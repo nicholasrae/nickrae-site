@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick Rae — Commercial Pilot | CPL/IR/MEL</title>
+<meta name="description" content="Nick Rae — Commercial Pilot seeking First Officer / SIC positions in Part 135, Part 91, aerial survey, and charter operations. CPL/IR/MEL with 369+ total hours.">
+<meta property="og:title" content="Nick Rae — Commercial Pilot">
+<meta property="og:description" content="Commercial Pilot seeking FO/SIC positions. CPL/IR/MEL, 369+ hours, aircraft owner, 20+ years leadership experience.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
+    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
+    --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
+    --border:#1e293b;--card:#131c2e;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .links a{color:var(--text-muted)}
+  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+
+  /* SECTIONS */
+  section{padding:5rem 1.5rem}
+  .container{max-width:1000px;margin:0 auto}
+  .section-title{font-size:1.5rem;font-weight:700;margin-bottom:2rem;padding-bottom:.75rem;border-bottom:2px solid var(--accent);display:inline-block}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:4rem;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(59,130,246,.06);top:50%;left:50%;transform:translate(-50%,-50%)}
+  .hero::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(59,130,246,.04);top:50%;left:50%;transform:translate(-50%,-50%)}
+  .hero-content{position:relative;z-index:1}
+  .hero .photo{width:160px;height:160px;border-radius:50%;background:var(--bg3);border:3px solid var(--accent);margin:0 auto 1.5rem;overflow:hidden}
+  .hero .photo img{width:100%;height:100%;object-fit:cover}
+  .hero h1{font-size:2.75rem;font-weight:800;letter-spacing:-1px;margin-bottom:.5rem}
+  .hero .title{font-size:1.2rem;color:var(--accent2);font-weight:500;margin-bottom:1rem}
+  .hero .tagline{color:var(--text-muted);max-width:550px;margin:0 auto 1.5rem;font-size:1.05rem}
+  .status-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#4ade80;padding:.5rem 1.25rem;border-radius:2rem;font-size:.875rem;font-weight:600;margin-bottom:1.5rem}
+  .status-badge::before{content:'';width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn{padding:.7rem 1.75rem;border-radius:.5rem;font-weight:600;font-size:.9rem;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
+  .btn-primary{background:var(--accent);color:#fff;border:none}
+  .btn-primary:hover{background:#2563eb;text-decoration:none}
+  .btn-outline{border:1px solid var(--border);color:var(--text-muted);background:transparent}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
+
+  /* ABOUT */
+  .about-section{background:var(--bg2)}
+  .about-content{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .about-content p{color:var(--text-muted);margin-bottom:1rem}
+  .about-highlight{background:var(--card);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;border-radius:0 .5rem .5rem 0}
+  .about-highlight h3{font-size:1rem;margin-bottom:.75rem;color:var(--accent2)}
+  .about-highlight ul{list-style:none;color:var(--text-muted);font-size:.9rem}
+  .about-highlight ul li{padding:.25rem 0}
+  .about-highlight ul li::before{content:'✓ ';color:var(--accent2)}
+
+  /* CREDENTIALS */
+  .cred-section{background:var(--bg)}
+  .hours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:2.5rem}
+  .hour-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;text-align:center}
+  .hour-card .number{font-size:1.75rem;font-weight:800;color:var(--accent2)}
+  .hour-card .label{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-top:.25rem}
+  .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  .cred-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
+  .cred-card h3{font-size:.95rem;color:var(--accent2);margin-bottom:.75rem}
+  .cred-card ul{list-style:none;font-size:.9rem;color:var(--text-muted)}
+  .cred-card ul li{padding:.3rem 0;border-bottom:1px solid var(--border)}
+  .cred-card ul li:last-child{border:none}
+
+  /* EXPERIENCE */
+  .exp-section{background:var(--bg2)}
+  .timeline{position:relative;padding-left:2rem}
+  .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--border)}
+  .timeline-item{position:relative;margin-bottom:2rem;padding-left:1.5rem}
+  .timeline-item::before{content:'';position:absolute;left:-2.05rem;top:.35rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg2)}
+  .timeline-item h3{font-size:1.05rem;margin-bottom:.25rem}
+  .timeline-item .date{font-size:.8rem;color:var(--accent2);font-weight:600;margin-bottom:.35rem}
+  .timeline-item p{color:var(--text-muted);font-size:.9rem}
+
+  /* EDUCATION */
+  .edu-section{background:var(--bg)}
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  .edu-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
+  .edu-card h3{font-size:1rem;margin-bottom:.25rem}
+  .edu-card .school{color:var(--accent2);font-size:.85rem;margin-bottom:.35rem}
+  .edu-card p{color:var(--text-muted);font-size:.85rem}
+
+  /* PROJECTS */
+  .proj-section{background:var(--bg2)}
+  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .proj-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
+  .proj-card h3{font-size:1rem;margin-bottom:.5rem}
+  .proj-card p{color:var(--text-muted);font-size:.85rem;margin-bottom:.75rem}
+  .proj-badge{display:inline-block;background:var(--accent-glow);color:var(--accent2);font-size:.75rem;padding:.2rem .75rem;border-radius:1rem;font-weight:600}
+
+  /* CONNECT */
+  .connect-section{background:var(--bg);text-align:center}
+  .connect-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.5rem}
+  .connect-link{display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text-muted);font-size:.85rem;padding:1rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:.75rem;min-width:120px;transition:border-color .2s}
+  .connect-link:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
+  .connect-link .icon{font-size:1.5rem}
+
+  /* FOOTER */
+  footer{text-align:center;padding:2rem 1.5rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem}
+  footer .motto{color:var(--text-muted);font-style:italic;margin-bottom:.5rem}
+
+  /* MOBILE */
+  @media(max-width:768px){
+    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+    nav .links.open{display:flex}
+    .menu-toggle{display:block}
+    .hero h1{font-size:2rem}
+    .about-content{grid-template-columns:1fr}
+    .cred-grid{grid-template-columns:1fr}
+    .edu-grid{grid-template-columns:1fr}
+    .proj-grid{grid-template-columns:1fr}
+    .hours-grid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:480px){
+    .hours-grid{grid-template-columns:repeat(2,1fr)}
+    section{padding:3.5rem 1rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <div class="logo">NICK RAE</div>
+    <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#connect">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="photo"><img src="headshot.jpg" alt="Nick Rae in 737 cockpit"></div>
+    <h1>Nick Rae</h1>
+    <div class="title">Commercial Pilot · Seeking FO/SIC Position</div>
+    <p class="tagline">Former automotive GM who left a 20-year career to pursue aviation at 44. Trained from zero to Commercial in 14 months. Now ready to fly.</p>
+    <div class="status-badge">Open to Opportunities — Will Relocate</div>
+    <div class="hero-buttons">
+      <a href="#credentials" class="btn btn-primary">View Credentials</a>
+      <a href="Nicholas_Rae_Flight_Resume.pdf" class="btn btn-outline" target="_blank">📄 Download Resume</a>
+      <a href="#connect" class="btn btn-outline">Contact</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="container">
+    <h2 class="section-title">About</h2>
+    <div class="about-content">
+      <div>
+        <p>At 44, I made the decision to leave a successful 20-year career in automotive management to pursue what I'd always known I was meant to do — fly. I enrolled at Skywarrior Flight Training at NAS Pensacola and earned my Private Pilot License, Instrument Rating, and Commercial certificate in just 14 months, training in Class C airspace from day one.</p>
+        <p>I added my Multi-Engine rating in August 2025 and currently own and fly a Rockwell Commander 114A (N5900N). I'm seeking First Officer and SIC opportunities in Part 135, Part 91, aerial survey, or charter operations.</p>
+        <p>Two decades of managing teams, budgets, and high-pressure operations gave me a foundation that translates directly to the flight deck: CRM, risk assessment, procedural discipline, and the ability to perform under pressure. I bring the same intensity to aviation that I brought to every role I've held.</p>
+      </div>
+      <div>
+        <div class="about-highlight">
+          <h3>What I Bring to the Flight Deck</h3>
+          <ul>
+            <li>CRM & crew coordination</li>
+            <li>Risk assessment & ADM</li>
+            <li>Procedural discipline</li>
+            <li>20+ years of leadership under pressure</li>
+            <li>Class C airspace trained from day one</li>
+            <li>Aircraft owner — skin in the game</li>
+            <li>AOPA & EAA member</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="cred-section" id="credentials">
+  <div class="container">
+    <h2 class="section-title">Flight Credentials</h2>
+    <div class="hours-grid">
+      <div class="hour-card"><div class="number">369.5</div><div class="label">Total Hours</div></div>
+      <div class="hour-card"><div class="number">251</div><div class="label">PIC</div></div>
+      <div class="hour-card"><div class="number">95.9</div><div class="label">Instrument</div></div>
+      <div class="hour-card"><div class="number">74.1</div><div class="label">Cross-Country</div></div>
+      <div class="hour-card"><div class="number">37.8</div><div class="label">Night</div></div>
+      <div class="hour-card"><div class="number">30.1</div><div class="label">Multi-Engine</div></div>
+    </div>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <h3>Certificates & Ratings</h3>
+        <ul>
+          <li>Commercial Pilot — ASEL, AMEL</li>
+          <li>Instrument Rating</li>
+          <li>Private Pilot — ASEL</li>
+          <li>Complex Endorsement</li>
+          <li>High-Performance Endorsement</li>
+        </ul>
+      </div>
+      <div class="cred-card">
+        <h3>Medical & Documents</h3>
+        <ul>
+          <li>2nd Class Medical — Current</li>
+          <li>US Passport</li>
+          <li>Aircraft Owner — N5900N</li>
+          <li>Rockwell Commander 114A</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section" id="experience">
+  <div class="container">
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">2024 — 2025</div>
+        <h3>Skywarrior Flight Training — NAS Pensacola</h3>
+        <p>Completed PPL, Instrument Rating, and Commercial certificate in 14 months. Trained in Class C airspace. Multi-Engine Add-On completed August 2025. Intensive, full-time program with a focus on procedural discipline and real-world readiness.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2017 — Present</div>
+        <h3>General Manager — Car Plus (Automotive)</h3>
+        <p>20+ years in automotive management and leadership. Responsible for P&L, team development, customer operations, and multi-department oversight. Built transferable skills in CRM, decision-making, and high-pressure operations management.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2017 — 2023</div>
+        <h3>Football Coach — Offensive & Defensive Coordinator</h3>
+        <p>Coached at the high school and junior college level. Developed game plans, led player development, and coordinated under pressure — the same skills that make for a disciplined, team-oriented aviator.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="edu-section" id="education">
+  <div class="container">
+    <h2 class="section-title">Education & Certifications</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h3>BS General Studies</h3>
+        <div class="school">University of Nevada, Reno</div>
+        <p>Minor in Information Systems</p>
+      </div>
+      <div class="edu-card">
+        <h3>Graduate Certificate — Management & Leadership</h3>
+        <div class="school">Liberty University</div>
+        <p>Graduate-level coursework in organizational leadership</p>
+      </div>
+      <div class="edu-card">
+        <h3>FAA Certificates</h3>
+        <div class="school">Federal Aviation Administration</div>
+        <p>Commercial Pilot — ASEL/AMEL, Instrument Rating, Complex & High-Performance Endorsed</p>
+      </div>
+      <div class="edu-card">
+        <h3>Aviation Mindset Mastery</h3>
+        <div class="school">Professional Development</div>
+        <p>Mental performance and aeronautical decision-making training</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="proj-section" id="projects">
+  <div class="container">
+    <h2 class="section-title">Projects & Products</h2>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <h3>FeedFare</h3>
+        <p>iOS app for pilot nutrition and meal planning on the road. Built for the lifestyle.</p>
+        <span class="proj-badge">Coming Soon</span>
+      </div>
+      <div class="proj-card">
+        <h3>The Pilot Workbook Series</h3>
+        <p>Self-published study guides for student and commercial pilots. Available on Amazon KDP.</p>
+        <span class="proj-badge">Available Now</span>
+      </div>
+      <div class="proj-card">
+        <h3>Aviation YouTube Channel</h3>
+        <p>Flight vlogs, training insights, and the journey from zero to commercial pilot.</p>
+        <span class="proj-badge">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="connect-section" id="connect">
+  <div class="container">
+    <h2 class="section-title">Connect</h2>
+    <p style="color:var(--text-muted);margin-bottom:.5rem">I'd love to hear from you — whether it's about flying, opportunities, or collaboration.</p>
+    <div class="connect-links">
+      <a href="mailto:nick@nickrae.net" class="connect-link"><span class="icon">✉</span>nick@nickrae.net</a>
+      <a href="https://linkedin.com/in/nickrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">in</span>LinkedIn</a>
+      <a href="https://x.com/nickrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">𝕏</span>@nickrae</a>
+      <a href="https://github.com/nicholasrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">⌨</span>GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="motto">Built with purpose. Flying with passion.</div>
+  <div>© 2025 Nick Rae · Merced, CA</div>
+</footer>
+
+</body>
+</html>
