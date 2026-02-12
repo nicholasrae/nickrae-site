@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My OpenClaw Setup: From Chat Assistant to Autonomous Co-Pilot in One Week — Nick Rae</title>
+<meta name="description" content="How I turned OpenClaw into an autonomous co-pilot with 20 cron jobs, tiered model routing, a memory system, and principles-driven decision making — in one week.">
+<meta property="og:title" content="My OpenClaw Setup: From Chat Assistant to Autonomous Co-Pilot in One Week">
+<meta property="og:description" content="Most setup guides get you a chatbot. A week of iteration gets you a co-pilot. Here's the full architecture.">
+<meta property="og:url" content="https://nickrae.net/blog/openclaw-setup.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<meta name="author" content="Nick Rae">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
+    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
+    --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
+    --border:#1e293b;--card:#131c2e;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
+
+  /* Nav */
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:720px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav a{color:var(--text-muted);font-size:.9rem;margin-left:1.5rem}
+  nav a:hover{color:var(--text)}
+  nav .brand{color:var(--text);font-weight:700;font-size:1.1rem;text-decoration:none}
+
+  /* Article */
+  article{margin-top:5rem}
+  .meta{color:var(--text-dim);font-size:.9rem;margin-bottom:2rem}
+  h1{font-size:2.2rem;line-height:1.2;margin-bottom:.5rem;background:linear-gradient(135deg,var(--text),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  h2{font-size:1.5rem;margin:2.5rem 0 1rem;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:.5rem}
+  h3{font-size:1.15rem;margin:1.5rem 0 .75rem;color:var(--accent2)}
+  p{margin-bottom:1rem;color:var(--text-muted)}
+  strong{color:var(--text)}
+  ul,ol{margin:0 0 1rem 1.5rem;color:var(--text-muted)}
+  li{margin-bottom:.4rem}
+
+  /* Code */
+  code{background:var(--bg3);padding:.15rem .4rem;border-radius:4px;font-size:.85rem;font-family:'SF Mono',Monaco,monospace;color:var(--accent2)}
+  pre{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin:1rem 0 1.5rem;overflow-x:auto}
+  pre code{background:none;padding:0;color:var(--text-muted);font-size:.85rem}
+
+  /* Table */
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.9rem}
+  th{text-align:left;padding:.6rem .75rem;border-bottom:2px solid var(--border);color:var(--text);font-weight:600}
+  td{padding:.6rem .75rem;border-bottom:1px solid var(--border);color:var(--text-muted)}
+
+  /* Callout */
+  .callout{background:var(--accent-glow);border-left:3px solid var(--accent);padding:1rem 1.25rem;border-radius:0 8px 8px 0;margin:1.5rem 0;color:var(--text-muted)}
+  .callout strong{color:var(--accent2)}
+
+  /* Principles */
+  .principle{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;margin:.75rem 0}
+  .principle-num{color:var(--accent2);font-weight:700;margin-right:.5rem}
+  .principle strong{color:var(--text)}
+  .principle span{color:var(--text-muted)}
+
+  /* Footer */
+  footer{margin-top:4rem;padding:2rem 0;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;text-align:center}
+
+  @media(max-width:600px){
+    h1{font-size:1.6rem}
+    .container{padding:1.5rem 1rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="brand">Nick Rae</a>
+    <div>
+      <a href="/">Home</a>
+      <a href="/blog/openclaw-setup.html">Blog</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+<article>
+
+<div class="meta">February 12, 2026 · Nick Rae · 10 min read</div>
+<h1>My OpenClaw Setup: From Chat Assistant to Autonomous Co-Pilot in One Week</h1>
+
+<p>Most OpenClaw setup guides stop at "install it, connect Telegram, chat with it." That's the tutorial. This is what happens when you actually <em>live</em> with it for a week and push it toward real autonomy.</p>
+
+<p>I run OpenClaw on a Mac with Claude Opus 4.6 as my main brain, backed by a tiered model system that routes cheap tasks to Gemini Flash and mid-tier work to Claude Sonnet. The agent's name is Talos — my co-pilot. Here's what the setup actually looks like.</p>
+
+<h2>The Hardware</h2>
+
+<ul>
+  <li><strong>Host</strong>: Mac running 24/7</li>
+  <li><strong>Remote node</strong>: iMac for macOS-specific tasks (Apple Notes, iMessage, Peekaboo screen automation)</li>
+  <li><strong>Messaging</strong>: Telegram as primary channel, iMessage as backup delivery</li>
+  <li><strong>Version</strong>: OpenClaw 2026.2.9</li>
+</ul>
+
+<p>Nothing fancy. No cloud VPS, no Kubernetes. Just a Mac that never sleeps.</p>
+
+<h2>The Model Routing That Actually Works</h2>
+
+<p>After burning through API credits learning what <em>doesn't</em> work, I landed on a three-tier system:</p>
+
+<table>
+  <tr><th>Tier</th><th>Model</th><th>What It Does</th><th>Cost</th></tr>
+  <tr><td><strong>Cheap</strong></td><td>Gemini 2.0 Flash</td><td>Email checks, OAuth polling, web searches, quick research, single CLI commands</td><td>~free</td></tr>
+  <tr><td><strong>Reliable</strong></td><td>Claude Sonnet 4</td><td>File writing, code generation, multi-step tasks, content drafts</td><td>Medium</td></tr>
+  <tr><td><strong>Heavy</strong></td><td>Claude Opus 4.6</td><td>Main session — complex reasoning, strategy, multi-tool orchestration</td><td>Premium</td></tr>
+</table>
+
+<div class="callout">
+  <strong>The golden rule:</strong> If the task writes a file, use Sonnet minimum. Flash will <em>describe</em> what it would write instead of actually writing it. Learned that one the hard way — three times.
+</div>
+
+<h2>20 Cron Jobs Running My Life</h2>
+
+<p>This is where OpenClaw stops being a chatbot and starts being an operator. Here's what runs automatically:</p>
+
+<h3>Morning Routine</h3>
+<ul>
+  <li><strong>7:00 AM</strong> — Morning Brief: weather, calendar, important emails, Bible verse, top 3 priorities. Delivered to Telegram and iMessage. Takes 30 seconds to scan on my phone.</li>
+</ul>
+
+<h3>Business Hours</h3>
+<ul>
+  <li><strong>Every 30 min</strong> — Email monitoring across two accounts. Only alerts me if something's actually important (not newsletters).</li>
+  <li><strong>8:00 AM &amp; 4:00 PM</strong> — Business Monitor: scans for App Store notices, customer feedback, revenue signals, competitor moves.</li>
+  <li><strong>9, 11, 1, 3, 5 PM</strong> — Autonomous Work Loop: picks the top task from a prioritized backlog and works on it. One task per cycle. Revenue-impact first.</li>
+  <li><strong>12:00 PM</strong> — X/Twitter Intelligence Scan: searches aviation, AI, indie dev, and Tesla topics. Delivers a briefing with engagement opportunities and suggested tweets.</li>
+  <li><strong>2:00 PM</strong> — Daily Research Report: deep-dive on one topic that makes me smarter — rotating through AI/ML, aviation, iOS dev, business strategy, personal finance.</li>
+</ul>
+
+<h3>Evening Wind-Down</h3>
+<ul>
+  <li><strong>7:00 PM</strong> — Evening Summary: what got done today, decisions made, blockers, updated metrics.</li>
+  <li><strong>10:00 PM</strong> — Daily Journal: permanent record written to markdown. Searchable, thorough, no Telegram noise.</li>
+</ul>
+
+<h3>Night Shift</h3>
+<ul>
+  <li><strong>11:00 PM</strong> — Night Shift Builder: Talos works autonomously while I sleep. Builds deliverables, stages them for my review. Rules: never spend money, never send external comms, never push to production. Everything goes to a staging folder with a REVIEW.md manifest.</li>
+</ul>
+
+<h3>Infrastructure</h3>
+<ul>
+  <li><strong>Every 4 hours</strong> — Watchdog: checks all cron jobs for errors, scans email for urgency, counts orphaned sessions, checks build statuses. Only pings me if something actually needs attention.</li>
+  <li><strong>Daily 5 AM</strong> — PiHole gravity update (ad blocking lists)</li>
+  <li><strong>Every 6 hours</strong> — OAuth token monitoring</li>
+  <li><strong>Weekly</strong> — Security audit, health data export reminder, weekly review</li>
+  <li><strong>Monthly</strong> — Financial review</li>
+</ul>
+
+<div class="callout">
+  <strong>The key insight:</strong> Most of these jobs run with <code>delivery: "none"</code> — they stay silent unless there's something worth reporting. My phone isn't buzzing every 30 minutes. It buzzes when it <em>matters</em>.
+</div>
+
+<h2>The Memory System</h2>
+
+<p>OpenClaw's workspace is basically a structured second brain:</p>
+
+<pre><code>memory/
+├── daily/          # YYYY-MM-DD.md journals (permanent record)
+├── projects/       # Per-project status files
+├── people/         # Contact/relationship context
+├── reference/      # Backlog, agent patterns, metrics, failure log
+├── workflows/      # Documented procedures (night shift, etc.)
+└── decisions/      # Decision logs with context and outcomes</code></pre>
+
+<p>Every work loop logs to the daily file. Every failure gets recorded in a failure log with root cause. Every decision gets documented so future-me (or future-Talos) knows <em>why</em> we made a call.</p>
+
+<p>The agent searches this memory before answering questions about prior work. It's not perfect, but it means context survives across sessions.</p>
+
+<h2>Sub-Agent Patterns (What I Learned the Hard Way)</h2>
+
+<p>OpenClaw can spawn sub-agents — isolated sessions that do a job and report back. Here's what actually works:</p>
+
+<h3>The Verification Protocol</h3>
+
+<p>Every sub-agent spawn follows this pattern:</p>
+<ol>
+  <li>Spawn with a clear, single-deliverable prompt</li>
+  <li>Wait 2-3 minutes</li>
+  <li><strong>Verify the output file exists</strong> (<code>ls -la &lt;path&gt;</code>)</li>
+  <li>If missing: redo in main session immediately — do NOT re-spawn</li>
+</ol>
+
+<p>This sounds obvious, but without it, you end up with sub-agents that "complete successfully" but produce nothing. Flash is especially guilty of this — it'll read 55K tokens of input and then just... not write the output.</p>
+
+<h3>The Decision Tree</h3>
+
+<pre><code>Disposable/monitoring task?     → Flash (cheap)
+Text generation < 500 words?    → Flash
+Research/web search only?       → Flash
+Needs to WRITE a file?          → Sonnet (reliable)
+Multiple tool calls?            → Sonnet or main session
+> 100 lines of code/content?    → Main session directly
+Complex reasoning/strategy?     → Main session (Opus)</code></pre>
+
+<h3>The Two-Failure Rule</h3>
+
+<p>If the same approach fails twice, switch strategies immediately. I wasted an entire evening trying to submit an app build through the same broken pipeline six times before implementing this rule.</p>
+
+<h2>The Working Agreement</h2>
+
+<p>This is the part most guides skip. Talos and I have an explicit working agreement documented in markdown:</p>
+
+<p><strong>Act Freely:</strong></p>
+<ul>
+  <li>Research, drafting, building tools, fixing mistakes, picking work during downtime</li>
+</ul>
+
+<p><strong>Propose First:</strong></p>
+<ul>
+  <li>Spending money, sending messages as me, irreversible changes, posting to social media</li>
+</ul>
+
+<p><strong>Pushback Level: 4/5</strong> — Talos argues his case firmly with evidence. Backs down only when I explicitly overrule after hearing the argument. This matters more than you'd think. A yes-man agent is useless.</p>
+
+<h2>The Principles Layer (The Missing Piece)</h2>
+
+<p>Most agent setups have skills (what to do) and rules (what's allowed). Almost none have <em>principles</em> — decision-making heuristics for when there's no clear instruction.</p>
+
+<p>After a week of iteration, I extracted 9 principles from real failures and wins. They live in <code>PRINCIPLES.md</code> and load into every session:</p>
+
+<div class="principle"><span class="principle-num">1.</span> <strong>Silent by default</strong> <span>— don't ping me unless it matters. Background jobs stay background.</span></div>
+<div class="principle"><span class="principle-num">2.</span> <strong>Revenue before polish</strong> <span>— ship what makes money first, optimize later.</span></div>
+<div class="principle"><span class="principle-num">3.</span> <strong>Two-failure rule</strong> <span>— same approach fails twice? Switch strategy immediately.</span></div>
+<div class="principle"><span class="principle-num">4.</span> <strong>Verify, don't trust</strong> <span>— check the output exists before marking done. Sub-agents lie by omission.</span></div>
+<div class="principle"><span class="principle-num">5.</span> <strong>Fix first, report after</strong> <span>— if it's reversible and low-stakes, just fix it.</span></div>
+<div class="principle"><span class="principle-num">6.</span> <strong>Pushback from care</strong> <span>— argue the case firmly, back down when overruled.</span></div>
+<div class="principle"><span class="principle-num">7.</span> <strong>Friction is data</strong> <span>— when something keeps breaking, document why and change the approach.</span></div>
+<div class="principle"><span class="principle-num">8.</span> <strong>One task, one cycle</strong> <span>— finish one thing before starting the next.</span></div>
+<div class="principle"><span class="principle-num">9.</span> <strong>Protect the principal</strong> <span>— never expose my data, spend my money, or speak as me without approval.</span></div>
+
+<p>The file also has a <strong>regressions table</strong> — when a principle fails or a new lesson emerges, it gets logged with the date, what happened, and which principle got updated. The principles aren't static. They evolve.</p>
+
+<p>This was inspired by <a href="https://x.com/atlasforgeai/status/2021773566341988758">@AtlasForgeAI's post</a> about the three-layer architecture: Soul (who to be), Principles (how to operate), Skills (what to do). The insight is that principles fill the gap between identity and capabilities — they're what the agent falls back on when the instructions run out.</p>
+
+<h2>Real Infrastructure Integration</h2>
+
+<p>Talos isn't just a chatbot that happens to run on my Mac. It's wired into:</p>
+
+<ul>
+  <li><strong>Home network</strong>: Philips Hue lights, Ecobee thermostat awareness, Eero router/device tracking, PiHole ad blocking management</li>
+  <li><strong>Tesla</strong>: TeslaMate integration for vehicle tracking and metrics</li>
+  <li><strong>Solar</strong>: Enphase panel monitoring (24 panels, ~4.6 kW system)</li>
+  <li><strong>Development</strong>: GitHub PRs, EAS builds, App Store submissions</li>
+  <li><strong>Social</strong>: X/Twitter via Bird CLI (free, cookie-auth, no API key needed)</li>
+  <li><strong>Communication</strong>: Telegram, iMessage, email (Himalaya CLI + Google Workspace)</li>
+  <li><strong>Productivity</strong>: Apple Notes, Apple Reminders, Google Calendar</li>
+</ul>
+
+<p>Each integration is a skill — a markdown instruction file that teaches the agent how to use a specific CLI tool. Some are community skills from ClawHub, some are custom-built.</p>
+
+<h2>What I'd Do Differently</h2>
+
+<ol>
+  <li><strong>Start with the tiered model system.</strong> Don't run Opus for everything. You'll blow through credits and most tasks don't need it.</li>
+  <li><strong>Build the failure log from day one.</strong> Every failure is a lesson. Document the root cause, not just "it didn't work."</li>
+  <li><strong>Use <code>delivery: "none"</code> on cron jobs.</strong> Let the agent decide what's worth pinging you about. Your phone should be quiet by default.</li>
+  <li><strong>Write the working agreement early.</strong> Define autonomy levels before the agent starts making decisions. It prevents the "wait, I didn't ask you to do that" moments.</li>
+  <li><strong>Verify sub-agent output.</strong> Trust but verify. Always check the file exists before marking a task done.</li>
+</ol>
+
+<h2>The Bottom Line</h2>
+
+<p>After one week, Talos runs 20 automated jobs, monitors my email/business/infrastructure, works autonomously while I sleep, and maintains a searchable memory of everything we've done together. It's not perfect — sub-agents still flake sometimes, Flash still refuses to write files, and the occasional cron job errors out. But the watchdog catches those, and the system self-corrects.</p>
+
+<p>The setup guide gets you a chatbot. A week of iteration gets you a co-pilot.</p>
+
+</article>
+
+<footer>
+  <p>OpenClaw 2026.2.9 · Claude Opus 4.6 + Sonnet 4 + Gemini Flash · 20 cron jobs · 30+ skills</p>
+  <p style="margin-top:.5rem"><a href="/">nickrae.net</a> · <a href="https://x.com/nickrae">@nickrae</a></p>
+</footer>
+
+</div>
+</body>
+</html>
