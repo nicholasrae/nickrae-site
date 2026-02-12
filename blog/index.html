@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Nick Rae | Commercial Pilot</title>
+<meta name="description" content="Aviation insights, pilot training tips, and entrepreneurship stories from commercial pilot Nick Rae. Learn from real-world flying experience and business automation strategies.">
+<meta property="og:title" content="Blog — Nick Rae | Commercial Pilot">
+<meta property="og:description" content="Aviation insights and pilot training tips from commercial pilot Nick Rae.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net/blog/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
+    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
+    --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
+    --border:#1e293b;--card:#131c2e;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .links a{color:var(--text-muted)}
+  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+
+  /* MAIN CONTENT */
+  main{max-width:1000px;margin:0 auto;padding:6rem 1.5rem 3rem}
+  .page-header{text-align:center;margin-bottom:3rem}
+  .page-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:1rem}
+  .page-subtitle{color:var(--text-muted);font-size:1.1rem;max-width:600px;margin:0 auto}
+
+  /* BLOG POSTS */
+  .blog-posts{display:grid;gap:2rem}
+  .post-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:2rem;transition:border-color .2s}
+  .post-card:hover{border-color:var(--accent)}
+  .post-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;font-size:.875rem;color:var(--text-dim)}
+  .post-date{color:var(--accent2)}
+  .post-category{background:var(--accent-glow);color:var(--accent2);padding:.25rem .75rem;border-radius:1rem;font-weight:600}
+  .post-title{font-size:1.5rem;font-weight:700;margin-bottom:1rem;line-height:1.3}
+  .post-title a{color:var(--text)}
+  .post-title a:hover{color:var(--accent2)}
+  .post-excerpt{color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6}
+  .read-more{color:var(--accent2);font-weight:600;font-size:.9rem}
+  .read-more:hover{text-decoration:none}
+
+  /* FOOTER */
+  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:4rem}
+
+  /* MOBILE */
+  @media(max-width:768px){
+    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+    nav .links.open{display:flex}
+    .menu-toggle{display:block}
+    .page-title{font-size:2rem}
+    main{padding:5rem 1rem 2rem}
+    .post-card{padding:1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div>
+    <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
+    <div class="links">
+      <a href="../">Home</a>
+      <a href="../#about">About</a>
+      <a href="../#credentials">Credentials</a>
+      <a href="../#experience">Experience</a>
+      <a href="../#connect">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main>
+  <div class="page-header">
+    <h1 class="page-title">Blog</h1>
+    <p class="page-subtitle">Aviation insights, pilot training tips, and entrepreneurship stories from the flight deck and beyond.</p>
+  </div>
+
+  <div class="blog-posts">
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-date">February 2026</span>
+        <span class="post-category">Entrepreneurship</span>
+      </div>
+      <h2 class="post-title">
+        <a href="ai-aviation-business.html">How I'm Using AI to Build a One-Man Aviation Business</a>
+      </h2>
+      <p class="post-excerpt">
+        Running a successful business as a commercial pilot with a full-time flying schedule isn't just challenging—it's nearly impossible without the right tools. Discover how AI automation changed everything for my aviation business, generating passive income through iOS apps, KDP publishing, and digital products while maintaining my commercial flying career.
+      </p>
+      <a href="ai-aviation-business.html" class="read-more">Read Article →</a>
+    </article>
+
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-date">February 2026</span>
+        <span class="post-category">Training</span>
+      </div>
+      <h2 class="post-title">
+        <a href="checkride-prep-guide.html">The Ultimate Private Pilot Checkride Prep Guide (2026)</a>
+      </h2>
+      <p class="post-excerpt">
+        The private pilot checkride represents one of aviation's most significant milestones. With recent updates to the Airman Certification Standards and evolving DPE expectations, checkride prep in 2026 requires a more strategic approach than ever before. This comprehensive guide covers everything you need to pass with confidence.
+      </p>
+      <a href="checkride-prep-guide.html" class="read-more">Read Article →</a>
+    </article>
+
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-date">February 2026</span>
+        <span class="post-category">Technology</span>
+      </div>
+      <h2 class="post-title">
+        <a href="student-pilot-apps-2026.html">5 Apps Every Student Pilot Needs in 2026</a>
+      </h2>
+      <p class="post-excerpt">
+        Modern flight training has evolved far beyond paper charts and mechanical calculators. Today's student pilot apps represent essential tools that can accelerate learning, improve safety, and prepare you for the technology-rich environment of contemporary aviation. Here are the essential apps every student pilot should have.
+      </p>
+      <a href="student-pilot-apps-2026.html" class="read-more">Read Article →</a>
+    </article>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 Nick Rae · Merced, CA · <a href="../">Back to Home</a></div>
+</footer>
+
+</body>
+</html>
