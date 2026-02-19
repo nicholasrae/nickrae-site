@@ -1,0 +1,12 @@
+node_modules/
+*.pem
+*.key
+*.env
+*.env.*
+.env
+*.token
+*.password
+*credentials*.json
+*secret*
+*private_key*
+.DS_Store
