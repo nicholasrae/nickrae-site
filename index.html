@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nick Rae — Commercial Pilot | CPL/IR/MEL</title>
-<meta name="description" content="Nick Rae — Commercial Pilot seeking First Officer / SIC positions in Part 135, Part 91, aerial survey, and charter operations. CPL/IR/MEL with 369+ total hours.">
-<meta property="og:title" content="Nick Rae — Commercial Pilot">
-<meta property="og:description" content="Commercial Pilot seeking FO/SIC positions. CPL/IR/MEL, 369+ hours, 20+ years leadership experience.">
+<title>Nick Rae — Pilot · Builder · Maker</title>
+<meta name="description" content="Nick Rae — commercial multi-engine pilot, iOS app builder, and AI automation engineer. Building apps, agent skills, and passive income systems. Merced, CA.">
+<meta property="og:title" content="Nick Rae — Pilot · Builder · Maker">
+<meta property="og:description" content="Commercial pilot, iOS developer, and automation builder. Aviation, apps, prediction markets, and AI-powered workflows.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net">
 <meta property="og:type" content="website">
@@ -20,6 +20,7 @@
     --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
     --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
     --border:#1e293b;--card:#131c2e;
+    --green:#22c55e;--yellow:#eab308;--cyan:#06b6d4;
   }
   html{scroll-behavior:smooth}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -49,10 +50,7 @@
   .hero .photo img{width:100%;height:100%;object-fit:cover}
   .hero h1{font-size:2.75rem;font-weight:800;letter-spacing:-1px;margin-bottom:.5rem}
   .hero .title{font-size:1.2rem;color:var(--accent2);font-weight:500;margin-bottom:1rem}
-  .hero .tagline{color:var(--text-muted);max-width:550px;margin:0 auto 1.5rem;font-size:1.05rem}
-  .status-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#4ade80;padding:.5rem 1.25rem;border-radius:2rem;font-size:.875rem;font-weight:600;margin-bottom:1.5rem}
-  .status-badge::before{content:'';width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero .tagline{color:var(--text-muted);max-width:580px;margin:0 auto 1.5rem;font-size:1.05rem}
   .hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
   .btn{padding:.7rem 1.75rem;border-radius:.5rem;font-weight:600;font-size:.9rem;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
   .btn-primary{background:var(--accent);color:#fff;border:none}
@@ -62,16 +60,33 @@
 
   /* ABOUT */
   .about-section{background:var(--bg2)}
-  .about-content{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-  .about-content p{color:var(--text-muted);margin-bottom:1rem}
-  .about-highlight{background:var(--card);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;border-radius:0 .5rem .5rem 0}
-  .about-highlight h3{font-size:1rem;margin-bottom:.75rem;color:var(--accent2)}
-  .about-highlight ul{list-style:none;color:var(--text-muted);font-size:.9rem}
-  .about-highlight ul li{padding:.25rem 0}
-  .about-highlight ul li::before{content:'✓ ';color:var(--accent2)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .about-grid p{color:var(--text-muted);margin-bottom:1rem}
+  .about-card{background:var(--card);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;border-radius:0 .5rem .5rem 0}
+  .about-card h3{font-size:1rem;margin-bottom:.75rem;color:var(--accent2)}
+  .about-card ul{list-style:none;color:var(--text-muted);font-size:.9rem}
+  .about-card ul li{padding:.25rem 0}
+  .about-card ul li::before{content:'✓ ';color:var(--accent2)}
+
+  /* PROJECTS */
+  .proj-section{background:var(--bg)}
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+  .proj-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;display:flex;flex-direction:column}
+  .proj-card h3{font-size:1.05rem;margin-bottom:.5rem}
+  .proj-card p{color:var(--text-muted);font-size:.85rem;margin-bottom:.75rem;flex:1}
+  .proj-badge{display:inline-block;font-size:.7rem;padding:.2rem .65rem;border-radius:1rem;font-weight:600;margin-right:.35rem}
+  .proj-badge.live{background:rgba(34,197,94,.12);color:var(--green)}
+  .proj-badge.review{background:rgba(234,179,8,.12);color:var(--yellow)}
+  .proj-badge.dev{background:rgba(6,182,212,.12);color:var(--cyan)}
+  .proj-badge.soon{background:rgba(100,116,139,.12);color:var(--text-dim)}
+  .proj-links{margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap}
+  .proj-links a{display:inline-block;padding:.35rem .75rem;border-radius:.3rem;font-size:.8rem;font-weight:600;text-decoration:none;transition:opacity .15s}
+  .proj-links a:hover{opacity:.85;text-decoration:none}
+  .proj-links .amazon{background:#FF9900;color:#111}
+  .proj-links .payhip{background:var(--accent);color:#fff}
 
   /* CREDENTIALS */
-  .cred-section{background:var(--bg)}
+  .cred-section{background:var(--bg2)}
   .hours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:2.5rem}
   .hour-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;text-align:center}
   .hour-card .number{font-size:1.75rem;font-weight:800;color:var(--accent2)}
@@ -84,30 +99,22 @@
   .cred-card ul li:last-child{border:none}
 
   /* EXPERIENCE */
-  .exp-section{background:var(--bg2)}
+  .exp-section{background:var(--bg)}
   .timeline{position:relative;padding-left:2rem}
   .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--border)}
   .timeline-item{position:relative;margin-bottom:2rem;padding-left:1.5rem}
-  .timeline-item::before{content:'';position:absolute;left:-2.05rem;top:.35rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg2)}
+  .timeline-item::before{content:'';position:absolute;left:-2.05rem;top:.35rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
   .timeline-item h3{font-size:1.05rem;margin-bottom:.25rem}
   .timeline-item .date{font-size:.8rem;color:var(--accent2);font-weight:600;margin-bottom:.35rem}
   .timeline-item p{color:var(--text-muted);font-size:.9rem}
 
   /* EDUCATION */
-  .edu-section{background:var(--bg)}
+  .edu-section{background:var(--bg2)}
   .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
   .edu-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
   .edu-card h3{font-size:1rem;margin-bottom:.25rem}
   .edu-card .school{color:var(--accent2);font-size:.85rem;margin-bottom:.35rem}
   .edu-card p{color:var(--text-muted);font-size:.85rem}
-
-  /* PROJECTS */
-  .proj-section{background:var(--bg2)}
-  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-  .proj-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
-  .proj-card h3{font-size:1rem;margin-bottom:.5rem}
-  .proj-card p{color:var(--text-muted);font-size:.85rem;margin-bottom:.75rem}
-  .proj-badge{display:inline-block;background:var(--accent-glow);color:var(--accent2);font-size:.75rem;padding:.2rem .75rem;border-radius:1rem;font-weight:600}
 
   /* CONNECT */
   .connect-section{background:var(--bg);text-align:center}
@@ -126,10 +133,9 @@
     nav .links.open{display:flex}
     .menu-toggle{display:block}
     .hero h1{font-size:2rem}
-    .about-content{grid-template-columns:1fr}
+    .about-grid{grid-template-columns:1fr}
     .cred-grid{grid-template-columns:1fr}
     .edu-grid{grid-template-columns:1fr}
-    .proj-grid{grid-template-columns:1fr}
     .hours-grid{grid-template-columns:repeat(3,1fr)}
   }
   @media(max-width:480px){
@@ -147,10 +153,9 @@
     <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
     <div class="links">
       <a href="#about">About</a>
-      <a href="#credentials">Credentials</a>
+      <a href="#building">Building</a>
+      <a href="#credentials">Flying</a>
       <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#projects">Projects</a>
       <a href="blog/">Blog</a>
       <a href="#connect">Connect</a>
     </div>
@@ -160,14 +165,13 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="photo"><img src="headshot.jpg" alt="Nick Rae in 737 cockpit"></div>
+    <div class="photo"><img src="headshot.jpg" alt="Nick Rae in cockpit" loading="eager"></div>
     <h1>Nick Rae</h1>
-    <div class="title">Commercial Pilot · Seeking FO/SIC Position</div>
-    <p class="tagline">Former automotive GM who left a 20-year career to pursue aviation at 44. Trained from zero to Commercial in 14 months. Now ready to fly.</p>
-    <div class="status-badge">Open to Opportunities — Will Relocate</div>
+    <div class="title">Pilot · Builder · Maker</div>
+    <p class="tagline">Left a 20-year career in automotive management to fly planes, build apps, and automate everything I can. Based in Merced, CA.</p>
     <div class="hero-buttons">
-      <a href="#credentials" class="btn btn-primary">View Credentials</a>
-      <a href="Nicholas_Rae_Flight_Resume.pdf" class="btn btn-outline" target="_blank">📄 Download Resume</a>
+      <a href="#building" class="btn btn-primary">What I'm Building</a>
+      <a href="#credentials" class="btn btn-outline">✈️ Flight Credentials</a>
       <a href="#connect" class="btn btn-outline">Contact</a>
     </div>
   </div>
@@ -177,23 +181,23 @@
 <section class="about-section" id="about">
   <div class="container">
     <h2 class="section-title">About</h2>
-    <div class="about-content">
+    <div class="about-grid">
       <div>
-        <p>At 44, I made the decision to leave a successful 20-year career in automotive management to pursue what I'd always known I was meant to do — fly. I enrolled at Skywarrior Flight Training at Pensacola, FL and earned my Private Pilot License, Instrument Rating, and Commercial certificate in just 14 months, training in Class C airspace from day one.</p>
-        <p>I added my Multi-Engine rating in August 2025 and am current and proficient in the Rockwell Commander 114A (N5900N). I'm seeking First Officer and SIC opportunities in Part 135, Part 91, aerial survey, or charter operations.</p>
-        <p>Two decades of managing teams, budgets, and high-pressure operations gave me a foundation that translates directly to the flight deck: CRM, risk assessment, procedural discipline, and the ability to perform under pressure. I bring the same intensity to aviation that I brought to every role I've held.</p>
+        <p>At 44, I walked away from a successful career as a General Manager in automotive to pursue what I'd always known I was meant to do — fly. I enrolled at Skywarrior Flight Training in Pensacola, FL and earned my Private Pilot License, Instrument Rating, and Commercial certificate in 14 months. Added Multi-Engine in August 2025.</p>
+        <p>But aviation is only half the story. I build iOS apps, run prediction market bots, publish study guides for pilots, and use AI automation to tie it all together. I taught myself to ship software the same way I learned to fly — by doing it, breaking things, and iterating fast.</p>
+        <p>Two decades of managing teams, budgets, and high-pressure operations gave me a foundation that shows up in everything I do now: CRM on the flight deck, product decisions in my apps, and risk management in my trading bots. I bring intensity to whatever I'm working on.</p>
       </div>
       <div>
-        <div class="about-highlight">
-          <h3>What I Bring to the Flight Deck</h3>
+        <div class="about-card">
+          <h3>What I Bring</h3>
           <ul>
-            <li>CRM & crew coordination</li>
-            <li>Risk assessment & ADM</li>
-            <li>Procedural discipline</li>
-            <li>20+ years of leadership under pressure</li>
-            <li>Class C airspace trained from day one</li>
-            <li>Complex/HP aircraft proficient</li>
-            <li>AOPA & EAA member</li>
+            <li>Commercial Pilot — ASEL, AMEL, Instrument</li>
+            <li>iOS apps shipped to App Store</li>
+            <li>AI agent skills published on ClawHub</li>
+            <li>AI-powered workflow automation (OpenClaw)</li>
+            <li>Prediction market bots (Kalshi, Polymarket)</li>
+            <li>20+ years leadership under pressure</li>
+            <li>Self-published aviation author (KDP + Payhip)</li>
           </ul>
         </div>
       </div>
@@ -201,10 +205,79 @@
   </div>
 </section>
 
-<!-- CREDENTIALS -->
+<!-- WHAT I'M BUILDING -->
+<section class="proj-section" id="building">
+  <div class="container">
+    <h2 class="section-title">What I'm Building</h2>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <h3>📚 The Pilot Workbook Series</h3>
+        <p>Self-published study guides for student pilots. PPL Checkride Prep Workbook live now. Instrument Rating Workbook coming soon. 500+ questions, detailed FAA Knowledge Test prep.</p>
+        <span class="proj-badge live">Available Now</span>
+        <div class="proj-links">
+          <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank" class="amazon">📚 Amazon</a>
+          <a href="https://payhip.com/V1Ventures" target="_blank" class="payhip">🛒 Payhip</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>🐾 PetFace AI</h3>
+        <p>iOS app that transforms your pet photo into a museum-quality oil painting portrait, reveals breed breakdown, and generates a Puppy → Now → Senior age progression. TikTok carousel export built in.</p>
+        <span class="proj-badge dev">In Development</span>
+      </div>
+
+      <div class="proj-card">
+        <h3>🍽️ FeedFare</h3>
+        <p>iOS habit and streak tracking app. Daily logging, streak management, and push notifications to keep you consistent. Submitted to App Store.</p>
+        <span class="proj-badge review">In Review</span>
+      </div>
+
+      <div class="proj-card">
+        <h3>⚡ Inflection Point</h3>
+        <p>iOS personal growth OS. Set quests, run daily protocols, and use evening AI synthesis to track your trajectory. Dark, premium, gamified — think life analytics meets accountability system.</p>
+        <span class="proj-badge dev">In Development</span>
+      </div>
+
+      <div class="proj-card">
+        <h3>💸 SpendSlap</h3>
+        <p>iOS app that roasts your spending habits with brutal AI honesty. Upload a bank CSV, get a savage 90-day audit, shareable scorecard, and TikTok carousel export. Tax season weapon.</p>
+        <span class="proj-badge dev">In Development</span>
+      </div>
+
+      <div class="proj-card">
+        <h3>🤖 Prediction Market Bots</h3>
+        <p>Automated trading systems for Kalshi and Polymarket. Weather prediction markets, probability-weighted sizing, multi-source signal analysis. Running paper trading on both platforms.</p>
+        <span class="proj-badge dev">Paper Trading</span>
+      </div>
+
+      <div class="proj-card">
+        <h3>⚙️ OpenClaw Skills — ClawHub</h3>
+        <p>Published AI agent skills for the OpenClaw ecosystem. Expense Tracker and App Store ReviewReply live now. Building the toolkit one skill at a time.</p>
+        <span class="proj-badge live">Live on ClawHub</span>
+        <div class="proj-links">
+          <a href="https://clawhub.com/skills/nicholasrae-expense-tracker" target="_blank" class="payhip">Expense Tracker</a>
+          <a href="https://clawhub.com/skills/nicholasrae-review-reply" target="_blank" class="payhip">ReviewReply</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>🛠️ OpenClaw Setup Service</h3>
+        <p>Done-for-you AI automation setup. Full fleet config, Tailscale private network, trading bot infrastructure, and personal dashboards — the whole stack, installed and running.</p>
+        <span class="proj-badge soon">Launching Soon</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FLIGHT CREDENTIALS -->
 <section class="cred-section" id="credentials">
   <div class="container">
     <h2 class="section-title">Flight Credentials</h2>
+    <div style="margin-bottom:1.5rem;text-align:right;">
+      <a href="Nicholas_Rae_Flight_Resume.pdf" class="btn btn-outline" target="_blank" style="font-size:.8rem;padding:.5rem 1.25rem;">📄 Download Flight Resume</a>
+    </div>
     <div class="hours-grid">
       <div class="hour-card"><div class="number">369.5</div><div class="label">Total Hours</div></div>
       <div class="hour-card"><div class="number">251</div><div class="label">PIC</div></div>
@@ -221,8 +294,8 @@
           <li>Instrument Rating</li>
           <li>Private Pilot — ASEL</li>
           <li>Complex Endorsement</li>
-          <li>DC SFRA Certificate</li>
           <li>High-Performance Endorsement</li>
+          <li>DC SFRA Certificate</li>
         </ul>
       </div>
       <div class="cred-card">
@@ -257,9 +330,14 @@
     <h2 class="section-title">Experience</h2>
     <div class="timeline">
       <div class="timeline-item">
+        <div class="date">2025 — Present</div>
+        <h3>Independent Builder</h3>
+        <p>Building a portfolio of iOS apps (FeedFare, PetFace AI, Inflection Point, SpendSlap), running AI-powered prediction market bots on Kalshi and Polymarket, publishing FAA study guides on Amazon KDP and Payhip, and designing AI automation agent skills for the OpenClaw ecosystem published on ClawHub.</p>
+      </div>
+      <div class="timeline-item">
         <div class="date">2024 — 2025</div>
         <h3>Skywarrior Flight Training — Pensacola, FL</h3>
-        <p>Completed PPL, Instrument Rating, and Commercial certificate in 14 months. Trained in Class C airspace. Multi-Engine Add-On completed August 2025. Intensive, full-time program with a focus on procedural discipline and real-world readiness.</p>
+        <p>Earned PPL, Instrument Rating, Commercial certificate, and Multi-Engine rating in under 18 months. Trained in Class C airspace (Pensacola Regional). Completed Complex and High-Performance endorsements. Intensive, full-time accelerated program focused on procedural discipline and IFR proficiency.</p>
       </div>
       <div class="timeline-item">
         <div class="date">2017 — Present</div>
@@ -269,7 +347,7 @@
       <div class="timeline-item">
         <div class="date">2017 — 2023</div>
         <h3>Football Coach — Offensive & Defensive Coordinator</h3>
-        <p>Coached at the high school and junior college level. Developed game plans, led player development, and coordinated under pressure — the same skills that make for a disciplined, team-oriented aviator.</p>
+        <p>Coached at the high school and junior college level. Game planning, player development, and coordinating under pressure — the same skills that make for a disciplined, team-oriented aviator.</p>
       </div>
     </div>
   </div>
@@ -278,7 +356,7 @@
 <!-- EDUCATION -->
 <section class="edu-section" id="education">
   <div class="container">
-    <h2 class="section-title">Education & Certifications</h2>
+    <h2 class="section-title">Education</h2>
     <div class="edu-grid">
       <div class="edu-card">
         <h3>BS General Studies</h3>
@@ -295,39 +373,6 @@
         <div class="school">Federal Aviation Administration</div>
         <p>Commercial Pilot — ASEL/AMEL, Instrument Rating, Complex & High-Performance Endorsed</p>
       </div>
-      <div class="edu-card">
-        <h3>Aviation Mindset Mastery</h3>
-        <div class="school">Professional Development</div>
-        <p>Mental performance and aeronautical decision-making training</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="proj-section" id="projects">
-  <div class="container">
-    <h2 class="section-title">Projects & Products</h2>
-    <div class="proj-grid">
-      <div class="proj-card">
-        <h3>FeedFare</h3>
-        <p>iOS app for pilot nutrition and meal planning on the road. Built for the lifestyle.</p>
-        <span class="proj-badge">Coming Soon</span>
-      </div>
-      <div class="proj-card">
-        <h3>The Pilot Workbook Series</h3>
-        <p>Self-published study guides for student and commercial pilots. 500+ practice questions with detailed explanations for the FAA Knowledge Test.</p>
-        <span class="proj-badge">Available Now</span>
-        <div style="margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap">
-          <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank" style="display:inline-block;background:#FF9900;color:#111;padding:.4rem .8rem;border-radius:.3rem;font-size:.85rem;font-weight:600;text-decoration:none">📚 Amazon</a>
-          <a href="https://payhip.com/V1Ventures" target="_blank" style="display:inline-block;background:var(--accent);color:#fff;padding:.4rem .8rem;border-radius:.3rem;font-size:.85rem;font-weight:600;text-decoration:none">🛒 Payhip Store</a>
-        </div>
-      </div>
-      <div class="proj-card">
-        <h3>Aviation YouTube Channel</h3>
-        <p>Flight vlogs, training insights, and the journey from zero to commercial pilot.</p>
-        <span class="proj-badge">Coming Soon</span>
-      </div>
     </div>
   </div>
 </section>
@@ -336,21 +381,22 @@
 <section class="connect-section" id="connect">
   <div class="container">
     <h2 class="section-title">Connect</h2>
-    <p style="color:var(--text-muted);margin-bottom:.5rem">I'd love to hear from you — whether it's about flying, opportunities, or collaboration.</p>
+    <p style="color:var(--text-muted);margin-bottom:.5rem">Whether it's about flying, building, or working together — I'd like to hear from you.</p>
     <div class="connect-links">
       <a href="mailto:nick@nickrae.net" class="connect-link"><span class="icon">✉</span>nick@nickrae.net</a>
       <a href="https://linkedin.com/in/nickrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">in</span>LinkedIn</a>
       <a href="https://x.com/nickrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">𝕏</span>@nickrae</a>
       <a href="https://github.com/nicholasrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">⌨</span>GitHub</a>
-      <a href="https://ts.la/nicholas204866" target="_blank" rel="noopener" class="connect-link"><span class="icon">⚡</span>Tesla Referral</a>
+      <a href="https://www.instagram.com/nickrae76" target="_blank" rel="noopener" class="connect-link"><span class="icon">📷</span>Instagram</a>
+      <a href="https://www.youtube.com/@nicholasrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">▶</span>YouTube</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="motto">Built with purpose. Flying with passion.</div>
-  <div>© 2025 Nick Rae · Merced, CA</div>
+  <div class="motto">Build things. Fly planes. Keep moving.</div>
+  <div>© 2026 Nick Rae · Merced, CA</div>
 </footer>
 
 </body>
