@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I've Been Running OpenClaw for 30 Days — Here's What I Wish I Knew — Nick Rae</title>
+<meta name="description" content="Ran OpenClaw for 30 days. Here's what I wish I knew: top 5 setup steps, dos and don'ts, and the honest assessment of whether it's worth it.">
+<meta property="og:title" content="I've Been Running OpenClaw for 30 Days — Here's What I Wish I Knew">
+<meta property="og:description" content="Top 5 setup steps, dos and don'ts, and an honest 30-day assessment of OpenClaw as an AI agent platform.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net/blog/openclaw-30-days.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="canonical" href="https://nickrae.net/blog/openclaw-30-days.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;--text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;--accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);--border:#1e293b;--card:#131c2e;}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .links a{color:var(--text-muted)}
+  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+  article{max-width:800px;margin:0 auto;padding:6rem 1.5rem 3rem}
+  .article-header{margin-bottom:3rem}
+  .article-meta{color:var(--text-dim);font-size:.875rem;margin-bottom:1rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .article-category{background:var(--accent-glow);color:var(--accent2);padding:.2rem .65rem;border-radius:1rem;font-weight:600;font-size:.8rem}
+  .article-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:1.5rem;line-height:1.2}
+  .article-excerpt{color:var(--text-muted);font-size:1.1rem;line-height:1.6;border-left:3px solid var(--accent);padding-left:1.25rem}
+  .article-content{color:var(--text-muted);line-height:1.75;margin-top:2.5rem}
+  .article-content h2{color:var(--text);font-size:1.6rem;font-weight:700;margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--border)}
+  .article-content h3{color:var(--text);font-size:1.25rem;font-weight:700;margin:2.5rem 0 1rem}
+  .article-content p{margin-bottom:1.25rem}
+  .article-content ul,.article-content ol{margin:1.25rem 0;padding-left:1.5rem}
+  .article-content li{margin-bottom:.6rem}
+  .article-content strong{color:var(--text);font-weight:600}
+  .article-content em{color:var(--accent2)}
+  .article-content blockquote{background:var(--card);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:0 .5rem .5rem 0;color:var(--text)}
+  .article-content code{background:var(--card);color:var(--accent2);padding:.15rem .4rem;border-radius:.25rem;font-size:.9em;font-family:monospace}
+  .article-content pre{background:var(--card);border:1px solid var(--border);border-radius:.5rem;padding:1.25rem;margin:1.5rem 0;overflow-x:auto}
+  .article-content pre code{background:none;padding:0;font-size:.85rem;color:var(--text-muted)}
+  .article-content hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
+  .checklist{list-style:none;padding:0;margin:1.5rem 0}
+  .checklist li{padding:.4rem 0;padding-left:1.75rem;position:relative;color:var(--text-muted)}
+  .checklist li::before{content:'☐';position:absolute;left:0;color:var(--accent2);font-size:.9rem}
+  .do-dont{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0}
+  .do-box,.dont-box{background:var(--card);border-radius:.75rem;padding:1.5rem}
+  .do-box{border:1px solid rgba(34,197,94,.3)}
+  .dont-box{border:1px solid rgba(239,68,68,.3)}
+  .do-box h4{color:#22c55e;margin-bottom:1rem;font-size:.9rem;text-transform:uppercase;letter-spacing:.5px}
+  .dont-box h4{color:#ef4444;margin-bottom:1rem;font-size:.9rem;text-transform:uppercase;letter-spacing:.5px}
+  .do-box li,.dont-box li{margin-bottom:.75rem;font-size:.9rem}
+  .author-box{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.75rem;margin:3rem 0;font-size:.9rem;color:var(--text-muted)}
+  .author-box strong{color:var(--text)}
+  .article-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+  .nav-link{color:var(--accent2);font-weight:600;font-size:.9rem}
+  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:4rem}
+  @media(max-width:768px){
+    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+    nav .links.open{display:flex}
+    .menu-toggle{display:block}
+    .article-title{font-size:1.9rem}
+    article{padding:5rem 1rem 2rem}
+    .do-dont{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div>
+    <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
+    <div class="links">
+      <a href="../">Home</a>
+      <a href="../#building">Building</a>
+      <a href="../#credentials">Flying</a>
+      <a href="./">Blog</a>
+      <a href="../flight-funded/" style="color:var(--accent2);font-weight:600">🛫 Flight Funded</a>
+      <a href="../#connect">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="article-header">
+    <div class="article-meta">
+      <span class="article-category">🤖 AI Tools</span>
+      <span>February 2026</span>
+      <span>Nick Rae</span>
+      <span>~9 min read</span>
+    </div>
+    <h1 class="article-title">I've Been Running OpenClaw for 30 Days — Here's What I Wish I Knew</h1>
+    <p class="article-excerpt">Most people install OpenClaw, open Telegram, type "hello," and get a capable AI that knows nothing about them. Here's the setup that actually unlocks it — from someone who learned the hard way.</p>
+  </div>
+
+  <div class="article-content">
+    <p>When I first set up OpenClaw, I made the classic mistake: I installed it, opened Telegram, typed "hello," and expected magic.</p>
+    <p>I got a capable AI that knew nothing about me, had no memory of previous conversations, no access to my tools, and answered questions with the same generic helpfulness as any free chatbot.</p>
+    <p>The tool was powerful. I had set it up like a toy.</p>
+    <p>Thirty days later — after wiring it to Todoist, giving it persistent memory, setting up cron jobs that run while I sleep, and building a workflow that genuinely moves my projects forward every day — I understand what OpenClaw actually is: <strong>a 24/7 AI agent you have to configure to earn.</strong></p>
+    <p>Here's what I wish someone had told me before I started.</p>
+
+    <h2>What Is OpenClaw, Actually?</h2>
+    <p>Most people describe OpenClaw as a "Claude chatbot on Telegram." That's like describing a scalpel as "a very thin knife." Technically accurate. Completely misses the point.</p>
+    <p>OpenClaw is a <strong>gateway daemon</strong> — a process that runs on your machine 24/7, connects your AI model (Claude, Gemini, or others) to your messaging platforms, gives it access to tools (shell commands, web search, browser control, file I/O), and lets it operate autonomously with persistent memory and scheduled tasks.</p>
+    <p>The Telegram interface is just how you talk to it. The real capability is everything running underneath.</p>
+
+    <h2>Top 5 Things to Do When You First Set Up OpenClaw</h2>
+
+    <h3>#1: Write Your Identity Files Before You Send a Single Message</h3>
+    <p>The single highest-leverage action in OpenClaw isn't installing a plugin or connecting an API. It's writing three text files that tell your agent who you are.</p>
+    <p>OpenClaw loads files from your workspace directory at the start of every session. These files are your agent's long-term memory. Without them, every conversation starts from scratch.</p>
+    <p>The three files you need immediately:</p>
+    <ul>
+      <li><strong>AGENTS.md</strong> — Identity and operating rules. Who the agent is, who you are, your active projects, what it's NEVER allowed to do autonomously, and what to prioritize.</li>
+      <li><strong>USER.md</strong> — A profile of you. Location, profession, communication preferences, schedule, expertise areas, goals.</li>
+      <li><strong>SESSION-STATE.md</strong> — The handover document. Updated before each context compaction or session end. This is how your agent picks up exactly where you left off.</li>
+    </ul>
+    <p>Write these three files before your first real conversation. 30 minutes of setup unlocks weeks of coherent context.</p>
+
+    <h3>#2: Set a Hard Autonomous Spend Limit</h3>
+    <p>OpenClaw has access to the shell on your computer. It can run commands, access the web, write files, and — if you give it the keys — send messages, make purchases, and push code to production.</p>
+    <p>Before you start, be explicit about what it <em>cannot</em> do without your approval. In your AGENTS.md:</p>
+    <pre><code>## Safety defaults
+- $0 autonomous spend limit — never purchase without approval
+- Never push to production or submit to app stores autonomously
+- Never delete files or run destructive commands
+- Confirm before sending any external message to a third party</code></pre>
+    <p>This isn't paranoia — it's operating procedure. The rule of thumb: anything <strong>irreversible</strong> requires your explicit approval.</p>
+
+    <h3>#3: Build a Cron Job That Works While You Sleep</h3>
+    <p>OpenClaw's cron system lets you schedule jobs that run at any interval — hourly, daily, at 6AM — without you initiating anything. Your agent wakes up, executes the task, writes output to a file, and sends you a summary.</p>
+    <p>My most valuable cron job is the <strong>Morning Taskmaster</strong>: a 6AM job that reviews my Todoist, picks 1–3 tasks it can safely execute autonomously (research, drafts, optimization), does the work, posts a comment back to Todoist, and sends me a Telegram message before I wake up.</p>
+    <p>Other useful cron ideas:</p>
+    <ul>
+      <li><strong>Daily journal writer</strong> — Logs what was discussed and decided each day to a dated memory file</li>
+      <li><strong>Morning brief</strong> — Weather, top tasks, news, and a Bible verse (mine pulls live METAR data from FAA)</li>
+      <li><strong>Weekly review digest</strong> — Compiles progress across all active projects every Sunday night</li>
+    </ul>
+    <p>Key to good cron jobs: write the system prompt carefully, include explicit safety bounds, and tell it exactly where to write output.</p>
+
+    <h3>#4: Connect Real Tools — Not Just Chat</h3>
+    <p>Fresh out of the box, OpenClaw is a chat interface. The real upgrade is connecting tools. Priority order:</p>
+    <ul>
+      <li><strong>Web search (Brave/Tavily)</strong> — Essential. Without it, your agent has no access to current information.</li>
+      <li><strong>Todoist (or task manager)</strong> — Highest-ROI integration. Your agent can read tasks, add comments, create subtasks, and triage priorities.</li>
+      <li><strong>File system</strong> — Already enabled. Make sure your agent knows its workspace structure.</li>
+      <li><strong>Browser control</strong> — The Camoufox integration lets your agent browse real pages and scrape data that web_fetch can't handle.</li>
+    </ul>
+
+    <h3>#5: Build a Memory System on Day One</h3>
+    <p>The agents that stay useful long-term are backed by persistent memory — not trusting chat history to remember everything. My setup:</p>
+    <pre><code>memory/
+├── YYYY-MM-DD.md     ← daily journal (written every evening)
+├── LEARNINGS.md      ← rules from mistakes (the most important file)
+├── [project].md      ← one doc per active project
+└── reference/        ← deep research, competitive analysis</code></pre>
+    <p>The most valuable file is <strong>LEARNINGS.md</strong> — a running log of mistakes the agent made and the rules derived from them. Every time the agent does something wrong, I write the correction as a rule. Over 30 days, this file becomes the institutional knowledge that makes the agent dramatically more accurate.</p>
+
+    <h2>Dos and Don'ts</h2>
+    <div class="do-dont">
+      <div class="do-box">
+        <h4>✅ Do</h4>
+        <ul>
+          <li>Give your agent a name and character — it improves consistency</li>
+          <li>Write every important decision to a file — chat is ephemeral, files are permanent</li>
+          <li>Use sub-agents for long tasks — orchestrate, don't execute everything inline</li>
+          <li>Update SESSION-STATE.md before any significant break</li>
+          <li>Set your $0 autonomous spend rule in writing</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>❌ Don't</h4>
+        <ul>
+          <li>Ask it to "just handle everything" — vague instructions, vague results</li>
+          <li>Give it production credentials on day one</li>
+          <li>Skip the memory files — every unlogged conversation is lost context</li>
+          <li>Treat it like a chatbot — it's an agent, the model is "set context → assign task → review output"</li>
+          <li>Run cron jobs without clear safety bounds in the prompt</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>The Honest Assessment After 30 Days</h2>
+    <p>OpenClaw is not a productivity hack. It's infrastructure.</p>
+    <p>The first week, I spent more time configuring it than I saved. The second week, it started doing useful things. By week three, it was running cron jobs every morning, managing my Todoist, drafting content, and keeping memory that made every conversation materially better than the last.</p>
+    <p>The ceiling is high. But the floor is also low — a badly configured OpenClaw will frustrate you and make you think it's overhyped. The setup tips in this post are the difference between those two outcomes.</p>
+    <blockquote>If you're on the fence: install it, spend 2 hours writing your identity files, set up one good cron job, and come back in a week. That's the honest minimum to evaluate what it can actually do.</blockquote>
+
+    <h2>Quick Setup Checklist</h2>
+    <ul class="checklist">
+      <li>Write AGENTS.md (identity, projects, safety rules)</li>
+      <li>Write USER.md (who you are, schedule, preferences)</li>
+      <li>Write SESSION-STATE.md (current context, handover doc)</li>
+      <li>Add Brave or Tavily API key for web search</li>
+      <li>Connect Todoist (or preferred task manager)</li>
+      <li>Set up one cron job (Morning Taskmaster or daily journal)</li>
+      <li>Start LEARNINGS.md (even just two entries)</li>
+      <li>Set $0 autonomous spend limit explicitly in AGENTS.md</li>
+    </ul>
+    <p>Eight items. Two hours. If you do these before anything else, you'll have a genuinely useful agent by day seven.</p>
+
+    <div class="author-box">
+      <strong>Nick Rae</strong> writes about aviation, AI tools, and building software products as a one-person operation. He's the author of the <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank" rel="noopener">Private Pilot License Workbook</a> and the developer of <a href="https://nickrae.net/flight-funded/">FeedFare</a>. Follow the build publicly at <a href="https://nickrae.net/flight-funded/">Flight Funded</a>.
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="./" class="nav-link">← All Posts</a>
+    <a href="openclaw-setup.html" class="nav-link">More: Full OpenClaw Architecture →</a>
+  </div>
+</article>
+
+<footer>
+  <p>© 2026 Nick Rae · <a href="mailto:nick@nickrae.net">nick@nickrae.net</a> · <a href="https://x.com/nickrae">@nickrae</a></p>
+</footer>
+<script>
+  document.querySelector('.menu-toggle').addEventListener('click',function(){
+    document.querySelector('nav .links').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
