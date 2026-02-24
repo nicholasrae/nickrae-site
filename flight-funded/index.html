@@ -86,8 +86,8 @@
     pointer-events:none;
   }
 
-  /* canvas for stars */
-  #stars{position:absolute;inset:0;opacity:.6;pointer-events:none}
+  /* webgl canvas */
+  #webgl-hero{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none;display:block;opacity:.85}
 
   .hero-content{position:relative;z-index:1;max-width:700px}
 
@@ -243,7 +243,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <canvas id="stars"></canvas>
+  <canvas id="webgl-hero"></canvas>
   <div class="hero-glow"></div>
   <div class="hero-content">
     <div class="badge"><span class="badge-dot"></span> Live Experiment</div>
@@ -424,45 +424,143 @@
 </footer>
 
 <script>
-// ── STAR CANVAS ──────────────────────────────────────────
-(function(){
-  const canvas = document.getElementById('stars');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
+// ── WEBGL STAR FIELD (Gemini 3.1 generated) ──────────────
+(function() {
+    const canvas = document.getElementById('webgl-hero');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return;
 
-  function resize(){
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
+    const vsSource = `
+        attribute vec2 position;
+        void main() {
+            gl_Position = vec4(position, 0.0, 1.0);
+        }
+    `;
 
-  function init(){
+    const fsSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+
+        float hash21(vec2 p) {
+            p = fract(p * vec2(123.34, 456.21));
+            p += dot(p, p + 45.32);
+            return fract(p.x * p.y);
+        }
+
+        float noise(vec2 p) {
+            vec2 i = floor(p);
+            vec2 f = fract(p);
+            f = f * f * (3.0 - 2.0 * f);
+            float a = hash21(i);
+            float b = hash21(i + vec2(1.0, 0.0));
+            float c = hash21(i + vec2(0.0, 1.0));
+            float d = hash21(i + vec2(1.0, 1.0));
+            return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+        }
+
+        float fbm(vec2 p) {
+            float v = 0.0;
+            float a = 0.5;
+            mat2 rot = mat2(0.866, -0.5, 0.5, 0.866);
+            for (int i=0; i<4; i++) {
+                v += a * noise(p);
+                p = rot * p * 2.0 + vec2(100.0);
+                a *= 0.5;
+            }
+            return v;
+        }
+
+        void main() {
+            vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+            vec3 col = vec3(0.01, 0.015, 0.04);
+
+            vec2 np = uv * 1.2;
+            float n1 = fbm(np + u_time * 0.02);
+            float n2 = fbm(np * 1.5 - u_time * 0.01 + vec2(5.2, 1.3));
+
+            vec3 nebCol1 = vec3(0.23, 0.51, 0.96) * n1 * n1 * 0.5;
+            vec3 nebCol2 = vec3(0.02, 0.71, 0.83) * n2 * n2 * n2 * 0.4;
+            col += nebCol1 + nebCol2;
+
+            float t = u_time * 0.15;
+
+            for(float i=0.; i<1.; i+=0.04) {
+                float depth = fract(i + t);
+                float scale = mix(15.0, 0.1, depth);
+                float fade = smoothstep(0.0, 0.2, depth) * smoothstep(1.0, 0.8, depth);
+
+                vec2 suv = uv * scale + i * 133.0;
+                vec2 id = floor(suv);
+                vec2 f = fract(suv) - 0.5;
+
+                float h = hash21(id);
+                if(h > 0.85) {
+                    float size = (h - 0.85) * 8.0;
+                    float d = length(f);
+
+                    vec3 starCol = mix(vec3(1.0), vec3(0.23, 0.51, 0.96), hash21(id * 3.3));
+                    starCol = mix(starCol, vec3(0.02, 0.71, 0.83), hash21(id * 7.1));
+
+                    float twinkle = sin(u_time * 5.0 + h * 100.0) * 0.5 + 0.5;
+                    size *= 0.8 + 0.4 * twinkle;
+
+                    float glow = 0.003 / (d + 0.001);
+                    col += starCol * glow * fade * size;
+                    col += vec3(1.0) * smoothstep(0.05, 0.0, d) * fade * size * 0.5;
+                }
+            }
+
+            gl_FragColor = vec4(col, 1.0);
+        }
+    `;
+
+    function compileShader(type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        return shader;
+    }
+
+    const vs = compileShader(gl.VERTEX_SHADER, vsSource);
+    const fs = compileShader(gl.FRAGMENT_SHADER, fsSource);
+    const program = gl.createProgram();
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    gl.useProgram(program);
+
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+        -1.0, -1.0,  1.0, -1.0, -1.0,  1.0,
+        -1.0,  1.0,  1.0, -1.0,  1.0,  1.0
+    ]), gl.STATIC_DRAW);
+
+    const positionLocation = gl.getAttribLocation(program, "position");
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+    const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+    const timeLocation = gl.getUniformLocation(program, "u_time");
+
+    function resize() {
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = canvas.clientWidth * dpr;
+        canvas.height = canvas.clientHeight * dpr;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+    }
+    window.addEventListener('resize', resize);
     resize();
-    stars = Array.from({length:80},()=>({
-      x: Math.random()*canvas.width,
-      y: Math.random()*canvas.height,
-      r: Math.random()*.8+.2,
-      a: Math.random(),
-      speed: Math.random()*.003+.001
-    }));
-  }
 
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    stars.forEach(s=>{
-      s.a += s.speed;
-      if(s.a > 1) s.speed *= -1;
-      if(s.a < 0) s.speed *= -1;
-      ctx.beginPath();
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle = `rgba(148,163,184,${Math.abs(s.a)})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', init);
-  init();
-  draw();
+    let startTime = performance.now();
+    function render(now) {
+        gl.uniform1f(timeLocation, (now - startTime) * 0.001);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
 })();
 
 // ── INTERSECTION OBSERVER (scroll reveal) ────────────────
