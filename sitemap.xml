@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://nickrae.net/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://nickrae.net/flight-funded/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nickrae.net/blog/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nickrae.net/blog/commercial-pilot-career-2026.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nickrae.net/blog/checkride-prep-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nickrae.net/blog/student-pilot-apps-2026.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nickrae.net/blog/openclaw-30-days.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nickrae.net/blog/openclaw-setup.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nickrae.net/blog/ai-aviation-business.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nickrae.net/inflection/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://nickrae.net/inflection/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://nickrae.net/inflection/support.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://nickrae.net/inflection/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>
