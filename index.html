@@ -142,6 +142,20 @@
     .hours-grid{grid-template-columns:repeat(2,1fr)}
     section{padding:3.5rem 1rem}
   }
+
+  .proj-links .gumroad{background:#36a9ae;color:#fff}
+  .proj-links .site{background:var(--green);color:#111}
+  .avi-section{background:var(--bg3)}
+  .avi-books{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-bottom:2rem}
+  .avi-book{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:.75rem;padding:1.5rem}
+  .avi-book h3{font-size:1rem;margin-bottom:.35rem}
+  .avi-book .price{font-size:.85rem;color:var(--green);font-weight:700;margin-bottom:.75rem}
+  .avi-book p{color:var(--text-muted);font-size:.85rem;margin-bottom:.75rem}
+  .avi-freebies{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+  .avi-freebies p{color:var(--text-muted);font-size:.85rem;flex:1;min-width:200px}
+  .social-bar{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem}
+  .social-bar a{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .75rem;border-radius:.35rem;font-size:.78rem;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--text-muted);transition:border-color .2s,color .2s}
+  .social-bar a:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
 </style>
 <script type="application/ld+json">
 [
@@ -257,10 +271,12 @@
 
       <div class="proj-card">
         <h3>📚 The Pilot Workbook Series</h3>
-        <p>Self-published study guides for student pilots. PPL Checkride Prep Workbook live now. Instrument Rating Workbook live on Amazon. 500+ questions, detailed FAA Knowledge Test prep.</p>
+        <p>Self-published study guides for student pilots. 500+ questions, detailed FAA Knowledge Test prep. Two books live on Amazon and Payhip. Free cheat sheets on Gumroad.</p>
         <span class="proj-badge live">Available Now</span>
         <div class="proj-links">
-          <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank" class="amazon">📚 Amazon</a>
+          <a href="https://a.co/d/0hExZLaf" target="_blank" class="amazon">✈️ PPL Workbook</a>
+          <a href="https://a.co/d/06zXHuEe" target="_blank" class="amazon">📡 IR Workbook</a>
+          <a href="https://nicholasrae.gumroad.com" target="_blank" class="gumroad">🎁 Free Cheat Sheets</a>
           <a href="https://payhip.com/V1Ventures" target="_blank" class="payhip">🛒 Payhip</a>
         </div>
       </div>
@@ -275,6 +291,9 @@
         <h3>🍽️ FeedFare</h3>
         <p>iOS habit and streak tracking app. Daily logging, streak management, and push notifications to keep you consistent. In App Review.</p>
         <span class="proj-badge review">In Review</span>
+        <div class="proj-links">
+          <a href="https://feedfare.app" target="_blank" class="site">🌐 feedfare.app</a>
+        </div>
       </div>
 
       <div class="proj-card">
@@ -311,6 +330,42 @@
         <span class="proj-badge soon">Launching Soon</span>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- AVIATION RESOURCES -->
+<section class="avi-section" id="aviation-resources">
+  <div class="container">
+    <h2 class="section-title">Aviation Resources</h2>
+    <p style="color:var(--text-muted);margin-bottom:1.5rem">Study materials I wrote to help student pilots pass their checkrides. Built from my own training — every question matters.</p>
+    <div class="avi-books">
+      <div class="avi-book">
+        <h3>✈️ Private Pilot License Workbook</h3>
+        <div class="price">$19.99 Print · $9.99 Kindle</div>
+        <p>500+ practice questions covering all PPL knowledge test topics. FAA-aligned, real exam format, fully explained answers.</p>
+        <div class="proj-links">
+          <a href="https://a.co/d/0hExZLaf" target="_blank" class="amazon">📚 Buy on Amazon</a>
+          <a href="https://payhip.com/V1Ventures" target="_blank" class="payhip">🛒 Payhip</a>
+        </div>
+      </div>
+      <div class="avi-book">
+        <h3>📡 Instrument Rating Workbook</h3>
+        <div class="price">$9.99 Kindle</div>
+        <p>Comprehensive IFR study guide for the instrument rating written exam. Covers weather, procedures, charts, regulations, and systems.</p>
+        <div class="proj-links">
+          <a href="https://a.co/d/06zXHuEe" target="_blank" class="amazon">📚 Buy on Amazon</a>
+          <a href="https://payhip.com/V1Ventures" target="_blank" class="payhip">🛒 Payhip</a>
+        </div>
+      </div>
+    </div>
+    <div class="avi-freebies">
+      <h3>🎁 Free Pilot Cheat Sheets</h3>
+      <p>Quick-reference cheat sheets for checkride prep — free to download. Grab them on Gumroad or the Payhip store.</p>
+      <div class="proj-links" style="flex-shrink:0">
+        <a href="https://nicholasrae.gumroad.com" target="_blank" class="gumroad">🎁 Free on Gumroad</a>
+        <a href="https://payhip.com/V1Ventures" target="_blank" class="payhip">🛒 Payhip Store</a>
+      </div>
     </div>
   </div>
 </section>
@@ -445,6 +500,14 @@
 <!-- FOOTER -->
 <footer>
   <div class="motto">Build things. Fly planes. Keep moving.</div>
+  <div class="social-bar" style="justify-content:center;margin-bottom:.75rem">
+    <a href="https://x.com/nickrae" target="_blank" rel="noopener">𝕏 @nickrae</a>
+    <a href="https://linkedin.com/in/nickrae" target="_blank" rel="noopener">in LinkedIn</a>
+    <a href="https://www.youtube.com/@nicholasrae" target="_blank" rel="noopener">▶ YouTube</a>
+    <a href="https://github.com/nicholasrae" target="_blank" rel="noopener">⌨ GitHub</a>
+    <a href="https://feedfare.app" target="_blank" rel="noopener">🍽️ FeedFare</a>
+    <a href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener">🎁 Gumroad</a>
+  </div>
   <div>© 2026 Nick Rae · Merced, CA</div>
 </footer>
 
