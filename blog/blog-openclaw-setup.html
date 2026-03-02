@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting Up OpenClaw: The 5 Things I Wish I Did First — Nick Rae</title>
+<meta name="description" content="OpenClaw becomes the backbone of how you work — but only if you set it up right. The five setup steps that actually matter, from someone who skipped them the first time.">
+<meta property="og:title" content="Setting Up OpenClaw: The 5 Things I Wish I Did First">
+<meta property="og:description" content="OpenClaw becomes the backbone of how you work — but only if you set it up right. The five setup steps that actually matter, from someone who skipped them the first time.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net/blog/blog-openclaw-setup.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="canonical" href="https://nickrae.net/blog/blog-openclaw-setup.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Setting Up OpenClaw: The 5 Things I Wish I Did First",
+  "author": {"@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net"},
+  "datePublished": "2026-03-02",
+  "url": "https://nickrae.net/blog/blog-openclaw-setup.html",
+  "keywords": "OpenClaw, AI assistant, personal AI agent, Telegram bot, cron jobs, AI setup"
+}
+</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;--text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;--accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);--border:#1e293b;--card:#131c2e;}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .links a{color:var(--text-muted)}
+  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+  article{max-width:800px;margin:0 auto;padding:6rem 1.5rem 3rem}
+  .article-header{margin-bottom:3rem}
+  .article-meta{color:var(--text-dim);font-size:.875rem;margin-bottom:1rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .article-category{background:var(--accent-glow);color:var(--accent2);padding:.2rem .65rem;border-radius:1rem;font-weight:600;font-size:.8rem}
+  .article-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:1.5rem;line-height:1.2}
+  .article-excerpt{color:var(--text-muted);font-size:1.1rem;line-height:1.6;border-left:3px solid var(--accent);padding-left:1.25rem}
+  .article-content{color:var(--text-muted);line-height:1.75;margin-top:2.5rem}
+  .article-content h2{color:var(--text);font-size:1.6rem;font-weight:700;margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--border)}
+  .article-content h3{color:var(--text);font-size:1.25rem;font-weight:700;margin:2.5rem 0 1rem}
+  .article-content h4{color:var(--accent2);font-size:1rem;font-weight:600;margin:1.75rem 0 .75rem;text-transform:uppercase;letter-spacing:.5px}
+  .article-content p{margin-bottom:1.25rem}
+  .article-content ul,.article-content ol{margin:1.25rem 0;padding-left:1.5rem}
+  .article-content li{margin-bottom:.5rem}
+  .article-content strong{color:var(--text);font-weight:600}
+  .article-content blockquote{background:var(--card);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:0 .5rem .5rem 0;color:var(--text)}
+  .article-content code{background:var(--card);border:1px solid var(--border);padding:.15rem .45rem;border-radius:.35rem;font-family:'SF Mono',Menlo,Monaco,Consolas,monospace;font-size:.875rem;color:var(--accent2)}
+  .article-content pre{background:var(--card);border:1px solid var(--border);border-radius:.5rem;padding:1.25rem 1.5rem;margin:1.5rem 0;overflow-x:auto}
+  .article-content pre code{background:none;border:none;padding:0;font-size:.875rem;color:var(--accent2)}
+  .article-content table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem}
+  .article-content th{background:var(--card);color:var(--accent2);padding:.75rem 1rem;text-align:left;border:1px solid var(--border);font-weight:600}
+  .article-content td{padding:.75rem 1rem;border:1px solid var(--border);color:var(--text-muted)}
+  .article-content tr:nth-child(even) td{background:rgba(19,28,46,.5)}
+  .article-content hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
+  .cta-box{background:var(--card);border:1px solid var(--accent);border-radius:.75rem;padding:1.75rem;margin:2.5rem 0}
+  .cta-box h3{color:var(--accent2);margin-bottom:.75rem;font-size:1.1rem}
+  .cta-box p{margin-bottom:1rem;font-size:.95rem}
+  .cta-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem}
+  .cta-links a{display:inline-block;background:var(--accent);color:white;padding:.6rem 1.25rem;border-radius:.5rem;font-weight:600;font-size:.9rem}
+  .cta-links a:hover{text-decoration:none;opacity:.9}
+  .author-box{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.75rem;margin:3rem 0;font-size:.9rem;color:var(--text-muted)}
+  .author-box strong{color:var(--text)}
+  .step-number{display:inline-block;background:var(--accent);color:white;width:2rem;height:2rem;border-radius:50%;text-align:center;line-height:2rem;font-weight:800;font-size:.9rem;margin-right:.5rem;flex-shrink:0}
+  .article-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem}
+  .nav-link{color:var(--accent2);font-weight:600;font-size:.9rem}
+  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:4rem}
+  @media(max-width:768px){
+    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+    nav .links.open{display:flex}
+    .menu-toggle{display:block}
+    .article-title{font-size:1.9rem}
+    article{padding:5rem 1rem 2rem}
+    .article-content table{font-size:.8rem}
+    .article-content th,.article-content td{padding:.5rem .65rem}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div>
+    <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <div class="links">
+      <a href="../">Home</a>
+      <a href="../#building">Building</a>
+      <a href="../#credentials">Flying</a>
+      <a href="./">Blog</a>
+      <a href="../flight-funded/" style="color:var(--accent2);font-weight:600">&#x1F6EB; Flight Funded</a>
+      <a href="../#connect">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="article-header">
+    <div class="article-meta">
+      <span class="article-category">&#x1F916; AI Tools</span>
+      <span>March 2026</span>
+      <span>Nick Rae</span>
+      <span>~8 min read</span>
+    </div>
+    <h1 class="article-title">Setting Up OpenClaw: The 5 Things I Wish I Did First</h1>
+    <p class="article-excerpt">OpenClaw is the kind of tool that sounds simple on paper — AI assistant, runs on your machine, talks to you on Telegram — and then quietly becomes the backbone of how you work. Most people leave a lot of power on the table in the first few weeks. Here's what I'd do differently from day one.</p>
+  </div>
+
+  <div class="article-content">
+
+    <p>I set mine up a few months ago. If I'm being honest, I was productive inside of 20 minutes. But I left a lot of power on the table for the first few weeks because I skipped a few things that seemed optional but weren't.</p>
+
+    <p>Here's what I'd do differently.</p>
+
+    <h2>1. Write SOUL.md on Day One</h2>
+
+    <p>OpenClaw has a persona system. You can define who your assistant is — name, tone, personality, priorities. Most people skip this because it feels like a fun extra. It isn't.</p>
+
+    <p>Your assistant inherits whatever defaults come with it. If you don't define a persona, you get a generic helpful chatbot. If you do, you get something that actually sounds like a co-pilot: opinionated, consistent, and tuned to how you think.</p>
+
+    <p>Mine is Talos — a "bronze automaton, lobster-coded AI running cron jobs at 3am." The humor is intentional. An assistant with personality is one you'll actually talk to.</p>
+
+    <p>Write <code>SOUL.md</code> in your workspace folder. Give your agent a name, a tone, and 3-5 rules for how it should behave. Take 15 minutes. You'll feel the difference in the first conversation.</p>
+
+    <h2>2. Set Up Cron Jobs Before You Need Them</h2>
+
+    <p>OpenClaw has a built-in cron scheduler. It can run tasks on a schedule — morning briefs, nightly summaries, health checks, automated research, anything.</p>
+
+    <p>The mistake is thinking: "I'll set those up once I know what I want." You won't. You'll get comfortable talking to it in real time and never build the async layer.</p>
+
+    <p>Start with three crons on day one:</p>
+
+    <ul>
+      <li><strong>Morning brief (7 AM)</strong> — weather, calendar, any overnight news relevant to your projects</li>
+      <li><strong>Evening summary (7 PM)</strong> — what got done, what's open, anything to prep for tomorrow</li>
+      <li><strong>Memory backup</strong> — git commit the workspace folder nightly so you never lose context</li>
+    </ul>
+
+    <p>These three alone make OpenClaw feel like it never sleeps. Because it doesn't.</p>
+
+    <h2>3. Connect It to the Channel You Actually Use</h2>
+
+    <p>OpenClaw supports Telegram, Signal, iMessage, WhatsApp, Discord, Slack, and more. You'll be tempted to connect all of them. Don't.</p>
+
+    <p>Pick the one chat app you already live in and connect that first. For me, it was Telegram. Everything routes through one channel with topics for different projects. I check it the way I check Messages — reflexively, without thinking.</p>
+
+    <p>If you spread across channels, the agent becomes a thing you have to go find. That kills the habit. Make it live where you already are.</p>
+
+    <h2>4. Write USER.md — Your Agent Needs to Know Who You Are</h2>
+
+    <p>This is the most underrated setup step. OpenClaw's memory system is built around files in your workspace. <code>USER.md</code> is where you tell it who it's talking to.</p>
+
+    <p>Name, timezone, schedule, goals, projects, constraints, preferences. The more you put in, the less you have to explain in every conversation.</p>
+
+    <p>Example entries that pay dividends:</p>
+
+    <ul>
+      <li>"During work hours (Mon-Thu 9-6), keep messages brief"</li>
+      <li>"Primary goal is building toward a flying career"</li>
+      <li>"I prefer practical advice over theory"</li>
+    </ul>
+
+    <p>Your assistant reads this file. It shapes every response. Filling it out is the fastest way to close the gap between "AI chatbot" and "person who actually knows me."</p>
+
+    <h2>5. Use the Skills System — Don't Reinvent Everything</h2>
+
+    <p>OpenClaw has an installable skills system called <strong>ClawHub</strong>. Skills are purpose-built mini-agents for specific tasks: managing Apple Notes, iMessage, Philips Hue lights, image generation, transcription, GitHub ops, and more.</p>
+
+    <p>Before building any custom workflow, check ClawHub. There's probably already a skill for it.</p>
+
+    <p>The ones I use most:</p>
+
+    <ul>
+      <li><strong>apple-notes</strong> — add and search notes without leaving Telegram</li>
+      <li><strong>github</strong> — PR status and issue management on demand</li>
+      <li><strong>weather</strong> — simple, works, no setup needed</li>
+    </ul>
+
+    <p>Install with:</p>
+
+    <pre><code>openclaw skill install &lt;skill-name&gt;</code></pre>
+
+    <h2>The Bottom Line</h2>
+
+    <p>OpenClaw's ceiling is high. Most people don't hit it because they treat it like a chatbot instead of building it out as an actual system.</p>
+
+    <p>The five things above — persona, crons, one channel, user profile, and skills — take about an hour total. After that, you have something that works for you while you're at work, asleep, or on the road.</p>
+
+    <div class="cta-box">
+      <h3>&#x1F9E0; Want to Go Deeper?</h3>
+      <p>I've written about the full architecture behind my OpenClaw setup — 20+ cron jobs, tiered model routing, a persistent memory system, and the principles that keep it from going off the rails.</p>
+      <div class="cta-links">
+        <a href="openclaw-setup.html">My Full OpenClaw Setup &#x2192;</a>
+        <a href="openclaw-30-days.html" style="background:var(--bg3);border:1px solid var(--border);">30-Day Assessment &#x2192;</a>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="author-box">
+      <strong>Nick Rae</strong> is a commercial pilot (ASEL/AMEL/IR), builder, and AI tools enthusiast based in Merced, CA. He uses OpenClaw as the operational backbone for managing side projects, flight planning, and automating the parts of work that don't need a human. Follow along on <a href="https://x.com/nickrae" target="_blank" rel="noopener">X @nickrae</a>.
+    </div>
+
+  </div>
+
+  <div class="article-nav">
+    <a href="./" class="nav-link">&#x2190; All Posts</a>
+    <a href="openclaw-setup.html" class="nav-link">Next: My Full OpenClaw Setup &#x2192;</a>
+  </div>
+</article>
+
+<footer>
+  <div style="margin-bottom:.5rem">Build things. Fly planes. Keep moving.</div>
+  <div>&#169; 2026 Nick Rae &middot; <a href="https://nickrae.net">nickrae.net</a></div>
+</footer>
+
+</body>
+</html>
