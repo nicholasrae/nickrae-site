@@ -17,12 +17,27 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "I Read an Academic Paper and Rebuilt My AI Agent's Memory",
-  "author": {"@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net"},
-  "datePublished": "2026-03-14",
-  "url": "https://nickrae.net/blog/blog-trajectory-learning.html",
-  "keywords": "OpenClaw, AI agent, trajectory learning, self-improvement, IBM research, agent memory, autonomous AI"
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "I Read an Academic Paper and Rebuilt My AI Agent's Memory",
+      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "datePublished": "2026-03-14",
+      "url": "https://nickrae.net/blog/blog-trajectory-learning.html",
+      "image": "https://nickrae.net/og-image.jpg",
+      "description": "An IBM research paper showed that AI agents improve 14% when they learn from their own execution patterns. I implemented a trajectory learning system in OpenClaw in one morning. Here's exactly what I built.",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/blog-trajectory-learning.html" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "I Read an Academic Paper and Rebuilt My AI Agent's Memory", "item": "https://nickrae.net/blog/blog-trajectory-learning.html" }
+      ]
+    }
+  ]
 }
 </script>
 <style>

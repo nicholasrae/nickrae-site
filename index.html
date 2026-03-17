@@ -158,27 +158,50 @@
   .social-bar a:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
 </style>
 <script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Nick Rae",
-    "jobTitle": "Commercial Pilot",
-    "url": "https://nickrae.net",
-    "sameAs": [
-      "https://twitter.com/nickrae",
-      "https://www.youtube.com/@nicholasrae",
-      "https://linkedin.com/in/nickrae",
-      "https://github.com/nicholasrae"
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Nick Rae",
-    "url": "https://nickrae.net"
-  }
-]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nickrae.net/#person",
+      "name": "Nick Rae",
+      "url": "https://nickrae.net/",
+      "image": "https://nickrae.net/headshot.webp",
+      "jobTitle": "Commercial Pilot",
+      "description": "Commercial pilot, iOS developer, and AI builder based in Merced, CA",
+      "knowsAbout": ["Commercial Aviation", "Flight Training", "iOS Development", "AI Automation", "Prediction Markets"],
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Professional License",
+        "name": "Commercial Instrument Multi-Engine Pilot Certificate"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/nickrae",
+        "https://twitter.com/nickrae",
+        "https://www.youtube.com/@nicholasrae",
+        "https://github.com/nicholasrae"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Car Plus",
+        "url": "https://www.carplusmerced.com"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Merced",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "Nick Rae",
+      "url": "https://nickrae.net/",
+      "description": "Midlife career 2.0 — commercial pilot building iOS apps and AI tools to fund the next chapter. Based in Merced, CA.",
+      "author": { "@id": "https://nickrae.net/#person" }
+    }
+  ]
+}
 </script>
 </head>
 <body>

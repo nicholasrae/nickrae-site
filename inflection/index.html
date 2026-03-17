@@ -18,21 +18,32 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Inflection Point",
-  "operatingSystem": "iOS",
-  "applicationCategory": "HealthApplication",
-  "description": "Gamified self-improvement. Anti-vision journaling, daily quests, and pattern interrupts. Your old self is the final boss.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Nick Rae",
-    "url": "https://nickrae.net"
-  }
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Inflection Point",
+      "operatingSystem": "iOS",
+      "applicationCategory": "HealthApplication",
+      "description": "Gamified self-improvement. Anti-vision journaling, daily quests, and pattern interrupts. Your old self is the final boss.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Nick Rae",
+        "url": "https://nickrae.net"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
+        { "@type": "ListItem", "position": 2, "name": "Inflection Point", "item": "https://nickrae.net/inflection/" }
+      ]
+    }
+  ]
 }
 </script>
 <style>
