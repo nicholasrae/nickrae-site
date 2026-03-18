@@ -140,7 +140,7 @@
 
     <p>On the AppWorld benchmark, this system delivered a <strong>14.3 percentage point improvement</strong> in goal completion. On complex tasks, the gain was 28.5 percentage points, a 149% relative improvement. Those numbers are hard to ignore.</p>
 
-    <p>I run <a href="https://openclaw.ai" target="_blank">OpenClaw</a> as my daily AI agent platform. It manages 46 cron jobs, spawns sub-agents for coding tasks, runs a weather prediction bot, and handles everything from iOS app builds to content scheduling. The agent already had an error registry for logging mistakes. But it had no way to learn from successes, no way to avoid repeating wasteful patterns, and no way to inject prior lessons into new tasks.</p>
+    <p>I run <a href="https://openclaw.ai" target="_blank">OpenClaw</a> as my daily AI agent platform. I've written about <a href="openclaw-setup.html">the full architecture</a> previously — it manages 46 cron jobs, spawns sub-agents for coding tasks, runs a <a href="kalshi-weather-bot.html">weather prediction bot</a>, and handles everything from iOS app builds to content scheduling. The agent already had an error registry for logging mistakes. But it had no way to learn from successes, no way to avoid repeating wasteful patterns, and no way to inject prior lessons into new tasks.</p>
 
     <p>That's exactly the gap the IBM paper addresses.</p>
 
@@ -268,7 +268,7 @@
 
     <p>The paper is free to read: <a href="https://arxiv.org/abs/2603.10600" target="_blank">arxiv.org/abs/2603.10600</a>. If you're running any kind of autonomous agent system, it's worth 30 minutes of your time. The implementation took me a morning. The infrastructure cost is essentially zero, just a few markdown files and a protocol change. The potential upside, if the IBM numbers hold, is significant.</p>
 
-    <p>I'll report back on whether the tips actually reduce repeat mistakes and wasteful patterns over the next month. For now, the system is live and logging.</p>
+    <p>I'll report back on whether the tips actually reduce repeat mistakes and wasteful patterns over the next month. For now, the system is live and logging. If you're just getting started with OpenClaw, my <a href="blog-openclaw-setup.html">5 things I wish I did first</a> guide covers the setup that makes trajectory learning possible, and the <a href="openclaw-30-days.html">30-day assessment</a> shows the honest results of running it daily.</p>
 
     <hr>
 

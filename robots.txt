@@ -2,3 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://nickrae.net/sitemap.xml
+
+# AI model context
+# See https://llmstxt.org for spec
+# llms.txt: https://nickrae.net/llms.txt

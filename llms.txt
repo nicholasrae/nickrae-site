@@ -1,0 +1,42 @@
+# Nick Rae
+
+> Commercial pilot, iOS developer, and AI builder based in Merced, CA. Building side income through apps, prediction markets, and automation to fund flight hours toward an airline career.
+
+## About
+
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight hours, working toward 1,500 hours for ATP certification. He builds iOS apps, runs an AI-powered weather prediction trading bot, and publishes aviation study materials on Amazon KDP. He documents the journey at nickrae.net.
+
+## Key Pages
+
+- [Home](https://nickrae.net/)
+- [Blog](https://nickrae.net/blog/)
+- [Flight Funded](https://nickrae.net/flight-funded/) — tracking side hustle income funding flight hours
+- [FeedFare App](https://nickrae.net/feedfare/)
+- [Inflection Point App](https://nickrae.net/inflection/)
+
+## Blog Posts
+
+- [How I Earned My Commercial Pilot License at 45](https://nickrae.net/blog/blog-commercial-pilot.html)
+- [The Cheapest Ways to Build Flight Hours in 2026](https://nickrae.net/blog/blog-cheapest-flight-hours.html)
+- [I Built a Weather Prediction Bot That Made $959 in Paper Trades](https://nickrae.net/blog/kalshi-weather-bot.html)
+- [Setting Up OpenClaw: The 5 Things I Wish I Did First](https://nickrae.net/blog/blog-openclaw-setup.html)
+- [I Read an Academic Paper and Rebuilt My AI Agent's Memory](https://nickrae.net/blog/blog-trajectory-learning.html)
+- [How to Become a Commercial Pilot in 2026](https://nickrae.net/blog/commercial-pilot-career-2026.html)
+- [The Ultimate Private Pilot Checkride Prep Guide](https://nickrae.net/blog/checkride-prep-guide.html)
+- [5 Apps Every Student Pilot Needs in 2026](https://nickrae.net/blog/student-pilot-apps-2026.html)
+- [My OpenClaw Setup: From Chat Assistant to Autonomous Co-Pilot](https://nickrae.net/blog/openclaw-setup.html)
+- [I've Been Running OpenClaw for 30 Days](https://nickrae.net/blog/openclaw-30-days.html)
+- [How I'm Using AI to Build Side Income as a Pilot](https://nickrae.net/blog/ai-aviation-business.html)
+
+## Books (Amazon KDP)
+
+- [Private Pilot License Workbook: 500+ Practice Questions](https://a.co/d/0hExZLaf)
+- [Instrument Rating Workbook: Complete IFR Study System](https://www.amazon.com/dp/B0GQH7QX62)
+
+## Contact
+
+- Website: https://nickrae.net
+- LinkedIn: https://www.linkedin.com/in/nickrae
+- X/Twitter: https://twitter.com/nickrae
+- YouTube: https://www.youtube.com/@nicholasrae
+- GitHub: https://github.com/nicholasrae
