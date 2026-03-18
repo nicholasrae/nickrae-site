@@ -130,12 +130,12 @@
     <p>When I first set up OpenClaw, I made the classic mistake: I installed it, opened Telegram, typed "hello," and expected magic.</p>
     <p>I got a capable AI that knew nothing about me, had no memory of previous conversations, no access to my tools, and answered questions with the same generic helpfulness as any free chatbot.</p>
     <p>The tool was powerful. I had set it up like a toy.</p>
-    <p>Thirty days later — after wiring it to Todoist, giving it persistent memory, setting up cron jobs that run while I sleep, and building a workflow that genuinely moves my projects forward every day — I understand what OpenClaw actually is: <strong>a 24/7 AI agent you have to configure to earn.</strong></p>
+    <p>Thirty days later — after wiring it to Todoist, giving it persistent memory, setting up cron jobs that run while I sleep, and <a href="ai-aviation-business.html">building a workflow that genuinely moves my projects forward every day</a> — I understand what OpenClaw actually is: <strong>a 24/7 AI agent you have to configure to earn.</strong></p>
     <p>Here's what I wish someone had told me before I started.</p>
 
     <h2>What Is OpenClaw, Actually?</h2>
     <p>Most people describe OpenClaw as a "Claude chatbot on Telegram." That's like describing a scalpel as "a very thin knife." Technically accurate. Completely misses the point.</p>
-    <p>OpenClaw is a <strong>gateway daemon</strong> — a process that runs on your machine 24/7, connects your AI model (Claude, Gemini, or others) to your messaging platforms, gives it access to tools (shell commands, web search, browser control, file I/O), and lets it operate autonomously with persistent memory and scheduled tasks.</p>
+    <p>OpenClaw is a <strong>gateway daemon</strong> — a process that runs on your machine 24/7, connects your AI model (Claude, Gemini, or others) to your messaging platforms, gives it access to tools (shell commands, web search, browser control, file I/O), and lets it operate autonomously with persistent memory and scheduled tasks. Once you've learned the 30-day lessons here, my <a href="openclaw-setup.html">full architecture writeup</a> goes much deeper on cron jobs, model routing, and sub-agent patterns.</p>
     <p>The Telegram interface is just how you talk to it. The real capability is everything running underneath.</p>
 
     <h2>Top 5 Things to Do When You First Set Up OpenClaw</h2>
@@ -231,7 +231,7 @@
       <li>Start LEARNINGS.md (even just two entries)</li>
       <li>Set $0 autonomous spend limit explicitly in AGENTS.md</li>
     </ul>
-    <p>Eight items. Two hours. If you do these before anything else, you'll have a genuinely useful agent by day seven.</p>
+    <p>Eight items. Two hours. If you do these before anything else, you'll have a genuinely useful agent by day seven. My follow-up post on <a href="blog-trajectory-learning.html">trajectory learning for AI agents</a> covers the next level of memory optimization once you've been running it for a few weeks.</p>
 
     <div class="author-box">
       <strong>Nick Rae</strong> writes about aviation, AI tools, and building software products as a one-person operation. He's the author of the <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank" rel="noopener">Private Pilot License Workbook</a> and the developer of <a href="https://feedfare.app">FeedFare</a>. Follow the build publicly at <a href="https://nickrae.net/flight-funded/">Flight Funded</a>.

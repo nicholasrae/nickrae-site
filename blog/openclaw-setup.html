@@ -119,7 +119,7 @@
 <div class="meta">February 12, 2026 · Nick Rae · 10 min read</div>
 <h1>My OpenClaw Setup: From Chat Assistant to Autonomous Co-Pilot in One Week</h1>
 
-<p>Most OpenClaw setup guides stop at "install it, connect Telegram, chat with it." That's the tutorial. This is what happens when you actually <em>live</em> with it for a week and push it toward real autonomy.</p>
+<p>Most OpenClaw setup guides stop at "install it, connect Telegram, chat with it." That's the tutorial. This is what happens when you actually <em>live</em> with it for a week and push it toward real autonomy. If you want the beginner-friendly version first, start with my <a href="openclaw-30-days.html">30-day assessment</a>.</p>
 
 <p>I run OpenClaw on a Mac with Claude Opus 4.6 as my main brain, backed by a tiered model system that routes cheap tasks to Gemini Flash and mid-tier work to Claude Sonnet. The agent's name is Talos — my co-pilot. Here's what the setup actually looks like.</p>
 
@@ -269,7 +269,7 @@ Complex reasoning/strategy?     → Main session (Opus)</code></pre>
 <div class="principle"><span class="principle-num">8.</span> <strong>One task, one cycle</strong> <span>— finish one thing before starting the next.</span></div>
 <div class="principle"><span class="principle-num">9.</span> <strong>Protect the principal</strong> <span>— never expose my data, spend my money, or speak as me without approval.</span></div>
 
-<p>The file also has a <strong>regressions table</strong> — when a principle fails or a new lesson emerges, it gets logged with the date, what happened, and which principle got updated. The principles aren't static. They evolve.</p>
+<p>The file also has a <strong>regressions table</strong> — when a principle fails or a new lesson emerges, it gets logged with the date, what happened, and which principle got updated. The principles aren't static. They evolve. I later built on this idea after reading an IBM research paper on <a href="blog-trajectory-learning.html">trajectory-informed memory for self-improving agents</a> — that post covers the next level.</p>
 
 <p>This was inspired by <a href="https://x.com/atlasforgeai/status/2021773566341988758">@AtlasForgeAI's post</a> about the three-layer architecture: Soul (who to be), Principles (how to operate), Skills (what to do). The insight is that principles fill the gap between identity and capabilities — they're what the agent falls back on when the instructions run out.</p>
 
@@ -301,7 +301,7 @@ Complex reasoning/strategy?     → Main session (Opus)</code></pre>
 
 <h2>The Bottom Line</h2>
 
-<p>After one week, Talos runs 20 automated jobs, monitors my email/business/infrastructure, works autonomously while I sleep, and maintains a searchable memory of everything we've done together. It's not perfect — sub-agents still flake sometimes, Flash still refuses to write files, and the occasional cron job errors out. But the watchdog catches those, and the system self-corrects.</p>
+<p>After one week, Talos runs 20 automated jobs, monitors my email/business/infrastructure, works autonomously while I sleep, and maintains a searchable memory of everything we've done together. It's not perfect — sub-agents still flake sometimes, Flash still refuses to write files, and the occasional cron job errors out. But the watchdog catches those, and the system self-corrects. I use this setup to <a href="ai-aviation-business.html">build side income as a pilot</a> — it runs the Kalshi bot, manages KDP books, and handles content while I'm at my day job.</p>
 
 <p>The setup guide gets you a chatbot. A week of iteration gets you a co-pilot.</p>
 
