@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Read Meta's Self-Improving AI Paper. Then I Implemented It. — Nick Rae</title>
+<meta name="description" content="Facebook Research published a paper on AI agents that rewrite themselves. Here's what it actually means, how it maps to my OpenClaw setup, and the one thing I built from it the same night.">
+<meta property="og:title" content="I Read Meta's Self-Improving AI Paper. Then I Implemented It.">
+<meta property="og:description" content="Facebook Research published a paper on AI agents that rewrite themselves. Here's what it actually means, how it maps to my OpenClaw setup, and the one thing I built from it the same night.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net/blog/self-improving-ai-agents.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "I Read Meta's Self-Improving AI Paper. Then I Implemented It.",
+      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "datePublished": "2026-03-24",
+      "url": "https://nickrae.net/blog/self-improving-ai-agents.html",
+      "image": "https://nickrae.net/og-image.jpg",
+      "description": "Facebook Research published a paper on AI agents that rewrite themselves. Here's what it actually means, how it maps to my OpenClaw setup, and the one thing I built from it the same night.",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/self-improving-ai-agents.html" },
+      "keywords": ["AI agents", "self-improving AI", "OpenClaw", "HyperAgents", "automation", "cron jobs"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "I Read Meta's Self-Improving AI Paper. Then I Implemented It.", "item": "https://nickrae.net/blog/self-improving-ai-agents.html" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
+    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
+    --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
+    --border:#1e293b;--card:#131c2e;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .links a{color:var(--text-muted)}
+  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  main{max-width:740px;margin:0 auto;padding:7rem 1.5rem 4rem}
+  .post-header{margin-bottom:2.5rem;border-bottom:1px solid var(--border);padding-bottom:2rem}
+  .post-tag{display:inline-block;background:var(--accent-glow);color:var(--accent2);border:1px solid rgba(59,130,246,.3);padding:.25rem .75rem;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:1rem}
+  h1{font-size:2rem;font-weight:800;line-height:1.25;letter-spacing:-.5px;margin-bottom:1rem}
+  .post-meta{color:var(--text-dim);font-size:.875rem}
+  h2{font-size:1.25rem;font-weight:700;margin:2.5rem 0 .75rem;color:var(--text)}
+  h3{font-size:1rem;font-weight:700;margin:2rem 0 .5rem;color:var(--accent2)}
+  p{color:var(--text-muted);margin-bottom:1.25rem;line-height:1.75}
+  p a{color:var(--accent2)}
+  ul,ol{color:var(--text-muted);padding-left:1.5rem;margin-bottom:1.25rem}
+  li{margin-bottom:.5rem;line-height:1.7}
+  li strong{color:var(--text)}
+  pre{background:var(--card);border:1px solid var(--border);border-radius:.5rem;padding:1.25rem;overflow-x:auto;margin:1.5rem 0;font-size:.85rem;line-height:1.6}
+  code{font-family:'SF Mono',Menlo,Monaco,monospace;font-size:.875em;color:#93c5fd;background:rgba(59,130,246,.1);padding:.15em .4em;border-radius:.25em}
+  pre code{background:none;padding:0;color:#e2e8f0}
+  .callout{background:var(--card);border-left:3px solid var(--accent);border-radius:0 .5rem .5rem 0;padding:1.25rem 1.5rem;margin:2rem 0}
+  .callout p{margin-bottom:0;color:var(--text)}
+  .callout .label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--accent2);margin-bottom:.5rem}
+  table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.875rem}
+  th{background:var(--card);color:var(--text);font-weight:600;padding:.75rem 1rem;text-align:left;border-bottom:1px solid var(--border)}
+  td{padding:.65rem 1rem;border-bottom:1px solid rgba(30,41,59,.5);color:var(--text-muted)}
+  tr:hover td{background:rgba(255,255,255,.02)}
+  .numbers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
+  .num-card{background:var(--card);border:1px solid var(--border);border-radius:.5rem;padding:1rem;text-align:center}
+  .num-card .num{font-size:1.75rem;font-weight:800;color:var(--accent2)}
+  .num-card .label{font-size:.75rem;color:var(--text-dim);margin-top:.25rem}
+  footer{max-width:740px;margin:0 auto;padding:2rem 1.5rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.875rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+  @media(max-width:600px){h1{font-size:1.5rem}.numbers-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="logo">✈️ Nick Rae</a>
+    <div class="links">
+      <a href="/#projects">Projects</a>
+      <a href="/blog/">Blog</a>
+      <a href="/flight-funded/">Flight Funded</a>
+      <a href="https://x.com/nickrae" target="_blank">@nickrae</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="post-header">
+    <div class="post-tag">AI &amp; Automation</div>
+    <h1>I Read Meta's Self-Improving AI Paper. Then I Implemented It.</h1>
+    <div class="post-meta">Nick Rae &nbsp;·&nbsp; March 24, 2026 &nbsp;·&nbsp; 8 min read</div>
+  </div>
+
+  <p>Last night someone dropped a link to a new paper from Facebook Research: <a href="https://arxiv.org/abs/2603.19461" target="_blank">HyperAgents</a>. The tagline is "self-referential self-improving agents that can optimize for any computable task." I read the whole thing, had my AI agent analyze it, and had the core idea implemented in my own system within a couple of hours.</p>
+
+  <p>Here's what the paper actually says, why it matters, and what I built from it — in plain English, no PhD required.</p>
+
+  <h2>What They Built</h2>
+
+  <p>The researchers built a system with two AI agents that work together:</p>
+
+  <ul>
+    <li><strong>A task agent</strong> that actually does the work (writes code, reviews papers, designs robot reward functions)</li>
+    <li><strong>A meta agent</strong> that watches the task agent perform and rewrites its code to make it better</li>
+  </ul>
+
+  <p>That part isn't new — there's a whole field of "self-improving AI" that does this. What makes HyperAgents different: <strong>the meta agent can also rewrite itself.</strong> The thing that improves the agent can improve how it improves the agent.</p>
+
+  <p>They tested it across four completely different domains: coding challenges, academic paper review, robot reward design, and olympiad math grading. It got substantially better at all of them starting from near-zero performance.</p>
+
+  <div class="callout">
+    <div class="label">The Key Finding</div>
+    <p>Improvements learned in one domain transferred to completely unrelated domains. Agents trained on paper review and robotics improved at math grading even though math grading was never part of the training. The researchers didn't expect that.</p>
+  </div>
+
+  <h2>The Numbers</h2>
+
+  <div class="numbers-grid">
+    <div class="num-card">
+      <div class="num">0% → 71%</div>
+      <div class="label">Paper review accuracy (test set)</div>
+    </div>
+    <div class="num-card">
+      <div class="num">6% → 37%</div>
+      <div class="label">Robotics (beat the domain default)</div>
+    </div>
+    <div class="num-card">
+      <div class="num">8% → 27%</div>
+      <div class="label">Coding on unseen tasks</div>
+    </div>
+  </div>
+
+  <p>The system started from a nearly useless agent — literally one LLM call — and compounded improvements across iterations. The researchers also found that removing either component (the self-improving meta agent, or the archive of past agent versions) caused results to collapse. You need both.</p>
+
+  <h2>What It Spontaneously Invented</h2>
+
+  <p>This is the part that caught my attention. Nobody told the system to do any of this — it figured it out on its own through the self-improvement loop:</p>
+
+  <ul>
+    <li>A <code>PerformanceTracker</code> class with moving averages and trend detection</li>
+    <li>Persistent memory with timestamped entries across sessions</li>
+    <li>Bias detection — it caught itself predicting "accept" 99% of the time and self-corrected</li>
+    <li>"Compute-aware planning" — bold architectural changes early in the run, conservative tweaks later</li>
+    <li>Structured evaluation checklists that outperformed vague attitude instructions ("be rigorous" turned out to be useless; a two-stage checklist worked)</li>
+  </ul>
+
+  <p>The system learned that raw attitude doesn't matter. Process does. That tracks with how I think about my own automation setup.</p>
+
+  <h2>How This Maps to My Setup</h2>
+
+  <p>I run an AI agent on an iMac called Talos. It manages 60+ automated tasks that run on schedules — morning briefings, a Kalshi weather prediction bot, app store monitoring, content pipelines. The whole thing is built on <a href="https://openclaw.ai" target="_blank">OpenClaw</a>.</p>
+
+  <p>When I mapped the HyperAgents architecture to what I've already built, the overlap was closer than I expected:</p>
+
+  <table>
+    <thead>
+      <tr><th>HyperAgents Concept</th><th>My Setup (Talos)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Task agents doing specific jobs</td><td>60+ cron jobs, each with a focused task</td></tr>
+      <tr><td>Performance tracking</td><td>Implicit feedback tracker, cron success/failure logs</td></tr>
+      <tr><td>Persistent memory</td><td>LEARNINGS.md, daily journal files, memory/ directory</td></tr>
+      <tr><td>Archive of past agent versions</td><td>Git history of the workspace</td></tr>
+      <tr><td>Meta agent analyzing results</td><td>Nightly self-learning cron, cron transcript analyzer</td></tr>
+    </tbody>
+  </table>
+
+  <p>The architecture is the same. Run tasks, evaluate results, extract learnings, improve the system. I've been building toward this without a formal name for it.</p>
+
+  <h3>Where I Fall Short</h3>
+
+  <p>HyperAgents' defining move is that the meta agent is <em>editable</em>. The improvement machinery rewrites itself. In my setup, the improvement machinery — the analyzer scripts, the format of LEARNINGS.md, the heartbeat logic — is fixed. It runs the same analysis every time.</p>
+
+  <p>If my cron analyzer isn't catching a failure pattern, nothing rewrites the analyzer. The task agents improve (slightly, via tips injected into prompts), but the improvement layer itself doesn't evolve.</p>
+
+  <p>The second gap: my crons are siloed. Each one analyzes its own transcripts. HyperAgents' biggest gains came from cross-domain transfer. My Kalshi bot doesn't inform my FeedFare crons, and vice versa. The cross-domain insight sits on the table unused.</p>
+
+  <h2>What I Built</h2>
+
+  <p>The single most actionable thing the paper revealed wasn't a new architecture — it was the difference between logging scores and logging reasoning.</p>
+
+  <p>What most systems do (including mine, until last night):</p>
+
+  <pre><code># Basic log entry
+cron_score: 0.63
+timestamp: 2026-03-23</code></pre>
+
+  <p>What HyperAgents-style memory looks like:</p>
+
+  <pre><code>{
+  "timestamp": "2026-03-24T03:16:49",
+  "error_count": 2,
+  "primary_failure_mode": "delivery",
+  "hypothesis": "Bad delivery target — strip threadId or route to DM",
+  "fix_applied": null,
+  "watch_next_runs": 3,
+  "repeat_count": 1,
+  "escalate": false,
+  "sample_error": "Telegram send failed: session not found in this context"
+}</code></pre>
+
+  <p>The difference: it's not logging the score. It's logging the <em>causal story</em>. What failed, why, what the hypothesis is, how many times the same thing has happened in a row, and whether to escalate. That's what makes improvements compound instead of repeating the same diagnosis every cycle.</p>
+
+  <p>I added this as a new layer to my existing cron transcript analyzer. Every time it runs now, it writes a structured insight entry per cron to <code>memory/cron-insights/{cron-name}.json</code>. The next run loads the history before deciding what to flag. If the same failure mode hits three times in a row, it escalates.</p>
+
+  <p>First run with the new system detected:</p>
+
+  <ul>
+    <li>Three crons with repeated delivery failures (bad Telegram thread IDs) — fixed all three</li>
+    <li>One cron pointing to a script path that had moved — fixed</li>
+    <li>Cross-cron pattern: delivery failures are the dominant failure mode across the platform (3 of 12 problem crons), not timeouts or rate limits as I assumed</li>
+  </ul>
+
+  <div class="callout">
+    <div class="label">The Compounding Part</div>
+    <p>The insights persist across runs. "Repeated 2x" in the output means the system has now seen the same failure twice and is tracking it as a pattern, not a fluke. At 3x it escalates to me. This is the feedback loop that makes improvements accumulate instead of reset.</p>
+  </div>
+
+  <h2>The Honest Limitations of the Paper</h2>
+
+  <p>A few things worth flagging before you get too excited:</p>
+
+  <ul>
+    <li><strong>Compute-heavy.</strong> Each HyperAgents run involves 100-200 iteration cycles with full evaluation loops. This isn't something you can run casually without a budget.</li>
+    <li><strong>Fixed task distribution.</strong> The system evolves <em>how</em> it does a task, not <em>what</em> it's trying to do. Your goals are still set by humans.</li>
+    <li><strong>The transfer results aren't fully statistically significant.</strong> The trend is real and consistent, but sample sizes are small in the compounding section.</li>
+    <li><strong>Evaluation gaming is a real risk.</strong> If you give it a gameable metric, it will game it. The authors acknowledge this.</li>
+    <li><strong>The GitHub repo executes model-generated code without sandboxing.</strong> Their own README has a safety warning about this. Don't run it on a machine you care about without a container.</li>
+  </ul>
+
+  <h2>Should You Care?</h2>
+
+  <p>If you run any kind of automated AI system — even a simple one — yes.</p>
+
+  <p>The paper is scientific validation that the general architecture works: run tasks, evaluate, extract learnings, improve. What most people are missing isn't the task agents (those are easy to build) or even the memory layer (LEARNINGS.md files, daily journals — also not hard). What most people are missing is <strong>structured causal memory that compounds</strong>.</p>
+
+  <p>Raw logs don't compound. "Error at 3am" doesn't help the next run. But "third consecutive timeout failure on morning-brief, hypothesis: 9am burst collision, fix applied: staggered by 15min, watch next 3 runs" — that compounds. Each run builds on the reasoning of the last one instead of starting from scratch.</p>
+
+  <p>The GitHub repo is at <a href="https://github.com/facebookresearch/Hyperagents" target="_blank">facebookresearch/Hyperagents</a> if you want to dig into the code. The paper is <a href="https://arxiv.org/abs/2603.19461" target="_blank">arXiv 2603.19461</a>.</p>
+
+  <p>The implementation I built for my own setup took about two hours. Most of that was reading the paper carefully enough to understand what the actual insight was, not the headline.</p>
+
+  <p>The headline is "AI that rewrites itself." The insight is "log the reasoning, not just the score."</p>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0">
+
+  <p style="color:var(--text-dim);font-size:.875rem"><em>I'm Nick Rae — commercial pilot, iOS developer, and automation builder in Merced, CA. I write about building side income to fund flight hours. My agent Talos runs this whole operation while I'm at my day job selling car stereos. Follow along at <a href="https://x.com/nickrae">@nickrae</a> or check the <a href="/flight-funded/">Flight Funded tracker</a> for live numbers.</em></p>
+
+</main>
+
+<footer>
+  <div>© 2026 Nick Rae · Merced, CA · <a href="/">Back to Home</a></div>
+  <div>
+    <a href="https://apps.apple.com/app/feedfare/id6740702770" target="_blank">FeedFare App</a> ·
+    <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank">PPL Workbook</a> ·
+    <a href="/flight-funded/">Flight Funded</a> ·
+    <a href="https://x.com/nickrae" target="_blank">@nickrae</a>
+  </div>
+</footer>
+
+</body>
+</html>
