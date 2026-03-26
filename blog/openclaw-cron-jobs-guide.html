@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code) — Nick Rae</title>
+<meta name="description" content="A non-developer's guide to building useful OpenClaw cron jobs. Morning briefings, trading bot monitoring, TikTok automation, and App Store alerts. Real configs from 6 months of daily use.">
+<meta property="og:title" content="How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code)">
+<meta property="og:description" content="A non-developer's guide to building useful OpenClaw cron jobs. Morning briefings, trading bot monitoring, TikTok automation, and App Store alerts.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net/blog/openclaw-cron-jobs-guide.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="canonical" href="https://nickrae.net/blog/openclaw-cron-jobs-guide.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code)",
+      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "datePublished": "2026-03-26",
+      "url": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html",
+      "image": "https://nickrae.net/og-image.jpg",
+      "description": "A non-developer's guide to building useful OpenClaw cron jobs.",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "How I Run 50+ AI Cron Jobs on OpenClaw", "item": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;--text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;--accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);--border:#1e293b;--card:#131c2e;}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .links a{color:var(--text-muted)}
+  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  article{max-width:800px;margin:0 auto;padding:6rem 1.5rem 3rem}
+  .article-header{margin-bottom:3rem}
+  .article-meta{color:var(--text-dim);font-size:.875rem;margin-bottom:1rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .article-category{background:var(--accent-glow);color:var(--accent2);padding:.2rem .65rem;border-radius:1rem;font-weight:600;font-size:.8rem}
+  h1{font-size:2.2rem;font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:1rem}
+  h2{font-size:1.4rem;font-weight:700;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+  h3{font-size:1.1rem;font-weight:600;margin:2rem 0 .75rem}
+  p{margin-bottom:1.25rem;color:var(--text-muted);font-size:1rem}
+  .lead{font-size:1.1rem;color:var(--text);margin-bottom:2rem}
+  code{background:var(--bg3);padding:.15rem .4rem;border-radius:.25rem;font-size:.9rem}
+  pre{background:var(--bg3);padding:1.25rem;border-radius:.5rem;overflow-x:auto;margin-bottom:1.5rem;border:1px solid var(--border)}
+  pre code{background:none;padding:0;font-size:.85rem;line-height:1.5}
+  ul,ol{margin-bottom:1.25rem;padding-left:1.5rem;color:var(--text-muted)}
+  li{margin-bottom:.5rem}
+  blockquote{border-left:3px solid var(--accent);padding:.75rem 1rem;margin:1.5rem 0;background:var(--bg2);border-radius:0 .5rem .5rem 0}
+  blockquote p{margin:0;color:var(--text)}
+  .callout{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(59,130,246,.03));border:1px solid rgba(59,130,246,.2);border-radius:.75rem;padding:1.25rem 1.5rem;margin:2rem 0}
+  .callout-title{font-weight:700;color:var(--accent2);margin-bottom:.5rem;font-size:.95rem}
+  .callout p{margin:0;font-size:.9rem}
+  .cta-box{background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(99,102,241,.04));border:1px solid rgba(99,102,241,.3);border-radius:.75rem;padding:1.5rem;margin:2.5rem 0;text-align:center}
+  .cta-box h3{margin:0 0 .5rem;color:#a5b4fc}
+  .cta-box p{margin:0 0 1rem;font-size:.95rem}
+  .cta-btn{display:inline-block;background:#6366f1;color:#fff;padding:.65rem 1.5rem;border-radius:.5rem;font-weight:600;font-size:.95rem}
+  .cta-btn:hover{background:#4f46e5;text-decoration:none}
+  footer{text-align:center;padding:3rem 1rem;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:3rem}
+  @media(max-width:640px){h1{font-size:1.6rem}article{padding:5rem 1rem 2rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="../" class="logo">Nick Rae</a>
+    <div class="links">
+      <a href="../">Home</a>
+      <a href="./">Blog</a>
+      <a href="../flight-funded/">Flight Funded</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="article-header">
+    <div class="article-meta">
+      <span class="article-category">OpenClaw</span>
+      <time datetime="2026-03-26">March 26, 2026</time>
+      <span>12 min read</span>
+    </div>
+    <h1>How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code)</h1>
+    <p class="lead">My agent sends me a morning briefing, monitors my apps in the App Store, trades weather markets, posts to TikTok, and backs up my databases. All while I'm at work selling car stereos. Here's how I set it all up.</p>
+  </div>
+
+  <p>Six months ago, my OpenClaw agent did exactly one thing: answer questions when I asked them. It was a chatbot. An expensive one.</p>
+
+  <p>Today it runs 46 automated jobs on a schedule. Some fire every 30 minutes. Some run once a week. A few only trigger when specific conditions are met. The total cost is about $30 a month in API tokens, and the time it saves me is somewhere north of 8 hours a week.</p>
+
+  <p>I'm not a developer. I manage a mobile electronics shop in Merced, California. The only code I've ever written is the occasional shell command my agent told me to paste into Terminal. Everything in this post was built by describing what I wanted in plain English and letting the agent figure out the implementation.</p>
+
+  <h2>What a cron job actually is</h2>
+
+  <p>A cron job is an instruction that runs on a schedule. "Every morning at 6am, send me a weather briefing." That's it. The name comes from old Unix systems, but you don't need to know that. You just need to know: schedule + instruction = automation.</p>
+
+  <p>In OpenClaw, you tell your agent what you want automated, and it creates the cron. You'll see output that looks like this:</p>
+
+<pre><code>{
+  "name": "morning-brief",
+  "schedule": { "kind": "cron", "expr": "0 6 * * *" },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "Send me a morning briefing with weather, news, and tasks.",
+    "model": "anthropic/claude-haiku-4-5",
+    "timeoutSeconds": 120
+  }
+}</code></pre>
+
+  <p>The <code>0 6 * * *</code> part means "at minute 0 of hour 6, every day." You don't need to memorize the syntax. Just tell your agent "run this every morning at 6am" and it handles the translation.</p>
+
+  <h2>The five crons worth building first</h2>
+
+  <p>I started with one. Then three. Then 15. Then 54. Then I deleted 8 because they were doing nothing useful. The sweet spot, for me, landed around 46. But if you're starting from zero, these five will cover 80% of the value.</p>
+
+  <h3>1. Morning briefing</h3>
+
+  <p>This one changed my mornings. Before 6am, I get a Telegram message with: local weather and METAR (I'm a pilot, so aviation weather matters), top 5 news headlines, my task list for the day, the status of my apps in the App Store, and a summary of my trading bot's overnight performance.</p>
+
+  <p>The key design choice: every step is wrapped in a "if this fails, skip it and move on" instruction. Early versions would abort the entire briefing because one API was down. Now it gracefully degrades. If the weather API is unreachable, I get "Weather: unavailable" and everything else still shows up.</p>
+
+  <h3>2. Database backup</h3>
+
+  <p>I run a weather prediction trading bot on Kalshi. The trade history lives in a SQLite database. If that file gets corrupted, I lose months of data. So every 4 hours, a cron copies the database to my Synology NAS, encrypted. If it succeeds, silence. If it fails, I get a Telegram alert.</p>
+
+  <p>The "silent on success, loud on failure" pattern is the single most important design principle for crons. If every cron sends you a success message, you'll have 46 unread notifications by noon and you'll stop reading any of them.</p>
+
+  <h3>3. App Store review monitor</h3>
+
+  <p>My app FeedFare is live on the App Store. Reviews are the lifeblood of discoverability. A cron checks the Apple RSS review feed every morning at 8am. If someone left a new review, I get a Telegram ping with the text and star rating. If no new reviews, silence.</p>
+
+  <p>This costs essentially nothing to run (one Haiku call per day) and means I never miss a review.</p>
+
+  <h3>4. Competitor tracking</h3>
+
+  <p>Once a day, a cron searches for my competitors by name. "Unrot app," "StepsUnlock," "walk to unlock phone app." It compares what it finds to the last check and only alerts me if something changed. New competitor launched? I hear about it. Competitor got featured? I hear about it. Nothing changed? Silence.</p>
+
+  <h3>5. Revenue monitoring</h3>
+
+  <p>RevenueCat tracks my subscription revenue. A daily cron at 8am calls the RevenueCat API and checks for new trials or conversions. If someone started a free trial overnight, I get a message. If not, silence.</p>
+
+  <p>When I eventually have actual revenue, this will be the most important cron I own.</p>
+
+  <h2>The mistakes I made (so you don't have to)</h2>
+
+  <h3>The $340 night</h3>
+
+  <p>I once told my agent to "research the competition and draft content for each one." What I didn't realize was that it spawned 23 sub-agents simultaneously, each making API calls. I woke up to a $340 API bill. This is now a hard rule in my system: any cron that spawns sub-agents gets a cap on concurrent processes and a budget ceiling. Lesson learned the expensive way.</p>
+
+  <h3>Building systems to manage systems</h3>
+
+  <p>At one point I had a cron that analyzed other crons' outputs to find patterns, which fed into a self-learning pipeline, which updated rules files, which affected how future crons ran. I had built infrastructure to manage infrastructure. It generated zero dollars. I deleted all of it last week.</p>
+
+  <p>The rule I follow now: if a cron doesn't directly support something that makes money or prevents something from breaking, it doesn't exist.</p>
+
+  <h3>The timeout trap</h3>
+
+  <p>Every cron has a timeout. Set it too low and the job gets killed mid-run. Set it too high and a stuck job blocks everything. I learned this when my morning briefing kept timing out at 120 seconds because the weather API was slow. The fix: bump the timeout to 600 seconds and add a "skip if this step takes more than 30 seconds" instruction inside the prompt.</p>
+
+  <h3>Silent failures</h3>
+
+  <p>For two weeks, my revenue monitor was failing every single morning because the API key had expired. I never noticed because the cron was set to "silent on failure" instead of "alert on failure." Now every cron follows the same pattern: silent on success, loud on failure, no exceptions.</p>
+
+  <h2>How I organize 46 crons</h2>
+
+  <p>Naming convention matters when you have more than 10. I use a simple pattern:</p>
+
+  <ul>
+    <li><strong>What it does:</strong> <code>morning-brief</code>, <code>db-backup</code>, <code>revenue-tracker</code></li>
+    <li><strong>When it runs:</strong> included in the cron description, not the name</li>
+    <li><strong>What it monitors:</strong> <code>kalshi-scanner</code>, <code>feedfare-asc-status</code></li>
+  </ul>
+
+  <p>I also group by schedule density. Things that run every 30 minutes (like the Kalshi scanner) use the cheapest model available (Haiku). Things that run once a week (like the self-review) can use a smarter model. The difference between running Haiku 48 times a day and running Sonnet 48 times a day is about $25/month.</p>
+
+  <h2>The model cost breakdown</h2>
+
+  <p>Here's roughly what my 46 crons cost per month:</p>
+
+  <ul>
+    <li><strong>High-frequency (every 30 min):</strong> Kalshi scanner. ~$8/month on Haiku.</li>
+    <li><strong>Daily crons (6am-10pm):</strong> morning brief, task digest, app monitors, TikTok posting. ~$12/month combined on Haiku.</li>
+    <li><strong>Weekly crons:</strong> self-review, revenue rollup, blog pipeline. ~$3/month on Haiku with occasional Sonnet.</li>
+    <li><strong>Monthly crons:</strong> context audit, journal consolidation. ~$1/month on Sonnet.</li>
+  </ul>
+
+  <p>Total: about $24-30/month. That's the cost of a Netflix subscription for an always-on automation system.</p>
+
+  <h2>What I'd do differently starting over</h2>
+
+  <ol>
+    <li><strong>Start with 3 crons, not 15.</strong> Morning brief, database backup, and one monitor for whatever you care most about. Add more only when you genuinely need them.</li>
+    <li><strong>Use the cheapest model for everything.</strong> Haiku handles 95% of cron tasks. Only upgrade to Sonnet or Opus when the task genuinely requires reasoning.</li>
+    <li><strong>Build the "silent success, loud failure" pattern from day one.</strong> Every cron ends with "if success, reply NO_REPLY. If failure, alert me."</li>
+    <li><strong>Don't build meta-infrastructure.</strong> No crons that manage other crons. No self-learning pipelines. No AI reviewing AI. Just direct automation that does one clear thing.</li>
+    <li><strong>Set a revenue gate.</strong> Before creating any new cron, ask: "Which revenue stream does this support?" If the answer is "none," don't build it yet.</li>
+  </ol>
+
+  <div class="cta-box">
+    <h3>📘 Want the complete playbook?</h3>
+    <p>163 pages covering cron jobs, identity files, memory architecture, a Kalshi trading bot, TikTok automation, and more. Written for non-developers.</p>
+    <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" class="cta-btn">Get the OpenClaw Playbook — $99</a>
+  </div>
+
+  <h2>The bottom line</h2>
+
+  <p>Cron jobs turned my OpenClaw agent from a chatbot into a system. The morning briefing alone saves me 20 minutes a day. The database backups give me peace of mind. The app monitors mean I never miss a review or an approval.</p>
+
+  <p>None of this required writing code. It required being specific about what I wanted, learning from the failures, and resisting the urge to build more than I needed.</p>
+
+  <p>Start with three. See what sticks. Add from there.</p>
+
+</article>
+
+<footer>
+  <div>
+    <a href="https://apps.apple.com/us/app/feedfare/id6758923557">📱 FeedFare</a> · 
+    <a href="https://a.co/d/0hExZLaf">📚 PPL Workbook</a> · 
+    <a href="https://nickrae.net/flight-funded/">Flight Funded</a> · 
+    <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook">📘 OpenClaw Playbook</a> · 
+    <a href="https://twitter.com/nickrae">@nickrae</a>
+  </div>
+  <div style="margin-top:.5rem">© 2026 Nick Rae · Merced, CA · <a href="../">Back to Home</a></div>
+</footer>
+
+</body>
+</html>
