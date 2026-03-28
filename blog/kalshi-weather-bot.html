@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Built a Weather Prediction Bot That Made $959 in Paper Trades (Here's How) — Nick Rae</title>
-<meta name="description" content="A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 137 paper trades, $959 profit, 98.3% Monte Carlo profitability. Here's exactly how it works.">
-<meta property="og:title" content="I Built a Weather Prediction Bot That Made $959 in Paper Trades (Here's How)">
-<meta property="og:description" content="A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 137 paper trades, $959 profit, 98.3% Monte Carlo profitability. Here's exactly how it works.">
+<title>I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live. — Nick Rae</title>
+<meta name="description" content="A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 217 resolved trades, 76.5% win rate, $1,773 paper profit. It went live with real money on March 28, 2026.">
+<meta property="og:title" content="I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.">
+<meta property="og:description" content="A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 217 resolved trades, 76.5% win rate, $1,773 paper profit. Now trading real money.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/kalshi-weather-bot.html">
 <meta property="og:type" content="article">
@@ -20,13 +20,13 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "headline": "I Built a Weather Prediction Bot That Made $959 in Paper Trades (Here's How)",
+      "headline": "I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.",
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-03-15",
       "url": "https://nickrae.net/blog/kalshi-weather-bot.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 137 paper trades, $959 profit, 98.3% Monte Carlo profitability. Here's exactly how it works.",
+      "description": "A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 217 resolved trades, 76.5% win rate, $1,773 paper profit. Now trading real money.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/kalshi-weather-bot.html" }
     },
     {
@@ -34,7 +34,7 @@
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
         { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "I Built a Weather Prediction Bot That Made $959 in Paper Trades (Here's How)", "item": "https://nickrae.net/blog/kalshi-weather-bot.html" }
+        { "@type": "ListItem", "position": 3, "name": "I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.", "item": "https://nickrae.net/blog/kalshi-weather-bot.html" }
       ]
     }
   ]
@@ -133,8 +133,8 @@
       <span>Nick Rae</span>
       <span>~10 min read</span>
     </div>
-    <h1 class="article-title">I Built a Weather Prediction Bot That Made $959 in Paper Trades (Here's How)</h1>
-    <p class="article-excerpt">A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion position sizing. 137 paper trades, $959.27 profit, 98.3% of Monte Carlo simulations profitable. Here's exactly how it works and why it's not live yet.</p>
+    <h1 class="article-title">I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.</h1>
+    <p class="article-excerpt">A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion position sizing. 217 resolved trades, 76.5% win rate, $1,773 paper profit. It went live with real money on March 28, 2026. Here's exactly how it works.</p>
   </div>
 
   <div class="article-content">
@@ -147,7 +147,7 @@
 
     <p>I thought: I probably have better-than-random intuition here. What if I built a bot to make those trades systematically and found out?</p>
 
-    <p>Six months later, the bot has 137 paper trades and $959.27 in simulated profit. Here's exactly how it works.</p>
+    <p>The bot ran paper for 35 days: 217 resolved trades, 76.5% win rate, $1,773 in simulated profit. On March 28 it went live with a $424 bankroll. Here's exactly how it works.</p>
 
     <h2>Why Weather Prediction Markets</h2>
 
@@ -197,19 +197,19 @@
 
     <h2>What the Numbers Say</h2>
 
-    <p>After 137 paper trades on a $1,000 simulated bankroll:</p>
+    <p>After 217 resolved paper trades on a $1,000 simulated bankroll:</p>
 
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="stat-value">$959.27</div>
+        <div class="stat-value">$1,773</div>
         <div class="stat-label">Total Paper Profit</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">137</div>
+        <div class="stat-value">217</div>
         <div class="stat-label">Total Trades</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">52.7%</div>
+        <div class="stat-value">76.5%</div>
         <div class="stat-label">Win Rate</div>
       </div>
       <div class="stat-card">
@@ -267,16 +267,18 @@
 
     <h2>The Six Live Gates</h2>
 
-    <p>Paper trading is paper trading. I'm not touching live money until I'm confident the edge is real and durable. So I built a gate system. Six criteria that have to pass simultaneously before the bot goes live.</p>
+    <p>Paper trading is paper trading. I built a gate system: six criteria that had to pass simultaneously before the bot touched real money. On March 28, 2026, all six cleared.</p>
 
     <ul class="gate-list">
-      <li><span class="gate-pass">&#x2713;</span> <span><strong>80 paper trades completed</strong> — enough sample to trust the stats</span></li>
-      <li><span class="gate-fail">&#x2717;</span> <span><strong>55% win rate</strong> — currently at 52.7%, close but not there</span></li>
-      <li><span class="gate-pass">&#x2713;</span> <span><strong>Brier score &#x2264; 0.20</strong> — calibration check: are my probabilities accurate?</span></li>
-      <li><span class="gate-pass">&#x2713;</span> <span><strong>Positive P&amp;L</strong> — obvious, but has to be explicit</span></li>
-      <li><span class="gate-fail">&#x2717;</span> <span><strong>Peak drawdown &lt; 20%</strong> — still working through this one</span></li>
-      <li><span class="gate-fail">&#x2717;</span> <span><strong>30 consecutive days of trading</strong> — need more time in the data</span></li>
+      <li><span class="gate-pass">&#x2713;</span> <span><strong>80 paper trades completed</strong> — 217 resolved</span></li>
+      <li><span class="gate-pass">&#x2713;</span> <span><strong>55% win rate</strong> — 76.5%</span></li>
+      <li><span class="gate-pass">&#x2713;</span> <span><strong>Brier score &#x2264; 0.20</strong> — 0.1947</span></li>
+      <li><span class="gate-pass">&#x2713;</span> <span><strong>Positive P&amp;L</strong> — $1,773</span></li>
+      <li><span class="gate-pass">&#x2713;</span> <span><strong>Peak drawdown &lt; 20%</strong> — 10.6%</span></li>
+      <li><span class="gate-pass">&#x2713;</span> <span><strong>30 consecutive days of trading</strong> — 35 days</span></li>
     </ul>
+
+    <p><strong>Update (March 28, 2026):</strong> The bot is now live with a $424 bankroll. Quarter-Kelly sizing for the first 50 trades, $15 max per position. Circuit breaker armed. Real dollars on the line.</p>
 
     <p>Currently: <strong>3 out of 6 gates passing</strong>. I need all six before I flip <code>KALSHI_LIVE_MODE = True</code>. I have a $100 live account sitting funded and ready. It stays there until the gates clear.</p>
 
