@@ -16,7 +16,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight ho
 
 ## Blog Posts
 
-- [I Built a Weather Prediction Bot That Made $1,459 in Paper Trades](https://nickrae.net/blog/kalshi-weather-bot.html)
+- [I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.](https://nickrae.net/blog/kalshi-weather-bot.html)
 - [I Read an Academic Paper and Rebuilt My AI Agent's Memory](https://nickrae.net/blog/blog-trajectory-learning.html)
 - [Setting Up OpenClaw: The 5 Things I Wish I Did First](https://nickrae.net/blog/blog-openclaw-setup.html)
 - [How I Earned My Commercial Pilot License at 45](https://nickrae.net/blog/blog-commercial-pilot.html)
