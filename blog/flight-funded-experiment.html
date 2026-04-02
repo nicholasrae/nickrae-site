@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Don't Want Internet Business Clout. I Want Flight Hours. — Nick Rae</title>
+<meta name="description" content="Why I'm building apps, books, bots, and automation in public to fund more flight hours as a commercial pilot.">
+<meta property="og:title" content="I Don't Want Internet Business Clout. I Want Flight Hours.">
+<meta property="og:description" content="Why I'm building apps, books, bots, and automation in public to fund more flight hours as a commercial pilot.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net/blog/flight-funded-experiment.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="canonical" href="https://nickrae.net/blog/flight-funded-experiment.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "I Don't Want Internet Business Clout. I Want Flight Hours.",
+      "description": "Why I'm building apps, books, bots, and automation in public to fund more flight hours as a commercial pilot.",
+      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "publisher": { "@type": "Person", "name": "Nick Rae" },
+      "datePublished": "2026-04-02",
+      "dateModified": "2026-04-02",
+      "mainEntityOfPage": "https://nickrae.net/blog/flight-funded-experiment.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Flight Funded", "item": "https://nickrae.net/blog/flight-funded-experiment.html" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
+    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
+    --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
+    --border:#1e293b;--card:#131c2e;
+    --green:#22c55e;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .links a{color:var(--text-muted)}
+  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+  main{max-width:860px;margin:0 auto;padding:6rem 1.5rem 3rem}
+  .eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .85rem;border:1px solid rgba(34,197,94,.35);background:rgba(34,197,94,.08);color:#86efac;border-radius:999px;font-size:.8rem;font-weight:700;letter-spacing:.02em;margin-bottom:1rem}
+  .title{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.08;letter-spacing:-1.4px;margin-bottom:1rem;font-weight:800}
+  .dek{font-size:1.15rem;color:var(--text-muted);max-width:720px;margin-bottom:1.5rem}
+  .meta{display:flex;gap:1rem;flex-wrap:wrap;color:var(--text-dim);font-size:.9rem;margin-bottom:2.5rem}
+  .hero-card{background:linear-gradient(180deg,var(--card),#101725);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;margin-bottom:2.5rem}
+  .hero-card p{color:var(--text-muted)}
+  article p{margin:0 0 1.25rem;color:var(--text-muted);font-size:1.06rem}
+  article h2{font-size:1.45rem;line-height:1.25;margin:2.4rem 0 1rem;color:var(--text)}
+  article ul{margin:0 0 1.5rem 1.2rem;color:var(--text-muted)}
+  article li{margin-bottom:.65rem}
+  .pullquote{border-left:3px solid var(--accent);padding:1rem 1.2rem;background:var(--card);border-radius:0 .75rem .75rem 0;color:var(--text);margin:2rem 0;font-size:1.05rem}
+  .closing{margin-top:2rem;padding:1.5rem;border:1px solid var(--border);background:var(--card);border-radius:1rem}
+  .cta-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+  .btn{padding:.75rem 1.1rem;border-radius:.6rem;font-weight:600;font-size:.92rem;display:inline-flex;align-items:center;gap:.45rem;text-decoration:none}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:#2563eb;text-decoration:none}
+  .btn-outline{border:1px solid var(--border);color:var(--text-muted)}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
+  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:4rem}
+  @media(max-width:768px){
+    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+    nav .links.open{display:flex}
+    .menu-toggle{display:block}
+    main{padding:5rem 1rem 2rem}
+    article p{font-size:1rem}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div>
+    <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
+    <div class="links">
+      <a href="../">Home</a>
+      <a href="../flight-funded/">Flight Funded</a>
+      <a href="./">Blog</a>
+      <a href="../#connect">Connect</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="eyebrow">✈️ Flight Funded · April 2, 2026</div>
+  <h1 class="title">I Don’t Want Internet Business Clout. I Want Flight Hours.</h1>
+  <p class="dek">I’m not building online for vague freedom points. I’m building apps, books, bots, and automation in public for one concrete reason: to fund more flight time and get to the next cockpit faster.</p>
+  <div class="meta">
+    <span>Nick Rae</span>
+    <span>~6 min read</span>
+    <span>Commercial Pilot · Builder · Maker</span>
+  </div>
+
+  <div class="hero-card">
+    <p><strong>Flight Funded</strong> is a live experiment: can modern tools, side income, and relentless shipping help close the gap between where I am now and the next meaningful milestone in aviation?</p>
+  </div>
+
+  <article>
+    <p>Most people building online seem to be chasing the same fuzzy prize: freedom, passive income, personal brand, maybe a laptop photo with suspicious lighting.</p>
+    <p>That’s not what I’m doing.</p>
+    <p>I’m a commercial pilot, and I need more flight hours to get to the next stage of my aviation career. Flight time is the bottleneck. Flight time costs money. So instead of waiting around, talking about goals, or pretending I’m “networking,” I started building income streams in public to help fund the gap.</p>
+    <p>That’s the experiment.</p>
+    <p>I call it <strong>Flight Funded</strong>.</p>
+
+    <div class="pullquote">The goal is simple: turn real work into real dollars that buy real progress toward the cockpit.</div>
+
+    <p>I’m trying to answer a very practical question: can I use the tools I already have, coding, writing, automation, AI systems, and a willingness to ship imperfect things, to create income that actually moves the needle?</p>
+    <p>Not fake internet money. Not vanity metrics. Not “10,000 followers and a course coming soon.” Real dollars. Real scoreboards. Real movement.</p>
+
+    <h2>What that looks like in real life</h2>
+    <p>So far, the portfolio has turned into a strange little fleet:</p>
+    <ul>
+      <li>iOS apps</li>
+      <li>aviation study guides and workbooks</li>
+      <li>a weather trading bot for prediction markets</li>
+      <li>digital products</li>
+      <li>content experiments</li>
+      <li>automation systems that keep the whole thing moving</li>
+    </ul>
+
+    <p>Some of it has worked. Some of it has flopped. Some of it looked promising right up until reality arrived with a bat.</p>
+    <p>That’s part of the point. I’m not interested in polishing the story after the fact and pretending every project was a masterstroke. I’d rather show the real version: what shipped, what made money, what didn’t, what got parked, and what actually deserves more time.</p>
+
+    <h2>Why do this in public?</h2>
+    <p>Because the internet has enough people selling outcomes they haven’t earned.</p>
+    <p>What makes this project different, at least to me, is that it has a hard anchor. I’m not building for “lifestyle design.” I’m building toward a measurable goal: more flight hours, more options, and eventually a better seat in aviation.</p>
+    <p>That constraint is useful. It kills a lot of bad ideas quickly.</p>
+    <ul>
+      <li>If a project doesn’t have a believable path to revenue, it’s probably a distraction.</li>
+      <li>If a system exists only to manage another system, it’s probably theater.</li>
+      <li>If something sounds exciting but doesn’t move the scoreboard, it can wait.</li>
+    </ul>
+
+    <p>Public tracking forces honesty. It turns vague ambition into numbers. It also makes the journey more interesting, because the result is not guaranteed. I don’t already know if this experiment ends with a meaningful self-funded push toward the next aviation milestone. That uncertainty is the whole reason it’s worth documenting.</p>
+
+    <h2>The bigger reason</h2>
+    <p>A lot of people are stuck in the gap between where they are and where they want to be, and the gap is usually expensive. It might be flight hours. It might be debt. It might be time, skills, equipment, or runway.</p>
+    <p>The standard advice is often either too abstract or too polished to help.</p>
+    <p>This site is my attempt to offer something more useful: a live record of trying to close one of those gaps with modern tools, imperfect execution, and a scoreboard that doesn’t care about excuses.</p>
+
+    <h2>What you’ll find here</h2>
+    <p>Not guru advice. Not “how I made $100K in 30 days.” Not recycled motivation with a better thumbnail.</p>
+    <p>Just the experiment:</p>
+    <ul>
+      <li>what I’m building</li>
+      <li>what’s working</li>
+      <li>what’s making money</li>
+      <li>what’s getting cut</li>
+      <li>whether any of it can help fund the next block of flight hours</li>
+    </ul>
+
+    <div class="closing">
+      <p><strong>That’s Flight Funded.</strong></p>
+      <p>And we’ll see if it flies.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="../flight-funded/">View the live Flight Funded tracker</a>
+        <a class="btn btn-outline" href="./">Back to blog</a>
+      </div>
+    </div>
+  </article>
+</main>
+<footer>
+  <div>© 2026 Nick Rae · Merced, CA · <a href="../">Back to Home</a></div>
+</footer>
+</body>
+</html>
