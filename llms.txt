@@ -4,7 +4,7 @@
 
 ## About
 
-Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight hours, working toward 1,500 hours for ATP certification. He builds iOS apps (FeedFare, Inflection Point, SpendSlap, PetFace AI), runs an AI-powered weather prediction trading bot on Kalshi, and publishes aviation study materials on Amazon KDP. He documents the journey at nickrae.net.
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight hours, working toward 1,500 hours for ATP certification. He builds iOS apps (FeedFare, Inflection Point), runs an AI-powered weather prediction trading bot on Kalshi, and publishes aviation study materials on Amazon KDP. He documents the journey at nickrae.net.
 
 ## Key Pages
 
@@ -31,9 +31,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight ho
 ## Apps
 
 - [FeedFare — Walk to Unlock Your Apps](https://apps.apple.com/us/app/feedfare/id6758923557) — screen time management through physical activity
-- Inflection Point — personal growth OS (App Store review)
-- SpendSlap — AI spending roast (ready to submit)
-- PetFace AI — pet portrait & breed analysis (ready to submit)
+- Inflection Point — personal growth OS (in TestFlight)
 
 ## Digital Products
 
