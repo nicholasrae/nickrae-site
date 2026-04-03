@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Wrote a Playbook for Running OpenClaw Without Writing Code — Nick Rae</title>
+<meta name="description" content="50+ automations, a live trading bot, and zero lines of code. Here's the non-developer's guide to OpenClaw I wish existed when I started.">
+<meta property="og:title" content="I Wrote a Playbook for Running OpenClaw Without Writing Code">
+<meta property="og:description" content="50+ automations, a live trading bot, and zero lines of code. Here's the non-developer's guide to OpenClaw I wish existed when I started.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net/blog/openclaw-playbook.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="canonical" href="https://nickrae.net/blog/openclaw-playbook.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "I Wrote a Playbook for Running OpenClaw Without Writing Code",
+      "description": "50+ automations, a live trading bot, and zero lines of code. Here's the non-developer's guide to OpenClaw I wish existed when I started.",
+      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "publisher": { "@type": "Person", "name": "Nick Rae" },
+      "datePublished": "2026-04-03",
+      "dateModified": "2026-04-03",
+      "mainEntityOfPage": "https://nickrae.net/blog/openclaw-playbook.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "OpenClaw Playbook" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0e17;color:#e2e8f0;line-height:1.7}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
+  a{color:#60a5fa;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .breadcrumb{font-size:.85rem;color:#94a3b8;margin-bottom:2rem}
+  .breadcrumb a{color:#94a3b8}
+  h1{font-size:2rem;line-height:1.25;margin-bottom:.5rem;color:#f8fafc}
+  .meta{font-size:.9rem;color:#94a3b8;margin-bottom:2rem}
+  h2{font-size:1.35rem;color:#f8fafc;margin:2rem 0 .75rem}
+  p{margin-bottom:1.25rem;color:#cbd5e1}
+  .highlight{background:#1e293b;border-left:3px solid #60a5fa;padding:1rem 1.25rem;border-radius:0 8px 8px 0;margin:1.5rem 0}
+  .highlight p{margin-bottom:0;color:#e2e8f0}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:1.5rem 0}
+  .stat{background:#1e293b;padding:1rem;border-radius:8px;text-align:center}
+  .stat .num{font-size:1.5rem;font-weight:700;color:#60a5fa}
+  .stat .label{font-size:.8rem;color:#94a3b8;margin-top:.25rem}
+  .cta{display:inline-block;background:#2563eb;color:#fff;padding:.75rem 1.5rem;border-radius:8px;font-weight:600;margin:1rem 0;transition:background .2s}
+  .cta:hover{background:#1d4ed8;text-decoration:none}
+  ul{margin:0 0 1.25rem 1.5rem;color:#cbd5e1}
+  li{margin-bottom:.5rem}
+  .back{margin-top:3rem;padding-top:1.5rem;border-top:1px solid #1e293b}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / OpenClaw Playbook</div>
+
+  <h1>I Wrote a Playbook for Running OpenClaw Without Writing Code</h1>
+  <div class="meta">Nick Rae · April 3, 2026 · 5 min read</div>
+
+  <p>Six months ago I couldn't tell you the difference between JSON and JavaScript. I'm a commercial pilot who manages a car electronics shop in Merced, California. I'm 46. I have two adult sons and a mortgage. I am not the target demographic for "AI agent frameworks."</p>
+
+  <p>But I needed more flight hours. And flight hours cost money. So I started building things that make money while I'm at work, and I used OpenClaw to do it.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="num">47</div><div class="label">Automated Crons</div></div>
+    <div class="stat"><div class="num">$30</div><div class="label">Monthly API Cost</div></div>
+    <div class="stat"><div class="num">$352</div><div class="label">Revenue Generated</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">Lines of Code Written</div></div>
+  </div>
+
+  <h2>What I Actually Built</h2>
+
+  <p>My OpenClaw agent runs on an iMac in my living room. Here's what it does while I'm at work selling car stereos:</p>
+
+  <ul>
+    <li><strong>Trades weather prediction markets on Kalshi.</strong> 66 live trades, 57.9% win rate, +$279 realized profit. The bot scans temperature forecasts, finds mispriced brackets, and places trades with position sizing based on Kelly criterion.</li>
+    <li><strong>Monitors my iOS apps on the App Store.</strong> Checks review status every few hours, alerts me on Telegram if anything gets approved or rejected.</li>
+    <li><strong>Generates a daily intelligence briefing.</strong> Scans RSS feeds, runs Tavily searches, synthesizes with Gemini, and posts to my Discord and Telegram before I wake up.</li>
+    <li><strong>Backs up everything.</strong> Workspace to GitHub, database to Synology NAS, memory files nightly.</li>
+    <li><strong>Tracks revenue across KDP, Gumroad, and Kalshi.</strong> Weekly rollup sent to my Telegram DM every Sunday.</li>
+  </ul>
+
+  <p>None of this required me to write code. I described what I wanted in plain English, and OpenClaw's coding agents built it. When something broke, I described the error and it got fixed.</p>
+
+  <h2>The Mistakes That Cost Me Money</h2>
+
+  <p>The playbook isn't a manual. It's a case study with every disaster included.</p>
+
+  <p>Like the night I accidentally spawned 23 sub-agents at full Opus pricing and burned through $340 in API credits before I noticed. Or the week I ran all 47 cron jobs on the same AI provider and hit rate limits so hard that my trading bot stopped placing trades for 12 hours during a profitable window.</p>
+
+  <p>Or the three apps I built, submitted to the App Store, and then realized weren't solving real problems. Those are documented too, with the exact moment I should have killed each one.</p>
+
+  <div class="highlight">
+    <p>The playbook covers what I wish someone had told me before I started: how to structure your agent's personality, how to set up cron jobs that don't eat your budget, how to delegate to coding agents without losing control, and how to think about which things to automate and which to leave manual.</p>
+  </div>
+
+  <h2>Who This Is For</h2>
+
+  <p>You don't need to be a pilot. You need to be someone who wants an AI agent doing real work, not just answering questions. If you have a Mac, a Telegram account, and a willingness to pay $30/month in API costs, you can run what I run.</p>
+
+  <p>The book is 140+ pages with real configs you can copy. Every SOUL.md, every cron job definition, every prompt template. Not screenshots of menus.</p>
+
+  <a class="cta" href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank">Get the Playbook on Gumroad →</a>
+
+  <p style="font-size:.85rem;color:#94a3b8;margin-top:.25rem">PDF + EPUB. Use code <strong>FIRSTFLIGHT</strong> for 30% off.</p>
+
+  <h2>The Bigger Picture</h2>
+
+  <p>All of this feeds into <a href="/flight-funded/">Flight Funded</a>, my public experiment to fund flight hours through side projects. The playbook is one revenue stream alongside KDP workbooks, a Kalshi trading bot, and iOS apps. Every dollar tracked in public.</p>
+
+  <p>I need 131 more hours to qualify for Part 135 operations. At ~$200/hour for rental and instruction, that's $26,000. The bot is averaging $40/day. The math is starting to work.</p>
+
+  <div class="back">
+    <a href="/blog/">← Back to blog</a> · <a href="/flight-funded/">Flight Funded tracker →</a>
+  </div>
+</div>
+</body>
+</html>
