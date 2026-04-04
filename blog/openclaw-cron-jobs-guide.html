@@ -102,7 +102,7 @@
       <span>12 min read</span>
     </div>
     <h1>How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code)</h1>
-    <p class="lead">My agent sends me a morning briefing, monitors my apps in the App Store, trades weather markets, posts to TikTok, and backs up my databases. All while I'm at work selling car stereos. Here's how I set it all up.</p>
+    <p class="lead">My agent sends me a morning briefing, monitors my apps in the App Store, trades weather markets, posts to TikTok, and backs up my databases. All while I'm at work selling car stereos. Here's what actually works, what broke, and what turned a chatbot into a useful system.</p>
   </div>
 
   <p>Six months ago, my OpenClaw agent did exactly one thing: answer questions when I asked them. It was a chatbot. An expensive one.</p>
@@ -113,121 +113,76 @@
 
   <h2>What a cron job actually is</h2>
 
-  <p>A cron job is an instruction that runs on a schedule. "Every morning at 6am, send me a weather briefing." That's it. The name comes from old Unix systems, but you don't need to know that. You just need to know: schedule + instruction = automation.</p>
+  <p>A cron job is just an instruction that runs on a schedule. In OpenClaw, that means telling the agent what should happen, when it should run, and what should happen if it fails.</p>
 
-  <p>In OpenClaw, you tell your agent what you want automated, and it creates the cron. You'll see output that looks like this:</p>
+  <h2>The cron categories that mattered most</h2>
 
-<pre><code>{
-  "name": "morning-brief",
-  "schedule": { "kind": "cron", "expr": "0 6 * * *" },
-  "payload": {
-    "kind": "agentTurn",
-    "message": "Send me a morning briefing with weather, news, and tasks.",
-    "model": "anthropic/claude-haiku-4-5",
-    "timeoutSeconds": 120
-  }
-}</code></pre>
+  <p>I started with one. Then three. Then 15. Then 54. Then I deleted the ones that were doing nothing useful. A small handful of cron categories drove most of the value for me.</p>
 
-  <p>The <code>0 6 * * *</code> part means "at minute 0 of hour 6, every day." You don't need to memorize the syntax. Just tell your agent "run this every morning at 6am" and it handles the translation.</p>
+  <h3>1. Briefing crons</h3>
 
-  <h2>The five crons worth building first</h2>
+  <p>My morning briefing is still the highest-ROI automation I run. Before work, I get one summary with the information I actually care about. That alone turned the agent from a novelty into something useful.</p>
 
-  <p>I started with one. Then three. Then 15. Then 54. Then I deleted 8 because they were doing nothing useful. The sweet spot, for me, landed around 46. But if you're starting from zero, these five will cover 80% of the value.</p>
+  <h3>2. Backup and watchdog crons</h3>
 
-  <h3>1. Morning briefing</h3>
+  <p>Another high-value category is backup and watchdog automation. Quiet when things are healthy, loud when something breaks. That pattern matters more than any specific tool.</p>
 
-  <p>This one changed my mornings. Before 6am, I get a Telegram message with: local weather and METAR (I'm a pilot, so aviation weather matters), top 5 news headlines, my task list for the day, the status of my apps in the App Store, and a summary of my trading bot's overnight performance.</p>
+  <h3>3. Monitoring crons</h3>
 
-  <p>The key design choice: every step is wrapped in a "if this fails, skip it and move on" instruction. Early versions would abort the entire briefing because one API was down. Now it gracefully degrades. If the weather API is unreachable, I get "Weather: unavailable" and everything else still shows up.</p>
+  <p>Reviews, approvals, ranking changes, and store activity are easy to miss manually and easy to automate well.</p>
 
-  <h3>2. Database backup</h3>
+  <h3>4. Competitor and market-watch crons</h3>
 
-  <p>I run a weather prediction trading bot on Kalshi. The trade history lives in a SQLite database. If that file gets corrupted, I lose months of data. So every 4 hours, a cron copies the database to my Synology NAS, encrypted. If it succeeds, silence. If it fails, I get a Telegram alert.</p>
+  <p>I also use competitor and market-watch crons that only alert me when something meaningfully changes.</p>
 
-  <p>The "silent on success, loud on failure" pattern is the single most important design principle for crons. If every cron sends you a success message, you'll have 46 unread notifications by noon and you'll stop reading any of them.</p>
+  <h3>5. Revenue crons</h3>
 
-  <h3>3. App Store review monitor</h3>
-
-  <p>My app FeedFare is live on the App Store. Reviews are the lifeblood of discoverability. A cron checks the Apple RSS review feed every morning at 8am. If someone left a new review, I get a Telegram ping with the text and star rating. If no new reviews, silence.</p>
-
-  <p>This costs essentially nothing to run (one Haiku call per day) and means I never miss a review.</p>
-
-  <h3>4. Competitor tracking</h3>
-
-  <p>Once a day, a cron searches for my competitors by name. "Unrot app," "StepsUnlock," "walk to unlock phone app." It compares what it finds to the last check and only alerts me if something changed. New competitor launched? I hear about it. Competitor got featured? I hear about it. Nothing changed? Silence.</p>
-
-  <h3>5. Revenue monitoring</h3>
-
-  <p>RevenueCat tracks my subscription revenue. A daily cron at 8am calls the RevenueCat API and checks for new trials or conversions. If someone started a free trial overnight, I get a message. If not, silence.</p>
-
-  <p>When I eventually have actual revenue, this will be the most important cron I own.</p>
+  <p>Revenue monitoring is the category I care about most long term. If money moved, I want to know. If nothing changed, I want silence.</p>
 
   <h2>The mistakes I made (so you don't have to)</h2>
 
   <h3>The $340 night</h3>
 
-  <p>I once told my agent to "research the competition and draft content for each one." What I didn't realize was that it spawned 23 sub-agents simultaneously, each making API calls. I woke up to a $340 API bill. This is now a hard rule in my system: any cron that spawns sub-agents gets a cap on concurrent processes and a budget ceiling. Lesson learned the expensive way.</p>
+  <p>I once asked my agent to research competitors and draft content. It ran far wider than I intended and I woke up to a $340 API bill. That mistake permanently changed how I design automations. Guardrails are not optional.</p>
 
   <h3>Building systems to manage systems</h3>
 
-  <p>At one point I had a cron that analyzed other crons' outputs to find patterns, which fed into a self-learning pipeline, which updated rules files, which affected how future crons ran. I had built infrastructure to manage infrastructure. It generated zero dollars. I deleted all of it last week.</p>
+  <p>At one point I built infrastructure to manage infrastructure. It generated zero dollars. I deleted it. Now my rule is simple: if an automation doesn’t make money or prevent breakage, it doesn’t stay.</p>
 
-  <p>The rule I follow now: if a cron doesn't directly support something that makes money or prevents something from breaking, it doesn't exist.</p>
+  <h3>The boring failure modes</h3>
 
-  <h3>The timeout trap</h3>
+  <p>Most automation failures are boring: timeouts, silent breakage, and noisy alerting. The hard part is not creating a cron. It’s building one that fails safely and only speaks when it matters.</p>
 
-  <p>Every cron has a timeout. Set it too low and the job gets killed mid-run. Set it too high and a stuck job blocks everything. I learned this when my morning briefing kept timing out at 120 seconds because the weather API was slow. The fix: bump the timeout to 600 seconds and add a "skip if this step takes more than 30 seconds" instruction inside the prompt.</p>
+  <h2>How I organize and price the system</h2>
 
-  <h3>Silent failures</h3>
+  <p>Once you have more than a handful of automations, naming, grouping, and schedule discipline matter more than people expect.</p>
 
-  <p>For two weeks, my revenue monitor was failing every single morning because the API key had expired. I never noticed because the cron was set to "silent on failure" instead of "alert on failure." Now every cron follows the same pattern: silent on success, loud on failure, no exceptions.</p>
-
-  <h2>How I organize 46 crons</h2>
-
-  <p>Naming convention matters when you have more than 10. I use a simple pattern:</p>
-
-  <ul>
-    <li><strong>What it does:</strong> <code>morning-brief</code>, <code>db-backup</code>, <code>revenue-tracker</code></li>
-    <li><strong>When it runs:</strong> included in the cron description, not the name</li>
-    <li><strong>What it monitors:</strong> <code>kalshi-scanner</code>, <code>feedfare-asc-status</code></li>
-  </ul>
-
-  <p>I also group by schedule density. Things that run every 30 minutes (like the Kalshi scanner) use the cheapest model available (Haiku). Things that run once a week (like the self-review) can use a smarter model. The difference between running Haiku 48 times a day and running Sonnet 48 times a day is about $25/month.</p>
-
-  <h2>The model cost breakdown</h2>
-
-  <p>Here's roughly what my 46 crons cost per month:</p>
-
-  <ul>
-    <li><strong>High-frequency (every 30 min):</strong> Kalshi scanner. ~$8/month on Haiku.</li>
-    <li><strong>Daily crons (6am-10pm):</strong> morning brief, task digest, app monitors, TikTok posting. ~$12/month combined on Haiku.</li>
-    <li><strong>Weekly crons:</strong> self-review, revenue rollup, blog pipeline. ~$3/month on Haiku with occasional Sonnet.</li>
-    <li><strong>Monthly crons:</strong> context audit, journal consolidation. ~$1/month on Sonnet.</li>
-  </ul>
-
-  <p>Total: about $24-30/month. That's the cost of a Netflix subscription for an always-on automation system.</p>
+  <p>The whole system is cheaper than most people expect if you match model cost to job frequency and avoid overengineering. The expensive part is usually not the baseline run cost. It’s bad design, bad guardrails, and letting the system sprawl.</p>
 
   <h2>What I'd do differently starting over</h2>
 
   <ol>
-    <li><strong>Start with 3 crons, not 15.</strong> Morning brief, database backup, and one monitor for whatever you care most about. Add more only when you genuinely need them.</li>
-    <li><strong>Use the cheapest model for everything.</strong> Haiku handles 95% of cron tasks. Only upgrade to Sonnet or Opus when the task genuinely requires reasoning.</li>
-    <li><strong>Build the "silent success, loud failure" pattern from day one.</strong> Every cron ends with "if success, reply NO_REPLY. If failure, alert me."</li>
-    <li><strong>Don't build meta-infrastructure.</strong> No crons that manage other crons. No self-learning pipelines. No AI reviewing AI. Just direct automation that does one clear thing.</li>
-    <li><strong>Set a revenue gate.</strong> Before creating any new cron, ask: "Which revenue stream does this support?" If the answer is "none," don't build it yet.</li>
+    <li><strong>Start smaller than you want to.</strong> Add automation only when the pain is real.</li>
+    <li><strong>Favor simple, cheap systems first.</strong> Fancy is usually where the waste starts.</li>
+    <li><strong>Design for quiet success and obvious failure.</strong> Noise kills trust fast.</li>
+    <li><strong>Don’t build automations that only exist to manage other automations.</strong> That road gets stupid in a hurry.</li>
+    <li><strong>Tie new automations to revenue or risk reduction.</strong> If it does neither, it can wait.</li>
   </ol>
 
   <div class="cta-box">
-    <h3>📘 Want the complete playbook?</h3>
-    <p>163 pages covering cron jobs, identity files, memory architecture, a Kalshi trading bot, TikTok automation, and more. Written for non-developers.</p>
-    <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" class="cta-btn">Get the OpenClaw Playbook — $99</a>
+    <h3>📘 Want the exact configs and templates?</h3>
+    <p>The public posts show what worked. The Playbook shows how to build it without making the same expensive mistakes. It includes copy-paste cron configs, reusable templates, and the guardrails that keep the whole system from turning noisy, brittle, or expensive.</p>
+    <p style="margin-top:1rem">
+      <a href="/assets/playbook/OpenClaw-Playbook-Free-Sample.pdf" class="cta-btn" style="margin-right:.75rem;background:#334155">Read the Free Sample</a>
+      <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" class="cta-btn">Get the OpenClaw Playbook — $99</a>
+    </p>
   </div>
 
   <h2>The bottom line</h2>
 
   <p>Cron jobs turned my OpenClaw agent from a chatbot into a system. The morning briefing alone saves me 20 minutes a day. The database backups give me peace of mind. The app monitors mean I never miss a review or an approval.</p>
 
-  <p>None of this required writing code. It required being specific about what I wanted, learning from the failures, and resisting the urge to build more than I needed.</p>
+  <p>None of this required writing code. It required being specific about what I wanted, learning from expensive mistakes, and resisting the urge to automate nonsense.</p>
 
   <p>Start with three. See what sticks. Add from there.</p>
 
