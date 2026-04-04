@@ -215,6 +215,7 @@
     <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
     <div class="links">
       <a href="#about">About</a>
+      <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank" rel="noopener" style="color:var(--accent2);font-weight:600">📘 Playbook</a>
       <a href="#building">Building</a>
       <a href="#credentials">Flying</a>
       <a href="#experience">Experience</a>
@@ -231,15 +232,31 @@
     <div class="photo"><picture><source srcset="headshot.webp" type="image/webp"><img src="headshot.jpg" alt="Nick Rae in cockpit" loading="eager"></picture></div>
     <h1>Nick Rae</h1>
     <div class="title">Pilot · Builder · Maker</div>
-    <p class="tagline">Midlife career 2.0 — commercial pilot building iOS apps and AI tools to fund the next chapter. Based in Merced, CA.</p>
+    <p class="tagline">Midlife career 2.0 — commercial pilot building AI automations, trading systems, and iOS products to fund the next chapter. Based in Merced, CA.</p>
     <div class="hero-buttons">
-      <a href="#building" class="btn btn-primary">What I'm Building</a>
-      <a href="#credentials" class="btn btn-outline">✈️ Flight Credentials</a>
+      <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank" rel="noopener" class="btn btn-primary">📘 Get the Playbook</a>
       <a href="flight-funded/" class="btn btn-outline">🛫 Flight Funded Tracker</a>
-      <a href="#connect" class="btn btn-outline">Contact</a>
+      <a href="#building" class="btn btn-outline">What I'm Building</a>
+      <a href="#credentials" class="btn btn-outline">✈️ Flight Credentials</a>
     </div>
   </div>
 </section>
+
+<section style="padding:2rem 1.5rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container" style="max-width:960px">
+    <div style="background:linear-gradient(135deg,#13112e,#0f1729);border:1px solid rgba(99,102,241,.35);border-radius:1rem;padding:1.5rem 1.75rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+      <div style="flex:1;min-width:260px">
+        <div style="font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:.35rem">Featured Product</div>
+        <h2 style="font-size:1.45rem;margin-bottom:.45rem">The Non-Developer's OpenClaw Playbook</h2>
+        <p style="color:var(--text-muted);margin:0">163 pages on building AI automations, cron jobs, a live trading bot, and real workflows without writing code. Real configs, real mistakes, real receipts.</p>
+      </div>
+      <div class="proj-links" style="margin-top:0">
+        <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank" rel="noopener" class="site">📘 Buy on Gumroad — $99</a>
+        <a href="blog/openclaw-playbook.html" class="gumroad">Read the story</a>
+      </div>
+    </div>
+   </div>
+ </section>
 
 <!-- ABOUT -->
 <section class="about-section" id="about">
@@ -276,49 +293,55 @@
     <h2 class="section-title">What I'm Building</h2>
     <div class="proj-grid">
 
+      <div class="proj-card" style="border-color:rgba(99,102,241,.4);background:linear-gradient(135deg,#13112e,#0f0929)">
+        <h3>📘 The Non-Developer's OpenClaw Playbook</h3>
+        <p>163 pages on building 50+ AI automations, a weather prediction trading bot, and real operating systems without writing code. Real configs, real mistakes, real results.</p>
+        <span class="proj-badge live">Featured Product</span>
+        <div class="proj-links">
+          <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank" rel="noopener" class="site">📘 Get the Playbook — $99</a>
+          <a href="blog/openclaw-playbook.html" class="gumroad">Read the breakdown</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>🤖 Prediction Market Bots</h3>
+        <p>Automated weather prediction trading on Kalshi. NOAA + Open-Meteo forecasts, probability-weighted sizing, Kelly Criterion, and live risk controls. Trading real money since March 2026.</p>
+        <span class="proj-badge live">Live Trading</span>
+        <div class="proj-links">
+          <a href="blog/kalshi-weather-bot.html" class="site">🌦️ Read the bot breakdown</a>
+          <a href="flight-funded/" class="payhip">📊 View live tracker</a>
+        </div>
+      </div>
+
       <div class="proj-card" style="border-color:rgba(59,130,246,.4);background:linear-gradient(135deg,#131c2e,#0f1729)">
         <h3>🛫 Flight Funded</h3>
-        <p>Public live tracker documenting the journey from 370 to 700 flight hours and the AI/app income funding it. Every trade, every dollar, every hour — tracked transparently. Inspired by the Pieter Levels model.</p>
+        <p>Public live tracker documenting the journey from 370 to 700 flight hours and the AI/app income funding it. Every trade, every dollar, every hour, tracked transparently.</p>
         <span class="proj-badge live">Live</span>
         <div class="proj-links">
           <a href="flight-funded/" class="payhip">📊 View Tracker</a>
         </div>
       </div>
 
-      <div class="proj-card" style="border-color:rgba(139,26,26,.4);background:linear-gradient(135deg,#1a0f0f,#2a1515)">
-        <h3>🐾 Runways &amp; Rescues</h3>
-        <p>501(c)3 nonprofit using volunteer pilots to fly rescue animals from danger to forever homes. Board member alongside founder Joe Orr. Domestic and international rescue missions — Eastern Seaboard and beyond. Built the organization's website.</p>
-        <span class="proj-badge live">Live</span>
-        <div class="proj-links">
-          <a href="https://nicholasrae.github.io/runways-rescues/" target="_blank" class="payhip">🌐 Visit Site</a>
-        </div>
-      </div>
-
-      <div class="proj-card">
-        <h3>📚 Books on Amazon</h3>
-        <p>Self-published on KDP. Aviation study guides with 500+ practice questions, a faith-based Bible word search, and niche puzzle books. 7 titles live on Amazon.</p>
-        <span class="proj-badge live">Available Now</span>
-        <div class="proj-links">
-          <a href="https://a.co/d/0hExZLaf" target="_blank" class="amazon">✈️ PPL Workbook</a>
-          <a href="https://a.co/d/06zXHuEe" target="_blank" class="amazon">📡 IR Workbook</a>
-          <a href="https://www.amazon.com/dp/B0DZY4C98F" target="_blank" class="amazon">✝️ Illuminating the Word</a>
-          <a href="https://www.amazon.com/dp/B0DZNXH78H" target="_blank" class="amazon">✈️ Aviation Word Search</a>
-          <a href="https://www.amazon.com/dp/B0DZTH7S3K" target="_blank" class="amazon">🎖️ Army Word Search</a>
-          <a href="https://www.amazon.com/dp/B0DZTD4CQ8" target="_blank" class="amazon">🏔️ Alaska Word Search</a>
-          <a href="https://www.amazon.com/dp/B0F18QX17H" target="_blank" class="amazon">🐛 Bugs Word Search</a>
-          <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" class="amazon">📖 Amazon Author Page</a>
-          <a href="https://nicholasrae.gumroad.com" target="_blank" class="gumroad">🎁 Free Cheat Sheets</a>
-          <a href="https://payhip.com/V1Ventures" target="_blank" class="payhip">🛒 Payhip</a>
-        </div>
-      </div>
-
       <div class="proj-card">
         <h3>🍽️ FeedFare</h3>
-        <p>Walk to unlock your apps. FeedFare turns movement into screen time, so your phone stops being the reward for doing nothing. Live on the App Store, now focused on tightening conversion and proving real revenue.</p>
+        <p>Trade steps for screen time. FeedFare helps you earn your scrolling with movement, streaks, and step-to-screen tracking. Live on the App Store while the deeper enforcement layer waits on Family Controls approval.</p>
         <span class="proj-badge live">Primary Focus</span>
         <div class="proj-links">
-          <a href="https://feedfare.app" target="_blank" class="site">🌐 feedfare.app</a>
-          <a href="https://apps.apple.com/us/app/feedfare/id6758923557" target="_blank" class="site">📱 App Store</a>
+          <a href="https://feedfare.app" target="_blank" rel="noopener" class="site">🌐 feedfare.app</a>
+          <a href="https://apps.apple.com/us/app/feedfare/id6758923557" target="_blank" rel="noopener" class="site">📱 App Store</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>📚 Aviation Study Guides</h3>
+        <p>Self-published pilot training products built from my own checkride prep. Focused on study systems that actually help pilots pass, not a random shelf of unrelated stuff.</p>
+        <span class="proj-badge live">Available Now</span>
+        <div class="proj-links">
+          <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" class="amazon">✈️ PPL Workbook</a>
+          <a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" class="amazon">📡 IR Workbook</a>
+          <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" class="amazon">📖 Full Amazon Catalog</a>
+          <a href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener" class="gumroad">🎁 Free Cheat Sheets</a>
+          <a href="https://payhip.com/V1Ventures" target="_blank" rel="noopener" class="payhip">🛒 Payhip</a>
         </div>
       </div>
 
@@ -329,27 +352,21 @@
       </div>
 
       <div class="proj-card">
-        <h3>🤖 Prediction Market Bots</h3>
-        <p>Automated weather prediction trading on Kalshi. NOAA + Open-Meteo forecasts, probability-weighted sizing, Kelly Criterion. Live with real money since March 2026.</p>
-        <span class="proj-badge live">Live Trading</span>
-      </div>
-
-      <div class="proj-card">
         <h3>⚙️ OpenClaw Skills — ClawHub</h3>
         <p>Published AI agent skills for the OpenClaw ecosystem. Expense Tracker and App Store ReviewReply live now. Building the toolkit one skill at a time.</p>
         <span class="proj-badge live">Live on ClawHub</span>
         <div class="proj-links">
-          <a href="https://clawhub.com/skills/nicholasrae-expense-tracker" target="_blank" class="payhip">Expense Tracker</a>
-          <a href="https://clawhub.com/skills/nicholasrae-review-reply" target="_blank" class="payhip">ReviewReply</a>
+          <a href="https://clawhub.com/skills/nicholasrae-expense-tracker" target="_blank" rel="noopener" class="payhip">Expense Tracker</a>
+          <a href="https://clawhub.com/skills/nicholasrae-review-reply" target="_blank" rel="noopener" class="payhip">ReviewReply</a>
         </div>
       </div>
 
-      <div class="proj-card" style="border-color:rgba(99,102,241,.4);background:linear-gradient(135deg,#13112e,#0f0929)">
-        <h3>📘 The Non-Developer's OpenClaw Playbook</h3>
-        <p>163 pages on building 50+ AI automations, a weather prediction trading bot, and a TikTok content pipeline. Written by a commercial pilot who doesn't code. Real configs, real mistakes, real results.</p>
-        <span class="proj-badge live">Live on Gumroad</span>
+      <div class="proj-card" style="border-color:rgba(139,26,26,.4);background:linear-gradient(135deg,#1a0f0f,#2a1515)">
+        <h3>🐾 Runways &amp; Rescues</h3>
+        <p>501(c)3 nonprofit using volunteer pilots to fly rescue animals from danger to forever homes. Board member alongside founder Joe Orr. Domestic and international rescue missions, Eastern Seaboard and beyond.</p>
+        <span class="proj-badge live">Live</span>
         <div class="proj-links">
-          <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank" class="site">📘 Get the Playbook — $99</a>
+          <a href="https://nicholasrae.github.io/runways-rescues/" target="_blank" rel="noopener" class="payhip">🌐 Visit Site</a>
         </div>
       </div>
 

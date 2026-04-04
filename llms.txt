@@ -11,7 +11,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight ho
 - [Home](https://nickrae.net/)
 - [Blog](https://nickrae.net/blog/)
 - [Flight Funded](https://nickrae.net/flight-funded/) — tracking side hustle income funding flight hours
-- [FeedFare](https://nickrae.net/feedfare/) — walk to unlock your apps (iOS)
+- [FeedFare](https://nickrae.net/feedfare/) — trade steps for screen time (iOS)
 - [Inflection Point](https://nickrae.net/inflection/) — personal growth OS (iOS)
 
 ## Blog Posts
@@ -30,7 +30,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight ho
 
 ## Apps
 
-- [FeedFare — Walk to Unlock Your Apps](https://apps.apple.com/us/app/feedfare/id6758923557) — screen time management through physical activity
+- [FeedFare — Trade Steps for Screen Time](https://apps.apple.com/us/app/feedfare/id6758923557) — step-to-screen tracking for better phone habits
 - Inflection Point — personal growth OS (in TestFlight)
 
 ## Digital Products
