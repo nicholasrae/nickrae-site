@@ -61,6 +61,10 @@
   .cta:hover{background:#1d4ed8;text-decoration:none}
   ul{margin:0 0 1.25rem 1.5rem;color:#cbd5e1}
   li{margin-bottom:.5rem}
+  .preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0 2rem}
+  .preview-card{background:#111827;border:1px solid #1e293b;border-radius:10px;overflow:hidden}
+  .preview-card img{display:block;width:100%;height:auto;background:#0f172a}
+  .preview-card .caption{padding:.85rem .95rem;font-size:.85rem;color:#94a3b8;line-height:1.5}
   .back{margin-top:3rem;padding-top:1.5rem;border-top:1px solid #1e293b}
 </style>
 </head>
@@ -114,7 +118,26 @@
 
   <p>The book is 140+ pages with real configs you can copy. Every SOUL.md, every cron job definition, every prompt template. Not screenshots of menus.</p>
 
-  <a class="cta" href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank">Get the Playbook on Gumroad →</a>
+  <h2>Inside the Playbook</h2>
+
+  <p>Here are three real pages from the PDF so you can see what you're actually buying: cover, table of contents, and an interior page from the security chapter with concrete config examples.</p>
+
+  <div class="preview-grid">
+    <div class="preview-card">
+      <img src="../assets/playbook/playbook-cover-001.jpg" alt="Cover of The Non-Developer's OpenClaw Playbook">
+      <div class="caption"><strong>Cover.</strong> The actual PDF buyers get, not a mockup pretending to be a book.</div>
+    </div>
+    <div class="preview-card">
+      <img src="../assets/playbook/playbook-toc-004.jpg" alt="Table of contents from The Non-Developer's OpenClaw Playbook">
+      <div class="caption"><strong>Table of contents.</strong> Fifteen chapters covering setup, memory, cron jobs, dashboards, security, sub-agents, and monetization.</div>
+    </div>
+    <div class="preview-card">
+      <img src="../assets/playbook/playbook-security-127.jpg" alt="Interior security chapter page from The Non-Developer's OpenClaw Playbook">
+      <div class="caption"><strong>Interior page.</strong> Real operating detail, including config patterns, security rules, and the mistakes that keep this stuff from getting expensive.</div>
+    </div>
+  </div>
+
+  <a class="cta" href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank" rel="noopener">Get the Playbook on Gumroad →</a>
 
   <p style="font-size:.85rem;color:#94a3b8;margin-top:.25rem">PDF + EPUB. Use code <strong>FIRSTFLIGHT</strong> for 30% off.</p>
 
