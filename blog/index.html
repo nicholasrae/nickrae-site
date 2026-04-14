@@ -63,6 +63,16 @@
   .page-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:1rem}
   .page-subtitle{color:var(--text-muted);font-size:1.1rem;max-width:600px;margin:0 auto}
 
+  /* FEATURED CLUSTER */
+  .featured-cluster{margin:0 0 2.5rem;background:linear-gradient(135deg,#131c2e,#0f1729);border:1px solid rgba(59,130,246,.25);border-radius:1rem;padding:1.5rem}
+  .featured-cluster h2{font-size:1.4rem;margin-bottom:.5rem}
+  .featured-cluster p{color:var(--text-muted);margin-bottom:1.25rem}
+  .featured-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+  .featured-link{display:block;background:rgba(10,14,23,.55);border:1px solid var(--border);border-radius:.75rem;padding:1rem;text-decoration:none}
+  .featured-link:hover{border-color:var(--accent);text-decoration:none}
+  .featured-link strong{display:block;color:var(--text);margin-bottom:.35rem;font-size:.98rem}
+  .featured-link span{display:block;color:var(--text-muted);font-size:.85rem;line-height:1.5}
+
   /* BLOG POSTS */
   .blog-posts{display:grid;gap:2rem}
   .post-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:2rem;transition:border-color .2s}
@@ -114,6 +124,29 @@
     <h1 class="page-title">Blog</h1>
     <p class="page-subtitle">Aviation insights, pilot training tips, and entrepreneurship stories from the flight deck and beyond.</p>
   </div>
+
+  <section class="featured-cluster" aria-label="Featured aviation guides">
+    <h2>Start Here: Best Aviation Guides</h2>
+    <p>These are the pages already pulling the strongest search attention and the ones most likely to help student pilots, checkride prep, and hour-building readers. If Google is going to learn what this site is about, these are the pages I want it staring at.</p>
+    <div class="featured-grid">
+      <a class="featured-link" href="checkride-prep-guide.html">
+        <strong>Private Pilot Checkride Prep Guide</strong>
+        <span>Practical oral, ACS, and flight-test prep from someone who actually did the ride.</span>
+      </a>
+      <a class="featured-link" href="student-pilot-apps-2026.html">
+        <strong>Best Apps for Student Pilots</strong>
+        <span>The tools worth using during training, not just another list stuffed with affiliate bait.</span>
+      </a>
+      <a class="featured-link" href="blog-cheapest-flight-hours.html">
+        <strong>Cheapest Ways to Build Flight Hours</strong>
+        <span>A straight answer to the question every commercial pilot eventually asks.</span>
+      </a>
+      <a class="featured-link" href="commercial-pilot-career-2026.html">
+        <strong>How to Become a Commercial Pilot in 2026</strong>
+        <span>Requirements, hours, costs, and timeline without the flight-school brochure perfume.</span>
+      </a>
+    </div>
+  </section>
 
   <div class="blog-posts">
     <article class="post-card" style="border-color:rgba(245,158,11,.45)">
