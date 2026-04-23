@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How I’m Getting from 371.0 to 500 Flight Hours — Nick Rae</title>
+<meta name="description" content="A commercial pilot’s real plan to close the gap from 371.0 to 500 flight hours without going broke. The math, the bottlenecks, and the hour-building strategy.">
+<meta property="og:title" content="How I’m Getting from 371.0 to 500 Flight Hours">
+<meta property="og:description" content="The real plan to close a 129.0-hour gap to Part 135 minimums without lighting money on fire.">
+<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+<meta property="og:url" content="https://nickrae.net/blog/from-369-5-to-500-hours.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="canonical" href="https://nickrae.net/blog/from-369-5-to-500-hours.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "How I’m Getting from 371.0 to 500 Flight Hours",
+      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "datePublished": "2026-04-23",
+      "dateModified": "2026-04-23",
+      "url": "https://nickrae.net/blog/from-369-5-to-500-hours.html",
+      "image": "https://nickrae.net/og-image.jpg",
+      "description": "A commercial pilot’s real plan to close the gap from 371.0 to 500 flight hours without going broke. The math, the bottlenecks, and the hour-building strategy.",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/from-369-5-to-500-hours.html" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "How I’m Getting from 371.0 to 500 Flight Hours", "item": "https://nickrae.net/blog/from-369-5-to-500-hours.html" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;--text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;--accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);--border:#1e293b;--card:#131c2e;}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .links a{color:var(--text-muted)}
+  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+  article{max-width:800px;margin:0 auto;padding:6rem 1.5rem 3rem}
+  .article-header{margin-bottom:3rem}
+  .article-meta{color:var(--text-dim);font-size:.875rem;margin-bottom:1rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .article-category{background:var(--accent-glow);color:var(--accent2);padding:.2rem .65rem;border-radius:1rem;font-weight:600;font-size:.8rem}
+  .article-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:1.5rem;line-height:1.2}
+  .article-excerpt{color:var(--text-muted);font-size:1.1rem;line-height:1.6;border-left:3px solid var(--accent);padding-left:1.25rem}
+  .article-content{color:var(--text-muted);line-height:1.75;margin-top:2.5rem}
+  .article-content h2{color:var(--text);font-size:1.6rem;font-weight:700;margin:3rem 0 1rem;padding-top:1rem;border-top:1px solid var(--border)}
+  .article-content h3{color:var(--text);font-size:1.25rem;font-weight:700;margin:2.25rem 0 1rem}
+  .article-content p{margin-bottom:1.25rem}
+  .article-content ul,.article-content ol{margin:1.25rem 0;padding-left:1.5rem}
+  .article-content li{margin-bottom:.5rem}
+  .article-content strong{color:var(--text);font-weight:600}
+  .article-content blockquote{background:var(--card);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:0 .5rem .5rem 0;color:var(--text)}
+  .article-content table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem}
+  .article-content th{background:var(--card);color:var(--accent2);padding:.75rem 1rem;text-align:left;border:1px solid var(--border);font-weight:600}
+  .article-content td{padding:.75rem 1rem;border:1px solid var(--border);color:var(--text-muted)}
+  .article-content tr:nth-child(even) td{background:rgba(19,28,46,.5)}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin:1.5rem 0}
+  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;text-align:center}
+  .stat-card .number{font-size:1.75rem;font-weight:800;color:var(--accent2)}
+  .stat-card .label{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-top:.25rem}
+  .cta-box{background:var(--card);border:1px solid var(--accent);border-radius:.75rem;padding:1.75rem;margin:2.5rem 0}
+  .cta-box h3{color:var(--accent2);margin-bottom:.75rem;font-size:1.1rem}
+  .cta-box p{margin-bottom:1rem;font-size:.95rem}
+  .cta-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem}
+  .cta-links a{display:inline-block;background:var(--accent);color:white;padding:.6rem 1.25rem;border-radius:.5rem;font-weight:600;font-size:.9rem}
+  .cta-links a:hover{text-decoration:none;opacity:.9}
+  .author-box{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.75rem;margin:3rem 0;font-size:.9rem;color:var(--text-muted)}
+  .author-box strong{color:var(--text)}
+  .article-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem}
+  .nav-link{color:var(--accent2);font-weight:600;font-size:.9rem}
+  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:4rem}
+  @media(max-width:768px){
+    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+    nav .links.open{display:flex}
+    .menu-toggle{display:block}
+    .article-title{font-size:1.9rem}
+    article{padding:5rem 1rem 2rem}
+    .article-content table{font-size:.8rem}
+    .article-content th,.article-content td{padding:.5rem .65rem}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div>
+    <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <div class="links">
+      <a href="../">Home</a>
+      <a href="../#building">Building</a>
+      <a href="../#credentials">Flying</a>
+      <a href="./">Blog</a>
+      <a href="../flight-funded/" style="color:var(--accent2);font-weight:600">&#x1F6EB; Flight Funded</a>
+      <a href="../#connect">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="article-header">
+    <div class="article-meta">
+      <span class="article-category">&#x2708;&#xFE0F; Flight Funded</span>
+      <span>April 23, 2026</span>
+      <span>Nick Rae</span>
+      <span>~8 min read</span>
+    </div>
+    <h1 class="article-title">How I’m Getting from 371.0 to 500 Flight Hours</h1>
+    <p class="article-excerpt">I’m 129.0 hours short of the 500-hour mark. That’s close enough to matter and expensive enough to get stupid fast. Here’s the real plan to close the gap without pretending money, currency, or time aren’t constraints.</p>
+  </div>
+
+  <div class="article-content">
+    <p>I have 371.0 total hours.</p>
+
+    <p>The next meaningful number is 500.</p>
+
+    <p>That’s not some motivational milestone I made up because round numbers look pretty on a dashboard. It’s the near-term Part 135 minimum I care about, and it’s the first number that starts to make a low-time commercial pilot more useful than theoretical.</p>
+
+    <p>The gap is 129.0 hours. At roughly $200 an hour once you factor in aircraft, instruction when needed, and the normal friction of flying, that gap can turn into a nasty little money fire if you handle it badly.</p>
+
+    <p>So this is the plan.</p>
+
+    <h2>The Numbers Right Now</h2>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="number">371.0</div><div class="label">Total Time</div></div>
+      <div class="stat-card"><div class="number">251</div><div class="label">PIC</div></div>
+      <div class="stat-card"><div class="number">129.0</div><div class="label">Hours Remaining</div></div>
+      <div class="stat-card"><div class="number">74%</div><div class="label">To 500</div></div>
+    </div>
+
+    <p>On paper, that’s encouraging. I’m not at 40 hours staring up a mountain. I’m already three-quarters of the way there.</p>
+
+    <p>But paper lies if you let it. The real question is pace.</p>
+
+    <p>At the pace shown on my <a href="../flight-funded/">Flight Funded tracker</a>, around 7.9 hours per month, it takes roughly 16 more months to reach 500. That’s too slow. Not because 17 months is impossible, but because drift has a way of turning 17 into 24 if you’re not careful.</p>
+
+    <blockquote>The problem is not whether 129.0 hours is possible. The problem is whether I build them on purpose or let them happen slowly and expensively.</blockquote>
+
+    <h2>The Real Bottlenecks</h2>
+
+    <p>The bottleneck isn’t just money.</p>
+
+    <p>It’s money, currency, and logistics stacked together.</p>
+
+    <ul>
+      <li><strong>Money:</strong> every hour costs something, and the wrong kind of hour-building burns cash without improving employability much.</li>
+      <li><strong>Currency:</strong> I logged 1.5 hours on April 23, 2026. That is progress, but one flight does not magically turn into a durable recurrency plan. Pretending otherwise would be bullshit.</li>
+      <li><strong>Logistics:</strong> I still have a day job. I’m in Merced, not living at an airport FBO seven days a week.</li>
+    </ul>
+
+    <p>The good news is my second-class medical is valid through May 2027, so the issue is not whether I’m medically cleared to fly. The issue is building a repeatable system that gets me back in the cockpit consistently enough to matter.</p>
+
+    <h2>Step One: Stop Lying About the Starting Point</h2>
+
+    <p>The first move is not “book 50 hours.” The first move is recurrency.</p>
+
+    <p>Any plan that ignores that is fake productivity. If I’m rusty, then the first few hours are not hour-building. They’re rust-removal. That still counts, but it needs to be acknowledged for what it is.</p>
+
+    <p>So step one is straightforward:</p>
+
+    <ul>
+      <li>get current again</li>
+      <li>knock the rust off cleanly</li>
+      <li>turn back into someone who can use each hour efficiently instead of relearning basic rhythm every flight</li>
+    </ul>
+
+    <p>That part is not glamorous. It is necessary.</p>
+
+    <h2>Step Two: Buy the Right Hours, Not Just More Hours</h2>
+
+    <p>Not all flight time is equal.</p>
+
+    <p>I already have the commercial certificate. I already have multi-engine. I already have instrument. So the goal now is not collecting random hobbs time like baseball cards. The goal is building hours that strengthen the logbook and keep me moving toward the first real job.</p>
+
+    <p>That means prioritizing:</p>
+
+    <ul>
+      <li><strong>PIC time</strong> where possible</li>
+      <li><strong>cross-country time</strong> that has actual structure</li>
+      <li><strong>multi-engine opportunities</strong> when the economics make sense</li>
+      <li><strong>flying that keeps proficiency sharp</strong> instead of just inflating totals</li>
+    </ul>
+
+    <p>There is a difference between building hours and building a story a chief pilot can respect. I want the second one.</p>
+
+    <h2>Step Three: Compress the Timeline with a Real Monthly Target</h2>
+
+    <p>A vague goal gets vague results.</p>
+
+    <p>“I need 129.0 more hours” sounds useful, but it still leaves too much room to drift. A monthly target is harder to hide from.</p>
+
+    <p>If I want to reach 500 faster than the current pace, the target has to move above maintenance mode. That means building around a monthly hour number that is aggressive enough to change the timeline, but not so aggressive that it collapses after two weeks.</p>
+
+    <table>
+      <thead>
+        <tr><th>Monthly Pace</th><th>Time to 500</th><th>Reality Check</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>7.9 hrs/month</td><td>~16 months</td><td>Current drift pace. Too slow.</td></tr>
+        <tr><td>12 hrs/month</td><td>~11 months</td><td>Better, but still needs discipline.</td></tr>
+        <tr><td>16 hrs/month</td><td>~8 months</td><td>Actually moves the scoreboard.</td></tr>
+      </tbody>
+    </table>
+
+    <p>I’m not treating those numbers as promises. I’m treating them as planning assumptions. The point is that the path gets very different once the monthly target becomes deliberate.</p>
+
+    <h2>Step Four: Fund Hours with Revenue, Not Good Intentions</h2>
+
+    <p>This is where Flight Funded stops being a cute slogan and becomes the whole game.</p>
+
+    <p>I’m not trying to manifest 129.0 hours. I’m trying to fund them.</p>
+
+    <p>That means side income is not a vanity project. It is directly tied to cockpit progress.</p>
+
+    <p>The current mix looks like this:</p>
+
+    <ul>
+      <li>KDP aviation workbooks</li>
+      <li><a href="../feedfare/">FeedFare</a> and other apps or digital products</li>
+      <li>automation and AI tools</li>
+      <li>the systems that keep those things shipping while I’m still working my day job</li>
+    </ul>
+
+    <p>If those projects do not turn into actual dollars, then they are hobbies wearing a business costume. If they do turn into dollars, they buy hours. That’s the scoreboard.</p>
+
+    <div class="cta-box">
+      <h3>&#x1F6EB; Why I Track This Publicly</h3>
+      <p>Flight Funded exists because “working on side income” is too vague. I’d rather track the real gap, the real hours, and the real revenue than tell myself a flattering story.</p>
+      <div class="cta-links">
+        <a href="../flight-funded/">View the Flight Funded tracker</a>
+      </div>
+    </div>
+
+    <h2>Step Five: Treat 500 Like a Launch Window, Not the Finish Line</h2>
+
+    <p>The mistake would be treating 500 as the destination.</p>
+
+    <p>It isn’t. It’s a threshold.</p>
+
+    <p>500 matters because it changes the conversation. It moves me from “still building” to “closer enough to matter.” But 500 by itself is not a career. It’s the point where the next set of doors becomes more realistic.</p>
+
+    <p>So the plan is not:</p>
+
+    <p>get to 500, celebrate, relax.</p>
+
+    <p>The plan is:</p>
+
+    <ul>
+      <li>get current</li>
+      <li>build efficiently</li>
+      <li>hit 500</li>
+      <li>use that milestone to create more opportunities</li>
+      <li>keep going</li>
+    </ul>
+
+    <h2>What I’m Not Going to Do</h2>
+
+    <p>A lot of hour-building advice sounds good until you do the math.</p>
+
+    <p>I’m not interested in spending money just to feel productive. I’m not interested in random flights with no structure. I’m not interested in pretending every loggable hour is equally useful.</p>
+
+    <p>The whole point is to close the gap intelligently.</p>
+
+    <p>That means saying no to hours that are expensive, low-signal, or disconnected from the actual goal. Cheap ego flights are still expensive if they don’t move the mission.</p>
+
+    <h2>The Honest Version</h2>
+
+    <p>This part of aviation is where a lot of people stall out.</p>
+
+    <p>You have the certificates. You have enough hours to know you’re serious. You do not yet have enough hours to stop thinking about money every time you look at the next step.</p>
+
+    <p>That’s where I am.</p>
+
+    <p>371.0 to 500 is not a fantasy gap. It’s a manageable gap. But it only stays manageable if I treat it like an operations problem instead of an emotional one.</p>
+
+    <p>That means math, scheduling, currency, and funding. Less romance. More execution.</p>
+
+    <h2>Bottom Line</h2>
+
+    <p>I need 129.0 more hours.</p>
+
+    <p>The near-term goal is 500 because that’s the first meaningful threshold I can attack from where I sit today. The plan is simple, even if it isn’t easy:</p>
+
+    <ul>
+      <li>get current again</li>
+      <li>set a deliberate monthly pace</li>
+      <li>buy the right hours</li>
+      <li>fund them with real revenue</li>
+      <li>keep the scoreboard honest</li>
+    </ul>
+
+    <p>That’s the path.</p>
+
+    <p>Now I just have to go fly it.</p>
+
+    <div class="author-box">
+      <strong>Nick Rae</strong> is a commercial instrument multi-engine pilot based in Merced, California. He has 371.0 total hours and is documenting the push to Part 135 minimums in public through <a href="../flight-funded/">Flight Funded</a>. He also builds apps, books, and automation systems to help fund more time in the cockpit.
+    </div>
+
+    <section aria-label="Related reading" style="margin-top:2.75rem;padding:1.5rem;border:1px solid #1e293b;border-radius:14px;background:#111827">
+      <div style="font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#60a5fa;margin-bottom:.6rem">Keep reading</div>
+      <p style="margin-bottom:1rem;color:#94a3b8">If this page was useful, these are the next three pages worth your time.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-bottom:1rem">
+        <a href="blog-cheapest-flight-hours.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
+          <strong style="display:block;color:#e2e8f0;font-size:.98rem">Cheapest Ways to Build Flight Hours</strong>
+          <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The practical options for building hours without burning cash stupidly.</span>
+        </a>
+        <a href="flight-funded-experiment.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
+          <strong style="display:block;color:#e2e8f0;font-size:.98rem">Flight Funded Experiment</strong>
+          <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">Why I’m building side income in public to fund more hours.</span>
+        </a>
+        <a href="blog-commercial-pilot.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
+          <strong style="display:block;color:#e2e8f0;font-size:.98rem">How I Earned My Commercial Pilot License at 45</strong>
+          <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The backstory behind the hours already in the logbook.</span>
+        </a>
+      </div>
+      <p style="margin:0;color:#94a3b8;font-size:.92rem">New here? Start at the <a href="../">homepage</a> or browse the <a href="./">full blog archive</a>.</p>
+    </section>
+
+  </div>
+
+  <div class="article-nav">
+    <a href="./" class="nav-link">&#x2190; All Posts</a>
+    <a href="../flight-funded/" class="nav-link">Flight Funded Tracker &#x2192;</a>
+  </div>
+</article>
+
+<footer>
+  <div style="margin-bottom:.5rem">Build things. Fly planes. Keep moving.</div>
+  <div>© 2026 Nick Rae · Merced, CA · <a href="../">Back to Home</a></div>
+</footer>
+</body>
+</html>
