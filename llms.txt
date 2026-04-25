@@ -4,7 +4,7 @@
 
 ## About
 
-Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight hours, working toward 1,500 hours for ATP certification. He builds iOS apps (FeedFare, Inflection Point), runs an AI-powered weather prediction trading bot on Kalshi, and publishes aviation study materials on Amazon KDP. He documents the journey at nickrae.net.
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 371.0 flight hours, working toward 500 hours for Part 135 and eventually 1,500 hours for ATP certification. He builds iOS apps, publishes aviation study materials on Amazon KDP, sells The Non-Developer's OpenClaw Playbook, and documents the Flight Funded experiment at nickrae.net. His Kalshi weather bot is paused until calibration earns trust.
 
 ## Key Pages
 
@@ -16,7 +16,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 369+ flight ho
 
 ## Blog Posts
 
-- [I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.](https://nickrae.net/blog/kalshi-weather-bot.html)
+- [I Built a Weather Prediction Bot. Then Live Trading Humbled It.](https://nickrae.net/blog/kalshi-weather-bot.html)
 - [I Read an Academic Paper and Rebuilt My AI Agent's Memory](https://nickrae.net/blog/blog-trajectory-learning.html)
 - [Setting Up OpenClaw: The 5 Things I Wish I Did First](https://nickrae.net/blog/blog-openclaw-setup.html)
 - [How I Earned My Commercial Pilot License at 45](https://nickrae.net/blog/blog-commercial-pilot.html)

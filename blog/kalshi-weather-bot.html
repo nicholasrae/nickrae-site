@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live. — Nick Rae</title>
-<meta name="description" content="A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 217 resolved trades, 76.5% win rate, $1,773 paper profit. It went live with real money on March 28, 2026.">
-<meta property="og:title" content="I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.">
-<meta property="og:description" content="A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 217 resolved trades, 76.5% win rate, $1,773 paper profit. Now trading real money.">
+<title>I Built a Weather Prediction Bot. Then Live Trading Humbled It. — Nick Rae</title>
+<meta name="description" content="A commercial pilot built a Kalshi weather bot, took it live, then paused it after calibration and market-baseline checks showed the model was not capital-ready.">
+<meta property="og:title" content="I Built a Weather Prediction Bot. Then Live Trading Humbled It.">
+<meta property="og:description" content="The paper results looked great. The live run and calibration audit said not yet. Here is the honest post-mortem.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/kalshi-weather-bot.html">
 <meta property="og:type" content="article">
@@ -20,13 +20,13 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "headline": "I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.",
+      "headline": "I Built a Weather Prediction Bot. Then Live Trading Humbled It.",
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-03-15",
       "url": "https://nickrae.net/blog/kalshi-weather-bot.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion sizing. 217 resolved trades, 76.5% win rate, $1,773 paper profit. Now trading real money.",
+      "description": "A commercial pilot built a Kalshi weather bot, took it live, then paused it after calibration and market-baseline checks showed the model was not capital-ready.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/kalshi-weather-bot.html" }
     },
     {
@@ -34,7 +34,7 @@
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
         { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.", "item": "https://nickrae.net/blog/kalshi-weather-bot.html" }
+        { "@type": "ListItem", "position": 3, "name": "I Built a Weather Prediction Bot. Then Live Trading Humbled It.", "item": "https://nickrae.net/blog/kalshi-weather-bot.html" }
       ]
     }
   ]
@@ -133,13 +133,13 @@
       <span>Nick Rae</span>
       <span>~10 min read</span>
     </div>
-    <h1 class="article-title">I Built a Weather Prediction Bot That Made $1,773 in Paper Trades. Now It's Live.</h1>
-    <p class="article-excerpt">A commercial pilot built a Kalshi weather prediction bot using Python, NOAA forecasts, and Kelly Criterion position sizing. 217 resolved trades, 76.5% win rate, $1,773 paper profit. It went live with real money on March 28, 2026. Here's exactly how it works.</p>
+    <h1 class="article-title">I Built a Weather Prediction Bot. Then Live Trading Humbled It.</h1>
+    <p class="article-excerpt">The paper results looked great. The live run and follow-up calibration audit did not. This is the honest breakdown of what worked, what failed, and why the bot stays paused until the gate earns trust.</p>
   </div>
 
   <div class="article-content">
 
-    <p>I'm 46 years old. I have a <a href="blog-commercial-pilot.html">commercial pilot certificate</a>, 371.0 flight hours, and a very clear problem: I need about 1,129 more hours to hit the minimums that get you a real flying job. At $150 to $200 an hour for a decent aircraft rental, that's somewhere between $170,000 and $225,000 I need to generate from somewhere that isn't my day job managing a car electronics shop in Merced.</p>
+    <p>I'm 46 years old. I have a <a href="blog-commercial-pilot.html">commercial pilot certificate</a>, 371.0 flight hours, and a very clear problem: I need 129 more hours to reach the 500-hour Part 135 target. At roughly $200 an hour, that's about $25,800 I need to generate from somewhere that isn't my day job managing a car electronics shop in Merced.</p>
 
     <p>That number has been sitting on my desk for a while. I've been building toward it through a few different angles — an iOS app, KDP workbooks, some content work — all orchestrated through <a href="blog-openclaw-setup.html">OpenClaw, my AI agent platform</a>. But a few months ago I started thinking about prediction markets. Specifically, Kalshi. Specifically, the weather markets.</p>
 
@@ -147,7 +147,9 @@
 
     <p>I thought: I probably have better-than-random intuition here. What if I built a bot to make those trades systematically and found out?</p>
 
-    <p>The bot ran paper for 35 days: 217 resolved trades, 76.5% win rate, $1,773 in simulated profit. On March 28 it went live with a $424 bankroll. Here's exactly how it works.</p>
+    <p>The bot ran paper for 35 days: 217 resolved trades, 76.5% win rate, and $1,773 in simulated profit. On March 28 it went live with a $424 bankroll. Later, after stripping noisy results and auditing calibration, the honest answer was uglier: the weather-only live run was not capital-ready, and the current gate still blocks live trading.</p>
+
+    <blockquote><strong>April 25 update:</strong> Kalshi weather is paused. The newest gate audit fixed bogus candidate-flow blockers, but the model still loses to the market baseline and needs more clean paper/live-gated data. I am leaving the original build notes below because the failure mode is the lesson.</blockquote>
 
     <h2>Why Weather Prediction Markets</h2>
 
@@ -265,9 +267,9 @@
       The edge isn't huge. $7.32 per trade on a $1,000 bankroll is not going to fund a Citation X. But it's real, it's consistent, and it compounds.
     </blockquote>
 
-    <h2>The Six Live Gates</h2>
+    <h2>The Gate That Wasn't Strict Enough</h2>
 
-    <p>Paper trading is paper trading. I built a gate system: six criteria that had to pass simultaneously before the bot touched real money. On March 28, 2026, all six cleared.</p>
+    <p>Paper trading is paper trading. I built a gate system: six criteria that had to pass simultaneously before the bot touched real money. On March 28, 2026, the old gate cleared. The newer gate is harsher, and it is right to be harsher.</p>
 
     <ul class="gate-list">
       <li><span class="gate-pass">&#x2713;</span> <span><strong>80 paper trades completed</strong> — 217 resolved</span></li>
@@ -278,11 +280,9 @@
       <li><span class="gate-pass">&#x2713;</span> <span><strong>30 consecutive days of trading</strong> — 35 days</span></li>
     </ul>
 
-    <p><strong>Update (March 28, 2026):</strong> The bot is now live with a $424 bankroll. Quarter-Kelly sizing for the first 50 trades, $15 max per position. Circuit breaker armed. Real dollars on the line.</p>
+    <p><strong>Update (March 28, 2026):</strong> The bot went live with a $424 bankroll, quarter-Kelly sizing, $15 max per position, and a circuit breaker armed.</p>
 
-    <p><strong>Update:</strong> All six gates cleared on March 28, 2026. The bot flipped to <code>KALSHI_LIVE_MODE = True</code> with a $424 bankroll. Quarter-Kelly sizing, $15 max per position, circuit breaker armed.</p>
-
-    <p>My best estimate for when that happens: around early April 2026, assuming the win rate and drawdown metrics continue improving. I'm not rushing it. Going live early is how you find out your edge wasn't real.</p>
+    <p><strong>Update (April 25, 2026):</strong> The bot is paused again. A later gate audit showed candidate flow was partially blocked by bad cluster logic, but after fixing that, the remaining block was real: not enough settled live data, not enough trading days, and final decision quality still worse than the market baseline. That is not a green light. That is the safety system doing its job.</p>
 
     <h2>What I Got Wrong</h2>
 
@@ -292,17 +292,17 @@
 
     <h2>What's Next</h2>
 
-    <p>The short answer: I wait for 6/6 gates to pass, then go live with $100 and let it run for 90 days. If the live results track the paper results within a reasonable margin, I scale up. If they don't, I go back to paper trading and figure out what changed.</p>
+    <p>The short answer: I keep it in paper/gated mode until it earns another shot. No threshold heroics. No tuning it into passing because I want the story to be cleaner. If the model cannot beat the market baseline after enough settled data, the strategy gets killed or rebuilt.</p>
 
     <p>I'm also looking at extending the model to precipitation and wind markets, not just temperature. Temperature is the cleanest signal because NOAA's temperature forecasts are very good. Precipitation is noisier. But there might be edge in specific market types where the noise works in my favor.</p>
 
-    <p>The longer game: if this generates a consistent $500 to $1,000 a month, that's two to five flight hours funded every month. Not enough to change my timeline dramatically on its own. But combined with the workbooks, the app revenue, and a couple of other projects, it moves the needle. I wrote about the <a href="ai-aviation-business.html">full picture of how I'm using AI to build side income as a pilot</a> — the Kalshi bot is one piece of a larger strategy. For the full menu of how pilots actually close the hour gap affordably, I also put together a guide to <a href="blog-cheapest-flight-hours.html">the cheapest ways to build flight hours in 2026</a>.</p>
+    <p>The longer game is still the same: build income streams that can fund flight hours. But KDP and digital products are cleaner proof right now than prediction-market bravado. I wrote about the <a href="ai-aviation-business.html">full picture of how I'm using AI to build side income as a pilot</a>, and I keep the current numbers on the <a href="../flight-funded/">Flight Funded tracker</a>.</p>
 
-    <p>371.0 hours and counting. The bot doesn't sleep. Neither does the compound interest.</p>
+    <p>371.0 hours and counting. The bot can sit in the penalty box until the math stops embarrassing itself.</p>
 
     <div class="cta-box">
       <h3>&#x1F4D8; Want the Exact System Behind the Bot?</h3>
-      <p>I wrote up the full OpenClaw setup behind this Kalshi bot in <strong>The Non-Developer's OpenClaw Playbook</strong>. It covers the cron jobs, model routing, memory files, coding-agent workflow, and the mistakes that cost me real money before it started working.</p>
+      <p>I wrote up the OpenClaw setup behind this whole automation stack in <strong>The Non-Developer's OpenClaw Playbook</strong>. It covers cron jobs, model routing, memory files, coding-agent workflow, safety gates, and the mistakes that cost money before they taught anything useful.</p>
       <div class="cta-links">
         <a href="https://nicholasrae.gumroad.com/l/openclaw-playbook" target="_blank" rel="noopener">Get the Playbook &#x2192;</a>
         <a href="openclaw-playbook.html" style="background:var(--bg3);border:1px solid var(--border);">Read the Playbook story &#x2192;</a>
@@ -313,7 +313,7 @@
     <hr>
 
     <div class="author-box">
-      <strong>Nick Rae</strong> is a commercial pilot (ASEL/AMEL/IR) with 371.0 hours, a car electronics shop manager, and a builder based in Merced, CA. He's building every income stream he can find to fund the remaining 1,129 flight hours between him and a real flying job. Follow along on <a href="https://x.com/nickrae" target="_blank" rel="noopener">X @nickrae</a> or check the <a href="../flight-funded/">Flight Funded tracker</a> for live numbers.
+      <strong>Nick Rae</strong> is a commercial pilot (ASEL/AMEL/IR) with 371.0 hours, a car electronics shop manager, and a builder based in Merced, CA. He's building income streams to fund the 129.0 hours between him and the 500-hour Part 135 target. Follow along on <a href="https://x.com/nickrae" target="_blank" rel="noopener">X @nickrae</a> or check the <a href="../flight-funded/">Flight Funded tracker</a> for live numbers.
     </div>
 
   </div>

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Wrote a Playbook for Running OpenClaw Without Writing Code — Nick Rae</title>
-<meta name="description" content="50+ automations, a live trading bot, and zero lines of code. Here's the non-developer's guide to OpenClaw I wish existed when I started.">
-<meta property="og:title" content="I Wrote a Playbook for Running OpenClaw Without Writing Code">
-<meta property="og:description" content="50+ automations, a live trading bot, and zero lines of code. Here's the non-developer's guide to OpenClaw I wish existed when I started.">
+<title>The Non-Developer's OpenClaw Playbook Is Live — Nick Rae</title>
+<meta name="description" content="The Non-Developer's OpenClaw Playbook is a practical field guide to setup, memory, cron jobs, coding agents, cost control, security, and real AI workflows.">
+<meta property="og:title" content="The Non-Developer's OpenClaw Playbook Is Live">
+<meta property="og:description" content="A practical field guide to running OpenClaw as a personal AI command center without turning your weekend into yak-shaving theater.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/openclaw-playbook.html">
 <meta property="og:type" content="article">
@@ -20,12 +20,12 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "headline": "I Wrote a Playbook for Running OpenClaw Without Writing Code",
-      "description": "50+ automations, a live trading bot, and zero lines of code. Here's the non-developer's guide to OpenClaw I wish existed when I started.",
+      "headline": "The Non-Developer's OpenClaw Playbook Is Live",
+      "description": "A practical field guide to setup, memory, cron jobs, coding agents, cost control, security, and real AI workflows in OpenClaw.",
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae" },
       "datePublished": "2026-04-03",
-      "dateModified": "2026-04-03",
+      "dateModified": "2026-04-25",
       "mainEntityOfPage": "https://nickrae.net/blog/openclaw-playbook.html"
     },
     {
@@ -75,44 +75,44 @@
 <div class="container">
   <div class="breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / OpenClaw Playbook</div>
 
-  <h1>I Wrote a Playbook for Running OpenClaw Without Writing Code</h1>
-  <div class="meta">Nick Rae · April 3, 2026 · 5 min read</div>
+  <h1>The Non-Developer's OpenClaw Playbook Is Live</h1>
+  <div class="meta">Nick Rae · Updated April 25, 2026 · 5 min read</div>
 
   <p>Six months ago I couldn't tell you the difference between JSON and JavaScript. I'm a commercial pilot who manages a car electronics shop in Merced, California. I'm 46. I have two adult sons and a mortgage. I am not the target demographic for "AI agent frameworks."</p>
 
   <p>But I needed more flight hours. And flight hours cost money. So I started building things that make money while I'm at work, and I used OpenClaw to do it.</p>
 
   <div class="stats">
-    <div class="stat"><div class="num">47</div><div class="label">Automated Crons</div></div>
-    <div class="stat"><div class="num">$30</div><div class="label">Monthly API Cost</div></div>
-    <div class="stat"><div class="num">$352</div><div class="label">Revenue Generated</div></div>
-    <div class="stat"><div class="num">0</div><div class="label">Lines of Code Written</div></div>
+    <div class="stat"><div class="num">163</div><div class="label">Pages</div></div>
+    <div class="stat"><div class="num">15</div><div class="label">Chapters</div></div>
+    <div class="stat"><div class="num">$30</div><div class="label">Typical Monthly API Cost</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">Code Required to Start</div></div>
   </div>
 
   <h2>What I Actually Built</h2>
 
-  <p>My OpenClaw agent runs on an iMac in my living room. Here's what it does while I'm at work selling car stereos:</p>
+  <p>My OpenClaw agent runs on an iMac in my living room. Here's what the stack actually does while I'm at work selling car stereos:</p>
 
   <ul>
-    <li><strong>Trades weather prediction markets on Kalshi.</strong> 66 live trades, 57.9% win rate, +$279 realized profit. The bot scans temperature forecasts, finds mispriced brackets, and places trades with position sizing based on Kelly criterion.</li>
-    <li><strong>Monitors my iOS apps on the App Store.</strong> Checks review status every few hours, alerts me on Telegram if anything gets approved or rejected.</li>
-    <li><strong>Generates a daily intelligence briefing.</strong> Scans RSS feeds, runs Tavily searches, synthesizes with Gemini, and posts to my Discord and Telegram before I wake up.</li>
-    <li><strong>Backs up everything.</strong> Workspace to GitHub, database to Synology NAS, memory files nightly.</li>
-    <li><strong>Tracks revenue across KDP, Gumroad, and Kalshi.</strong> Weekly rollup sent to my Telegram DM every Sunday.</li>
+    <li><strong>Runs recurring AI workflows.</strong> Morning checks, project audits, publishing tasks, website updates, and operator alerts without me babysitting a terminal.</li>
+    <li><strong>Helps manage shipped products.</strong> KDP workbooks, Gumroad products, app status checks, copy updates, and launch assets all move faster because the agent can read, edit, test, and report.</li>
+    <li><strong>Runs prediction-market research safely.</strong> The Kalshi weather bot went live, got humbled, and is now gated behind paper-only calibration until the data earns trust. That lesson is in the playbook because pretending failures do not exist is how people build expensive toys.</li>
+    <li><strong>Maintains the boring plumbing.</strong> Backups, logs, cron checks, repo hygiene, and watchdogs. Not sexy. Very useful.</li>
+    <li><strong>Turns plain-English requests into finished work.</strong> I describe what I want, the agent reads files, edits code or copy, runs checks, and gives me the operator version.</li>
   </ul>
 
-  <p>None of this required me to write code. I described what I wanted in plain English, and OpenClaw's coding agents built it. When something broke, I described the error and it got fixed.</p>
+  <p>None of this required me to become a developer first. I still have to make judgment calls, review output, and kill bad ideas. The difference is that OpenClaw turns those decisions into finished work instead of another abandoned Notion page.</p>
 
   <h2>The Mistakes That Cost Me Money</h2>
 
   <p>The playbook isn't a manual. It's a case study with every disaster included.</p>
 
-  <p>Like the night I accidentally spawned 23 sub-agents at full Opus pricing and burned through $340 in API credits before I noticed. Or the week I ran all 47 cron jobs on the same AI provider and hit rate limits so hard that my trading bot stopped placing trades for 12 hours during a profitable window.</p>
+  <p>Like the night I accidentally spawned too many high-end sub-agents and burned through more API credit than I meant to. Or the week I routed too much automation through one provider and learned that rate limits do not care about my little empire.</p>
 
-  <p>Or the three apps I built, submitted to the App Store, and then realized weren't solving real problems. Those are documented too, with the exact moment I should have killed each one.</p>
+  <p>Or the Kalshi bot that looked great in paper trading, then proved the live gate needed to be harsher. Or the app ideas I should have killed earlier. Those are documented too, with the exact moment the useful lesson showed up wearing steel-toed boots.</p>
 
   <div class="highlight">
-    <p>The playbook covers what I wish someone had told me before I started: how to structure your agent's personality, how to set up cron jobs that don't eat your budget, how to delegate to coding agents without losing control, and how to think about which things to automate and which to leave manual.</p>
+    <p>The playbook covers what I wish someone had told me before I started: how to structure your agent's personality, set up cron jobs that do not eat your budget, delegate to coding agents without losing control, keep secrets out of public configs, and decide which automations deserve to exist.</p>
   </div>
 
   <h2>Who This Is For</h2>
@@ -151,7 +151,7 @@
 
   <p>All of this feeds into <a href="/flight-funded/">Flight Funded</a>, my public experiment to fund flight hours through side projects. The playbook is one revenue stream alongside KDP workbooks, a Kalshi trading bot, and iOS apps. Every dollar tracked in public.</p>
 
-  <p>I need 131 more hours to qualify for Part 135 operations. At ~$200/hour for rental and instruction, that's $26,000. The bot is averaging $40/day. The math is starting to work.</p>
+  <p>I need 129 more hours to reach the 500-hour Part 135 target. At roughly $200/hour, that's a real funding problem, not a motivational quote. The playbook is one of the cleaner ways to turn what I learned building the system into something people can actually buy.</p>
 
 
 
