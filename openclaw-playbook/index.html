@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw Playbook — Run Your AI Agent Like an Operator</title>
+<meta name="description" content="A practical field guide for turning OpenClaw, Hermes, Talos, Claude, ChatGPT, and Codex into repeatable daily AI-agent workflows. Preview the playbook and buy through Gumroad.">
+<meta property="og:title" content="OpenClaw Playbook — Run Your AI Agent Like an Operator">
+<meta property="og:description" content="Stop treating AI agents like chatbots. Get the field-tested setup, workflows, templates, and failure lessons behind a real operator stack.">
+<meta property="og:image" content="https://nickrae.net/assets/playbook/playbook-cover-001.jpg">
+<meta property="og:url" content="https://nickrae.net/openclaw-playbook/">
+<meta property="og:type" content="product">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nickrae">
+<link rel="canonical" href="https://nickrae.net/openclaw-playbook/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📘</text></svg>">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18126210838');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "The Non-Developer's OpenClaw Playbook",
+      "description": "A practical field guide for setting up OpenClaw and running AI agents as daily operator workflows.",
+      "image": "https://nickrae.net/assets/playbook/playbook-cover-001.jpg",
+      "brand": { "@type": "Brand", "name": "Nick Rae" },
+      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://nicholasrae.gumroad.com/l/openclaw-playbook",
+        "priceCurrency": "USD",
+        "price": "99",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is this only for OpenClaw?", "acceptedAnswer": { "@type": "Answer", "text": "No. The examples use OpenClaw, Hermes, Talos, Claude, ChatGPT, and coding agents, but the operating rules apply to any tool-using AI agent stack." } },
+        { "@type": "Question", "name": "Do I need to code?", "acceptedAnswer": { "@type": "Answer", "text": "You do not need to be a developer to use the core workflows. You do need to be willing to configure tools, review output, and set clear safety rules." } },
+        { "@type": "Question", "name": "Is this a prompt pack?", "acceptedAnswer": { "@type": "Answer", "text": "No. It includes prompts and templates, but the main value is the operating system: memory, tools, cron jobs, verification, delegation, cost control, and safety rules." } }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#08090a;--panel:#0f1011;--surface:#191a1b;--surface2:#23252a;
+    --text:#f7f8f8;--muted:#d0d6e0;--dim:#8a8f98;--faint:#62666d;
+    --accent:#5e6ad2;--accent2:#7170ff;--accent3:#828fff;--green:#10b981;
+    --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.05);
+    --shadow:0 24px 80px rgba(0,0,0,.45);
+  }
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-feature-settings:"cv01","ss03";background:radial-gradient(circle at 50% -12%,rgba(94,106,210,.28),transparent 34rem),linear-gradient(180deg,#08090a 0%,#0b0c0e 42%,#08090a 100%);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent3);text-decoration:none} a:hover{text-decoration:underline}
+  .container{width:min(1120px,calc(100% - 32px));margin:0 auto}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(8,9,10,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
+  .brand{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+  .nav-links{display:flex;gap:1.1rem;align-items:center;font-size:13px;font-weight:510}
+  .nav-links a{color:var(--dim)}.nav-links a:hover{color:var(--text);text-decoration:none}.nav-links a.btn-primary{color:#fff}
+  .pill{display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--border);border-radius:999px;padding:.32rem .7rem;background:rgba(255,255,255,.02);color:var(--muted);font-size:12px;font-weight:510}
+  .hero{padding:5.5rem 0 4rem}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.75fr);gap:3rem;align-items:center}
+  .eyebrow{display:inline-flex;margin-bottom:1rem;color:var(--accent3);border-color:rgba(113,112,255,.35);background:rgba(113,112,255,.08)}
+  h1{font-size:clamp(2.7rem,8vw,5.6rem);line-height:.96;letter-spacing:-.07em;font-weight:510;max-width:860px;margin-bottom:1.25rem}
+  .subhead{font-size:clamp(1.08rem,2vw,1.32rem);line-height:1.65;color:var(--muted);max-width:720px;margin-bottom:1.6rem}
+  .hero-actions,.cta-row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:8px;padding:.82rem 1.1rem;font-size:14px;font-weight:590;border:1px solid var(--border);transition:transform .16s,background .16s,border-color .16s;color:var(--text)}
+  .btn:hover{transform:translateY(-1px);text-decoration:none}.btn-primary{background:var(--accent);border-color:rgba(130,143,255,.4);color:#fff}.btn-primary:hover{background:var(--accent3)}.btn-secondary{background:rgba(255,255,255,.03);color:var(--muted)}.btn-secondary:hover{background:rgba(255,255,255,.06);color:var(--text)}
+  .risk{margin-top:1rem;color:var(--dim);font-size:13px}.risk strong{color:var(--muted);font-weight:510}
+  .hero-proof{margin:.85rem 0 1.1rem;padding:.75rem .9rem;border:1px solid rgba(113,112,255,.28);border-radius:12px;background:rgba(113,112,255,.07);color:var(--muted);font-size:14px}.hero-proof strong{color:var(--text)}
+  .cover-wrap{position:relative}.cover-card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--border);border-radius:22px;padding:1rem;box-shadow:var(--shadow);transform:rotate(1.4deg)}
+  .cover-card img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--border2)}
+  .float-card{position:absolute;left:-1.1rem;bottom:1.6rem;width:min(280px,75%);background:rgba(15,16,17,.92);border:1px solid var(--border);border-radius:14px;padding:1rem;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+  .float-card .mono{font-family:'JetBrains Mono',ui-monospace,monospace;color:var(--green);font-size:12px;margin-bottom:.4rem}.float-card p{font-size:13px;color:var(--muted)}
+  .trust-strip{border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);background:rgba(255,255,255,.015);padding:1.1rem 0}.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.trust-item{font-size:13px;color:var(--dim)}.trust-item strong{display:block;color:var(--text);font-size:22px;font-weight:510;letter-spacing:-.04em}
+  section{padding:4.8rem 0;border-bottom:1px solid var(--border2)}
+  .section-head{max-width:760px;margin-bottom:2rem}.label{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--accent3);letter-spacing:.04em;margin-bottom:.6rem}h2{font-size:clamp(2rem,4vw,3.25rem);line-height:1.02;letter-spacing:-.05em;font-weight:510;margin-bottom:.85rem}.lede{font-size:18px;color:var(--dim);line-height:1.7}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.card{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;padding:1.25rem}.card h3{font-size:18px;letter-spacing:-.02em;margin-bottom:.55rem}.card p,.card li{color:var(--dim);font-size:15px}.card ul{padding-left:1.1rem}.card li{margin:.45rem 0}
+  .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.proof-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden}.proof-card img{display:block;width:100%;height:auto}.proof-card div{padding:1rem}.proof-card strong{display:block;margin-bottom:.25rem}.proof-card p{color:var(--dim);font-size:14px}
+  .workflow{display:grid;grid-template-columns:.95fr 1.05fr;gap:1rem;align-items:stretch}.terminal{font-family:'JetBrains Mono',ui-monospace,monospace;background:#030405;border:1px solid var(--border);border-radius:16px;padding:1.2rem;color:#b9f6ca;font-size:13px;line-height:1.65;box-shadow:inset 0 0 28px rgba(0,0,0,.55)}.terminal .muted{color:#6b7280}.terminal .white{color:#f7f8f8}.terminal .blue{color:#828fff}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.good{border-color:rgba(16,185,129,.35)}.bad{border-color:rgba(239,68,68,.35)}.good h3{color:#86efac}.bad h3{color:#fca5a5}
+  .cred-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:1rem;align-items:stretch}.cred-card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid var(--border);border-radius:16px;padding:1.35rem}.cred-list{display:grid;gap:.75rem}.cred-list div{border:1px solid var(--border2);border-radius:12px;padding:.9rem;background:rgba(255,255,255,.018)}.cred-list strong{display:block;color:var(--text);margin-bottom:.18rem}.cred-list span{color:var(--dim);font-size:14px}
+  .research{background:linear-gradient(180deg,rgba(113,112,255,.06),rgba(255,255,255,.01))}.research-list{display:grid;gap:.75rem}.research-item{display:grid;grid-template-columns:170px 1fr;gap:1rem;border:1px solid var(--border);border-radius:14px;padding:1rem;background:rgba(255,255,255,.02)}.research-item strong{color:var(--text)}.research-item span{color:var(--dim);font-size:14px}
+  .faq{display:grid;gap:.8rem}.faq details{border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.02);padding:1rem}.faq summary{cursor:pointer;font-weight:590;color:var(--text)}.faq p{color:var(--dim);margin-top:.75rem}
+  .final-cta{text-align:center;background:radial-gradient(circle at 50% 0,rgba(94,106,210,.22),transparent 30rem);padding:5rem 0 6rem}.final-cta h2{max-width:760px;margin:0 auto 1rem}.final-cta p{color:var(--dim);font-size:18px;max-width:680px;margin:0 auto 1.4rem}
+  footer{padding:2rem 0;color:var(--faint);font-size:13px}.footer-row{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  @media(max-width:860px){.hero-grid,.workflow,.split,.cred-grid{grid-template-columns:1fr}.cards,.proof-grid,.trust-grid{grid-template-columns:1fr 1fr}.nav-links a:not(.nav-cta){display:none}.float-card{position:static;width:auto;margin-top:1rem}.cover-card{transform:none}.research-item{grid-template-columns:1fr}}
+  @media(max-width:560px){.cards,.proof-grid,.trust-grid{grid-template-columns:1fr}.hero{padding-top:3.5rem}.btn{width:100%}.hero-actions,.cta-row{width:100%}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="/">NICK RAE</a>
+    <div class="nav-links">
+      <a href="#inside">Inside</a>
+      <a href="#proof">Preview</a>
+      <a href="#fit">Fit</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary nav-cta" data-track="checkout" data-placement="nav" href="https://nicholasrae.gumroad.com/l/openclaw-playbook?utm_source=nickrae&utm_medium=landing-page&utm_campaign=openclaw-playbook&utm_content=nav" target="_blank" rel="noopener">Get the Playbook</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="pill eyebrow">Field-tested AI-agent operations</div>
+      <h1>Run your AI agent like an operator, not a chatbot.</h1>
+      <p class="subhead">A practical field guide for turning AI tools into repeatable daily workflows: briefs, audits, automations, research loops, code checks, and decision support you actually use. Built around OpenClaw, useful for Claude, ChatGPT, Codex, Cursor, and any tool-using agent stack.</p>
+      <div class="hero-proof"><strong>Written by Nick Rae from a live operator setup:</strong> Telegram briefs, Desktop reports, scheduled audits, app launches, aviation products, and the mistakes that made the rules sharper.</div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-track="checkout" data-placement="hero-primary" href="https://nicholasrae.gumroad.com/l/openclaw-playbook?utm_source=nickrae&utm_medium=landing-page&utm_campaign=openclaw-playbook&utm_content=hero-primary" target="_blank" rel="noopener">Get the Playbook on Gumroad →</a>
+        <a class="btn btn-secondary" data-track="sample" data-placement="hero-sample" href="/assets/playbook/OpenClaw-Playbook-Free-Sample.pdf" target="_blank" rel="noopener">Read the Free Sample</a>
+      </div>
+      <p class="risk"><strong>Full PDF + EPUB.</strong> Use code <strong>FIRSTFLIGHT</strong> for 30% off. If it saves one hour of confused AI tinkering, it paid for itself.</p>
+    </div>
+    <div class="cover-wrap" aria-label="OpenClaw Playbook cover preview">
+      <div class="cover-card"><img src="/assets/playbook/playbook-cover-001.jpg" alt="Cover of The Non-Developer's OpenClaw Playbook"></div>
+      <div class="float-card"><div class="mono">STATUS: SHIPPED</div><p>Built from a real working setup, not a prompt-pack fever dream.</p></div>
+    </div>
+  </div>
+</header>
+
+<div class="trust-strip">
+  <div class="container trust-grid">
+    <div class="trust-item"><strong>163</strong> pages</div>
+    <div class="trust-item"><strong>15</strong> chapters</div>
+    <div class="trust-item"><strong>16</strong> sample pages</div>
+    <div class="trust-item"><strong>$30</strong> typical monthly API cost</div>
+  </div>
+</div>
+
+<section id="problem">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">THE PROBLEM</div>
+      <h2>Most AI-agent setups die as smarter chat windows.</h2>
+      <p class="lede">People install the gateway, say hello in Telegram, run a few impressive demos, then stall. The missing layer is not more prompts. It is operating discipline: context, memory, tools, scheduled work, verification, cost controls, and hard rules for what the agent is allowed to touch.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Random chats do not compound</h3><p>Without durable memory and repeatable workflows, every session starts from zero. Neat demo. Bad operating system.</p></div>
+      <div class="card"><h3>Automation without gates gets expensive</h3><p>Sub-agents, API calls, browser sessions, cron jobs, and live tools need limits. Otherwise the bill teaches the lesson.</p></div>
+      <div class="card"><h3>Useful agents need jobs</h3><p>Morning briefs, project audits, content checks, code review, research packets, and status reports. Concrete loops beat vague magic.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="inside">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">WHAT YOU GET</div>
+      <h2>The operating manual I wish existed before I broke things.</h2>
+      <p class="lede">Not theory. Not a generic prompt pack. A practical system built from running an AI agent on a real iMac, wired into real work, with the embarrassing parts left in because that is where the useful rules came from.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Setup and context</h3><ul><li>Agent identity and operating rules</li><li>Project context files that reduce babysitting</li><li>Memory rules that prevent repeated mistakes</li></ul></div>
+      <div class="card"><h3>Daily workflows</h3><ul><li>Morning brief patterns</li><li>Overnight leverage scout</li><li>Read-only audits and ranked next actions</li></ul></div>
+      <div class="card"><h3>Tools and delegation</h3><ul><li>When to use shell, browser, files, web, and sub-agents</li><li>How to verify after delegation</li><li>How to avoid fake certainty from tool output</li></ul></div>
+      <div class="card"><h3>Cron jobs</h3><ul><li>Recurring autonomous runs</li><li>Self-contained prompts</li><li>Reports that wake you up with decisions, not sludge</li></ul></div>
+      <div class="card"><h3>Security and cost control</h3><ul><li>Secrets boundaries</li><li>Live-action safety gates</li><li>Provider choice and token-burn rules</li></ul></div>
+      <div class="card"><h3>Failure lessons</h3><ul><li>What actually went wrong</li><li>What got patched</li><li>What should never be automated</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">PREVIEW THE PRODUCT</div>
+      <h2>See inside before you buy.</h2>
+      <p class="lede">Cold traffic needs proof. So here it is: actual pages, actual table of contents, actual operating detail. Gumroad is just checkout. This page is the evidence.</p>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-card"><img src="/assets/playbook/playbook-cover-001.jpg" alt="OpenClaw Playbook cover"><div><strong>Cover</strong><p>The buyer gets a real PDF + EPUB, not a vaporware mockup.</p></div></div>
+      <div class="proof-card"><img src="/assets/playbook/playbook-toc-004.jpg" alt="OpenClaw Playbook table of contents"><div><strong>Table of contents</strong><p>Fifteen chapters across setup, memory, cron, security, sub-agents, cost, and monetization.</p></div></div>
+      <div class="proof-card"><img src="/assets/playbook/playbook-security-127.jpg" alt="OpenClaw Playbook security chapter preview"><div><strong>Interior page</strong><p>Concrete operating detail, config patterns, and rules that keep your stack useful instead of feral.</p></div></div>
+    </div>
+    <div class="cta-row" style="margin-top:1.25rem">
+      <a class="btn btn-secondary" data-track="sample" data-placement="preview-sample" href="/assets/playbook/OpenClaw-Playbook-Free-Sample.pdf" target="_blank" rel="noopener">Open the 16-page sample</a>
+      <a class="btn btn-primary" data-track="checkout" data-placement="preview-section" href="https://nicholasrae.gumroad.com/l/openclaw-playbook?utm_source=nickrae&utm_medium=landing-page&utm_campaign=openclaw-playbook&utm_content=preview-section" target="_blank" rel="noopener">Buy on Gumroad →</a>
+    </div>
+  </div>
+</section>
+
+<section id="workflow">
+  <div class="container workflow">
+    <div class="section-head" style="margin-bottom:0">
+      <div class="label">CONCRETE EXAMPLE</div>
+      <h2>Example workflow: Overnight Leverage Scout.</h2>
+      <p class="lede">Before bed, give your agent a read-only mission: scan active projects, find the highest-leverage next action, write a morning report, and label each item SHIPPED / IN PROGRESS / PLANNED. You wake up to a ranked execution list instead of vague AI optimism. Civilized, barely.</p>
+    </div>
+    <div class="terminal" aria-label="Example agent report">
+      <div class="muted">$ cron: overnight leverage scout</div>
+      <br>
+      <div class="white">SHIPPED</div>
+      <div>Report written and verified on Desktop.</div>
+      <br>
+      <div class="blue">IN PROGRESS</div>
+      <div>Priority 1: App review status. Do not tinker unless Apple approves/rejects.</div>
+      <br>
+      <div class="blue">PLANNED</div>
+      <div>Priority 2: Ads funnel. Fix landing page trust before buying more clicks.</div>
+      <br>
+      <div class="muted">Operator read: traffic is not the bottleneck. Conversion trust is.</div>
+    </div>
+  </div>
+</section>
+
+<section id="credibility">
+  <div class="container cred-grid">
+    <div class="section-head" style="margin-bottom:0">
+      <div class="label">WHY TRUST THIS</div>
+      <h2>Written from a live operator stack.</h2>
+      <p class="lede">I am not selling AI fairy dust. This came from running agents inside real side projects, aviation products, app launches, content systems, and prediction-market paper tests, then writing down what survived contact with reality.</p>
+    </div>
+    <div class="cred-card">
+      <div class="cred-list">
+        <div><strong>Real daily use</strong><span>Telegram briefs, Desktop reports, audits, code checks, media pipelines, and recurring jobs running against actual projects.</span></div>
+        <div><strong>Failure-informed rules</strong><span>The book covers cost burn, hallucinated certainty, unsafe automation, context rot, and why verification after delegation is not optional.</span></div>
+        <div><strong>Operator bias</strong><span>The goal is not to make agents impressive. The goal is to make them useful enough to save time, ship work, and avoid dumb expensive mistakes.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fit">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">QUALIFY THE BUYER</div>
+      <h2>For operators. Not tourists.</h2>
+      <p class="lede">The fastest way to build trust is to tell the wrong buyer to leave. Saves refunds. Saves time. Extremely unfashionable, so naturally useful.</p>
+    </div>
+    <div class="split">
+      <div class="card good"><h3>For you if</h3><ul><li>You use ChatGPT, Claude, Codex, Cursor, Hermes, OpenClaw, or local agents</li><li>You want repeatable workflows instead of random chats</li><li>You care about execution, verification, and safety gates</li><li>You are willing to wire tools, accounts, files, and routines together</li></ul></div>
+      <div class="card bad"><h3>Not for you if</h3><ul><li>You want magic passive income</li><li>You want a generic prompt pack</li><li>You refuse to review outputs or set boundaries</li><li>You expect an agent to know your life without giving it context</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="research" id="research">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">WHY THIS PAGE IS STRUCTURED THIS WAY</div>
+      <h2>Conversion trust techniques used here.</h2>
+      <p class="lede">The build follows evidence-backed ecommerce and landing-page patterns: answer buyer questions, show inspectable proof, reduce uncertainty, and make the purchase path obvious.</p>
+    </div>
+    <div class="research-list">
+      <div class="research-item"><strong>Trust signals early</strong><span>Nielsen Norman Group identifies trustworthiness as a stable web-design requirement. This page leads with real screenshots, specific stats, and the actual seller story instead of abstract claims.</span></div>
+      <div class="research-item"><strong>Product-page questions answered</strong><span>NN/g product-page guidance says buyers need enough information to decide. This page answers what it is, who it is for, what is inside, how it works, and what happens after purchase.</span></div>
+      <div class="research-item"><strong>Inspectable product proof</strong><span>Baymard’s ecommerce UX research emphasizes product-page UX and incremental CRO. The page exposes cover, TOC, interior page, and free sample before checkout.</span></div>
+      <div class="research-item"><strong>Single job, single CTA</strong><span>Paid traffic should not land in the blog maze. The page has one commercial job: qualify the visitor and send them to Gumroad with UTMs.</span></div>
+      <div class="research-item"><strong>Objection handling</strong><span>Who-it-is-for, who-it-is-not-for, FAQ, price framing, and free sample reduce risk before the buyer hits the Gumroad checkout.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-head"><div class="label">FAQ</div><h2>Questions before checkout.</h2></div>
+    <div class="faq">
+      <details open><summary>Is this only for OpenClaw?</summary><p>No. OpenClaw is the working example because that is the system I use. The broader method applies to Hermes, Talos, Claude, ChatGPT, Codex, Cursor, and any tool-using agent that can read, write, search, run commands, or schedule work.</p></details>
+      <details><summary>Do I need to code?</summary><p>No coding is required for the core workflows, but you do need to be comfortable following setup steps, editing config-style text, and reviewing what your agent does. If you want zero setup, this is not your thing.</p></details>
+      <details><summary>Is this a prompt pack?</summary><p>No. Prompts are included where useful, but the playbook is mostly operating system: context files, memory, cron jobs, delegation, safety rules, verification, and deciding what not to automate.</p></details>
+      <details><summary>What format do I get?</summary><p>The full product is delivered through Gumroad as a PDF + EPUB. There is also a free sample linked on this page so you can inspect the style before buying.</p></details>
+      <details><summary>What if I am already technical?</summary><p>You may not need the beginner framing, but the operator patterns still apply: read-only audits, cron prompts, delegation boundaries, status labels, memory hygiene, cost controls, and verification loops.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="container">
+    <h2>Stop losing weekends trying to make your agent useful.</h2>
+    <p>Get the field guide, copy the workflows, steal the safety rules, and skip a few expensive lessons.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a class="btn btn-primary" data-track="checkout" data-placement="final-cta" href="https://nicholasrae.gumroad.com/l/openclaw-playbook?utm_source=nickrae&utm_medium=landing-page&utm_campaign=openclaw-playbook&utm_content=final-cta" target="_blank" rel="noopener">Get the OpenClaw Playbook →</a>
+      <a class="btn btn-secondary" data-track="backstory" data-placement="final-backstory" href="/blog/openclaw-playbook.html">Read the backstory</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-row">
+    <span>© 2026 Nick Rae. Built for operators, not prompt goblins.</span>
+    <span><a href="/">Home</a> · <a href="/blog/">Blog</a> · <a href="/flight-funded/">Flight Funded</a></span>
+  </div>
+</footer>
+<script>
+(function(){
+  const inbound = new URLSearchParams(window.location.search);
+  const preserveKeys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','gbraid','wbraid','msclkid'];
+  const checkoutLinks = document.querySelectorAll('a[data-track="checkout"]');
+
+  checkoutLinks.forEach(function(link){
+    const url = new URL(link.href);
+    const placement = link.dataset.placement || url.searchParams.get('utm_content') || 'unknown';
+    preserveKeys.forEach(function(key){
+      const value = inbound.get(key);
+      if (value) url.searchParams.set('landing_' + key, value);
+    });
+    url.searchParams.set('cta_placement', placement);
+    link.href = url.toString();
+  });
+
+  document.querySelectorAll('[data-track]').forEach(function(link){
+    link.addEventListener('click', function(){
+      const track = link.dataset.track || 'click';
+      const placement = link.dataset.placement || 'unknown';
+      if (typeof gtag === 'function') {
+        gtag('event', 'openclaw_' + track + '_click', {
+          send_to: 'AW-18126210838',
+          event_category: 'openclaw_playbook',
+          event_label: placement,
+          cta_placement: placement,
+          link_url: link.href
+        });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
