@@ -35,7 +35,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 371.0 flight h
 
 ## Digital Products
 
-- [The Non-Developer's OpenClaw Playbook](https://nicholasrae.gumroad.com/l/openclaw-playbook) — 163-page guide to building AI automations, trading bots, and content pipelines without writing code. $99 on Gumroad.
+- [The Non-Developer's OpenClaw Playbook](https://nicholasrae.gumroad.com/l/openclaw-playbook) — 163-page guide plus Starter Kit ZIP for building AI-agent workflows, automations, audits, and content pipelines without writing code. $99 on Gumroad.
 
 ## Books (Amazon KDP)
 
