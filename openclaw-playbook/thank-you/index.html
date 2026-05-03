@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Thank You — OpenClaw Playbook</title>
 <meta name="description" content="Thank you for purchasing the OpenClaw Playbook.">
+<link rel="canonical" href="https://nickrae.net/openclaw-playbook/thank-you/">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
 <script>
@@ -18,7 +19,7 @@
 <script>
   (function(){
     const params = new URLSearchParams(window.location.search);
-    const transactionId = params.get('session_id') || params.get('order_id') || params.get('transaction_id') || '';
+    const transactionId = params.get('sale_id') || params.get('session_id') || params.get('order_id') || params.get('transaction_id') || params.get('purchase_id') || '';
     const value = Number(params.get('value') || '99');
     const currency = params.get('currency') || 'USD';
     if (transactionId && typeof gtag === 'function') {
