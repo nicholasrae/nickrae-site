@@ -1,7 +1,7 @@
 # OpenClaw Playbook: Conversion Research Memo
 **Date:** 2026-04-03
 **Author:** Hermes
-**Product:** The Non-Developer's OpenClaw Playbook ($99, PDF+EPUB, 123 pages)
+**Product:** The Non-Developer's OpenClaw Playbook ($99, PDF, 123 pages)
 
 ---
 
