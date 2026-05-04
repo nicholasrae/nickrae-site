@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1120" viewBox="0 0 900 1120">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0b0c0e"/><stop offset="1" stop-color="#171827"/></linearGradient></defs>
+  <rect width="900" height="1120" rx="36" fill="url(#g)"/>
+  <rect x="42" y="42" width="816" height="1036" rx="28" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+  <text x="80" y="115" fill="#f7f8f8" font-family="Inter,Arial" font-size="42" font-weight="700">OpenClaw Operator Kit</text>
+  <text x="80" y="160" fill="#a7adff" font-family="JetBrains Mono,monospace" font-size="22">templates • checklists • local scripts • search test plan</text>
+  <g font-family="Inter,Arial" font-size="28" fill="#f7f8f8">
+    <text x="80" y="245">01 Templates</text><text x="80" y="455">02 Checklists</text><text x="80" y="665">03 Local scripts</text><text x="80" y="875">04 Ads test plan</text>
+  </g>
+  <g font-family="Inter,Arial" font-size="22" fill="#cfd6e6">
+    <text x="115" y="292">Identity, user, soul, session state, learnings</text>
+    <text x="115" y="330">Weekly ship board + project lane template</text>
+    <text x="115" y="502">Security, readiness, cron noise diet</text>
+    <text x="115" y="540">Human approval gates before live action</text>
+    <text x="115" y="712">Local smoke test</text>
+    <text x="115" y="750">Cron noise audit</text>
+    <text x="115" y="788">Weekly board generator + inbox triage</text>
+    <text x="115" y="922">Exact/phrase search only</text>
+    <text x="115" y="960">No PMax until purchase proof exists</text>
+  </g>
+  <g fill="#10b981"><circle cx="88" cy="285" r="8"/><circle cx="88" cy="495" r="8"/><circle cx="88" cy="705" r="8"/><circle cx="88" cy="915" r="8"/></g>
+  <text x="80" y="1035" fill="#8a8f98" font-family="JetBrains Mono,monospace" font-size="20">Free docs help you install. This helps you operate.</text>
+</svg>
