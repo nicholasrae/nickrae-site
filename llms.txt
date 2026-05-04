@@ -10,12 +10,14 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 371.0 flight h
 
 - [Home](https://nickrae.net/)
 - [Blog](https://nickrae.net/blog/)
+- [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — $99 full PDF plus Starter Kit ZIP
 - [Flight Funded](https://nickrae.net/flight-funded/) — tracking side hustle income funding flight hours
 - [FeedFare](https://nickrae.net/feedfare/) — trade steps for screen time (iOS)
 - [Inflection Point](https://nickrae.net/inflection/) — personal growth OS (iOS)
 
 ## Blog Posts
 
+- [How to Turn OpenClaw Into a Personal AI Operations System](https://nickrae.net/blog/openclaw-personal-ai-operations-system.html)
 - [I Built a Weather Prediction Bot. Then Live Trading Humbled It.](https://nickrae.net/blog/kalshi-weather-bot.html)
 - [I Read an Academic Paper and Rebuilt My AI Agent's Memory](https://nickrae.net/blog/blog-trajectory-learning.html)
 - [Setting Up OpenClaw: The 5 Things I Wish I Did First](https://nickrae.net/blog/blog-openclaw-setup.html)
