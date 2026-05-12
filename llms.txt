@@ -4,7 +4,7 @@
 
 ## About
 
-Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 371.0 flight hours, working toward 500 hours for Part 135 and eventually 1,500 hours for ATP certification. He builds iOS apps, publishes aviation study materials on Amazon KDP, sells The Non-Developer's OpenClaw Playbook, and documents the Flight Funded experiment at nickrae.net. His Kalshi weather bot is paused until calibration earns trust.
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 373.2 flight hours, working toward 500 hours for Part 135 and eventually 1,500 hours for ATP certification. He builds iOS apps, publishes aviation study materials on Amazon KDP, sells The Non-Developer's OpenClaw Playbook, and documents the Flight Funded experiment at nickrae.net. His Kalshi weather bot is paused until calibration earns trust.
 
 ## Key Pages
 
@@ -13,7 +13,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 371.0 flight h
 - [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — $99 full PDF plus Starter Kit ZIP
 - [Flight Funded](https://nickrae.net/flight-funded/) — tracking side hustle income funding flight hours
 - [FeedFare](https://nickrae.net/feedfare/) — trade steps for screen time (iOS)
-- [Inflection Point](https://nickrae.net/inflection/) — personal growth OS (iOS)
+- [Inflection Point](https://nickrae.net/inflection-point/) — personal growth OS with a 3-day access preview, free plan, and optional $14.99 lifetime unlock
 
 ## Blog Posts
 
@@ -33,7 +33,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 371.0 flight h
 ## Apps
 
 - [FeedFare — Trade Steps for Screen Time](https://apps.apple.com/us/app/feedfare/id6758923557) — step-to-screen tracking for better phone habits
-- Inflection Point — personal growth OS (in TestFlight)
+- Inflection Point — personal growth OS with 3-day access preview and optional $14.99 lifetime unlock
 
 ## Digital Products
 
