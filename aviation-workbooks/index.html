@@ -42,6 +42,15 @@
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
         { "@type": "ListItem", "position": 2, "name": "Aviation Pilot Workbooks", "item": "https://nickrae.net/aviation-workbooks/" }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Which pilot workbook should I buy first?", "acceptedAnswer": { "@type": "Answer", "text": "Start with the workbook that matches the checkride or rating in front of you: Private Pilot for student pilots, Instrument for IFR training, Commercial for commercial candidates, and Multi-Engine for PA-44 or add-on prep." } },
+        { "@type": "Question", "name": "Are these workbooks for the written test or oral exam?", "acceptedAnswer": { "@type": "Answer", "text": "They help with written-test review, but the real value is the explanation practice and oral-exam thinking you need when a DPE asks why your answer is correct." } },
+        { "@type": "Question", "name": "Do these replace ground school?", "acceptedAnswer": { "@type": "Answer", "text": "No. Use them as focused study and checkride-prep tools alongside instruction, FAA handbooks, ACS standards, and your instructor's guidance." } },
+        { "@type": "Question", "name": "Are Kindle and paperback versions available?", "acceptedAnswer": { "@type": "Answer", "text": "Most workbooks are available in paperback and Kindle formats on Amazon. Check each product page for the current available formats and pricing." } }
+      ]
     }
   ]
 }
@@ -70,6 +79,7 @@
   .signal{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:3rem}.signal-card{background:var(--card);border:1px solid var(--border);border-radius:.8rem;padding:1.1rem}.signal-card strong{display:block;font-size:1.25rem;color:var(--accent2)}.signal-card span{display:block;color:var(--text-muted);font-size:.85rem;margin-top:.25rem}
   .books{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.25rem;margin-bottom:3rem}.book{background:var(--card);border:1px solid var(--border);border-radius:.85rem;padding:1.35rem;display:flex;flex-direction:column}.book.featured{border-color:rgba(34,197,94,.55);box-shadow:0 0 0 1px rgba(34,197,94,.08)}.badge{align-self:flex-start;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:1rem;padding:.2rem .6rem;margin-bottom:.75rem;background:rgba(59,130,246,.12);color:var(--accent2)}.badge.green{background:rgba(34,197,94,.12);color:var(--green)}.book h2{font-size:1.1rem;margin-bottom:.45rem}.price{color:var(--green);font-size:.85rem;font-weight:700;margin-bottom:.65rem}.book p{color:var(--text-muted);font-size:.9rem;margin-bottom:1rem;flex:1}.links{display:flex;gap:.5rem;flex-wrap:wrap}.links a{display:inline-block;border-radius:.35rem;padding:.42rem .7rem;font-size:.82rem;font-weight:700}.amazon{background:#ff9900;color:#111}.gumroad{background:#36a9ae;color:white}.site{background:var(--accent);color:white}
   .copy-block{background:linear-gradient(135deg,#131c2e,#0f1729);border:1px solid rgba(59,130,246,.24);border-radius:.9rem;padding:1.4rem;margin-bottom:2rem}.copy-block h2{font-size:1.25rem;margin-bottom:.5rem}.copy-block p,.copy-block li{color:var(--text-muted)}.copy-block ul{padding-left:1.25rem;margin-top:.75rem}.quote{border-left:3px solid var(--accent2);padding-left:1rem;color:var(--text);font-size:1.05rem;margin-top:1rem}
+  .chooser,.comparison,.faq{margin-bottom:3rem}.chooser-grid,.faq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}.chooser-card,.faq-card{background:var(--card);border:1px solid var(--border);border-radius:.85rem;padding:1.15rem}.chooser-card strong,.faq-card strong{display:block;color:var(--text);margin-bottom:.4rem}.chooser-card p,.faq-card p{color:var(--text-muted);font-size:.9rem;margin:0}.chooser-card a{display:inline-block;margin-top:.75rem;font-weight:700}.compare-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:.85rem;overflow:hidden}.compare-table th,.compare-table td{padding:.85rem;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}.compare-table th{color:var(--accent2);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}.compare-table td{color:var(--text-muted);font-size:.9rem}.proof-box{background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.35);border-radius:.9rem;padding:1.35rem;margin-bottom:2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}.proof-box strong{color:var(--green)}
   footer{text-align:center;border-top:1px solid var(--border);padding:2rem 1.5rem;color:var(--text-dim);font-size:.85rem}
   @media(max-width:700px){nav .links{display:none}.hero{padding-top:6.5rem}.hero-wrap{grid-template-columns:1fr}.hero-copy{text-align:center}.sub{margin-left:auto;margin-right:auto}.hero-actions{justify-content:center}.hero-visual{min-height:280px}.stack-card{width:185px}.signal{grid-template-columns:1fr}.books{grid-template-columns:1fr}}
 </style>
@@ -81,6 +91,30 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'AW-18126210838');
+</script>
+<script>
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('a[href]');
+    if (!link || typeof gtag !== 'function') return;
+    try {
+      var url = new URL(link.href, window.location.href);
+      var host = url.hostname.replace(/^www\./, '');
+      var product = link.dataset.product || 'other';
+      if (host.includes('amazon.com') || host === 'a.co') product = product === 'other' ? 'amazon_workbook' : product;
+      if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
+      if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
+      if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
+      if (host.includes('payhip.com')) product = product === 'other' ? 'payhip' : product;
+      if (url.hostname !== window.location.hostname || product !== 'other') {
+        gtag('event', 'outbound_cta_click', {
+          event_category: 'outbound_cta',
+          product: product,
+          placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
+          link_url: url.href
+        });
+      }
+    } catch (e) {}
+  });
 </script>
 </head>
 <body>
@@ -124,6 +158,26 @@
     <div class="signal-card"><strong>4 lanes</strong><span>Private, instrument, commercial, and multi-engine add-on prep</span></div>
   </section>
 
+  <section class="proof-box" aria-label="Current KDP proof">
+    <div>
+      <div class="eyebrow">Current sales proof</div>
+      <h2 class="section-title" style="margin-bottom:.35rem">Real pilots are buying the study stack.</h2>
+      <p class="section-note" style="margin:0">The Feb 24-May 16 KDP royalty export shows <strong>51 processed units</strong> and <strong>$424.15 USD + €9.41 EUR</strong>. PPL leads, Instrument is second, Commercial is moving, and Multi-Engine has its first processed unit.</p>
+    </div>
+    <a class="btn btn-outline" href="../flight-funded/">See Flight Funded proof</a>
+  </section>
+
+  <section class="chooser" aria-label="Which workbook should I buy">
+    <h2 class="section-title">Which workbook should I buy?</h2>
+    <p class="section-note">Start with the rating in front of you. Do not buy a whole shelf when one checkride is trying to punch you in the mouth.</p>
+    <div class="chooser-grid">
+      <div class="chooser-card"><strong>Student pilot / PPL</strong><p>Build written-test fluency and oral-exam explanations before private pilot checkride prep gets noisy.</p><a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="chooser">Start with PPL →</a></div>
+      <div class="chooser-card"><strong>IFR training</strong><p>Use the Instrument workbook for weather, procedures, charts, systems, and scenario thinking.</p><a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="chooser">Study IFR →</a></div>
+      <div class="chooser-card"><strong>Commercial candidate</strong><p>Move from private-pilot habits into commercial judgment, maneuvers, and ACS explanation practice.</p><a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="chooser">Prep commercial →</a></div>
+      <div class="chooser-card"><strong>Multi-engine add-on</strong><p>Review Vmc, OEI, PA-44 flows, engine-out calls, and multi-engine oral traps without generic twin fog.</p><a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="chooser">Prep multi-engine →</a></div>
+    </div>
+  </section>
+
   <section id="books">
     <h2 class="section-title">Pick the workbook for your next checkride</h2>
     <p class="section-note">Each book is built around the same principle: practice questions are useful, but the explanations are the product. You need to know why the answer works before the DPE starts pulling threads.</p>
@@ -134,8 +188,8 @@
         <div class="price">$19.99 Print · $9.99 Kindle</div>
         <p>500+ practice questions covering the PPL knowledge test topics with explained answers, FAA-style wording, and study flow for students who want more than answer-key roulette.</p>
         <div class="links">
-          <a class="amazon" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener">Buy on Amazon</a>
-          <a class="gumroad" href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener">Free cheat sheets</a>
+          <a class="amazon" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="book-card">Buy on Amazon</a>
+          <a class="gumroad" href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener" data-product="free_cheat_sheets" data-placement="book-card">Free cheat sheets</a>
         </div>
       </article>
       <article class="book">
@@ -143,14 +197,14 @@
         <h2>📡 Instrument Rating Workbook</h2>
         <div class="price">$24.99 Print · $9.99 Kindle</div>
         <p>ACS-aligned IFR study for weather, procedures, charts, systems, and scenario thinking. Built for pilots who need to brief, decide, and explain under instrument pressure.</p>
-        <div class="links"><a class="amazon" href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener">Buy on Amazon</a></div>
+        <div class="links"><a class="amazon" href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="book-card">Buy on Amazon</a></div>
       </article>
       <article class="book">
         <span class="badge">Commercial ACS</span>
         <h2>🛩️ The Complete Commercial Pilot Workbook</h2>
         <div class="price">$24.99 Print · $9.99 Kindle</div>
         <p>Written test and oral exam prep with practice questions, flight scenarios, and checkride review for pilots moving from private-pilot habits to commercial-pilot judgment.</p>
-        <div class="links"><a class="amazon" href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener">Buy on Amazon</a></div>
+        <div class="links"><a class="amazon" href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="book-card">Buy on Amazon</a></div>
       </article>
       <article class="book">
         <span class="badge">PA-44 focused</span>
@@ -158,17 +212,46 @@
         <div class="price">Paperback · Kindle</div>
         <p>Seminole-focused prep for V-speeds, engine-out procedures, Vmc, OEI approaches, and oral exam review. No generic twin-engine fog machine.</p>
         <div class="links">
-          <a class="amazon" href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener">Paperback</a>
-          <a class="amazon" href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener">Kindle</a>
+          <a class="amazon" href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="book-card">Paperback</a>
+          <a class="amazon" href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="book-card">Kindle</a>
         </div>
       </article>
     </div>
+  </section>
+
+  <section class="comparison" aria-label="Pilot workbook comparison">
+    <h2 class="section-title">Compare the workbook lanes</h2>
+    <table class="compare-table">
+      <thead><tr><th>Workbook</th><th>Best for</th><th>What it trains</th><th>Preview path</th></tr></thead>
+      <tbody>
+        <tr><td>Private Pilot License Workbook</td><td>Student pilots and rusty fundamentals</td><td>Knowledge-test review, explained answers, oral-exam thinking</td><td>Use Amazon Look Inside when available</td></tr>
+        <tr><td>Instrument Rating Workbook</td><td>IFR students and procedure review</td><td>Weather, charts, regulations, approach decisions, systems</td><td>Open the Amazon page before buying</td></tr>
+        <tr><td>Complete Commercial Pilot Workbook</td><td>Commercial candidates</td><td>ACS review, commercial judgment, maneuvers, scenario answers</td><td>Check paperback/Kindle options on Amazon</td></tr>
+        <tr><td>Multi-Engine Add-On Workbook</td><td>PA-44 and multi-engine add-on pilots</td><td>V-speeds, Vmc, OEI operations, engine-out procedures</td><td>Choose paperback or Kindle format</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="copy-block">
+    <h2>Preview before buying</h2>
+    <p>Use each Amazon product page to inspect the current format, price, and Look Inside preview when Amazon exposes it. I would rather you buy the workbook that matches your actual next checkride than collect another aviation PDF you never open.</p>
+    <p class="quote">If the DPE asks “why,” the workbook did its job only if you can answer without sounding like an answer key with a pulse.</p>
   </section>
 
   <section class="copy-block">
     <h2>Why these exist</h2>
     <p>Most aviation study material either stops at answer memorization or buries the useful parts under textbook sludge. These workbooks are built for the moment after the written test, when you still have to sit across from a DPE and explain what you think, what you would do, and why.</p>
     <p class="quote">Stop memorizing. Start explaining like a pilot.</p>
+  </section>
+
+  <section class="faq" aria-label="Aviation workbook FAQ">
+    <h2 class="section-title">Pilot workbook FAQ</h2>
+    <div class="faq-grid">
+      <div class="faq-card"><strong>Which pilot workbook should I buy first?</strong><p>Buy the one matching the checkride or rating in front of you: PPL, Instrument, Commercial, or Multi-Engine. Sequence beats hoarding.</p></div>
+      <div class="faq-card"><strong>Are these for the written test or oral exam?</strong><p>Both, but the point is explanation practice. Passing the written is nice. Surviving the oral is where understanding shows.</p></div>
+      <div class="faq-card"><strong>Do these replace ground school?</strong><p>No. Use them with FAA handbooks, ACS standards, your instructor, and real flight training. A workbook is a tool, not a CFI in paperback clothing.</p></div>
+      <div class="faq-card"><strong>Are Kindle and paperback versions available?</strong><p>Most titles have paperback and Kindle options. Amazon controls current format availability and price display, so check the product page before buying.</p></div>
+    </div>
   </section>
 
   <section class="copy-block">

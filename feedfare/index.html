@@ -98,6 +98,30 @@
   gtag('js', new Date());
   gtag('config', 'AW-18126210838');
 </script>
+<script>
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('a[href]');
+    if (!link || typeof gtag !== 'function') return;
+    try {
+      var url = new URL(link.href, window.location.href);
+      var host = url.hostname.replace(/^www\./, '');
+      var product = link.dataset.product || 'other';
+      if (host.includes('amazon.com') || host === 'a.co') product = product === 'other' ? 'amazon_workbook' : product;
+      if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
+      if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
+      if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
+      if (host.includes('payhip.com')) product = product === 'other' ? 'payhip' : product;
+      if (url.hostname !== window.location.hostname || product !== 'other') {
+        gtag('event', 'outbound_cta_click', {
+          event_category: 'outbound_cta',
+          product: product,
+          placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
+          link_url: url.href
+        });
+      }
+    } catch (e) {}
+  });
+</script>
 </head>
 <body>
 
