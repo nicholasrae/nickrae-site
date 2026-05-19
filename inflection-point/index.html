@@ -93,7 +93,6 @@
       if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
       if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
       if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
-      if (host.includes('payhip.com')) product = product === 'other' ? 'payhip' : product;
       if (url.hostname !== window.location.hostname || product !== 'other') {
         gtag('event', 'outbound_cta_click', {
           event_category: 'outbound_cta',

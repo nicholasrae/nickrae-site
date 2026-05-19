@@ -45,7 +45,7 @@
 
 ### Homepage
 - **What should a visitor do?** Unclear. There are 4 hero buttons, 10+
-  Amazon links, links to Gumroad, Payhip, ClawHub, the App Store, and
+  Amazon links, links to Gumroad, ClawHub, the App Store, and
   GitHub. The paradox of choice is extreme.
 - The strongest revenue CTA ("Get the Playbook — $99") is buried as
   project #8 in a list of 9. A visitor who doesn't scroll past the
@@ -122,7 +122,7 @@
   page sees "Bugs Word Search" next to "Commercial Pilot" and the
   credibility math gets confused. The puzzle books should be on
   Amazon only, not on your professional homepage.
-- **Too many storefronts.** Amazon, Gumroad, Payhip, ClawHub, App
+- **Too many storefronts.** Amazon, Gumroad, ClawHub, App
   Store. A visitor has to figure out which store to use for which
   product. Consolidate where possible, or at least don't list every
   store on every product.
@@ -233,4 +233,4 @@ cause of the "doing too many jobs" problem.
 | Projects listed | 9 | Homepage |
 | Books listed | 7 | Homepage |
 | Homepage nav items | 7 | Homepage |
-| Storefronts linked | 5 (Amazon, Gumroad, Payhip, ClawHub, App Store) | Homepage |
+| Storefronts linked | 4 (Amazon, Gumroad, ClawHub, App Store) | Homepage |
