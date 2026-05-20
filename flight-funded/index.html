@@ -237,11 +237,22 @@
 
   /* ── UPDATES ─────────────────────────────────── */
   .updates-section{padding:3rem 1.5rem;background:var(--bg2)}
-  .update-row{display:flex;gap:1.25rem;padding:1rem 0;border-bottom:1px solid var(--border)}
-  .update-row:last-child{border-bottom:none}
-  .update-date{font-size:.78rem;color:var(--text-dim);white-space:nowrap;min-width:90px;padding-top:.1rem}
-  .update-text{font-size:.9rem;color:var(--text-muted)}
-  .update-text strong{color:var(--text)}
+  .updates-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.35rem}
+  .updates-note{max-width:520px;color:var(--text-dim);font-size:.86rem;line-height:1.5}
+  .updates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}
+  .update-row{background:rgba(19,28,46,.72);border:1px solid var(--border);border-radius:.75rem;padding:1rem;display:grid;gap:.45rem;align-content:start;min-height:118px}
+  .update-row:hover{border-color:rgba(59,130,246,.28)}
+  .update-date{font-size:.72rem;color:var(--accent2);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+  .update-text{font-size:.88rem;color:var(--text-muted);line-height:1.5}
+  .update-text strong{color:var(--text);display:block;margin-bottom:.15rem;line-height:1.35}
+  .update-meta{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.15rem}
+  .update-pill{display:inline-flex;align-items:center;border:1px solid rgba(96,165,250,.22);background:rgba(59,130,246,.08);border-radius:2rem;padding:.18rem .48rem;font-size:.7rem;color:var(--text-muted);font-weight:700}
+  .updates-archive{margin-top:1rem;border:1px solid var(--border);border-radius:.75rem;background:rgba(15,23,41,.55);overflow:hidden}
+  .updates-archive summary{cursor:pointer;padding:.9rem 1rem;font-weight:800;color:var(--text);list-style:none}
+  .updates-archive summary::-webkit-details-marker{display:none}
+  .updates-archive summary::after{content:'+';float:right;color:var(--accent2)}
+  .updates-archive[open] summary::after{content:'–'}
+  .updates-archive .updates-grid{padding:0 1rem 1rem}
 
   /* ── FOOTER ──────────────────────────────────── */
   footer{padding:2rem 1.5rem;background:var(--bg);border-top:1px solid var(--border);text-align:center}
@@ -538,91 +549,124 @@
 <!-- UPDATES LOG -->
 <section class="updates-section" id="updates">
   <div class="container">
-    <div class="section-title reveal-left">Milestones</div>
-    <div class="update-row reveal">
-      <div class="update-date">May 17, 2026</div>
-      <div class="update-text"><strong>KDP royalty export reconciled through May 16: 51 processed workbook units, $424.15 USD, and €9.41 EUR booked.</strong> May alone is at 19 units and $160.27 USD so far. PPL leads with 34 total units, Instrument has 13, Commercial has 3, and Multi-Engine has its first processed unit.</div>
+    <div class="updates-head">
+      <div class="section-title reveal-left" style="margin-bottom:0">Milestones</div>
+      <p class="updates-note">Condensed proof log: only the numbers that changed the flight-hours or revenue thesis. Longer receipts stay off the page.</p>
     </div>
-    <div class="update-row reveal">
-      <div class="update-date">May 16, 2026</div>
-      <div class="update-text"><strong>Updated the flight log to 375.2 total hours, 256.7 PIC, and 104.6 cross-country.</strong> The 500-hour gap is now 124.8 hours, or 75.0% complete. Commander time moved to 23.1 hours and the logbook now shows 204 flights.</div>
+
+    <div class="updates-grid">
+      <div class="update-row reveal">
+        <div class="update-date">May 17, 2026</div>
+        <div class="update-text"><strong>KDP export reconciled through May 16.</strong> 51 processed workbook units booked, with PPL still leading and Multi-Engine now showing its first processed unit.</div>
+        <div class="update-meta"><span class="update-pill">$424.15 USD</span><span class="update-pill">€9.41 EUR</span><span class="update-pill">51 units</span></div>
+      </div>
+      <div class="update-row reveal">
+        <div class="update-date">May 16, 2026</div>
+        <div class="update-text"><strong>Flight log updated.</strong> The 500-hour gap is down to 124.8 hours, with commander time now at 23.1 hours.</div>
+        <div class="update-meta"><span class="update-pill">375.2 TT</span><span class="update-pill">256.7 PIC</span><span class="update-pill">75.0%</span></div>
+      </div>
+      <div class="update-row reveal">
+        <div class="update-date">May 13, 2026</div>
+        <div class="update-text"><strong>May KDP kept moving.</strong> March-May tracking reached 47 workbook sales. Actual buyer intent, not spreadsheet incense.</div>
+        <div class="update-meta"><span class="update-pill">47 sales</span><span class="update-pill">$392.63 USD</span><span class="update-pill">€9.41 EUR</span></div>
+      </div>
+      <div class="update-row reveal">
+        <div class="update-date">May 10, 2026</div>
+        <div class="update-text"><strong>Flight log crossed 373 hours.</strong> Next clean gate became 400 TT, then the larger push to 500.</div>
+        <div class="update-meta"><span class="update-pill">373.2 TT</span><span class="update-pill">254.7 PIC</span><span class="update-pill">126.8 hrs left</span></div>
+      </div>
+      <div class="update-row reveal">
+        <div class="update-date">May 8, 2026</div>
+        <div class="update-text"><strong>KDP joined the verified tracker.</strong> The workbook lane became a real proof line, with PPL leading and Instrument second.</div>
+        <div class="update-meta"><span class="update-pill">37 units</span><span class="update-pill">$299.58 USD</span><span class="update-pill">€9.41 EUR</span></div>
+      </div>
+      <div class="update-row reveal">
+        <div class="update-date">May 2, 2026</div>
+        <div class="update-text"><strong>March-April exports reconciled.</strong> Aviation workbooks moved from idea to verified sales evidence.</div>
+        <div class="update-meta"><span class="update-pill">31 units</span><span class="update-pill">$256.00 USD</span><span class="update-pill">PPL leads</span></div>
+      </div>
+      <div class="update-row reveal">
+        <div class="update-date">Apr 29, 2026</div>
+        <div class="update-text"><strong>April KDP hit real traction.</strong> PPL carried volume while Instrument added higher-dollar units.</div>
+        <div class="update-meta"><span class="update-pill">24 sales</span><span class="update-pill">$198.34 USD</span><span class="update-pill">€9.41 EUR</span></div>
+      </div>
+      <div class="update-row reveal">
+        <div class="update-date">Apr 23, 2026</div>
+        <div class="update-text"><strong>Logged 1.5 flight hours.</strong> The public 500-hour plan updated with the latest gap math.</div>
+        <div class="update-meta"><span class="update-pill">371.0 TT</span><span class="update-pill">129.0 hrs left</span><span class="update-pill"><a href="../blog/from-369-5-to-500-hours.html" style="color:var(--accent2)">500 plan →</a></span></div>
+      </div>
     </div>
-    <div class="update-row reveal">
-      <div class="update-date">May 13, 2026</div>
-      <div class="update-text"><strong>May KDP kept moving: March-May tracking is now 47 workbook sales, $392.63 USD, and €9.41 EUR booked.</strong> The May dashboard shows 16 orders and $136.63 this month so far: PPL 7, Instrument 5, Commercial 3, plus one additional catalog order not visible in the screenshot crop. Actual buyer intent, not spreadsheet incense.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">May 10, 2026</div>
-      <div class="update-text"><strong>Updated the flight log to 373.2 total hours and 254.7 PIC.</strong> At that point, the 500-hour gap was 126.8 hours, or about 74.6% complete. The next clean gate was 400 TT, then the bigger push to 500.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">May 8, 2026</div>
-      <div class="update-text"><strong>May KDP is now folded into the verified tracker: 37 total March-May units, $299.58 USD, and €9.41 EUR booked.</strong> PPL leads with 26 units, Instrument is second with 10 units, and Commercial has its first May sale. Still early. Real enough to count.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">May 2, 2026</div>
-      <div class="update-text"><strong>March and April KDP royalty exports are now reconciled: 31 total units, $256.00 USD, and €9.41 EUR booked.</strong> PPL leads with 23 units, Instrument is second with 8 units, and the aviation workbook catalog has moved from idea to verified proof line.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 29, 2026</div>
-      <div class="update-text"><strong>April KDP reached 24 paperback sales with $198.34 USD plus €9.41 EUR booked.</strong> The PPL workbook is carrying volume, Instrument is adding higher-dollar units, and the catalog is finally behaving like a real proof line instead of a vibes spreadsheet.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 25, 2026</div>
-      <div class="update-text"><strong>The Non-Developer's OpenClaw Playbook is shipped on Gumroad.</strong> The site now points to the product directly, and the Kalshi bot remains paused because the latest gate audit says the market baseline still beats the model. Annoying, useful, true.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 23, 2026</div>
-      <div class="update-text"><strong>Logged 1.5 flight hours, bringing total time to 371.0.</strong> At that point, the 500-hour gap was 129.0 hours, or about 74.2% complete. <a href="../blog/from-369-5-to-500-hours.html" style="color:var(--accent)">Read the updated 375.2 → 500 plan →</a></div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 21, 2026</div>
-      <div class="update-text"><strong>April KDP is now at 18 paperback sales and $140.80 USD booked.</strong> The PPL workbook is still leading, the IR workbook is second, and the multi-engine workbook is now part of the live catalog alongside the rest of the aviation stack.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 17, 2026</div>
-      <div class="update-text"><strong>The Multi-Engine Add-On Rating Workbook is now live in paperback and Kindle.</strong> April KDP is up to 16 paperback sales with $125.04 USD plus €9.41 EUR booked, and the catalog now covers private, instrument, commercial, and multi-engine add-on prep.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 13, 2026</div>
-      <div class="update-text"><strong>KDP is now at 17 paid units and $139.88 in estimated royalties.</strong> April alone is up to 9 paperback sales and $74.34, with the Private Pilot workbook clearly leading the line.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 10, 2026</div>
-      <div class="update-text"><strong>I corrected this page after separating sports activity from the weather bot results.</strong> Kalshi is paused for redesign, and the weather-only realized result is -$142.16.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 6, 2026</div>
-      <div class="update-text"><strong>The Complete Commercial Pilot Workbook is live on Amazon.</strong> The aviation catalog now includes PPL, IR, and Commercial study products.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 3, 2026</div>
-      <div class="update-text"><strong>FeedFare momentum and KDP traction both improved.</strong> The app kept moving forward, and the workbook catalog continued to validate that pilots will pay for useful study products.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Apr 2, 2026</div>
-      <div class="update-text"><strong>FeedFare Build 26 approved.</strong> New activation-first onboarding, quiz-driven walking rules, and a delayed paywall shipped into the App Store review process.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Mar 31, 2026</div>
-      <div class="update-text"><strong>KDP became the cleanest proof line in the stack.</strong> The first ebook royalty hit for the Instrument workbook, and the paperback sales kept proving the aviation workbook idea was real.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Mar 28, 2026</div>
-      <div class="update-text"><strong>Kalshi went live, then got humbled.</strong> The live launch happened, but the later post-mortem showed the weather strategy was not capital-ready. That is why it is paused now instead of being dressed up as a win.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Mar 2, 2026</div>
-      <div class="update-text"><strong>🎉 FeedFare went live on the App Store.</strong> My first shipped iOS app is now public, with free and premium tiers. <a href="../feedfare/" style="color:var(--accent)">Read the FeedFare page →</a> · <a href="https://apps.apple.com/us/app/feedfare/id6758923557" style="color:var(--accent)">Download on the App Store →</a></div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Feb 26, 2026</div>
-      <div class="update-text"><strong>First KDP sale landed.</strong> The PPL Workbook generated its first paperback royalty, proving aviation study products can sell to strangers.</div>
-    </div>
-    <div class="update-row reveal">
-      <div class="update-date">Feb 23, 2026</div>
-      <div class="update-text"><strong>Flight Funded launched.</strong> I put the experiment in public: track the hours, track the revenue, and see whether the stack can help fund more flying.</div>
-    </div>
+
+    <details class="updates-archive">
+      <summary>Earlier checkpoints</summary>
+      <div class="updates-grid">
+        <div class="update-row reveal">
+          <div class="update-date">Apr 25, 2026</div>
+          <div class="update-text"><strong>OpenClaw Playbook shipped.</strong> Product lane went live on Gumroad while Kalshi stayed paused.</div>
+          <div class="update-meta"><span class="update-pill">shipped</span><span class="update-pill">bot paused</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Apr 21, 2026</div>
+          <div class="update-text"><strong>April KDP reached 18 paperback sales.</strong> PPL led, IR followed, and Multi-Engine joined the catalog.</div>
+          <div class="update-meta"><span class="update-pill">18 sales</span><span class="update-pill">$140.80 USD</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Apr 17, 2026</div>
+          <div class="update-text"><strong>Multi-Engine workbook went live.</strong> The aviation catalog now covered private, instrument, commercial, and multi-engine prep.</div>
+          <div class="update-meta"><span class="update-pill">catalog complete</span><span class="update-pill">$125.04 USD</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Apr 13, 2026</div>
+          <div class="update-text"><strong>KDP reached 17 paid units.</strong> April alone was up to 9 paperback sales, with PPL clearly leading.</div>
+          <div class="update-meta"><span class="update-pill">17 units</span><span class="update-pill">$139.88 est.</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Apr 10, 2026</div>
+          <div class="update-text"><strong>Weather bot results corrected.</strong> Sports activity was separated from weather-only results; Kalshi stayed paused.</div>
+          <div class="update-meta"><span class="update-pill">-$142.16 weather</span><span class="update-pill">redesign</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Apr 6, 2026</div>
+          <div class="update-text"><strong>Commercial workbook went live.</strong> The aviation catalog expanded to PPL, IR, and Commercial.</div>
+          <div class="update-meta"><span class="update-pill">Amazon live</span><span class="update-pill">catalog grows</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Apr 3, 2026</div>
+          <div class="update-text"><strong>FeedFare and KDP both improved.</strong> App progress continued while workbook sales validated the lane.</div>
+          <div class="update-meta"><span class="update-pill">app</span><span class="update-pill">KDP</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Apr 2, 2026</div>
+          <div class="update-text"><strong>FeedFare Build 26 approved.</strong> Activation-first onboarding, quiz rules, and delayed paywall shipped.</div>
+          <div class="update-meta"><span class="update-pill">App Store</span><span class="update-pill">Build 26</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Mar 31, 2026</div>
+          <div class="update-text"><strong>KDP became the cleanest proof line.</strong> The first Instrument ebook royalty hit while paperback sales kept proving demand.</div>
+          <div class="update-meta"><span class="update-pill">first IR ebook</span><span class="update-pill">paperback proof</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Mar 28, 2026</div>
+          <div class="update-text"><strong>Kalshi went live, then got humbled.</strong> The post-mortem showed the weather strategy was not capital-ready.</div>
+          <div class="update-meta"><span class="update-pill">live test</span><span class="update-pill">paused</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Mar 2, 2026</div>
+          <div class="update-text"><strong>FeedFare went live.</strong> First public iOS app shipped with free and premium tiers.</div>
+          <div class="update-meta"><span class="update-pill"><a href="../feedfare/" style="color:var(--accent2)">FeedFare →</a></span><span class="update-pill"><a href="https://apps.apple.com/us/app/feedfare/id6758923557" style="color:var(--accent2)">App Store →</a></span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Feb 26, 2026</div>
+          <div class="update-text"><strong>First KDP sale landed.</strong> The PPL Workbook generated its first paperback royalty.</div>
+          <div class="update-meta"><span class="update-pill">first sale</span><span class="update-pill">stranger money</span></div>
+        </div>
+        <div class="update-row reveal">
+          <div class="update-date">Feb 23, 2026</div>
+          <div class="update-text"><strong>Flight Funded launched.</strong> Track the hours, track the revenue, and see whether the stack funds more flying.</div>
+          <div class="update-meta"><span class="update-pill">public experiment</span></div>
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 
