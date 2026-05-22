@@ -4,7 +4,7 @@
 
 ## About
 
-Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 375.2 flight hours, working toward 500 hours for Part 135 and eventually 1,500 hours for ATP certification. He builds iOS apps, publishes aviation study materials on Amazon KDP, sells The Non-Developer's OpenClaw Playbook, and documents the Flight Funded experiment at nickrae.net. His Kalshi weather bot is paused until calibration earns trust.
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 381.2 flight hours, working toward 500 hours for Part 135 and eventually 1,500 hours for ATP certification. He builds iOS apps, publishes aviation study materials on Amazon KDP, sells The Non-Developer's OpenClaw Playbook, and documents the Flight Funded experiment at nickrae.net. His Kalshi weather bot is paused until calibration earns trust.
 
 ## Key Pages
 
