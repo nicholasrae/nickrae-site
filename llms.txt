@@ -11,7 +11,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 381.2 flight h
 - [Home](https://nickrae.net/)
 - [Blog](https://nickrae.net/blog/)
 - [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — $99 full PDF plus Starter Kit ZIP
-- [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and verified KDP royalties: 51 workbook units, $424.15 USD + €9.41 EUR through May 16, 2026
+- [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and KDP aviation royalties: 62 March-May aviation workbook units, $526.87 USD + €9.41 EUR through the May 2026 dashboard
 - [FeedFare](https://nickrae.net/feedfare/) — trade steps for screen time (iOS)
 - [Inflection Point](https://nickrae.net/inflection-point/) — personal growth OS with a 3-day access preview, free plan, and optional $14.99 lifetime unlock
 
@@ -37,7 +37,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 381.2 flight h
 
 ## Current Revenue Proof
 
-- KDP aviation workbook royalty export through May 16, 2026: 51 processed units, $424.15 USD + €9.41 EUR. PPL leads with 34 units, Instrument has 13, Commercial has 3, and Multi-Engine has 1.
+- KDP aviation workbook dashboard through May 2026: 62 March-May aviation workbook units, $526.87 USD + €9.41 EUR. May dashboard shows 31 aviation-workbook units, 0 refunds, and PPL still leading with Instrument second.
 - Kalshi weather bot remains paused/gated until calibration earns trust.
 
 ## Digital Products
