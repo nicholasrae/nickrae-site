@@ -163,6 +163,28 @@
   .social-bar{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem}
   .social-bar a{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .75rem;border-radius:.35rem;font-size:.78rem;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--text-muted);transition:border-color .2s,color .2s}
   .social-bar a:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
+
+
+  /* A+ KDP product-storefront pass */
+  .hero.product-hero{min-height:92vh;text-align:left;padding:7rem 1.5rem 4rem;background:radial-gradient(circle at 76% 24%,rgba(255,153,0,.14),transparent 22%),radial-gradient(circle at 28% 18%,rgba(96,165,250,.16),transparent 26%),linear-gradient(180deg,#070b12 0%,#101827 55%,#0a0e17 100%)}
+  .hero-layout{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(310px,.95fr);gap:3rem;align-items:center;position:relative;z-index:1}
+  .hero-kicker{display:inline-flex;align-items:center;gap:.45rem;color:#fbbf24;background:rgba(255,153,0,.09);border:1px solid rgba(255,153,0,.22);border-radius:999px;padding:.35rem .7rem;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+  .hero.product-hero h1{font-size:clamp(2.6rem,6vw,5rem);line-height:.96;letter-spacing:-.065em;margin-bottom:1rem;max-width:760px}
+  .hero.product-hero .tagline{max-width:650px;margin:0 0 1.45rem;color:#b6c2d3;font-size:1.1rem}
+  .credential-chip{display:flex;align-items:center;gap:.7rem;margin-top:1.2rem;color:var(--text-muted);font-size:.86rem}
+  .credential-chip img{width:44px;height:44px;border-radius:999px;border:1px solid rgba(148,163,184,.35);object-fit:cover}
+  .cover-stage{position:relative;min-height:430px;border-radius:1.8rem;background:linear-gradient(145deg,rgba(15,23,42,.96),rgba(30,41,59,.76));border:1px solid rgba(148,163,184,.22);box-shadow:0 34px 100px rgba(0,0,0,.44);overflow:hidden}
+  .cover-stage::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(180deg,rgba(0,0,0,.78),transparent 78%)}
+  .cover-stage::after{content:'KNEEBOARD STACK';position:absolute;left:1.35rem;bottom:1.15rem;color:rgba(226,232,240,.28);font-size:.72rem;font-weight:900;letter-spacing:.18em}
+  .cover-img{position:absolute;width:174px;border-radius:.4rem;box-shadow:0 26px 65px rgba(0,0,0,.52);border:1px solid rgba(255,255,255,.18);background:#0f172a}
+  .cover-main{width:205px;right:82px;top:58px;transform:rotate(3deg);z-index:3}.cover-left{left:64px;top:112px;transform:rotate(-9deg);z-index:2}.cover-right{right:36px;bottom:66px;transform:rotate(9deg);z-index:1}
+  .proof-pill{position:absolute;left:38px;bottom:54px;z-index:4;background:rgba(2,6,23,.82);border:1px solid rgba(34,197,94,.35);backdrop-filter:blur(10px);border-radius:1rem;padding:.9rem 1rem;max-width:230px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+  .proof-pill strong{display:block;color:#86efac;font-size:1.35rem;line-height:1}.proof-pill span{display:block;color:#cbd5e1;font-size:.78rem;margin-top:.3rem}
+  .proof-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem;margin-top:1.15rem}
+  .proof-metric{background:rgba(15,23,42,.72);border:1px solid rgba(148,163,184,.18);border-radius:.9rem;padding:1rem;text-align:left}.proof-metric strong{display:block;font-size:1.45rem;color:#f8fafc;line-height:1}.proof-metric span{display:block;color:var(--text-muted);font-size:.78rem;margin-top:.35rem}
+  .workbook-preview{display:grid;grid-template-columns:1.05fr .95fr;gap:1rem;align-items:stretch;margin-top:1.25rem;margin-bottom:1.25rem}.cover-shelf-card{background:linear-gradient(135deg,#101827,#0f1729);border:1px solid rgba(96,165,250,.3);border-radius:1rem;padding:1.25rem;display:grid;grid-template-columns:92px 1fr;gap:1rem;align-items:center;color:var(--text);text-decoration:none}.cover-shelf-card:hover{text-decoration:none;border-color:rgba(96,165,250,.62)}.cover-shelf-card img{width:92px;border-radius:.25rem;box-shadow:0 14px 36px rgba(0,0,0,.35)}.cover-shelf-card h3{font-size:1rem;margin-bottom:.35rem}.cover-shelf-card p{font-size:.83rem;color:var(--text-muted);margin:0}.cover-shelf-card.featured{grid-row:span 2;grid-template-columns:130px 1fr;border-color:rgba(255,153,0,.42)}.cover-shelf-card.featured img{width:130px}
+  @media(max-width:860px){.hero-layout,.workbook-preview{grid-template-columns:1fr}.hero.product-hero{text-align:center}.hero.product-hero .tagline{margin-left:auto;margin-right:auto}.credential-chip{justify-content:center}.cover-stage{min-height:380px}.proof-strip{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.cover-stage{min-height:330px}.cover-img{width:138px}.cover-main{width:160px;right:42px;top:48px}.cover-left{left:38px;top:112px}.cover-right{right:26px;bottom:72px}.proof-pill{left:22px;bottom:28px}.proof-strip{grid-template-columns:1fr}.cover-shelf-card,.cover-shelf-card.featured{grid-template-columns:86px 1fr}.cover-shelf-card img,.cover-shelf-card.featured img{width:86px}.hero-buttons{gap:.65rem}.btn{width:100%;justify-content:center}}
 </style>
 <script type="application/ld+json">
 {
@@ -275,17 +297,27 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="photo"><picture><source srcset="headshot.webp" type="image/webp"><img src="headshot.jpg" alt="Nick Rae in cockpit" loading="eager"></picture></div>
-    <h1>Nick Rae</h1>
-    <div class="title">Commercial Pilot · Aviation Workbook Author · Builder</div>
-    <p class="tagline">FAA-aligned pilot workbooks are the front door now: private, instrument, commercial, multi-engine, and VFR radio calls. Newest: Clearance to Confidence, for pilots who freeze on frequency.</p>
-    <div class="hero-buttons">
-      <a href="aviation-workbooks/" class="btn btn-primary">📚 Compare Pilot Workbooks</a>
-      <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="btn btn-outline">🎙️ VFR Radio Calls</a>
-      <a href="flight-funded/" class="btn btn-outline">🛫 Flight Funded Proof</a>
-      <a href="#credentials" class="btn btn-outline">✈️ Flight Credentials</a>
+<section class="hero product-hero">
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <div class="hero-kicker">FAA-aligned pilot workbooks</div>
+      <h1>Pilot workbooks for the checkride in front of you.</h1>
+      <p class="tagline">Private, instrument, commercial, multi-engine, and VFR radio-call study tools written by a Commercial Instrument Multi-Engine pilot. Built for explanations, oral traps, and practical reps, not answer-key roulette.</p>
+      <div class="hero-buttons">
+        <a href="aviation-workbooks/" class="btn btn-primary">Compare Pilot Workbooks</a>
+        <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="btn btn-outline" data-product="vfr_radio_calls_workbook" data-placement="home-hero">Buy VFR Radio Calls</a>
+        <a href="flight-funded/" class="btn btn-outline">See sales proof</a>
+      </div>
+      <div class="credential-chip">
+        <picture><source srcset="headshot.webp" type="image/webp"><img src="headshot.jpg" alt="Nick Rae in cockpit"></picture>
+        <span>Nick Rae · Commercial Pilot ASEL/AMEL · Instrument · Merced, CA</span>
+      </div>
+    </div>
+    <div class="cover-stage" aria-label="Nick Rae aviation workbook covers">
+      <img class="cover-img cover-left" src="assets/workbooks/private-pilot-cover.jpg" alt="Private Pilot License Workbook cover" loading="eager">
+      <img class="cover-img cover-main" src="assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager">
+      <img class="cover-img cover-right" src="assets/workbooks/instrument-rating-cover.jpg" alt="Instrument Rating Workbook cover" loading="eager">
+      <div class="proof-pill"><strong>62 units</strong><span>March-May aviation workbook sales tracked through KDP dashboard</span></div>
     </div>
   </div>
 </section>
@@ -318,17 +350,25 @@
 </section>
 
 <section style="padding:2rem 1.5rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="container" style="max-width:960px">
-    <div style="background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.38);border-radius:1rem;padding:1.5rem 1.75rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
-      <div style="flex:1;min-width:260px">
-        <div style="font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:.35rem">Current revenue proof</div>
-        <h2 style="font-size:1.45rem;margin-bottom:.45rem">Pilot workbooks are the cleanest money line.</h2>
-        <p style="color:var(--text-muted);margin:0">The KDP dashboard shows 62 March-May aviation workbook units and $526.87 USD plus €9.41 EUR tracked. The newest title, Clearance to Confidence: VFR Radio Calls Workbook, is now live on Amazon in paperback and Kindle. Start with the workbook that matches your next checkride, then follow the public Flight Funded scoreboard.</p>
+  <div class="container" style="max-width:1040px">
+    <div style="background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.38);border-radius:1rem;padding:1.5rem 1.75rem">
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+        <div style="flex:1;min-width:260px">
+          <div style="font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:.35rem">Current revenue proof</div>
+          <h2 style="font-size:1.45rem;margin-bottom:.45rem">Pilot workbooks are the cleanest money line.</h2>
+          <p style="color:var(--text-muted);margin:0">KDP proof is now shown like proof, not buried in a paragraph. Dashboard data is useful demand signal, not a magic ad-scaling license. Novel technology: telling the truth.</p>
+        </div>
+        <div class="proj-links" style="margin-top:0">
+          <a href="aviation-workbooks/" class="site">Compare Workbooks</a>
+          <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="amazon" data-product="vfr_radio_calls_workbook" data-placement="home-proof">Buy Radio Workbook</a>
+          <a href="flight-funded/" class="accent">See proof log</a>
+        </div>
       </div>
-      <div class="proj-links" style="margin-top:0">
-        <a href="aviation-workbooks/" class="site">📚 Compare Workbooks</a>
-        <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="amazon">🎙️ New Radio Workbook</a>
-        <a href="flight-funded/" class="accent">See the proof</a>
+      <div class="proof-strip" aria-label="KDP sales proof summary">
+        <div class="proof-metric"><strong>62</strong><span>March-May aviation workbook units</span></div>
+        <div class="proof-metric"><strong>$526.87</strong><span>USD aviation royalties tracked</span></div>
+        <div class="proof-metric"><strong>€9.41</strong><span>Amazon.fr aviation royalties tracked</span></div>
+        <div class="proof-metric"><strong>0</strong><span>May aviation workbook refunds</span></div>
       </div>
     </div>
    </div>
@@ -482,6 +522,20 @@
   <div class="container">
     <h2 class="section-title">Aviation Resources</h2>
     <p style="color:var(--text-muted);margin-bottom:1.5rem">Study materials I wrote to help student pilots, instrument applicants, commercial candidates, multi-engine add-on pilots, and pilots who freeze on frequency pass the written, survive the oral, and walk into the checkride less dumb.</p>
+    <div class="workbook-preview" aria-label="Featured aviation workbooks">
+      <a class="cover-shelf-card featured" href="aviation-workbooks/">
+        <img src="assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="lazy">
+        <div><h3>Start with the product shelf</h3><p>See the full workbook stack, current proof, format options, and the best fit for your next checkride.</p></div>
+      </a>
+      <a class="cover-shelf-card" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-shelf">
+        <img src="assets/workbooks/private-pilot-cover.jpg" alt="Private Pilot License Workbook cover" loading="lazy">
+        <div><h3>Current demand leader</h3><p>Private Pilot License Workbook: 500+ practice questions with explanations.</p></div>
+      </a>
+      <a class="cover-shelf-card" href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-shelf">
+        <img src="assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="lazy">
+        <div><h3>Newest title</h3><p>VFR radio-call drills for pilots who freeze when the mic button gets rude.</p></div>
+      </a>
+    </div>
     <div class="avi-books">
       <div class="avi-book">
         <h3>🎙️ Clearance to Confidence: VFR Radio Calls Workbook</h3>

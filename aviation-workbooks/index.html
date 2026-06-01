@@ -83,6 +83,22 @@
   .chooser,.comparison,.faq{margin-bottom:3rem}.chooser-grid,.faq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}.chooser-card,.faq-card{background:var(--card);border:1px solid var(--border);border-radius:.85rem;padding:1.15rem}.chooser-card strong,.faq-card strong{display:block;color:var(--text);margin-bottom:.4rem}.chooser-card p,.faq-card p{color:var(--text-muted);font-size:.9rem;margin:0}.chooser-card a{display:inline-block;margin-top:.75rem;font-weight:700}.compare-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:.85rem;overflow:hidden}.compare-table th,.compare-table td{padding:.85rem;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}.compare-table th{color:var(--accent2);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}.compare-table td{color:var(--text-muted);font-size:.9rem}.proof-box{background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.35);border-radius:.9rem;padding:1.35rem;margin-bottom:2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}.proof-box strong{color:var(--green)}
   footer{text-align:center;border-top:1px solid var(--border);padding:2rem 1.5rem;color:var(--text-dim);font-size:.85rem}
   @media(max-width:700px){nav .links{display:none}.hero{padding-top:6.5rem}.hero-wrap{grid-template-columns:1fr}.hero-copy{text-align:center}.sub{margin-left:auto;margin-right:auto}.hero-actions{justify-content:center}.hero-visual{min-height:280px}.stack-card{width:185px}.signal{grid-template-columns:1fr}.books{grid-template-columns:1fr}}
+
+
+  /* A+ product page polish */
+  :root{--amazon:#ff9900;--paper:#f8fafc;--navy:#07111f}
+  .hero-visual.product-stack{min-height:420px;background:linear-gradient(145deg,#07111f,#172033);border-color:rgba(255,153,0,.28)}
+  .hero-visual.product-stack::before{inset:0;border:0;transform:none;background:linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,rgba(0,0,0,.75),transparent)}
+  .hero-cover{position:absolute;width:178px;border-radius:.38rem;box-shadow:0 26px 70px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.18)}
+  .hero-cover.main{width:218px;right:76px;top:54px;transform:rotate(3deg);z-index:4}.hero-cover.left{left:44px;top:112px;transform:rotate(-9deg);z-index:2}.hero-cover.bottom{right:42px;bottom:56px;transform:rotate(10deg);z-index:1}
+  .proof-sticker{position:absolute;left:34px;bottom:42px;z-index:5;background:rgba(2,6,23,.84);border:1px solid rgba(34,197,94,.4);border-radius:1rem;padding:.9rem 1rem;backdrop-filter:blur(10px);box-shadow:0 18px 50px rgba(0,0,0,.35)}.proof-sticker strong{display:block;color:#86efac;font-size:1.35rem;line-height:1}.proof-sticker span{display:block;color:#cbd5e1;font-size:.78rem;margin-top:.3rem;max-width:180px}
+  .hero-actions{justify-content:flex-start}.btn-primary{background:var(--accent);color:white}.btn-amazon{background:var(--amazon);color:#111}.btn-outline{background:transparent;color:var(--text-muted);border:1px solid var(--border)}
+  .signal-card{position:relative;overflow:hidden}.signal-card::after{content:'';position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(90deg,var(--accent2),var(--amazon));opacity:.75}
+  .book{padding:0;overflow:hidden;display:grid;grid-template-rows:auto 1fr}.book-top{display:grid;grid-template-columns:108px 1fr;gap:1rem;padding:1.25rem 1.25rem 0}.book.featured{grid-column:span 2}.book.featured .book-top{grid-template-columns:150px 1fr}.book-cover{width:100%;border-radius:.3rem;box-shadow:0 18px 42px rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.13);background:#0f172a}.book-body{display:flex;flex-direction:column;padding:1rem 1.25rem 1.25rem}.book-body h2{font-size:1.15rem;margin-bottom:.45rem}.book.featured .book-body h2{font-size:1.35rem}.links a.amazon,.amazon{background:var(--amazon);color:#111}.links a.site,.site{background:var(--accent);color:white}.links a.gumroad,.gumroad{background:#334155;color:#e2e8f0}
+  .sample-preview{margin-bottom:3rem;background:linear-gradient(135deg,#f8fafc,#e2e8f0);color:#0f172a;border-radius:1rem;padding:1.5rem;border:1px solid rgba(148,163,184,.35)}.sample-preview .eyebrow{color:#1d4ed8}.sample-preview h2{font-size:1.45rem;margin-bottom:.45rem}.sample-preview p{color:#334155}.sample-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-top:1rem}.sample-card{background:white;border:1px solid #cbd5e1;border-radius:.8rem;padding:1rem;box-shadow:0 16px 35px rgba(15,23,42,.1)}.sample-card strong{display:block;color:#0f172a;margin-bottom:.4rem}.sample-card span{display:block;color:#475569;font-size:.88rem}
+  .bottom-cta{display:none}
+  @media(max-width:760px){.hero-actions{justify-content:center}.hero-visual.product-stack{min-height:340px}.hero-cover{width:130px}.hero-cover.main{width:166px;right:50px;top:46px}.hero-cover.left{left:34px;top:106px}.hero-cover.bottom{right:28px;bottom:72px}.proof-sticker{left:22px;bottom:26px}.book.featured{grid-column:auto}.book.featured .book-top,.book-top{grid-template-columns:92px 1fr}.book.featured .book-body h2{font-size:1.15rem}.bottom-cta{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;gap:.5rem;background:rgba(2,6,23,.94);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:.65rem .75rem}.bottom-cta a{flex:1;text-align:center;border-radius:.55rem;padding:.7rem .55rem;font-size:.82rem;font-weight:800;text-decoration:none}.bottom-cta .compare{background:var(--accent);color:white}.bottom-cta .buy{background:var(--amazon);color:#111}body{padding-bottom:4.2rem}}
+  @media(max-width:520px){.book-top,.book.featured .book-top{grid-template-columns:78px 1fr;gap:.8rem}.book-body{padding:.9rem 1rem 1.1rem}.hero-copy{text-align:left}.hero-actions .btn{width:100%;justify-content:center}}
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -137,15 +153,16 @@
       <h1>Train like the checkride is already scheduled.</h1>
       <p class="sub">FAA-aligned workbooks for private pilot, instrument rating, commercial pilot, multi-engine add-on training, and VFR radio calls. Practical questions, oral-exam traps, call-building drills, and explanations that teach you how to answer the DPE's next question.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener">📖 Full Amazon Catalog</a>
-        <a class="btn btn-outline" href="#books">Compare the workbooks</a>
-        <a class="btn btn-outline" href="../flight-funded/">🛫 Follow Flight Funded</a>
+        <a class="btn btn-amazon" href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="workbooks-hero">Full Amazon Catalog</a>
+        <a class="btn btn-primary" href="#books">Compare the workbooks</a>
+        <a class="btn btn-outline" href="../flight-funded/">Follow Flight Funded</a>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="stack-card stack-a"><h3>500+ PPL questions</h3><p>Knowledge-test practice with explanations, not answer-key roulette.</p></div>
-      <div class="stack-card stack-b"><h3>Oral exam traps</h3><p>Scenario prompts built for the moment the DPE starts pulling threads.</p></div>
-      <div class="stack-card stack-c"><h3>VFR radio calls</h3><p>Build the call, hear the reply, read it back, and stop freezing on frequency.</p></div>
+    <div class="hero-visual product-stack" aria-label="Nick Rae aviation workbook covers">
+      <img class="hero-cover left" src="../assets/workbooks/private-pilot-cover.jpg" alt="Private Pilot License Workbook cover" loading="eager">
+      <img class="hero-cover main" src="../assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager">
+      <img class="hero-cover bottom" src="../assets/workbooks/instrument-rating-cover.jpg" alt="Instrument Rating Workbook cover" loading="eager">
+      <div class="proof-sticker"><strong>62 units</strong><span>March-May aviation workbook sales tracked</span></div>
     </div>
   </div>
 </section>
@@ -196,48 +213,59 @@
     <p class="section-note">Each book is built around the same principle: practice questions are useful, but the explanations are the product. You need to know why the answer works before the DPE starts pulling threads.</p>
     <div class="books">
       <article class="book featured">
-        <span class="badge green">New on Amazon</span>
-        <h2>🎙️ Clearance to Confidence: VFR Radio Calls Workbook</h2>
-        <div class="price">$24.99 Paperback · $9.99 Kindle · Kindle Unlimited</div>
-        <p>Scenario-based VFR radio call drills for pilots who freeze on frequency. Practice the situation, build the call, anticipate the reply, read it back, and run variations out loud.</p>
-        <div class="links">
-          <a class="amazon" href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="book-card">Paperback</a>
-          <a class="amazon" href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="book-card">Kindle</a>
+        <div class="book-top">
+          <img class="book-cover" src="../assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager">
+          <div>
+            <span class="badge green">New on Amazon</span>
+            <h2>Clearance to Confidence: VFR Radio Calls Workbook</h2>
+            <div class="price">$24.99 Paperback · $9.99 Kindle · Kindle Unlimited</div>
+          </div>
+        </div>
+        <div class="book-body">
+          <p>Scenario-based VFR radio call drills for pilots who freeze on frequency. Practice the situation, build the call, anticipate the reply, read it back, and run variations out loud.</p>
+          <div class="links">
+            <a class="amazon" href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="book-card">Paperback</a>
+            <a class="amazon" href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="book-card">Kindle</a>
+          </div>
         </div>
       </article>
       <article class="book featured">
-        <span class="badge green">Current demand leader</span>
-        <h2>✈️ Private Pilot License Workbook</h2>
-        <div class="price">$19.99 Print · $9.99 Kindle</div>
-        <p>500+ practice questions covering the PPL knowledge test topics with explained answers, FAA-style wording, and study flow for students who want more than answer-key roulette.</p>
-        <div class="links">
-          <a class="amazon" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="book-card">Buy on Amazon</a>
-          <a class="gumroad" href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener" data-product="free_cheat_sheets" data-placement="book-card">Free cheat sheets</a>
+        <div class="book-top">
+          <img class="book-cover" src="../assets/workbooks/private-pilot-cover.jpg" alt="Private Pilot License Workbook cover" loading="eager">
+          <div>
+            <span class="badge green">Current demand leader</span>
+            <h2>Private Pilot License Workbook</h2>
+            <div class="price">$19.99 Print · $9.99 Kindle</div>
+          </div>
+        </div>
+        <div class="book-body">
+          <p>500+ practice questions covering the PPL knowledge test topics with explained answers, FAA-style wording, and study flow for students who want more than answer-key roulette.</p>
+          <div class="links">
+            <a class="amazon" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="book-card">Buy on Amazon</a>
+            <a class="gumroad" href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener" data-product="free_cheat_sheets" data-placement="book-card">Free cheat sheets</a>
+          </div>
         </div>
       </article>
       <article class="book">
-        <span class="badge">IFR prep</span>
-        <h2>📡 Instrument Rating Workbook</h2>
-        <div class="price">$24.99 Print · $9.99 Kindle</div>
-        <p>ACS-aligned IFR study for weather, procedures, charts, systems, and scenario thinking. Built for pilots who need to brief, decide, and explain under instrument pressure.</p>
-        <div class="links"><a class="amazon" href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="book-card">Buy on Amazon</a></div>
-      </article>
-      <article class="book">
-        <span class="badge">Commercial ACS</span>
-        <h2>🛩️ The Complete Commercial Pilot Workbook</h2>
-        <div class="price">$24.99 Print · $9.99 Kindle</div>
-        <p>Written test and oral exam prep with practice questions, flight scenarios, and checkride review for pilots moving from private-pilot habits to commercial-pilot judgment.</p>
-        <div class="links"><a class="amazon" href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="book-card">Buy on Amazon</a></div>
-      </article>
-      <article class="book">
-        <span class="badge">PA-44 focused</span>
-        <h2>🛫 Multi-Engine Add-On Rating Workbook</h2>
-        <div class="price">Paperback · Kindle</div>
-        <p>Seminole-focused prep for V-speeds, engine-out procedures, Vmc, OEI approaches, and oral exam review. No generic twin-engine fog machine.</p>
-        <div class="links">
-          <a class="amazon" href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="book-card">Paperback</a>
-          <a class="amazon" href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="book-card">Kindle</a>
+        <div class="book-top">
+          <img class="book-cover" src="../assets/workbooks/instrument-rating-cover.jpg" alt="Instrument Rating Workbook cover" loading="eager">
+          <div><span class="badge">IFR prep</span><h2>Instrument Rating Workbook</h2><div class="price">$24.99 Print · $9.99 Kindle</div></div>
         </div>
+        <div class="book-body"><p>ACS-aligned IFR study for weather, procedures, charts, systems, and scenario thinking. Built for pilots who need to brief, decide, and explain under instrument pressure.</p><div class="links"><a class="amazon" href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="book-card">Buy on Amazon</a></div></div>
+      </article>
+      <article class="book">
+        <div class="book-top">
+          <img class="book-cover" src="../assets/workbooks/commercial-pilot-cover.jpg" alt="Complete Commercial Pilot Workbook cover" loading="eager">
+          <div><span class="badge">Commercial ACS</span><h2>The Complete Commercial Pilot Workbook</h2><div class="price">$24.99 Print · $9.99 Kindle</div></div>
+        </div>
+        <div class="book-body"><p>Written test and oral exam prep with practice questions, flight scenarios, and checkride review for pilots moving from private-pilot habits to commercial-pilot judgment.</p><div class="links"><a class="amazon" href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="book-card">Buy on Amazon</a></div></div>
+      </article>
+      <article class="book">
+        <div class="book-top">
+          <img class="book-cover" src="../assets/workbooks/multi-engine-cover.jpg" alt="Multi-Engine Add-On Rating Workbook cover" loading="eager">
+          <div><span class="badge">PA-44 focused</span><h2>Multi-Engine Add-On Rating Workbook</h2><div class="price">Paperback · Kindle</div></div>
+        </div>
+        <div class="book-body"><p>Seminole-focused prep for V-speeds, engine-out procedures, Vmc, OEI approaches, and multi-engine oral traps without generic twin fog.</p><div class="links"><a class="amazon" href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="book-card">Paperback</a><a class="amazon" href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="book-card">Kindle</a></div></div>
       </article>
     </div>
   </section>
@@ -254,6 +282,18 @@
         <tr><td>Clearance to Confidence: VFR Radio Calls Workbook</td><td>Student pilots, rusty pilots, and anyone tense on frequency</td><td>Call-building, readbacks, CTAF, towered/non-towered flows, out-loud reps</td><td>Choose paperback, Kindle, or Kindle Unlimited</td></tr>
       </tbody>
     </table>
+  </section>
+
+
+  <section class="sample-preview" aria-label="Workbook sample preview">
+    <div class="eyebrow">Preview the teaching style</div>
+    <h2>What the pages are built to make you practice</h2>
+    <p>The cover gets attention. The interior has to earn trust. These workbooks are designed around explanation reps, oral-exam pressure, and practical scenario drills.</p>
+    <div class="sample-grid">
+      <div class="sample-card"><strong>Explained-answer practice</strong><span>Not just “B is correct.” The goal is to understand why the answer survives the next DPE question.</span></div>
+      <div class="sample-card"><strong>Oral-exam traps</strong><span>Scenario prompts force the student to explain decisions, limits, weather, systems, and risk.</span></div>
+      <div class="sample-card"><strong>Out-loud radio drills</strong><span>For VFR radio calls: build the call, hear the expected reply, read it back, then run the variation.</span></div>
+    </div>
   </section>
 
   <section class="copy-block">
@@ -294,5 +334,10 @@
 <footer>
   <p>© 2026 Nick Rae · Commercial Instrument Multi-Engine Pilot · <a href="../flight-funded/">Flight Funded</a></p>
 </footer>
+
+<div class="bottom-cta" aria-label="Workbook quick actions">
+  <a class="compare" href="#books">Compare</a>
+  <a class="buy" href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="sticky-mobile">Buy VFR Radio</a>
+</div>
 </body>
 </html>
