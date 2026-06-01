@@ -1,18 +1,18 @@
 # Nick Rae
 
-> Commercial pilot, FeedFare creator, iOS developer, and AI builder based in Merced, CA. Building side income through apps, prediction markets, and automation to fund flight hours toward an airline career.
+> Commercial pilot and aviation workbook author based in Merced, CA. Publishing FAA-aligned pilot study workbooks on Amazon KDP while building side income to fund flight hours toward a flying career.
 
 ## About
 
-Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 381.2 flight hours, working toward 500 hours for Part 135 and eventually 1,500 hours for ATP certification. He builds iOS apps, publishes aviation study materials on Amazon KDP, including Clearance to Confidence: VFR Radio Calls Workbook, sells The Non-Developer's OpenClaw Playbook, and documents the Flight Funded experiment at nickrae.net. His Kalshi weather bot is paused until calibration earns trust.
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 381.2 flight hours, working toward 500 hours for Part 135 and eventually 1,500 hours for ATP certification. His main public product lane is FAA-aligned aviation study material on Amazon KDP, including Clearance to Confidence: VFR Radio Calls Workbook. He also builds iOS apps and documents the Flight Funded experiment at nickrae.net. The OpenClaw playbook remains available but is a background builder lane, not the primary offer.
 
 ## Key Pages
 
 - [Home](https://nickrae.net/)
 - [Blog](https://nickrae.net/blog/)
-- [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — $99 full PDF plus Starter Kit ZIP
 - [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and KDP aviation royalties: 62 March-May aviation workbook units, $526.87 USD + €9.41 EUR through the May 2026 dashboard
 - [Aviation Pilot Workbooks](https://nickrae.net/aviation-workbooks/) — FAA-aligned workbooks for private pilot, instrument, commercial, multi-engine, and VFR radio calls
+- [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — background AI-automation playbook, not the current lead offer
 - [FeedFare](https://nickrae.net/feedfare/) — trade steps for screen time (iOS)
 - [Inflection Point](https://nickrae.net/inflection-point/) — personal growth OS with a 3-day access preview, free plan, and optional $14.99 lifetime unlock
 
@@ -41,9 +41,9 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 381.2 flight h
 - KDP aviation workbook dashboard through May 2026: 62 March-May aviation workbook units, $526.87 USD + €9.41 EUR. May dashboard shows 31 aviation-workbook units, 0 refunds, and PPL still leading with Instrument second.
 - Kalshi weather bot remains paused/gated until calibration earns trust.
 
-## Digital Products
+## Background Digital Products
 
-- [The Non-Developer's OpenClaw Playbook](https://nicholasrae.gumroad.com/l/openclaw-playbook) — 163-page guide plus Starter Kit ZIP for building AI-agent workflows, automations, audits, and content pipelines without writing code. $99 on Gumroad.
+- [The Non-Developer's OpenClaw Playbook](https://nicholasrae.gumroad.com/l/openclaw-playbook) — 163-page guide plus Starter Kit ZIP for building AI-agent workflows, automations, audits, and content pipelines without writing code. Background offer while KDP aviation workbooks carry the main buyer path.
 
 ## Books (Amazon KDP)
 
