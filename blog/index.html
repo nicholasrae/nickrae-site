@@ -3,21 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aviation Training, Pilot Workbooks, and Flight Funded Blog — Nick Rae</title>
-<meta name="description" content="Pilot training guides, FAA-aligned aviation workbooks, Flight Funded updates, and practical builder notes from commercial pilot Nick Rae.">
-<meta property="og:title" content="Aviation Training, Pilot Workbooks, and Flight Funded Blog — Nick Rae">
-<meta property="og:description" content="Pilot training guides, FAA-aligned aviation workbooks, Flight Funded updates, and practical builder notes from Nick Rae.">
+<title>Pilot Training, Workbooks & Flight Funded Blog | Nick Rae</title>
+<meta name="description" content="Pilot training guides, IFR oral exam scenarios, aviation workbooks, Flight Funded updates, and practical builder notes from commercial pilot Nick Rae.">
+<meta property="og:title" content="Pilot Training, Workbooks & Flight Funded Blog | Nick Rae">
+<meta property="og:description" content="Pilot training guides, IFR oral exam scenarios, aviation workbooks, Flight Funded updates, and practical builder notes.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@nickrae">
 <link rel="canonical" href="https://nickrae.net/blog/">
-<script>
-  if (window.location.pathname === '/blog/index.html') {
-    window.location.replace(`https://nickrae.net/blog/${window.location.search}${window.location.hash}`);
-  }
-</script>
+<script>if (window.location.pathname === '/blog/index.html') { window.location.replace(`https://nickrae.net/blog/${window.location.search}${window.location.hash}`); }</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
 <script type="application/ld+json">
 {
@@ -27,14 +23,28 @@
       "@type": "Blog",
       "name": "Nick Rae Blog",
       "url": "https://nickrae.net/blog/",
-      "description": "Pilot training guides, aviation workbooks, Flight Funded updates, and practical builder notes from a commercial pilot",
-      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" }
+      "description": "Pilot training guides, IFR oral exam scenarios, aviation workbooks, Flight Funded updates, and practical builder notes from a commercial pilot.",
+      "author": {
+        "@type": "Person",
+        "name": "Nick Rae",
+        "url": "https://nickrae.net/"
+      }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nickrae.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://nickrae.net/blog/"
+        }
       ]
     }
   ]
@@ -42,70 +52,31 @@
 </script>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
-    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
-    --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
-    --border:#1e293b;--card:#131c2e;
-  }
+  :root{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;--text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;--accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);--border:#1e293b;--card:#131c2e;--green:#22c55e}
   html{scroll-behavior:smooth}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:var(--accent2);text-decoration:none}
-  a:hover{text-decoration:underline}
-
-  /* NAV */
+  a{color:var(--accent2);text-decoration:none} a:hover{text-decoration:underline}
   nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
   nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
-  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
-  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
-  nav .links a{color:var(--text-muted)}
-  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px} nav .links{display:flex;gap:1.5rem;font-size:.875rem} nav .links a{color:var(--text-muted)} nav .links a:hover{color:var(--accent2);text-decoration:none}
   .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
-
-  /* MAIN CONTENT */
-  main{max-width:1000px;margin:0 auto;padding:6rem 1.5rem 3rem}
-  .page-header{text-align:center;margin-bottom:3rem}
-  .page-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:1rem}
-  .page-subtitle{color:var(--text-muted);font-size:1.1rem;max-width:600px;margin:0 auto}
-
-  /* FEATURED CLUSTER */
-  .featured-cluster{margin:0 0 2.5rem;background:linear-gradient(135deg,#131c2e,#0f1729);border:1px solid rgba(59,130,246,.25);border-radius:1rem;padding:1.5rem}
-  .featured-cluster h2{font-size:1.4rem;margin-bottom:.5rem}
-  .featured-cluster p{color:var(--text-muted);margin-bottom:1.25rem}
-  .featured-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-  .featured-link{display:block;background:rgba(10,14,23,.55);border:1px solid var(--border);border-radius:.75rem;padding:1rem;text-decoration:none}
-  .featured-link:hover{border-color:var(--accent);text-decoration:none}
-  .featured-link strong{display:block;color:var(--text);margin-bottom:.35rem;font-size:.98rem}
-  .featured-link span{display:block;color:var(--text-muted);font-size:.85rem;line-height:1.5}
-
-  /* BLOG POSTS */
-  .blog-posts{display:grid;gap:2rem}
-  .post-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:2rem;transition:border-color .2s}
-  .post-card:hover{border-color:var(--accent)}
-  .post-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;font-size:.875rem;color:var(--text-dim)}
-  .post-date{color:var(--accent2)}
-  .post-category{background:var(--accent-glow);color:var(--accent2);padding:.25rem .75rem;border-radius:1rem;font-weight:600}
-  .post-title{font-size:1.5rem;font-weight:700;margin-bottom:1rem;line-height:1.3}
-  .post-title a{color:var(--text)}
-  .post-title a:hover{color:var(--accent2)}
-  .post-excerpt{color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6}
-  .read-more{color:var(--accent2);font-weight:600;font-size:.9rem}
-  .read-more:hover{text-decoration:none}
-
-  /* FOOTER */
-  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:4rem}
-
-  /* MOBILE */
-  @media(max-width:768px){
-    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
-    nav .links.open{display:flex}
-    .menu-toggle{display:block}
-    .page-title{font-size:2rem}
-    main{padding:5rem 1rem 2rem}
-    .post-card{padding:1.5rem}
-  }
+  main{max-width:1040px;margin:0 auto;padding:6rem 1.5rem 3rem}
+  .page-header{text-align:center;margin-bottom:2.5rem} .page-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:1rem} .page-subtitle{color:var(--text-muted);font-size:1.1rem;max-width:680px;margin:0 auto}
+  .featured-cluster,.start-here{margin:0 0 2.5rem;background:linear-gradient(135deg,#131c2e,#0f1729);border:1px solid rgba(59,130,246,.25);border-radius:1rem;padding:1.5rem}
+  .featured-cluster h2,.start-here h2{font-size:1.4rem;margin-bottom:.5rem} .featured-cluster p,.start-here p{color:var(--text-muted);margin-bottom:1.25rem}
+  .featured-grid,.start-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+  .featured-link,.start-card{display:block;background:rgba(10,14,23,.55);border:1px solid var(--border);border-radius:.75rem;padding:1rem;text-decoration:none;color:var(--text)}
+  .featured-link:hover,.start-card:hover{border-color:var(--accent);text-decoration:none}
+  .featured-link strong,.start-card strong{display:block;color:var(--text);margin-bottom:.35rem;font-size:.98rem} .featured-link span,.start-card span{display:block;color:var(--text-muted);font-size:.85rem;line-height:1.5}
+  .section-label{margin:2.75rem 0 1rem;color:#bfdbfe;text-transform:uppercase;letter-spacing:.12em;font-weight:900;font-size:.78rem;border-top:1px solid var(--border);padding-top:1.25rem}
+  .blog-posts{display:grid;gap:1.25rem} .post-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.55rem;transition:border-color .2s,transform .2s} .post-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .post-meta{display:flex;align-items:center;gap:1rem;margin-bottom:.85rem;font-size:.875rem;color:var(--text-dim);flex-wrap:wrap} .post-date{color:var(--accent2)} .post-category{background:var(--accent-glow);color:var(--accent2);padding:.25rem .75rem;border-radius:1rem;font-weight:600}
+  .post-title{font-size:1.35rem;font-weight:700;margin-bottom:.75rem;line-height:1.3} .post-title a{color:var(--text)} .post-title a:hover{color:var(--accent2)} .post-excerpt{color:var(--text-muted);margin-bottom:1rem;line-height:1.6} .read-more{color:var(--accent2);font-weight:700;font-size:.9rem}
+  .cross-links{padding:2rem 1.5rem;background:var(--bg2);border-top:1px solid var(--border)} .cross-links div{max-width:900px;margin:0 auto;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;font-size:.85rem} .cross-links a{padding:.5rem 1rem;border:1px solid var(--border);border-radius:.5rem;color:var(--text-muted)}
+  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:0}
+  @media(max-width:768px){nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)} nav .links.open{display:flex} .menu-toggle{display:block} .page-title{font-size:2rem} main{padding:5rem 1rem 2rem} .post-card{padding:1.35rem}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.post-card:hover{transform:none}}
 </style>
-
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
 <script>
@@ -113,296 +84,164 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'AW-18126210838');
+  document.addEventListener('click', function(event){
+    var el = event.target.closest && event.target.closest('a[href],button[data-event]');
+    if(!el || typeof gtag !== 'function') return;
+    try {
+      var url = el.href ? new URL(el.href, window.location.href) : null;
+      gtag('event', el.dataset.event || 'blog_internal_click', {
+        event_category: el.dataset.category || 'site_cta',
+        product: el.dataset.product || undefined,
+        placement: el.dataset.placement || document.body.dataset.page || window.location.pathname,
+        link_url: url ? url.href : undefined
+      });
+    } catch(e) {}
+  });
 </script>
 </head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <div class="inner">
-    <div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div>
-    <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
-    <div class="links">
-      <a href="../">Home</a>
-      <a href="../#about">About</a>
-      <a href="../#credentials">Credentials</a>
-      <a href="../aviation-workbooks/">Pilot Workbooks</a>
-      <a href="../#experience">Experience</a>
-      <a href="../#connect">Connect</a>
-    </div>
-  </div>
-</nav>
-
-<!-- MAIN CONTENT -->
+<body data-page="blog-index">
+<nav><div class="inner"><div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div><button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button><div class="links"><a href="../">Home</a><a href="../aviation-workbooks/">Pilot Workbooks</a><a href="../ifr-scenario-pack/">Free IFR Pack</a><a href="../flight-funded/">Flight Funded</a><a href="../#connect">Connect</a></div></div></nav>
 <main>
-  <div class="page-header">
-    <h1 class="page-title">Blog</h1>
-    <p class="page-subtitle">Pilot training guides, aviation workbook updates, and the public Flight Funded experiment. AI notes still live here, just no longer driving the bus.</p>
-  </div>
-
-  <section class="featured-cluster" aria-label="Featured aviation guides">
-    <h2>Start Here: Pilot Workbooks and Aviation Guides</h2>
-    <p>These are the pages most likely to help student pilots, checkride prep, radio confidence, and hour-building readers. If Google is going to learn what this site is about, these are the pages I want it staring at.</p>
-    <div class="featured-grid">
-      <a class="featured-link" href="../aviation-workbooks/">
-        <strong>Aviation Pilot Workbook Series</strong>
-        <span>Private, instrument, commercial, multi-engine, and VFR radio-call prep in one clean catalog page.</span>
-      </a>
-      <a class="featured-link" href="../aviation-workbooks/#books">
-        <strong>Clearance to Confidence: VFR Radio Calls</strong>
-        <span>The newest workbook: scenario drills for pilots who know what to say until the mic button makes them stupid.</span>
-      </a>
-      <a class="featured-link" href="checkride-prep-guide.html">
-        <strong>Private Pilot Checkride Prep Guide</strong>
-        <span>Practical oral, ACS, and flight-test prep from someone who actually did the ride.</span>
-      </a>
-      <a class="featured-link" href="student-pilot-apps-2026.html">
-        <strong>Best Apps for Student Pilots</strong>
-        <span>The tools worth using during training, not just another list stuffed with affiliate bait.</span>
-      </a>
-      <a class="featured-link" href="blog-cheapest-flight-hours.html">
-        <strong>Cheapest Ways to Build Flight Hours</strong>
-        <span>A straight answer to the question every commercial pilot eventually asks.</span>
-      </a>
-      <a class="featured-link" href="commercial-pilot-career-2026.html">
-        <strong>How to Become a Commercial Pilot in 2026</strong>
-        <span>Requirements, hours, costs, and timeline without the flight-school brochure perfume.</span>
-      </a>
-    </div>
-  </section>
-
+  <div class="page-header"><h1 class="page-title">Pilot Training Blog</h1><p class="page-subtitle">Aviation study guides, checkride prep, Flight Funded proof, and older AI automation notes. The current lane is pilot workbooks and IFR scenario practice.</p></div>
+  <section class="featured-cluster" aria-label="Featured aviation guides"><h2>Start Here: IFR Pack and Pilot Workbooks</h2><p>If Google or a tired student pilot lands here, these are the pages I want them to find first.</p><div class="featured-grid">
+    <a class="featured-link" href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="blog-featured"><strong>Free IFR Oral Exam Scenario Pack</strong><span>10 source-anchored cards for out-loud instrument oral practice.</span></a>
+    <a class="featured-link" href="ifr-oral-exam-scenarios.html" data-event="blog_internal_click" data-product="ifr_oral_scenarios_post" data-placement="blog-featured"><strong>IFR Oral Exam Scenarios</strong><span>Ten example prompts using rule, risk, and action before you download the PDF.</span></a>
+    <a class="featured-link" href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="blog-featured"><strong>Aviation Pilot Workbook Series</strong><span>Private, instrument, commercial, multi-engine, and VFR radio-call prep.</span></a>
+    <a class="featured-link" href="checkride-prep-guide.html" data-event="blog_internal_click" data-product="checkride_guide" data-placement="blog-featured"><strong>Private Pilot Checkride Prep Guide</strong><span>Oral, ACS, and flight-test prep from someone who actually did the ride.</span></a>
+  </div></section>
+  <section class="start-here" aria-label="Start here for pilots"><h2>Start here for pilots</h2><p>Pick the lane matching the problem in front of you. Sequence beats hoarding tabs.</p><div class="start-grid">
+    <a class="start-card" href="ifr-oral-exam-scenarios.html" data-event="blog_internal_click" data-product="ifr_oral_scenarios_post" data-placement="blog-start-here"><strong>IFR / checkride</strong><span>IFR oral scenarios, private checkride prep, and study-stack guidance.</span></a>
+    <a class="start-card" href="blog-cheapest-flight-hours.html" data-event="blog_internal_click" data-product="hour_building_post" data-placement="blog-start-here"><strong>Hour building</strong><span>Cheapest hours, commercial pilot path, and 389.4 to 500-hour plan.</span></a>
+    <a class="start-card" href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="blog-start-here"><strong>Workbook / proof</strong><span>Workbook catalog, launch posts, and Flight Funded proof.</span></a>
+  </div></section>
+  <div class="section-label">Aviation and Flight Funded</div>
   <div class="blog-posts">
+    <article class="post-card" style="border-color:rgba(34,197,94,.75);background:linear-gradient(135deg,#10251d,#0f1729)">
+      <div class="post-meta"><span class="post-date">July 9, 2026</span><span class="post-category">✈️ IFR Training</span><span>~9 min read</span></div>
+      <h2 class="post-title"><a href="ifr-oral-exam-scenarios.html" data-event="blog_internal_click" data-product="ifr_oral_scenarios_post" data-placement="blog-card">IFR Oral Exam Scenarios: 10 Questions That Prove Whether You Understand the Rating</a></h2>
+      <p class="post-excerpt">A practical rule-risk-action framework for instrument students who need to answer out loud before the DPE starts pulling threads.</p>
+      <a href="ifr-oral-exam-scenarios.html" class="read-more" data-event="blog_internal_click" data-product="ifr_oral_scenarios_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
     <article class="post-card" style="border-color:rgba(34,197,94,.65);background:linear-gradient(135deg,#10251d,#0f1729)">
-      <div class="post-meta">
-        <span class="post-date">June 1, 2026</span>
-        <span class="post-category">📚 Pilot Workbooks</span>
-        <span>Catalog</span>
-      </div>
-      <h2 class="post-title"><a href="../aviation-workbooks/">Aviation Pilot Workbook Series</a></h2>
-      <p class="post-excerpt">The main lane now: FAA-aligned workbooks for private, instrument, commercial, multi-engine, and VFR radio calls. The newest title is Clearance to Confidence, built for pilots who freeze on frequency.</p>
-      <a href="../aviation-workbooks/" class="read-more">Compare the workbooks →</a>
+      <div class="post-meta"><span class="post-date">June 1, 2026</span><span class="post-category">📚 Pilot Workbooks</span><span>Catalog</span></div>
+      <h2 class="post-title"><a href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="blog-card">Aviation Pilot Workbook Series</a></h2>
+      <p class="post-excerpt">The main workbook shelf: private, instrument, commercial, multi-engine, and VFR radio-call prep.</p>
+      <a href="../aviation-workbooks/" class="read-more" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="blog-card-read-more">Read more →</a>
     </article>
-
-    <article class="post-card" style="border-color:rgba(59,130,246,.55)">
-      <div class="post-meta">
-        <span class="post-date">April 23, 2026</span>
-        <span class="post-category">✈️ Flight Funded</span>
-        <span>~8 min read</span>
-      </div>
-      <h2 class="post-title"><a href="from-369-5-to-500-hours.html">How I’m Getting from 389.4 to 500 Flight Hours</a></h2>
-      <p class="post-excerpt">The current gap is 110.6 hours. Here’s the real plan to close it without pretending money, currency, or time are optional details.</p>
-      <a href="from-369-5-to-500-hours.html" class="read-more">Read the plan →</a>
+    <article class="post-card" style="border-color:rgba(59,130,246,.65);background:linear-gradient(135deg,#102033,#0f1729)">
+      <div class="post-meta"><span class="post-date">July 9, 2026</span><span class="post-category">🎁 Free IFR Pack</span><span>Download</span></div>
+      <h2 class="post-title"><a href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="blog-card">Free IFR Oral Exam Scenario Pack</a></h2>
+      <p class="post-excerpt">10 source-anchored IFR scenario cards for currency, alternates, fuel, readbacks, holding, MDA discipline, and equipment checks.</p>
+      <a href="../ifr-scenario-pack/" class="read-more" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="blog-card-read-more">Read more →</a>
     </article>
-
-    <article class="post-card" style="border-color:rgba(14,165,233,.45)">
-      <div class="post-meta">
-        <span class="post-date">April 17, 2026</span>
-        <span class="post-category">✈️ Aviation</span>
-        <span>~4 min read</span>
-      </div>
-      <h2 class="post-title"><a href="multi-engine-add-on-rating-workbook-live.html">The Multi-Engine Add-On Rating Workbook Is Live on Amazon</a></h2>
-      <p class="post-excerpt">Paperback and Kindle are live. The aviation series now covers private, instrument, commercial, and the multi-engine add-on with PA-44 Seminole-focused prep.</p>
-      <a href="multi-engine-add-on-rating-workbook-live.html" class="read-more">Read the post →</a>
-    </article>
-
-    <article class="post-card" style="border-color:rgba(245,158,11,.45)">
-      <div class="post-meta">
-        <span class="post-date">April 6, 2026</span>
-        <span class="post-category">✈️ Aviation</span>
-        <span>~5 min read</span>
-      </div>
-      <h2 class="post-title"><a href="commercial-pilot-workbook-live.html">The Complete Commercial Pilot Workbook Is Live on Amazon</a></h2>
-      <p class="post-excerpt">The commercial workbook is finally live. Here's why I wrote it, what's inside, and who it will actually help.</p>
-      <a href="commercial-pilot-workbook-live.html" class="read-more">Read the post →</a>
-    </article>
-
-    <article class="post-card" style="border-color:rgba(168,85,247,.45)">
-      <div class="post-meta">
-        <span class="post-date">April 3, 2026</span>
-        <span class="post-category">🤖 OpenClaw</span>
-        <span>~5 min read</span>
-      </div>
-      <h2 class="post-title"><a href="openclaw-playbook.html">I Wrote a Playbook for Running OpenClaw Without Writing Code</a></h2>
-      <p class="post-excerpt">A practical field guide to setting up OpenClaw as a personal AI command center: cron jobs, memory, coding agents, costs, security, and the mistakes that keep this stuff from becoming an expensive toy.</p>
-      <a href="openclaw-playbook.html" class="read-more">Read the post →</a>
-    </article>
-
-    <article class="post-card" style="border-color:rgba(59,130,246,.45)">
-      <div class="post-meta">
-        <span class="post-date">April 2, 2026</span>
-        <span class="post-category">✈️ Flight Funded</span>
-        <span>~6 min read</span>
-      </div>
-      <h2 class="post-title"><a href="flight-funded-experiment.html">I Don't Want Internet Business Clout. I Want Flight Hours.</a></h2>
-      <p class="post-excerpt">Why I'm building apps, books, bots, and automation in public to fund more flight time as a commercial pilot. No guru cosplay, no fake scoreboards, just the live experiment.</p>
-      <a href="flight-funded-experiment.html" class="read-more">Read the post →</a>
-    </article>
-
-    <article class="post-card" style="border-color:rgba(34,197,94,.4)">
-      <div class="post-meta">
-        <span class="post-date">March 2026</span>
-        <span class="post-category">&#x1F916; AI Tools</span>
-        <span>~10 min read</span>
-      </div>
-      <h2 class="post-title"><a href="kalshi-weather-bot.html">I Built a Weather Prediction Bot. Then Live Trading Humbled It.</a></h2>
-      <p class="post-excerpt">The paper results looked great. The live run and follow-up calibration audit did not. Here is what the Kalshi weather bot got right, what failed, and why it stays paused until the gate earns trust.</p>
-      <a href="kalshi-weather-bot.html" class="read-more">Read the honest post-mortem &#x2192;</a>
-    </article>
-
-    <article class="post-card" style="border-color:rgba(139,92,246,.4)">
-      <div class="post-meta">
-        <span class="post-date">March 2026</span>
-        <span class="post-category">&#x1F916; AI Tools</span>
-        <span>~10 min read</span>
-      </div>
-      <h2 class="post-title"><a href="self-improving-ai-agents.html">I Read an Academic Paper and Rebuilt My AI Agent's Memory</a></h2>
-      <p class="post-excerpt">IBM researchers proved that AI agents improve up to 14% when they learn from their own execution history. I run an AI agent platform called OpenClaw. I implemented their framework in a Saturday morning. Here&#x2019;s what I built, what changed, and what I learned about making AI agents that actually get better over time.</p>
-      <a href="self-improving-ai-agents.html" class="read-more">Read the post &#x2192;</a>
-    </article>
-
-    <article class="post-card" style="border-color:rgba(99,102,241,.4)">
-      <div class="post-meta">
-        <span class="post-date">March 2026</span>
-        <span class="post-category">&#x1F916; AI Tools</span>
-        <span>~8 min read</span>
-      </div>
-      <h2 class="post-title"><a href="blog-openclaw-setup.html">Setting Up OpenClaw: The 5 Things I Wish I Did First</a></h2>
-      <p class="post-excerpt">OpenClaw becomes the backbone of how you work &#x2014; but only if you set it up right. Most people skip the five steps that actually matter: SOUL.md, cron jobs, picking one channel, USER.md, and the skills system. Here&#x2019;s what I&#x2019;d do differently from day one.</p>
-      <a href="blog-openclaw-setup.html" class="read-more">Read the guide &#x2192;</a>
-    </article>
-
-    <article class="post-card" style="border-color:rgba(59,130,246,.4)">
-      <div class="post-meta">
-        <span class="post-date">March 2026</span>
-        <span class="post-category">&#x2708;&#xFE0F; Aviation</span>
-        <span>~12 min read</span>
-      </div>
-      <h2 class="post-title"><a href="blog-commercial-pilot.html">How I Earned My Commercial Pilot License at 45</a></h2>
-      <p class="post-excerpt">From zero flight time at 44 to commercial multi-engine certificate at 46. Real hours, real costs, real timeline. Started at Pensacola, FL in late 2023 and knocked out PPL, IR, Commercial ASEL, and Commercial AMEL in under 18 months &#x2014; all while holding down a day job in California. Here&#x2019;s exactly how it went.</p>
-      <a href="blog-commercial-pilot.html" class="read-more">Read the story &#x2192;</a>
-    </article>
-
-    <article class="post-card" style="border-color:rgba(34,197,94,.3)">
-      <div class="post-meta">
-        <span class="post-date">March 2026</span>
-        <span class="post-category">&#x2708;&#xFE0F; Aviation</span>
-        <span>~10 min read</span>
-      </div>
-      <h2 class="post-title"><a href="blog-cheapest-flight-hours.html">The Cheapest Ways to Build Flight Hours in 2026</a></h2>
-      <p class="post-excerpt">You need hours. Hours cost money. Unless you know the workarounds. A practical guide to every legitimate method for building pilot flight time affordably in 2026 &#x2014; including options that are free and one where they pay you to fly 130 hours a month.</p>
-      <a href="blog-cheapest-flight-hours.html" class="read-more">Read the guide &#x2192;</a>
-    </article>
-
-
     <article class="post-card">
-      <div class="post-meta">
-        <span class="post-date">February 25, 2026</span>
-        <span class="post-category">✈️ Aviation</span>
-        <span>~15 min read</span>
-      </div>
-      <h2 class="post-title">
-        <a href="commercial-pilot-career-2026.html">How to Become a Commercial Pilot in 2026: Requirements, Hours &amp; Timeline</a>
-      </h2>
-      <p class="post-excerpt">
-        A real commercial pilot's breakdown of the CPL career path - requirements, hours, costs, and timeline. Written by someone who just did it as a career change from business management, not a flight school brochure.
-      </p>
-      <a href="commercial-pilot-career-2026.html" class="read-more">Read Article →</a>
+      <div class="post-meta"><span class="post-date">April 23, 2026</span><span class="post-category">✈️ Flight Funded</span><span>~8 min read</span></div>
+      <h2 class="post-title"><a href="from-369-5-to-500-hours.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How I’m Getting from 389.4 to 500 Flight Hours</a></h2>
+      <p class="post-excerpt">The current gap is 110.6 hours. Here is the real plan to close it without pretending money, currency, or time are optional details.</p>
+      <a href="from-369-5-to-500-hours.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
-
     <article class="post-card">
-      <div class="post-meta">
-        <span class="post-date">February 22, 2026</span>
-        <span class="post-category">🤖 AI Tools</span>
-        <span>~10 min read</span>
-      </div>
-      <h2 class="post-title">
-        <a href="openclaw-30-days.html">I've Been Running OpenClaw for 30 Days - Here's What I Wish I Knew</a>
-      </h2>
-      <p class="post-excerpt">
-        Top 5 setup steps, dos and don'ts, and an honest 30-day assessment of OpenClaw as an AI agent platform. Covers identity files, autonomous spend limits, cron jobs, tool connections, and the memory system that makes it actually useful.
-      </p>
-      <a href="openclaw-30-days.html" class="read-more">Read Article →</a>
+      <div class="post-meta"><span class="post-date">April 17, 2026</span><span class="post-category">✈️ Aviation</span><span>~4 min read</span></div>
+      <h2 class="post-title"><a href="multi-engine-add-on-rating-workbook-live.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">The Multi-Engine Add-On Rating Workbook Is Live on Amazon</a></h2>
+      <p class="post-excerpt">Paperback and Kindle are live. The aviation series now covers private, instrument, commercial, and multi-engine add-on prep.</p>
+      <a href="multi-engine-add-on-rating-workbook-live.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
-
-
     <article class="post-card">
-      <div class="post-meta">
-        <span class="post-date">February 20, 2026</span>
-        <span class="post-category">💰 Entrepreneurship</span>
-        <span>~8 min read</span>
-      </div>
-      <h2 class="post-title">
-        <a href="ai-aviation-business.html">How I'm Using AI to Build Side Income as a Pilot</a>
-      </h2>
-      <p class="post-excerpt">
-        I need 110.6 more flight hours to reach the 500-hour Part 135 target. At roughly $200/hr, that's about $22,120. I'm using AI automation to build side income through iOS apps, aviation products, and gated prediction-market research. Real numbers, real timeline, still early.
-      </p>
-      <a href="ai-aviation-business.html" class="read-more">Read Article →</a>
+      <div class="post-meta"><span class="post-date">April 6, 2026</span><span class="post-category">✈️ Aviation</span><span>~5 min read</span></div>
+      <h2 class="post-title"><a href="commercial-pilot-workbook-live.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">The Complete Commercial Pilot Workbook Is Live on Amazon</a></h2>
+      <p class="post-excerpt">Why I wrote the commercial workbook, what is inside, and who it will actually help.</p>
+      <a href="commercial-pilot-workbook-live.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
-
     <article class="post-card">
-      <div class="post-meta">
-        <span class="post-date">March 14, 2026</span>
-        <span class="post-category">🤖 AI Tools</span>
-        <span>~8 min read</span>
-      </div>
-      <h2 class="post-title">
-        <a href="openclaw-cron-jobs-guide.html">How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code)</a>
-      </h2>
-      <p class="post-excerpt">
-        Morning briefings, trading bot monitoring, TikTok automation, and App Store alerts. A non-developer's guide to building useful AI cron jobs from 6 months of daily use.
-      </p>
-      <a href="openclaw-cron-jobs-guide.html" class="read-more">Read Article →</a>
+      <div class="post-meta"><span class="post-date">April 2, 2026</span><span class="post-category">✈️ Flight Funded</span><span>~6 min read</span></div>
+      <h2 class="post-title"><a href="flight-funded-experiment.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I Don't Want Internet Business Clout. I Want Flight Hours.</a></h2>
+      <p class="post-excerpt">Why I am building apps, books, bots, and automation in public to fund more flight time as a commercial pilot.</p>
+      <a href="flight-funded-experiment.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
-
-
     <article class="post-card">
-      <div class="post-meta">
-        <span class="post-date">February 18, 2026</span>
-        <span class="post-category">✈️ Training</span>
-        <span>~12 min read</span>
-      </div>
-      <h2 class="post-title">
-        <a href="checkride-prep-guide.html">The Ultimate Private Pilot Checkride Prep Guide (2026)</a>
-      </h2>
-      <p class="post-excerpt">
-        I passed my PPL checkride on the first try. Here's everything I wish someone had told me: what the DPE actually cares about, how to study the ACS without losing your mind, the oral questions that trip people up, and the flight maneuvers worth over-preparing.
-      </p>
-      <a href="checkride-prep-guide.html" class="read-more">Read Article →</a>
+      <div class="post-meta"><span class="post-date">March 2026</span><span class="post-category">✈️ Aviation</span><span>~12 min read</span></div>
+      <h2 class="post-title"><a href="blog-commercial-pilot.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How I Earned My Commercial Pilot License at 45</a></h2>
+      <p class="post-excerpt">From zero flight time at 44 to commercial multi-engine certificate at 46: real hours, real costs, real timeline.</p>
+      <a href="blog-commercial-pilot.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
-
     <article class="post-card">
-      <div class="post-meta">
-        <span class="post-date">February 15, 2026</span>
-        <span class="post-category">✈️ Training</span>
-        <span>~6 min read</span>
-      </div>
-      <h2 class="post-title">
-        <a href="student-pilot-apps-2026.html">5 Apps Every Student Pilot Needs in 2026</a>
-      </h2>
-      <p class="post-excerpt">
-        The apps I actually used during training, not the ones flight schools push. ForeFlight is obvious. The other four saved me real money, real time, and real headaches during PPL through commercial.
-      </p>
-      <a href="student-pilot-apps-2026.html" class="read-more">Read Article →</a>
+      <div class="post-meta"><span class="post-date">March 2026</span><span class="post-category">✈️ Aviation</span><span>~10 min read</span></div>
+      <h2 class="post-title"><a href="blog-cheapest-flight-hours.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">The Cheapest Ways to Build Flight Hours in 2026</a></h2>
+      <p class="post-excerpt">A practical guide to legitimate methods for building pilot flight time affordably, including paid and lower-cost paths.</p>
+      <a href="blog-cheapest-flight-hours.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">February 25, 2026</span><span class="post-category">✈️ Aviation</span><span>~10 min read</span></div>
+      <h2 class="post-title"><a href="commercial-pilot-career-2026.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How to Become a Commercial Pilot in 2026</a></h2>
+      <p class="post-excerpt">Requirements, hours, costs, and timeline without the flight-school brochure perfume.</p>
+      <a href="commercial-pilot-career-2026.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">February 18, 2026</span><span class="post-category">✈️ Training</span><span>~12 min read</span></div>
+      <h2 class="post-title"><a href="checkride-prep-guide.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">Private Pilot Checkride Prep Guide</a></h2>
+      <p class="post-excerpt">Oral exam, ACS study plan, common DPE questions, and flight maneuvers worth over-preparing.</p>
+      <a href="checkride-prep-guide.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">February 15, 2026</span><span class="post-category">✈️ Training</span><span>~6 min read</span></div>
+      <h2 class="post-title"><a href="student-pilot-apps-2026.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">5 Apps Every Student Pilot Needs in 2026</a></h2>
+      <p class="post-excerpt">The apps I actually used during training, not just the ones flight schools push.</p>
+      <a href="student-pilot-apps-2026.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">February 20, 2026</span><span class="post-category">💰 Flight Funded</span><span>~8 min read</span></div>
+      <h2 class="post-title"><a href="ai-aviation-business.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How I'm Using AI to Build Side Income as a Pilot</a></h2>
+      <p class="post-excerpt">Aviation products, apps, and automation as a flight-hour funding lane. Real numbers, real timeline, still early.</p>
+      <a href="ai-aviation-business.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+  </div>
+  <div class="section-label">AI and automation archive</div>
+  <div class="blog-posts" aria-label="AI and automation archive">
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">May 3, 2026</span><span class="post-category">🤖 AI Tools</span><span>~10 min read</span></div>
+      <h2 class="post-title"><a href="openclaw-personal-ai-operations-system.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How to Turn OpenClaw Into a Personal AI Operations System</a></h2>
+      <p class="post-excerpt">A warmer entry point for OpenClaw as a personal operations layer: workflows, agents, reports, and decisions.</p>
+      <a href="openclaw-personal-ai-operations-system.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">April 3, 2026</span><span class="post-category">🤖 OpenClaw</span><span>~5 min read</span></div>
+      <h2 class="post-title"><a href="openclaw-playbook.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I Wrote a Playbook for Running OpenClaw Without Writing Code</a></h2>
+      <p class="post-excerpt">A field guide to setup, memory, cron jobs, coding agents, cost control, security, and practical AI workflows.</p>
+      <a href="openclaw-playbook.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">March 2026</span><span class="post-category">🤖 AI Tools</span><span>~10 min read</span></div>
+      <h2 class="post-title"><a href="kalshi-weather-bot.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I Built a Weather Prediction Bot. Then Live Trading Humbled It.</a></h2>
+      <p class="post-excerpt">The paper results looked great. The live run and follow-up calibration audit did not. Useful scar tissue.</p>
+      <a href="kalshi-weather-bot.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">March 2026</span><span class="post-category">🤖 AI Tools</span><span>~10 min read</span></div>
+      <h2 class="post-title"><a href="self-improving-ai-agents.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I Read Meta's Self-Improving AI Paper. Then I Implemented It.</a></h2>
+      <p class="post-excerpt">What changed when I rebuilt the agent memory system around execution history.</p>
+      <a href="self-improving-ai-agents.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">March 2026</span><span class="post-category">🤖 AI Tools</span><span>~8 min read</span></div>
+      <h2 class="post-title"><a href="blog-openclaw-setup.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">Setting Up OpenClaw: The 5 Things I Wish I Did First</a></h2>
+      <p class="post-excerpt">The setup steps that mattered: identity, cron jobs, one channel, USER.md, and skills.</p>
+      <a href="blog-openclaw-setup.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">February 22, 2026</span><span class="post-category">🤖 AI Tools</span><span>~10 min read</span></div>
+      <h2 class="post-title"><a href="openclaw-30-days.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I've Been Running OpenClaw for 30 Days</a></h2>
+      <p class="post-excerpt">Top setup steps, mistakes, and whether an AI agent platform stays useful after novelty wears off.</p>
+      <a href="openclaw-30-days.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
+    </article>
+    <article class="post-card">
+      <div class="post-meta"><span class="post-date">March 14, 2026</span><span class="post-category">🤖 AI Tools</span><span>~8 min read</span></div>
+      <h2 class="post-title"><a href="openclaw-cron-jobs-guide.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How I Run 50+ AI Cron Jobs on OpenClaw</a></h2>
+      <p class="post-excerpt">Morning briefings, alerts, publishing checks, and watchdogs without turning cron into a second job.</p>
+      <a href="openclaw-cron-jobs-guide.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
   </div>
 </main>
-
-<!-- CROSS-LINKS -->
-<section style="padding:2rem 1.5rem;background:var(--bg2,#111827);border-top:1px solid var(--border,#1e293b)">
-  <div style="max-width:900px;margin:0 auto;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;font-size:.85rem">
-    <a href="../aviation-workbooks/" style="padding:.5rem 1rem;border:1px solid #1e293b;border-radius:.5rem;color:#94a3b8">📚 Compare Pilot Workbooks</a>
-    <a href="https://www.amazon.com/dp/B0H3KT5FHW" style="padding:.5rem 1rem;border:1px solid #1e293b;border-radius:.5rem;color:#94a3b8">🎙️ VFR Radio Calls</a>
-    <a href="https://a.co/d/0hExZLaf" style="padding:.5rem 1rem;border:1px solid #1e293b;border-radius:.5rem;color:#94a3b8">✈️ PPL Workbook</a>
-    <a href="../flight-funded/" style="padding:.5rem 1rem;border:1px solid #1e293b;border-radius:.5rem;color:#94a3b8">🛫 Flight Funded Tracker</a>
-    <a href="https://x.com/nickrae" style="padding:.5rem 1rem;border:1px solid #1e293b;border-radius:.5rem;color:#94a3b8">X @nickrae</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div>© 2026 Nick Rae · Merced, CA · <a href="../">Back to Home</a></div>
-</footer>
-
+<section class="cross-links"><div><a href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="blog-footer">🎁 Free IFR Pack</a><a href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="blog-footer">📚 Compare Pilot Workbooks</a><a href="https://www.amazon.com/dp/B0H3KT5FHW" data-event="amazon_click" data-product="vfr_radio_calls_workbook" data-placement="blog-footer">🎙️ VFR Radio Calls</a><a href="../flight-funded/" data-event="blog_internal_click" data-product="flight_funded" data-placement="blog-footer">🛫 Flight Funded Tracker</a><a href="https://x.com/nickrae">X @nickrae</a></div></section>
+<footer><div>© 2026 Nick Rae · Merced, CA · <a href="../">Back to Home</a></div></footer>
 </body>
 </html>

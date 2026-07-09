@@ -13,12 +13,14 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 389.4 flight h
 - [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and KDP aviation royalties: 98 March-June aviation workbook units, $854.38 USD + €25.29 EUR from the June final KDP exports
 - [Aviation Pilot Workbooks](https://nickrae.net/aviation-workbooks/) — FAA-aligned workbooks for private pilot, instrument, commercial, multi-engine, and VFR radio calls
 - [Free IFR Oral Exam Scenario Pack](https://nickrae.net/ifr-scenario-pack/) — free 10-card IFR oral exam scenario PDF; source-anchored study aid with chart-specific traps intentionally excluded
+- [IFR Oral Exam Scenarios](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — 10-question blog bridge using the rule-risk-action framework for instrument oral practice
 - [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — background AI-automation playbook, not the current lead offer
 - [FeedFare](https://nickrae.net/feedfare/) — trade steps for screen time (iOS)
 - [Inflection Point](https://nickrae.net/inflection-point/) — personal growth OS with a 3-day access preview, free plan, and optional $14.99 lifetime unlock
 
 ## Blog Posts
 
+- [IFR Oral Exam Scenarios: 10 Questions That Prove Whether You Understand the Rating](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — bridge article for instrument students; routes to the free IFR scenario pack and aviation workbook shelf
 - [How to Turn OpenClaw Into a Personal AI Operations System](https://nickrae.net/blog/openclaw-personal-ai-operations-system.html)
 - [I Built a Weather Prediction Bot. Then Live Trading Humbled It.](https://nickrae.net/blog/kalshi-weather-bot.html)
 - [I Read Meta's Self-Improving AI Paper. Then I Implemented It.](https://nickrae.net/blog/self-improving-ai-agents.html)
