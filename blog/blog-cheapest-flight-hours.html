@@ -426,6 +426,18 @@
     <p style="margin:0;color:#94a3b8;font-size:.92rem">New here? Start at the <a href="../">homepage</a> or browse the <a href="./">full blog archive</a>.</p>
   </section>
 
+
+  <section aria-label="IFR oral scenario warmup" style="margin-top:2.75rem;padding:1.5rem;border:1px solid rgba(96,165,250,.35);border-radius:14px;background:linear-gradient(135deg,#102033,#0f1729)">
+    <div style="font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#93c5fd;margin-bottom:.6rem">IFR / checkride warmup</div>
+    <h3 style="color:#e2e8f0;margin:0 0 .65rem">Before the next oral, practice rule, risk, and action out loud.</h3>
+    <p style="color:#94a3b8;margin-bottom:1rem">I built a free IFR scenario path for pilots who need more than answer-key roulette: read 10 example oral scenarios, then download the 10-card source-anchored PDF.</p>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <a href="ifr-oral-exam-scenarios.html" data-event="blog_internal_click" data-product="ifr_oral_scenarios_post" data-placement="aviation-post-ifr-box" style="display:inline-flex;align-items:center;background:#2563eb;color:#fff;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">Read 10 IFR scenarios</a>
+      <a href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="aviation-post-ifr-box" style="display:inline-flex;align-items:center;border:1px solid #334155;color:#e2e8f0;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">Download free IFR pack</a>
+      <a href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="aviation-post-ifr-box" style="display:inline-flex;align-items:center;border:1px solid #334155;color:#e2e8f0;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">Compare workbooks</a>
+    </div>
+  </section>
+
   <div class="article-nav">
     <a href="blog-commercial-pilot.html" class="nav-link">&#x2190; How I Earned My Commercial at 45</a>
     <a href="./" class="nav-link">All Posts &#x2192;</a>
@@ -437,5 +449,21 @@
   <div>&#169; 2026 Nick Rae &middot; <a href="https://nickrae.net">nickrae.net</a></div>
 </footer>
 
+
+<script>
+  document.addEventListener('click', function(event){
+    var el = event.target.closest && event.target.closest('a[data-event]');
+    if(!el || typeof gtag !== 'function') return;
+    try {
+      var url = new URL(el.href, window.location.href);
+      gtag('event', el.dataset.event, {
+        event_category: 'site_cta',
+        product: el.dataset.product || undefined,
+        placement: el.dataset.placement || document.body.dataset.page || window.location.pathname,
+        link_url: url.href
+      });
+    } catch(e) {}
+  });
+</script>
 </body>
 </html>
