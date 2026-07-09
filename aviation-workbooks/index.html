@@ -99,6 +99,17 @@
   .bottom-cta{display:none}
   @media(max-width:760px){.hero-actions{justify-content:center}.hero-visual.product-stack{min-height:340px}.hero-cover{width:130px}.hero-cover.main{width:166px;right:50px;top:46px}.hero-cover.left{left:34px;top:106px}.hero-cover.bottom{right:28px;bottom:72px}.proof-sticker{left:22px;bottom:26px}.book.featured{grid-column:auto}.book.featured .book-top,.book-top{grid-template-columns:92px 1fr}.book.featured .book-body h2{font-size:1.15rem}.bottom-cta{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;gap:.5rem;background:rgba(2,6,23,.94);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:.65rem .75rem}.bottom-cta a{flex:1;text-align:center;border-radius:.55rem;padding:.7rem .55rem;font-size:.82rem;font-weight:800;text-decoration:none}.bottom-cta .compare{background:var(--accent);color:white}.bottom-cta .buy{background:var(--amazon);color:#111}body{padding-bottom:4.2rem}}
   @media(max-width:520px){.book-top,.book.featured .book-top{grid-template-columns:78px 1fr;gap:.8rem}.book-body{padding:.9rem 1rem 1.1rem}.hero-copy{text-align:left}.hero-actions .btn{width:100%;justify-content:center}}
+
+  /* Apple-design interaction pass: quiet, fast, reversible. */
+  .btn,.links a,.chooser-card a,.bottom-cta a{transition:transform 140ms cubic-bezier(.23,1,.32,1),background-color 140ms cubic-bezier(.23,1,.32,1),border-color 140ms cubic-bezier(.23,1,.32,1),box-shadow 180ms cubic-bezier(.23,1,.32,1),opacity 140ms cubic-bezier(.23,1,.32,1);touch-action:manipulation}
+  .btn:active,.links a:active,.chooser-card a:active,.bottom-cta a:active{transform:scale(.97)}
+  .btn:focus-visible,.links a:focus-visible,.chooser-card a:focus-visible,.bottom-cta a:focus-visible{outline:2px solid var(--accent2);outline-offset:3px;text-decoration:none}
+  .book,.chooser-card,.faq-card,.signal-card,.sample-card{transition:transform 180ms cubic-bezier(.23,1,.32,1),border-color 180ms cubic-bezier(.23,1,.32,1),box-shadow 180ms cubic-bezier(.23,1,.32,1)}
+  @media(hover:hover){.book:hover,.book:focus-within,.chooser-card:hover,.chooser-card:focus-within,.sample-card:hover,.sample-card:focus-within{transform:translateY(-2px);border-color:rgba(96,165,250,.45);box-shadow:0 22px 70px rgba(0,0,0,.28)}}
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav,.proof-sticker,.bottom-cta{background:#07111f}}
+  @media(max-width:760px){.bottom-cta{padding:.65rem .75rem calc(.65rem + env(safe-area-inset-bottom))}.bottom-cta a{min-height:44px;display:flex;align-items:center;justify-content:center}body{padding-bottom:calc(4.2rem + env(safe-area-inset-bottom))}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
+
 </style>
 
 <!-- Google tag (gtag.js) -->
