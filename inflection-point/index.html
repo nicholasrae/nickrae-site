@@ -36,6 +36,7 @@
   }
 }
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Inflection Point a subscription?","acceptedAnswer":{"@type":"Answer","text":"No. Inflection Point has a 3-day access preview, then a free plan or an optional $14.99 lifetime unlock. There is no subscription and no auto-renewal."}},{"@type":"Question","name":"What is Inflection Point for?","acceptedAnswer":{"@type":"Answer","text":"It is an iOS personal growth OS for quests, daily protocols, reflection prompts, resets, and behavior-change structure."}},{"@type":"Question","name":"What happens after the 3-day preview?","acceptedAnswer":{"@type":"Answer","text":"After the preview, users can continue with the free plan or choose the optional lifetime unlock."}}]}</script>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;--text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;--accent:#8b5cf6;--accent2:#c4b5fd;--border:#1e293b;--card:#131c2e;--green:#22c55e;--yellow:#eab308}
@@ -53,10 +54,12 @@
   .eyebrow{display:inline-flex;gap:.4rem;align-items:center;padding:.3rem .7rem;border:1px solid rgba(196,181,253,.35);border-radius:999px;color:var(--accent2);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem;background:rgba(139,92,246,.08)}
   .hero h1{font-size:2.7rem;font-weight:900;letter-spacing:-1px;margin-bottom:.75rem}
   .hero .sub{color:var(--text-muted);font-size:1.12rem;margin-bottom:2rem}
-  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.78rem 1.6rem;border-radius:.55rem;font-weight:800;font-size:.98rem;transition:opacity .2s;margin:.25rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.78rem 1.6rem;border-radius:.55rem;font-weight:800;font-size:.98rem;transition:transform 140ms cubic-bezier(.23,1,.32,1),opacity 140ms cubic-bezier(.23,1,.32,1),background-color 140ms cubic-bezier(.23,1,.32,1),border-color 140ms cubic-bezier(.23,1,.32,1);margin:.25rem;touch-action:manipulation}
   .btn-primary{background:var(--accent);color:#fff}
   .btn-outline{border:1px solid var(--border);color:var(--text-muted);background:transparent}
   .btn:hover{opacity:.9;text-decoration:none}
+  .btn:active{transform:scale(.97)}
+  .btn:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
   .section{padding:4rem 1.5rem;background:var(--bg)}
   .section.alt{background:var(--bg2)}
   .container{max-width:940px;margin:0 auto}
@@ -67,9 +70,16 @@
   .card h3{font-size:1rem;margin-bottom:.6rem}
   .card p,.card li{color:var(--text-muted);font-size:.9rem}
   .card ul{padding-left:1.1rem}
+  .steps{counter-reset:step}
+  .step{position:relative;padding-left:3.4rem}
+  .step::before{counter-increment:step;content:counter(step);position:absolute;left:1rem;top:1.25rem;width:1.7rem;height:1.7rem;border-radius:999px;background:rgba(139,92,246,.2);color:var(--accent2);display:grid;place-items:center;font-weight:900}
+  .fit-list{display:grid;gap:.85rem}
+  .fit-list li{list-style:none;border-left:3px solid var(--accent);padding-left:.8rem}
   .price{font-size:1.4rem;font-weight:900;color:var(--green);margin:.5rem 0}
   .note{color:var(--text-dim);font-size:.85rem}
   footer{padding:2rem 1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text-dim);font-size:.85rem}
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav{background:#0a0e17}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
   @media(max-width:620px){.hero h1{font-size:2rem}.nav .links{gap:.75rem}.btn{width:100%;justify-content:center}}
 </style>
 
@@ -93,9 +103,10 @@
       if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
       if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
       if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
-      if (url.hostname !== window.location.hostname || product !== 'other') {
-        gtag('event', 'outbound_cta_click', {
-          event_category: 'outbound_cta',
+      var eventName = link.dataset.event || ((host.includes('amazon.com') || host === 'a.co') ? 'amazon_click' : 'outbound_cta_click');
+      if (url.hostname !== window.location.hostname || product !== 'other' || link.dataset.event) {
+        gtag('event', eventName, {
+          event_category: link.dataset.category || (eventName === 'outbound_cta_click' ? 'outbound_cta' : 'site_engagement'),
           product: product,
           placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
           link_url: url.href
@@ -122,7 +133,7 @@
     <div class="eyebrow">iOS personal growth OS</div>
     <h1>Structure for the moment you decide to stop drifting.</h1>
     <p class="sub">Inflection Point gives you quests, daily protocols, and reflection prompts built for actual behavior change, not another polite habit tracker that applauds you for opening it twice.</p>
-    <a href="https://inflectionpoint.me" class="btn btn-primary">⚡ Open Inflection Point</a>
+    <a href="https://inflectionpoint.me" class="btn btn-primary" data-product="inflection_point" data-placement="inflection-hero">⚡ Open Inflection Point</a>
     <a href="https://nickrae.net" class="btn btn-outline">← Back to NickRae.net</a>
   </div>
 </section>
@@ -171,10 +182,75 @@
 
 <section class="section alt">
   <div class="container">
+    <h2 class="section-title">How the app flow works</h2>
+    <p class="section-intro">The page used to explain the offer, but not the user path. This is the missing plain-English bridge.</p>
+    <div class="grid steps">
+      <div class="card step">
+        <h3>Pick a quest</h3>
+        <p>Choose the arc you are trying to move: discipline, reset, identity, spiritual momentum, or a practical behavior target.</p>
+      </div>
+      <div class="card step">
+        <h3>Run the daily protocol</h3>
+        <p>Use a short structure for what needs to happen today instead of pretending motivation is a strategy.</p>
+      </div>
+      <div class="card step">
+        <h3>Reflect and adjust</h3>
+        <p>Review what happened, name the friction, and decide the next action. Not a confetti habit toy. A mirror with buttons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Who it fits</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Good fit</h3>
+        <ul class="fit-list">
+          <li>You want concrete prompts and daily structure.</li>
+          <li>You prefer a one-time unlock over subscription creep.</li>
+          <li>You need momentum after a clear personal inflection point.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Bad fit</h3>
+        <ul class="fit-list">
+          <li>You want passive tracking without reflection.</li>
+          <li>You want therapy, coaching, or medical advice from an app.</li>
+          <li>You want a social feed disguised as self-improvement.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <h2 class="section-title">FAQ</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Is it a subscription?</h3>
+        <p>No. It has a 3-day access preview, then a free plan or an optional $14.99 lifetime unlock. No auto-renewal.</p>
+      </div>
+      <div class="card">
+        <h3>What happens after preview?</h3>
+        <p>You can keep using the free plan or buy the one-time lifetime unlock if the structure is worth keeping.</p>
+      </div>
+      <div class="card">
+        <h3>Is this therapy or coaching?</h3>
+        <p>No. It is a structure and reflection app. It does not replace therapy, pastoral care, coaching, medical advice, or real accountability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
     <div class="card" style="text-align:center;max-width:720px;margin:0 auto">
       <h2 class="section-title" style="margin-bottom:.5rem">Ready to test it?</h2>
       <p style="margin-bottom:1.25rem;color:var(--text-muted)">Start at the standalone launch site. NickRae.net keeps this page as a clean portfolio and search bridge.</p>
-      <a href="https://inflectionpoint.me" class="btn btn-primary">⚡ Go to inflectionpoint.me</a>
+      <a href="https://inflectionpoint.me" class="btn btn-primary" data-product="inflection_point" data-placement="inflection-final">⚡ Go to inflectionpoint.me</a>
       <p class="note">3-day access preview · Free plan · $14.99 lifetime unlock · No subscription</p>
     </div>
   </div>

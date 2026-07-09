@@ -59,7 +59,7 @@
   .hero .title{font-size:1.2rem;color:var(--accent2);font-weight:500;margin-bottom:1rem}
   .hero .tagline{color:var(--text-muted);max-width:580px;margin:0 auto 1.5rem;font-size:1.05rem}
   .hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-  .btn{padding:.7rem 1.75rem;border-radius:.5rem;font-weight:600;font-size:.9rem;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
+  .btn{padding:.7rem 1.75rem;border-radius:.5rem;font-weight:600;font-size:.9rem;transition:transform 140ms cubic-bezier(.23,1,.32,1),background-color 140ms cubic-bezier(.23,1,.32,1),border-color 140ms cubic-bezier(.23,1,.32,1),color 140ms cubic-bezier(.23,1,.32,1),opacity 140ms cubic-bezier(.23,1,.32,1);display:inline-flex;align-items:center;gap:.5rem;touch-action:manipulation}.btn:active{transform:scale(.97)}.btn:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
   .btn-primary{background:var(--accent);color:#fff;border:none}
   .btn-primary:hover{background:#2563eb;text-decoration:none}
   .btn-outline{border:1px solid var(--border);color:var(--text-muted);background:transparent}
@@ -185,6 +185,8 @@
   .workbook-preview{display:grid;grid-template-columns:1.05fr .95fr;gap:1rem;align-items:stretch;margin-top:1.25rem;margin-bottom:1.25rem}.cover-shelf-card{background:linear-gradient(135deg,#101827,#0f1729);border:1px solid rgba(96,165,250,.3);border-radius:1rem;padding:1.25rem;display:grid;grid-template-columns:92px 1fr;gap:1rem;align-items:center;color:var(--text);text-decoration:none}.cover-shelf-card:hover{text-decoration:none;border-color:rgba(96,165,250,.62)}.cover-shelf-card img{width:92px;border-radius:.25rem;box-shadow:0 14px 36px rgba(0,0,0,.35)}.cover-shelf-card h3{font-size:1rem;margin-bottom:.35rem}.cover-shelf-card p{font-size:.83rem;color:var(--text-muted);margin:0}.cover-shelf-card.featured{grid-row:span 2;grid-template-columns:130px 1fr;border-color:rgba(255,153,0,.42)}.cover-shelf-card.featured img{width:130px}
   @media(max-width:860px){.hero-layout,.workbook-preview{grid-template-columns:1fr}.hero.product-hero{text-align:center}.hero.product-hero .tagline{margin-left:auto;margin-right:auto}.credential-chip{justify-content:center}.cover-stage{min-height:380px}.proof-strip{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.cover-stage{min-height:330px}.cover-img{width:138px}.cover-main{width:160px;right:42px;top:48px}.cover-left{left:38px;top:112px}.cover-right{right:26px;bottom:72px}.proof-pill{left:22px;bottom:28px}.proof-strip{grid-template-columns:1fr}.cover-shelf-card,.cover-shelf-card.featured{grid-template-columns:86px 1fr}.cover-shelf-card img,.cover-shelf-card.featured img{width:86px}.hero-buttons{gap:.65rem}.btn{width:100%;justify-content:center}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav{background:#0a0e17}}
 </style>
 <script type="application/ld+json">
 {
@@ -265,9 +267,10 @@
       if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
       if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
       if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
-      if (url.hostname !== window.location.hostname || product !== 'other') {
-        gtag('event', 'outbound_cta_click', {
-          event_category: 'outbound_cta',
+      var eventName = link.dataset.event || ((host.includes('amazon.com') || host === 'a.co') ? 'amazon_click' : 'outbound_cta_click');
+      if (url.hostname !== window.location.hostname || product !== 'other' || link.dataset.event) {
+        gtag('event', eventName, {
+          event_category: link.dataset.category || (eventName === 'outbound_cta_click' ? 'outbound_cta' : 'site_engagement'),
           product: product,
           placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
           link_url: url.href
@@ -304,8 +307,8 @@
       <h1>Pilot workbooks for the checkride in front of you.</h1>
       <p class="tagline">Private, instrument, commercial, multi-engine, and VFR radio-call study tools written by a Commercial Instrument Multi-Engine pilot. Built for explanations, oral traps, and practical reps, not answer-key roulette.</p>
       <div class="hero-buttons">
-        <a href="aviation-workbooks/" class="btn btn-primary">Compare Pilot Workbooks</a>
-        <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="btn btn-outline" data-product="vfr_radio_calls_workbook" data-placement="home-hero">Buy VFR Radio Calls</a>
+        <a href="aviation-workbooks/" class="btn btn-primary" data-product="aviation_workbooks" data-placement="home-hero">Compare Pilot Workbooks</a>
+        <a href="ifr-scenario-pack/" class="btn btn-outline" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-hero">Free IFR Scenario Pack</a>
         <a href="flight-funded/" class="btn btn-outline">See sales proof</a>
       </div>
       <div class="credential-chip">
@@ -335,10 +338,10 @@
         <h3 style="font-size:1.05rem;margin-bottom:.35rem">Buy the pilot workbook for your next checkride</h3>
         <p style="color:var(--text-muted);font-size:.86rem;margin:0">Private, instrument, commercial, multi-engine, and VFR radio calls. Current proof: 98 aviation workbook units and $854.38 USD + €25.29 EUR verified from the June final KDP exports.</p>
       </a>
-      <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" style="display:block;background:linear-gradient(135deg,#1a2236,#0f1729);border:1px solid rgba(34,197,94,.38);border-radius:1rem;padding:1.35rem;text-decoration:none;color:var(--text)">
-        <div style="font-size:1.4rem;margin-bottom:.4rem">🎙️</div>
-        <h3 style="font-size:1.05rem;margin-bottom:.35rem">Stop freezing on the radio</h3>
-        <p style="color:var(--text-muted);font-size:.86rem;margin:0">Clearance to Confidence is live on Amazon: VFR radio-call drills, readbacks, CTAF, towered flows, and out-loud reps.</p>
+      <a href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-path-card" style="display:block;background:linear-gradient(135deg,#1a2236,#0f1729);border:1px solid rgba(34,197,94,.38);border-radius:1rem;padding:1.35rem;text-decoration:none;color:var(--text)">
+        <div style="font-size:1.4rem;margin-bottom:.4rem">📡</div>
+        <h3 style="font-size:1.05rem;margin-bottom:.35rem">Practice 10 IFR oral answers for free</h3>
+        <p style="color:var(--text-muted);font-size:.86rem;margin:0">Start with the free IFR Oral Exam Scenario Pack, then use the Instrument workbook if you need deeper reps.</p>
       </a>
       <a href="#building" style="display:block;background:linear-gradient(135deg,#10251d,#0f1729);border:1px solid rgba(34,197,94,.28);border-radius:1rem;padding:1.35rem;text-decoration:none;color:var(--text)">
         <div style="font-size:1.4rem;margin-bottom:.4rem">⚡</div>
@@ -360,7 +363,7 @@
         </div>
         <div class="proj-links" style="margin-top:0">
           <a href="aviation-workbooks/" class="site">Compare Workbooks</a>
-          <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="amazon" data-product="vfr_radio_calls_workbook" data-placement="home-proof">Buy Radio Workbook</a>
+          <a href="ifr-scenario-pack/" class="accent" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-proof">Free IFR Pack</a>
           <a href="flight-funded/" class="accent">See proof log</a>
         </div>
       </div>
@@ -399,6 +402,7 @@
       </div>
       <div class="proj-links" style="margin-top:0">
         <a href="aviation-workbooks/" class="site">Compare Pilot Workbooks</a>
+        <a href="ifr-scenario-pack/" class="accent" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-checkride-start">Free IFR Pack</a>
       </div>
     </div>
   </div>
@@ -445,6 +449,7 @@
         <span class="proj-badge live">Primary Revenue Lane</span>
         <div class="proj-links">
           <a href="aviation-workbooks/" class="site">📚 Compare Workbooks</a>
+          <a href="ifr-scenario-pack/" class="accent" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-building-card">📡 Free IFR Pack</a>
           <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="amazon">🎙️ VFR Radio Calls</a>
           <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" class="amazon">✈️ PPL Workbook</a>
           <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" class="amazon">📖 Full Amazon Catalog</a>
@@ -526,6 +531,10 @@
       <a class="cover-shelf-card featured" href="aviation-workbooks/">
         <img src="assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="lazy">
         <div><h3>Start with the product shelf</h3><p>See the full workbook stack, current proof, format options, and the best fit for your next checkride.</p></div>
+      </a>
+      <a class="cover-shelf-card" href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-shelf">
+        <img src="assets/workbooks/instrument-rating-cover.jpg" alt="Instrument Rating Workbook cover" loading="lazy">
+        <div><h3>Free IFR oral pack</h3><p>Download 10 source-anchored IFR scenario cards before buying another workbook.</p></div>
       </a>
       <a class="cover-shelf-card" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-shelf">
         <img src="assets/workbooks/private-pilot-cover.jpg" alt="Private Pilot License Workbook cover" loading="lazy">

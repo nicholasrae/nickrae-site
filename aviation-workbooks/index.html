@@ -109,7 +109,6 @@
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav,.proof-sticker,.bottom-cta{background:#07111f}}
   @media(max-width:760px){.bottom-cta{padding:.65rem .75rem calc(.65rem + env(safe-area-inset-bottom))}.bottom-cta a{min-height:44px;display:flex;align-items:center;justify-content:center}body{padding-bottom:calc(4.2rem + env(safe-area-inset-bottom))}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
-
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -132,9 +131,10 @@
       if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
       if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
       if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
-      if (url.hostname !== window.location.hostname || product !== 'other') {
-        gtag('event', 'outbound_cta_click', {
-          event_category: 'outbound_cta',
+      var eventName = link.dataset.event || ((host.includes('amazon.com') || host === 'a.co') ? 'amazon_click' : 'outbound_cta_click');
+      if (url.hostname !== window.location.hostname || product !== 'other' || link.dataset.event) {
+        gtag('event', eventName, {
+          event_category: link.dataset.category || (eventName === 'outbound_cta_click' ? 'outbound_cta' : 'site_engagement'),
           product: product,
           placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
           link_url: url.href
@@ -164,9 +164,9 @@
       <h1>Train like the checkride is already scheduled.</h1>
       <p class="sub">FAA-aligned workbooks for private pilot, instrument rating, commercial pilot, multi-engine add-on training, and VFR radio calls. Practical questions, oral-exam traps, call-building drills, and explanations that teach you how to answer the DPE's next question.</p>
       <div class="hero-actions">
+        <a class="btn btn-primary" href="#books" data-product="aviation_workbooks" data-placement="workbooks-hero">Compare the workbooks</a>
+        <a class="btn btn-outline" href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="workbooks-hero">Free IFR pack</a>
         <a class="btn btn-amazon" href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="workbooks-hero">Full Amazon Catalog</a>
-        <a class="btn btn-primary" href="#books">Compare the workbooks</a>
-        <a class="btn btn-outline" href="../flight-funded/">Follow Flight Funded</a>
       </div>
     </div>
     <div class="hero-visual product-stack" aria-label="Nick Rae aviation workbook covers">
@@ -288,6 +288,17 @@
         </div>
         <div class="book-body"><p>Seminole-focused prep for V-speeds, engine-out procedures, Vmc, OEI approaches, and multi-engine oral traps without generic twin fog.</p><div class="links"><a class="amazon" href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="book-card">Paperback</a><a class="amazon" href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="book-card">Kindle</a></div></div>
       </article>
+    </div>
+  </section>
+
+  <section class="copy-block" aria-label="Free IFR oral exam scenario pack">
+    <div class="eyebrow">Free IFR scenario pack</div>
+    <h2>Instrument students: practice 10 IFR oral answers before buying another workbook.</h2>
+    <p>Get the free IFR Oral Exam Scenario Pack: 10 source-anchored cards for currency, alternates, fuel, readbacks, holding, MDA discipline, and IFR equipment checks. It is a study aid, not flight instruction, and it intentionally excludes chart-specific traps until human review is complete.</p>
+    <p class="quote">If the DPE asks “why,” your mouth needs to prove your brain did the work.</p>
+    <div class="hero-actions" style="margin-top:1rem">
+      <a class="btn btn-primary" href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="workbooks-ifr-cta">Get the free IFR pack</a>
+      <a class="btn btn-outline" href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="workbooks-ifr-cta">Instrument workbook on Amazon</a>
     </div>
   </section>
 

@@ -12,6 +12,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 389.4 flight h
 - [Blog](https://nickrae.net/blog/)
 - [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and KDP aviation royalties: 98 March-June aviation workbook units, $854.38 USD + €25.29 EUR from the June final KDP exports
 - [Aviation Pilot Workbooks](https://nickrae.net/aviation-workbooks/) — FAA-aligned workbooks for private pilot, instrument, commercial, multi-engine, and VFR radio calls
+- [Free IFR Oral Exam Scenario Pack](https://nickrae.net/ifr-scenario-pack/) — free 10-card IFR oral exam scenario PDF; source-anchored study aid with chart-specific traps intentionally excluded
 - [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — background AI-automation playbook, not the current lead offer
 - [FeedFare](https://nickrae.net/feedfare/) — trade steps for screen time (iOS)
 - [Inflection Point](https://nickrae.net/inflection-point/) — personal growth OS with a 3-day access preview, free plan, and optional $14.99 lifetime unlock

@@ -266,6 +266,12 @@
     .pos-status{text-align:left}
     .hero::before,.hero::after{width:90vw;height:90vw}
   }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+    #webgl-hero{display:none}
+    .reveal,.reveal-left{opacity:1;transform:none}
+  }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -288,9 +294,10 @@
       if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
       if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
       if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
-      if (url.hostname !== window.location.hostname || product !== 'other') {
-        gtag('event', 'outbound_cta_click', {
-          event_category: 'outbound_cta',
+      var eventName = link.dataset.event || ((host.includes('amazon.com') || host === 'a.co') ? 'amazon_click' : 'outbound_cta_click');
+      if (url.hostname !== window.location.hostname || product !== 'other' || link.dataset.event) {
+        gtag('event', eventName, {
+          event_category: link.dataset.category || (eventName === 'outbound_cta_click' ? 'outbound_cta' : 'site_engagement'),
           product: product,
           placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
           link_url: url.href
@@ -323,7 +330,8 @@
     <h1>Building a <span>Flight Funded Career</span></h1>
     <p class="sub">I'm a commercial pilot building income streams to fund the next block of flight hours. KDP aviation workbooks are the cleanest proof line, FeedFare is live, and the AI automation material now stays in the background until it proves demand.</p>
     <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem">
-      <a href="../aviation-workbooks/" style="display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:white;font-weight:800;padding:.8rem 1.15rem;border-radius:.65rem;text-decoration:none">📚 Get the pilot workbooks funding this</a>
+      <a href="../ifr-scenario-pack/" style="display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:white;font-weight:800;padding:.8rem 1.15rem;border-radius:.65rem;text-decoration:none" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="flight-funded-hero">Free IFR scenario pack</a>
+      <a href="../aviation-workbooks/" style="display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--border);color:var(--text-muted);font-weight:700;padding:.8rem 1.15rem;border-radius:.65rem;text-decoration:none">📚 Pilot workbooks</a>
       <a href="#updates" style="display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--border);color:var(--text-muted);font-weight:700;padding:.8rem 1.15rem;border-radius:.65rem;text-decoration:none">See the receipts</a>
     </div>
   </div>
@@ -761,6 +769,11 @@
 // ── WEBGL STAR FIELD (Gemini 3.1 generated) ──────────────
 (function() {
     const canvas = document.getElementById('webgl-hero');
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+        canvas.style.display = 'none';
+        return;
+    }
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     if (!gl) return;
 
@@ -913,6 +926,10 @@
 })();
 
 // ── INTERSECTION OBSERVER (scroll reveal) ────────────────
+const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduceMotion) {
+  document.querySelectorAll('.reveal,.reveal-left').forEach(el=>el.classList.add('visible'));
+} else {
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -931,6 +948,7 @@ document.querySelectorAll('.reveal,.reveal-left').forEach(el=>observer.observe(e
 
 // also observe progress cards directly for the bars
 document.querySelectorAll('.progress-card').forEach(el=>observer.observe(el));
+}
 
 // ── NUMBER COUNTER ───────────────────────────────────────
 function countUp(el, target){
@@ -959,7 +977,7 @@ function countUpDecimal(el, target){
 
 // ── HERO ENTRANCE ─────────────────────────────────────────
 window.addEventListener('load',()=>{
-  document.querySelector('.hero-content').style.animation='fadeUp .8s ease .1s both';
+  if (!reduceMotion) document.querySelector('.hero-content').style.animation='fadeUp .8s ease .1s both';
 });
 </script>
 <!-- KO-FI FLOATING WIDGET -->
