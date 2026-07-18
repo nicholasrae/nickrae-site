@@ -33,6 +33,7 @@
         "url": "https://nickrae.net/"
       },
       "datePublished": "2026-03-01",
+      "dateModified": "2026-07-18",
       "url": "https://nickrae.net/blog/blog-cheapest-flight-hours.html",
       "image": "https://nickrae.net/og-image.jpg",
       "description": "Seven realistic ways to build flight hours cheaply in 2026: safety pilot time, flying clubs, CAP, Angel Flight, pipeline patrol, CFI, and banner towing.",
@@ -161,6 +162,20 @@
   .author-box{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.75rem;margin:3rem 0;font-size:.9rem;color:var(--text-muted)}
   .author-box strong{color:var(--text)}
   .summary-table{background:var(--card);border:1px solid var(--border);border-radius:.75rem;overflow:hidden;margin:2rem 0}
+  .hour-calculator{background:linear-gradient(145deg,#101b2e,#0d1524);border:1px solid rgba(96,165,250,.4);border-radius:1rem;padding:1.5rem;margin:2.5rem 0}
+  .hour-calculator h2{border-top:0;padding-top:0;margin-top:0}
+  .calculator-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin:1.25rem 0}
+  .calculator-field label{display:block;color:var(--text);font-size:.82rem;font-weight:700;margin-bottom:.35rem}
+  .calculator-field input{width:100%;background:#09111f;color:var(--text);border:1px solid var(--border);border-radius:.55rem;padding:.7rem .75rem;font:inherit}
+  .calculator-field input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .calculator-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
+  .calculator-actions button{border:0;border-radius:.55rem;background:var(--accent);color:white;font:inherit;font-weight:800;padding:.75rem 1.1rem;cursor:pointer}
+  .calculator-actions button:hover{background:#2563eb}
+  .calculator-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.8rem}
+  .calculator-result{background:#09111f;border:1px solid var(--border);border-radius:.7rem;padding:1rem}
+  .calculator-result strong{display:block;color:var(--accent2);font-size:1.25rem}
+  .calculator-result span{display:block;color:var(--text-dim);font-size:.8rem;margin-top:.25rem}
+  .calculator-note{color:var(--text-dim);font-size:.82rem;margin-top:1rem;margin-bottom:0!important}
   .article-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem}
   .nav-link{color:var(--accent2);font-weight:600;font-size:.9rem}
   footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:4rem}
@@ -204,7 +219,7 @@
   <div class="article-header">
     <div class="article-meta">
       <span class="article-category">&#x2708;&#xFE0F; Aviation</span>
-      <span>March 2026</span>
+      <span>March 2026 · Updated July 18, 2026</span>
       <span>Nick Rae</span>
       <span>~10 min read</span>
     </div>
@@ -229,6 +244,50 @@
     <p>Here's the full spectrum, from free to low-cost to income-generating:</p>
 
     <blockquote><strong>Fast answer:</strong> the cheapest way to build flight time is usually safety-pilot time or Civil Air Patrol if you qualify and have the network. The most reliable low-cost path is a flying club. The best long-term economic path is paid flying: CFI, pipeline patrol, survey, banner towing, or another commercial job that logs hours while paying you.</blockquote>
+
+    <section class="hour-calculator" id="flight-hour-calculator" aria-labelledby="flight-hour-calculator-title">
+      <h2 id="flight-hour-calculator-title">Flight Hour Cost Calculator</h2>
+      <p>Change the assumptions to match your logbook and local rates. The defaults are planning examples from this article, not live quotes from a school, club, employer, or safety-pilot partner.</p>
+      <form id="flight-hour-calculator-form">
+        <div class="calculator-grid">
+          <div class="calculator-field">
+            <label for="current-hours">Current total hours</label>
+            <input id="current-hours" type="number" min="0" step="0.1" value="391.3" inputmode="decimal">
+          </div>
+          <div class="calculator-field">
+            <label for="target-hours">Target hours</label>
+            <input id="target-hours" type="number" min="0" step="1" value="500" inputmode="numeric">
+          </div>
+          <div class="calculator-field">
+            <label for="school-rate">Flight-school rate per hour</label>
+            <input id="school-rate" type="number" min="0" step="1" value="200" inputmode="decimal">
+          </div>
+          <div class="calculator-field">
+            <label for="club-rate">Flying-club rate per hour</label>
+            <input id="club-rate" type="number" min="0" step="1" value="125" inputmode="decimal">
+          </div>
+          <div class="calculator-field">
+            <label for="safety-hours">Safety-pilot hours per month</label>
+            <input id="safety-hours" type="number" min="0" step="1" value="5" inputmode="decimal">
+          </div>
+          <div class="calculator-field">
+            <label for="paid-hours">Paid flying hours per month</label>
+            <input id="paid-hours" type="number" min="0" step="1" value="0" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calculator-actions">
+          <button type="submit">Calculate my path</button>
+          <span style="color:var(--text-dim);font-size:.82rem">No data leaves this page.</span>
+        </div>
+      </form>
+      <div class="calculator-results" aria-live="polite">
+        <div class="calculator-result"><strong id="result-remaining">108.7</strong><span>hours remaining</span></div>
+        <div class="calculator-result"><strong id="result-school">$21,740</strong><span>rent every remaining hour</span></div>
+        <div class="calculator-result"><strong id="result-club">$13,588</strong><span id="result-savings">club path · save $8,153</span></div>
+        <div class="calculator-result"><strong id="result-months">22 months</strong><span>safety-pilot + paid hours only</span></div>
+      </div>
+      <p class="calculator-note">Planning estimate only. It excludes dues, initiation fees, certificates, instruction, travel, insurance, currency work, fuel splits, taxes, and aircraft availability. Safety-pilot and paid-flying time must be legal, loggable, available, and appropriate to your certificate, role, and operation.</p>
+    </section>
 
     <h2>Cost-Per-Hour Comparison</h2>
     <div class="summary-table">
@@ -427,14 +486,14 @@
   </section>
 
 
-  <section aria-label="IFR oral scenario warmup" style="margin-top:2.75rem;padding:1.5rem;border:1px solid rgba(96,165,250,.35);border-radius:14px;background:linear-gradient(135deg,#102033,#0f1729)">
-    <div style="font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#93c5fd;margin-bottom:.6rem">IFR / checkride warmup</div>
-    <h3 style="color:#e2e8f0;margin:0 0 .65rem">Before the next oral, practice rule, risk, and action out loud.</h3>
-    <p style="color:#94a3b8;margin-bottom:1rem">I built a free IFR scenario path for pilots who need more than answer-key roulette: read 10 example oral scenarios, then download the 10-card source-anchored PDF.</p>
+  <section aria-label="Flight hour planning next steps" style="margin-top:2.75rem;padding:1.5rem;border:1px solid rgba(96,165,250,.35);border-radius:14px;background:linear-gradient(135deg,#102033,#0f1729)">
+    <div style="font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#93c5fd;margin-bottom:.6rem">Plan the next threshold</div>
+    <h3 style="color:#e2e8f0;margin:0 0 .65rem">Turn the estimate into an actual hour-building plan.</h3>
+    <p style="color:#94a3b8;margin-bottom:1rem">Run your numbers above, then compare them with the public Flight Funded ledger and the full commercial-pilot pathway.</p>
     <div style="display:flex;gap:.75rem;flex-wrap:wrap">
-      <a href="ifr-oral-exam-scenarios.html" data-event="blog_internal_click" data-product="ifr_oral_scenarios_post" data-placement="aviation-post-ifr-box" style="display:inline-flex;align-items:center;background:#2563eb;color:#fff;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">Read 10 IFR scenarios</a>
-      <a href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="aviation-post-ifr-box" style="display:inline-flex;align-items:center;border:1px solid #334155;color:#e2e8f0;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">Download free IFR pack</a>
-      <a href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="aviation-post-ifr-box" style="display:inline-flex;align-items:center;border:1px solid #334155;color:#e2e8f0;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">Compare workbooks</a>
+      <a href="#flight-hour-calculator" data-event="blog_internal_click" data-product="flight_hour_calculator" data-placement="hour-building-primary-cta" style="display:inline-flex;align-items:center;background:#2563eb;color:#fff;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">Run the calculator</a>
+      <a href="../flight-funded/" data-event="blog_internal_click" data-product="flight_funded" data-placement="hour-building-primary-cta" style="display:inline-flex;align-items:center;border:1px solid #334155;color:#e2e8f0;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">Open Flight Funded</a>
+      <a href="commercial-pilot-career-2026.html" data-event="blog_internal_click" data-product="commercial_pilot_career" data-placement="hour-building-secondary-cta" style="display:inline-flex;align-items:center;border:1px solid #334155;color:#e2e8f0;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">See the career path</a>
     </div>
   </section>
 
@@ -451,6 +510,58 @@
 
 
 <script>
+  (function(){
+    var form = document.getElementById('flight-hour-calculator-form');
+    if(!form) return;
+
+    function numberValue(id){
+      var value = Number.parseFloat(document.getElementById(id).value);
+      return Number.isFinite(value) && value >= 0 ? value : 0;
+    }
+
+    function money(value){
+      return Math.round(value).toLocaleString('en-US', {style:'currency', currency:'USD', maximumFractionDigits:0});
+    }
+
+    function calculate(track){
+      var current = numberValue('current-hours');
+      var target = numberValue('target-hours');
+      var schoolRate = numberValue('school-rate');
+      var clubRate = numberValue('club-rate');
+      var safetyPerMonth = numberValue('safety-hours');
+      var paidPerMonth = numberValue('paid-hours');
+      var remaining = Math.max(0, Number((target - current).toFixed(1)));
+      var schoolCost = remaining * schoolRate;
+      var clubCost = remaining * clubRate;
+      var savings = Math.max(0, schoolCost - clubCost);
+      var lowCashMonthly = safetyPerMonth + paidPerMonth;
+      var months = remaining === 0 ? 0 : (lowCashMonthly > 0 ? Math.ceil(remaining / lowCashMonthly) : null);
+
+      document.getElementById('result-remaining').textContent = remaining.toFixed(1);
+      document.getElementById('result-school').textContent = money(schoolCost);
+      document.getElementById('result-club').textContent = money(clubCost);
+      document.getElementById('result-savings').textContent = 'club path · save ' + money(savings);
+      document.getElementById('result-months').textContent = months === null ? 'Add monthly hours' : (months + (months === 1 ? ' month' : ' months'));
+
+      if(track && typeof gtag === 'function'){
+        gtag('event', 'flight_hour_calculator_use', {
+          event_category: 'site_tool',
+          product: 'flight_hour_calculator',
+          placement: 'cheapest-flight-hours',
+          target_hours: target,
+          remaining_hours: Number(remaining.toFixed(1))
+        });
+      }
+    }
+
+    form.addEventListener('submit', function(event){
+      event.preventDefault();
+      calculate(true);
+    });
+    form.addEventListener('input', function(){ calculate(false); });
+    calculate(false);
+  })();
+
   document.addEventListener('click', function(event){
     var el = event.target.closest && event.target.closest('a[data-event]');
     if(!el || typeof gtag !== 'function') return;

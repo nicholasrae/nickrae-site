@@ -26,10 +26,10 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 - [I Read Meta's Self-Improving AI Paper. Then I Implemented It.](https://nickrae.net/blog/self-improving-ai-agents.html)
 - [Setting Up OpenClaw: The 5 Things I Wish I Did First](https://nickrae.net/blog/blog-openclaw-setup.html)
 - [How I Earned My Commercial Pilot License at 45](https://nickrae.net/blog/blog-commercial-pilot.html)
-- [The Cheapest Ways to Build Flight Hours in 2026](https://nickrae.net/blog/blog-cheapest-flight-hours.html) — cost-per-hour comparison for safety-pilot time, flying clubs, CAP, CFI, and paid hour-building jobs
+- [The Cheapest Ways to Build Flight Hours in 2026](https://nickrae.net/blog/blog-cheapest-flight-hours.html) — cost-per-hour comparison plus an interactive calculator for rental, club, safety-pilot, and paid-flying paths
 - [How to Become a Commercial Pilot in 2026](https://nickrae.net/blog/commercial-pilot-career-2026.html)
-- [The Ultimate Private Pilot Checkride Prep Guide](https://nickrae.net/blog/checkride-prep-guide.html) — oral, ACS, flight-test, and study-stack guidance
-- [5 Apps Every Student Pilot Needs in 2026](https://nickrae.net/blog/student-pilot-apps-2026.html) — comparison table for ForeFlight, Prepware, E6B, CloudAhoy, and focus tools
+- [The Ultimate Private Pilot Checkride Prep Guide](https://nickrae.net/blog/checkride-prep-guide.html) — FAA-S-ACS-6C source links, a visible checkride-week checklist, oral/flight guidance, and PPL-specific workbook path
+- [5 Apps Every Student Pilot Needs in 2026](https://nickrae.net/blog/student-pilot-apps-2026.html) — comparison table for ForeFlight, Prepware, E6B, CloudAhoy, and focus tools with intent-matched next steps
 - [Setting Up OpenClaw: The 5 Things I Wish I Did First](https://nickrae.net/blog/blog-openclaw-setup.html)
 - [I've Been Running OpenClaw for 30 Days](https://nickrae.net/blog/openclaw-30-days.html)
 - [How I'm Using AI to Build Side Income as a Pilot](https://nickrae.net/blog/ai-aviation-business.html)
