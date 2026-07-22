@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How I'm Using AI to Build Side Income as a Pilot — Nick Rae</title>
-<meta name="description" content="A commercial pilot's honest account of using AI automation to build side income through iOS apps, KDP publishing, and prediction market bots. Real numbers, real timeline, still early.">
+<meta name="description" content="A commercial pilot's honest account of using AI automation and KDP publishing to fund flight hours, with real revenue, parked apps, and paper-only market research.">
 <meta property="og:title" content="How I'm Using AI to Build Side Income as a Pilot">
 <meta property="og:description" content="I need 108.7 more flight hours to reach the 500-hour Part 135 target. I'm using AI, aviation products, and automation to close the gap honestly.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
@@ -24,9 +24,10 @@
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-03-14",
+      "dateModified": "2026-07-22",
       "url": "https://nickrae.net/blog/ai-aviation-business.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "A commercial pilot's honest account of using AI automation to build side income through iOS apps, KDP publishing, and prediction market bots. Real numbers, real timeline, still early.",
+      "description": "A commercial pilot's honest account of using AI automation and KDP publishing to fund flight hours, with real revenue, parked apps, and paper-only market research.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/ai-aviation-business.html" }
     },
     {
@@ -126,9 +127,9 @@
 <!-- ARTICLE -->
 <article>
   <header class="article-header">
-    <div class="article-meta">March 2026 · Entrepreneurship</div>
+    <div class="article-meta">March 2026 · Updated July 2026 · Entrepreneurship</div>
     <h1 class="article-title">How I'm Using AI to Build Side Income as a Pilot</h1>
-    <p class="article-excerpt">I need 108.7 more flight hours to reach the 500-hour Part 135 target. At roughly $200/hr, that's about $21,740. I'm using AI automation to build side income through iOS apps, aviation products, and gated prediction-market research. Here's what is actually working and what is not yet.</p>
+    <p class="article-excerpt">I need 108.7 more flight hours to reach the 500-hour Part 135 target. At roughly $200/hr, that's about $21,740. I'm using AI automation and shipped aviation products to close the gap while keeping app experiments parked and market research paper-only.</p>
   </header>
 
   <div class="article-content">
@@ -136,16 +137,16 @@
 
     <p>So I'm building income streams on the side, and using AI automation to do most of the heavy lifting while I'm at work. Here's an honest accounting of where things stand.</p>
 
-    <h3>The Stack: OpenClaw + Talos</h3>
+    <h3>The Stack: Hermes Agent + Talos</h3>
 
-    <p>Everything runs through <a href="blog-openclaw-setup.html">OpenClaw</a>, an open-source AI agent platform that runs on my Mac 24/7. My agent is named Talos. It handles:</p>
+    <p>I originally ran this operating system through OpenClaw. That runtime is now retired. The current stack uses Hermes Agent, with my agent Talos handling bounded research, local builds, verification, and scheduled monitoring on my Mac.</p>
 
     <ul>
       <li><strong>Content creation</strong>: Blog posts, SEO optimization, marketing copy</li>
       <li><strong>Code generation</strong>: Helps build and maintain my iOS apps</li>
       <li><strong>Market research</strong>: Scans for opportunities, analyzes competitors</li>
-      <li><strong>Task management</strong>: Tracks progress across all projects via Todoist integration</li>
-      <li><strong>Cron automation</strong>: 20+ scheduled jobs run overnight while I sleep</li>
+      <li><strong>Evidence management</strong>: Separates shipped proof, drafts, paper results, and real revenue</li>
+      <li><strong>Scheduled monitoring</strong>: Runs a bounded set of health, evidence, and briefing jobs</li>
     </ul>
 
     <p>Talos isn't magic. It's infrastructure. The value comes from having a system that moves projects forward during the hours I can't.</p>
@@ -166,29 +167,23 @@
 
     <p>All five are now collected on the <a href="../aviation-workbooks/">Aviation Pilot Workbook Series page</a> so the book funnel has one clean destination instead of scattered product links.</p>
 
-    <p>The June 2026 final KDP exports put the aviation workbook lane at <strong>$854.38 USD plus €25.29 EUR</strong> from 98 March-June aviation workbook units. June final totals show 36 aviation units, $327.51 USD, €15.88 EUR, and 682 KENP, with Instrument leading royalty dollars and PPL still showing durable demand. Still small, but no longer imaginary. AI helped with formatting, keyword optimization, product copy, and the publishing workflow.</p>
+    <p>Reconciled tracking through July 22 puts the aviation workbook lane at <strong>110 units, $952.38 USD plus €37.42 EUR</strong>. That is tracked aviation-product proof across the stated March-July evidence windows, not an Amazon Ads attribution claim. Instrument carries the clearest current ad signal, while PPL still shows durable product demand. Still small, but no longer imaginary.</p>
 
     <h4>FeedFare — Live on the App Store</h4>
 
     <p>An iOS app where you trade steps for screen time. Set a daily walking goal, earn minutes, and use movement to build better phone habits.</p>
 
-    <p>Now live on the App Store as of March 2, 2026. Free with premium IAP. Not generating revenue yet — just launched. AI helped build it, optimize the App Store listing, and generate ASO keywords. The app works. Now it needs users, trial starts, and conversion data.</p>
+    <p>FeedFare is live on the App Store and remains a separate product experiment. I do not have verified revenue proof for it. Further conversion and App Store work is parked unless the lane is explicitly reopened.</p>
 
     <h4>Kalshi Weather Bot — Paper Trading</h4>
 
-    <p>A Python bot that scans <a href="kalshi-weather-bot.html">Kalshi weather prediction markets</a> every 30 minutes. It compares NOAA and Open-Meteo forecasts to market prices, identifies edges above 15 cents, and sizes positions using Kelly Criterion.</p>
+    <p>The current credential-free research stack collects public <a href="kalshi-weather-bot.html">Kalshi weather-market</a>, NBM, and METAR evidence. It is a paper/shadow research system, not a live trading product.</p>
 
-    <p>The bot ran paper for 35 days: 217 resolved trades, 76.5% win rate, and $1,773 in simulated profit. It went live on March 28, 2026 with a $424 bankroll, then got pulled back into paper/gated mode after live calibration checks showed the weather strategy was not capital-ready. AI built the scanner and review layer. The useful lesson was that automation still needs brutal gates.</p>
+    <p>An earlier paper headline failed harder market-relative validation. The settled V1 ledger finished 1 win, 19 losses, and -$24.99 in realized paper P&amp;L. V2 is collecting under stricter abstention rules and has not produced a candidate yet. Live trading is off. The useful lesson is that automation still needs brutal gates.</p>
 
-    <h4>More Apps in the Pipeline</h4>
+    <h4>Other Apps — Parked</h4>
 
-    <ul>
-      <li><strong>Inflection Point</strong>: Life strategy game (iOS). Built, needs to be submitted to App Store.</li>
-      <li><strong>SpendSlap</strong>: CSV spending roaster with AI analysis. Built, needs RevenueCat wired.</li>
-      <li><strong>PetFace</strong>: AI pet portraits + breed detection. Built, needs Replicate API + RevenueCat.</li>
-    </ul>
-
-    <p>Notice the pattern: built but not shipped. That's the gap I'm closing right now. AI is great at building. Shipping requires human follow-through on App Store submissions, payment wiring, and marketing.</p>
+    <p>Inflection Point and older app experiments such as SpendSlap and PetFace are parked. They are not active revenue lanes, and unfinished software is not a product merely because AI generated code for it.</p>
 
     <h4>YouTube — Not Yet Monetized</h4>
 
@@ -199,7 +194,7 @@
     <p>After several months of running this system, here's what genuinely works:</p>
 
     <ul>
-      <li><strong>Overnight work</strong>: Talos runs cron jobs at 3am that draft content, back up data, scan markets, and prepare morning briefs. I wake up to a summary of what got done.</li>
+      <li><strong>Bounded background work</strong>: Talos monitors evidence, checks system health, and prepares concise decision briefs without pretending activity is progress.</li>
       <li><strong>Research at scale</strong>: Competitive analysis, niche scouting for KDP, SEO keyword research. Tasks that would take me hours take minutes.</li>
       <li><strong>Code generation</strong>: Going from idea to working iOS app in days instead of months. I'm not a developer by training. AI closed that gap.</li>
       <li><strong>Content production</strong>: Blog posts, product descriptions, social media drafts. The volume would be impossible solo.</li>
@@ -208,26 +203,26 @@
     <h3>What AI Doesn't Do</h3>
 
     <ul>
-      <li><strong>Ship products</strong>: Every app still needs manual App Store submission, screenshot creation, payment integration.</li>
+      <li><strong>Ship products by itself</strong>: Public releases, account changes, purchases, and outreach still require human judgment and approval.</li>
       <li><strong>Build an audience</strong>: No shortcut for genuine engagement. Reviews, followers, and trust take time.</li>
-      <li><strong>Replace judgment</strong>: The Kalshi bot has a devil's advocate layer because blindly trusting AI signals with real money is how you go broke.</li>
-      <li><strong>Guarantee income</strong>: KDP revenue is real, the OpenClaw Playbook is live, and the Kalshi bot is paused because the market baseline beat it. Still early, no fairy dust.</li>
+      <li><strong>Replace judgment</strong>: The weather research stack defaults to abstention because blindly trusting model signals with real money is how you go broke.</li>
+      <li><strong>Guarantee income</strong>: KDP royalties are real. Paper P&amp;L, app code, clicks, and unfinished products are not revenue. Still early, no fairy dust.</li>
     </ul>
 
     <h3>The Math</h3>
 
     <p>The near-term target is 500 hours for the Part 135 path. At 391.3 hours, that leaves 108.7 hours. At roughly $200/hr, that is about a $21,740 gap. ATP minimums are the later mountain, but the next hill is 500 hours.</p>
 
-    <p>The cleanest signal right now is aviation products: the June final KDP exports put March-June aviation workbook tracking at 98 units and $854.38 USD plus €25.29 EUR, with Instrument leading royalty dollars and PPL still a strong demand lane. The workbook catalog is the current lead revenue lane. FeedFare is live on the App Store. Kalshi is back in the penalty box until the gate earns trust.</p>
+    <p>The cleanest signal right now is aviation products: reconciled tracking through July 22 is 110 aviation units and $952.38 USD plus €37.42 EUR. The workbook catalog is the lead revenue lane. FeedFare is live but unproven and parked. Weather-market work stays paper-only until independent evidence beats the market after costs.</p>
 
     <h3>What's Next</h3>
 
     <ol>
-      <li><strong>Sell what is already shipped</strong>: The OpenClaw Playbook and aviation workbooks need distribution more than another polish pass.</li>
-      <li><strong>Grow KDP reviews</strong>: Reviews, the new aviation workbook funnel page, and eventually Amazon Ads are still the cleanest levers for the aviation catalog.</li>
-      <li><strong>Improve FeedFare conversion</strong>: The app is live; now the funnel has to prove trial and paid conversion.</li>
-      <li><strong>Keep Kalshi gated</strong>: No live restart until calibration beats the market baseline with enough settled data.</li>
-      <li><strong>Join a flying club</strong>: Cut hourly costs from $200 to something less stupid. Small victory, large bill.</li>
+      <li><strong>Sell what is already shipped</strong>: The aviation workbooks need distribution and customer proof more than another product draft.</li>
+      <li><strong>Hold ad scale</strong>: Keep the converting Instrument campaign capped while same-window royalty economics mature.</li>
+      <li><strong>Pursue paid flying honestly</strong>: Apply only where the current posting and verified logbook fit.</li>
+      <li><strong>Keep weather research gated</strong>: No live restart until independent forward evidence beats the market after costs.</li>
+      <li><strong>Leave parked products parked</strong>: No app resurrection without a buyer, user, or explicit proof gate.</li>
     </ol>
 
     <p>I'm tracking every dollar publicly on my <a href="../flight-funded/">Flight Funded</a> dashboard. Real numbers, real time, no spin. If AI-powered side income can fund a pilot career, you'll see it happen there first.</p>
@@ -241,13 +236,13 @@
     <div style="font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#60a5fa;margin-bottom:.6rem">Keep reading</div>
     <p style="margin-bottom:1rem;color:#94a3b8">If this page was useful, these are the next three pages worth your time.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-bottom:1rem">
-      <a href="kalshi-weather-bot.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
-        <strong style="display:block;color:#e2e8f0;font-size:.98rem">Kalshi Weather Bot</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">How the weather bot works, where the edge comes from, and what changed once real money hit.</span>
+      <a href="../aviation-workbooks/" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
+        <strong style="display:block;color:#e2e8f0;font-size:.98rem">Aviation Pilot Workbook Series</strong>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The shipped aviation products with verified customer-money proof.</span>
       </a>
-      <a href="openclaw-playbook.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
-        <strong style="display:block;color:#e2e8f0;font-size:.98rem">OpenClaw Playbook</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The non-developer setup that powers the automations behind these projects.</span>
+      <a href="blog-commercial-pilot.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
+        <strong style="display:block;color:#e2e8f0;font-size:.98rem">My Commercial Pilot Story</strong>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The verified flight-time path these products are helping fund.</span>
       </a>
       <a href="../flight-funded/" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">Flight Funded</strong>
