@@ -11,7 +11,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 - [Home](https://nickrae.net/)
 - [Blog](https://nickrae.net/blog/)
 - [Flight Resume](https://nickrae.net/Nicholas_Rae_Flight_Resume.pdf) — current generic one-page pilot resume with verified 391.3 TT, 272.8 PIC, 311.7 C172, and 221.6 C172 PIC
-- [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and KDP aviation royalties: reconciled Jan-July tracking stands at 122 books through July 26; the July 1-26 aviation snapshot shows 17 paid units, $146.61 USD + €12.13 EUR, 411 KENP through July 24, and 0 refunds; cumulative March-July aviation tracking is 115 units, $1,000.99 USD + €37.42 EUR
+- [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and KDP aviation royalties: reconciled Jan-July tracking stands at 129 full-catalog books through July 31; the July 1-31 aviation snapshot shows 24 paid units, $192.85 USD + €21.54 EUR + A$9.49, 438 KENP, and 0 refunds; cumulative March-July aviation tracking is 122 units, $1,047.23 USD + €46.83 EUR + A$9.49
 - [Aviation Pilot Workbooks](https://nickrae.net/aviation-workbooks/) — FAA-aligned workbooks for private pilot, instrument, commercial, multi-engine, and VFR radio calls
 - [Free IFR Oral Exam Scenario Pack](https://nickrae.net/ifr-scenario-pack/) — free 10-card IFR oral exam scenario PDF; source-anchored study aid with chart-specific traps intentionally excluded
 - [IFR Oral Exam Scenarios](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — 10-question blog bridge using the rule-risk-action framework for instrument oral practice
@@ -42,7 +42,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 
 ## Current Revenue Proof
 
-- Reconciled KDP tracking through July 26, 2026: 122 books, including 14 eBooks and 108 paperbacks. The July 1-26 aviation dashboard snapshot shows 17 paid units, $146.61 USD + €12.13 EUR, 0 refunds, and 411 KENP through July 24; March-July aviation tracking is 115 units, $1,000.99 USD + €37.42 EUR. Amazon Ads scale remains HOLD until same-window Ads exports prove attribution.
+- Reconciled KDP tracking through July 31, 2026: 129 full-catalog books. The July 1-31 aviation dashboard snapshot shows 24 paid units, $192.85 USD + €21.54 EUR + A$9.49, 0 refunds, and 438 KENP; March-July aviation tracking is 122 units, $1,047.23 USD + €46.83 EUR + A$9.49. Amazon Ads scale remains HOLD until same-window Campaign, Search Term, Targeting, and Placement evidence proves attribution and repeatability.
 - Kalshi weather bot remains paused/gated until calibration earns trust.
 
 ## Background Digital Products
