@@ -140,14 +140,7 @@
   @media(max-width:720px){nav .links{display:none}article{padding:4rem 1rem 2rem}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.btn:hover{transform:none}}
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-  document.addEventListener('click', function(event){
+<script>document.addEventListener('click', function(event){
     var el = event.target.closest && event.target.closest('a[href],button[data-event]');
     if(!el || typeof gtag !== 'function') return;
     try {
@@ -159,11 +152,12 @@
         link_url: url ? url.href : undefined
       });
     } catch(e) {}
-  });
-</script>
+  });</script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body data-page="blog-ifr-oral-exam-scenarios">
 <nav><div class="inner"><div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div><div class="links"><a href="./">Blog</a><a href="../ifr-scenario-pack/">Free IFR Pack</a><a href="../aviation-workbooks/">Pilot Workbooks</a><a href="../flight-funded/">Flight Funded</a></div></div></nav>
+<main id="main-content">
 <article>
   <div class="article-meta">July 9, 2026 · Instrument training · 9 min read</div>
   <h1>IFR Oral Exam Scenarios: 10 Questions That Prove Whether You Understand the Rating</h1>
@@ -234,6 +228,7 @@
     </div>
   </section>
 </article>
+</main>
 <footer>© 2026 Nick Rae · Commercial Instrument Multi-Engine Pilot · <a href="../flight-funded/">Flight Funded</a></footer>
 </body>
 </html>

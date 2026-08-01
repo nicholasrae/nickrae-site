@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code) — Nick Rae</title>
-<meta name="description" content="A non-developer's guide to building useful OpenClaw cron jobs. Morning briefings, trading bot monitoring, TikTok automation, and App Store alerts. Real configs from 6 months of daily use.">
-<meta property="og:title" content="How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code)">
-<meta property="og:description" content="A non-developer's guide to building useful OpenClaw cron jobs. Morning briefings, trading bot monitoring, TikTok automation, and App Store alerts.">
+<title>How I Ran 46 AI Cron Jobs on OpenClaw — 2026 Archive — Nick Rae</title>
+<meta name="description" content="A dated March 2026 account of running 46 OpenClaw cron jobs, including useful patterns, expensive mistakes, and safety lessons. The runtime is now retired.">
+<meta property="og:title" content="How I Ran 46 AI Cron Jobs on OpenClaw — 2026 Archive">
+<meta property="og:description" content="Historical OpenClaw cron-job patterns and safety lessons from 2026. Nick's OpenClaw runtime is now retired.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/openclaw-cron-jobs-guide.html">
 <meta property="og:type" content="article">
@@ -20,13 +20,13 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "headline": "How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code)",
+      "headline": "How I Ran 46 AI Cron Jobs on OpenClaw — 2026 Archive",
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-03-26",
       "url": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "A non-developer's guide to building useful OpenClaw cron jobs.",
+      "description": "A dated March 2026 account of running 46 OpenClaw cron jobs. Nick's runtime is now retired.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html" }
     },
     {
@@ -34,7 +34,7 @@
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
         { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "How I Run 50+ AI Cron Jobs on OpenClaw", "item": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html" }
+        { "@type": "ListItem", "position": 3, "name": "How I Ran 46 AI Cron Jobs on OpenClaw", "item": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html" }
       ]
     }
   ]
@@ -81,14 +81,7 @@
   @media(max-width:640px){h1{font-size:1.6rem}article{padding:5rem 1rem 2rem}}
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 
@@ -103,6 +96,7 @@
   </div>
 </nav>
 
+<main id="main-content">
 <article>
   <div class="article-header">
     <div class="article-meta">
@@ -110,13 +104,14 @@
       <time datetime="2026-03-26">March 26, 2026</time>
       <span>12 min read</span>
     </div>
-    <h1>How I Run 50+ AI Cron Jobs on OpenClaw (Without Writing Code)</h1>
-    <p class="lead">My agent sends me a morning briefing, monitors my apps in the App Store, trades weather markets, posts to TikTok, and backs up my databases. All while I'm at work selling car stereos. Here's what actually works, what broke, and what turned a chatbot into a useful system.</p>
+    <h1>How I Ran 46 AI Cron Jobs on OpenClaw — 2026 Archive</h1>
+    <p class="lead">This page preserves the March 26, 2026 operating snapshot: what worked, what broke, and which safety lessons survived. My OpenClaw runtime is now retired; market work is paper-only, and current interfaces may differ.</p>
   </div>
 
-  <p>Six months ago, my OpenClaw agent did exactly one thing: answer questions when I asked them. It was a chatbot. An expensive one.</p>
+  <div class="callout"><div class="callout-title">Status · August 1, 2026</div><p>Historical operating notes, not a current-system claim or live setup guide. Verify present documentation before adapting any example.</p></div>
+  <p>At the beginning of that OpenClaw period, the agent did exactly one thing: answer questions when I asked them. It was a chatbot. An expensive one.</p>
 
-  <p>Today it runs 46 automated jobs on a schedule. Some fire every 30 minutes. Some run once a week. A few only trigger when specific conditions are met. The total cost is about $30 a month in API tokens, and the time it saves me is somewhere north of 8 hours a week.</p>
+  <p>At the March 26 snapshot, it ran 46 automated jobs on schedules ranging from 30 minutes to weekly. I then estimated roughly $30 per month in API tokens and more than eight hours saved per week. Those were operating-period estimates, not current measurements.</p>
 
   <p>I'm not a developer. I manage a mobile electronics shop in Merced, California. The only code I've ever written is the occasional shell command my agent told me to paste into Terminal. Everything in this post was built by describing what I wanted in plain English and letting the agent figure out the implementation.</p>
 
@@ -130,7 +125,7 @@
 
   <h3>1. Briefing crons</h3>
 
-  <p>My morning briefing is still the highest-ROI automation I run. Before work, I get one summary with the information I actually care about. That alone turned the agent from a novelty into something useful.</p>
+  <p>The morning briefing was the highest-ROI automation in that period. One concise pre-work summary turned the agent from a novelty into something useful.</p>
 
   <h3>2. Backup and watchdog crons</h3>
 
@@ -142,11 +137,11 @@
 
   <h3>4. Competitor and market-watch crons</h3>
 
-  <p>I also use competitor and market-watch crons that only alert me when something meaningfully changes.</p>
+  <p>I also used competitor and market-watch crons that only alerted when something meaningfully changed.</p>
 
   <h3>5. Revenue crons</h3>
 
-  <p>Revenue monitoring is the category I care about most long term. If money moved, I want to know. If nothing changed, I want silence.</p>
+  <p>Revenue monitoring was the category I cared about most long term. The durable rule remains simple: report movement and stay silent when nothing changed.</p>
 
   <h2>The mistakes I made (so you don't have to)</h2>
 
@@ -179,8 +174,8 @@
   </ol>
 
   <div class="cta-box">
-    <h3>📘 Want the exact configs and templates?</h3>
-    <p>The public posts show what worked. The Playbook shows how to build it without making the same expensive mistakes. It includes copy-paste cron configs, reusable templates, and the guardrails that keep the whole system from turning noisy, brittle, or expensive.</p>
+    <h3>📘 Want the dated configs and templates?</h3>
+    <p>The Playbook preserves the 2026 examples and guardrails from this retired runtime. Read the free sample first and adapt any useful pattern to current documentation rather than copying old commands blindly.</p>
     <p style="margin-top:1rem">
       <a href="/assets/playbook/OpenClaw-Playbook-Free-Sample.pdf" class="cta-btn" style="margin-right:.75rem;background:#334155">Read the Free Sample</a>
       <a href="../openclaw-playbook/" class="cta-btn">Get the OpenClaw Playbook — $99</a>
@@ -189,11 +184,11 @@
 
   <h2>The bottom line</h2>
 
-  <p>Cron jobs turned my OpenClaw agent from a chatbot into a system. The morning briefing alone saves me 20 minutes a day. The database backups give me peace of mind. The app monitors mean I never miss a review or an approval.</p>
+  <p>During that period, cron jobs turned my OpenClaw agent from a chatbot into a system. The morning briefing saved about 20 minutes a day, while backup and app-monitoring jobs reduced routine checking.</p>
 
   <p>None of this required writing code. It required being specific about what I wanted, learning from expensive mistakes, and resisting the urge to automate nonsense.</p>
 
-  <p>Start with three. See what sticks. Add from there.</p>
+  <p>The durable lesson: start with a few bounded jobs, measure what helps, and remove the rest.</p>
 
 
   <section aria-label="Related reading" style="margin-top:2.75rem;padding:1.5rem;border:1px solid #1e293b;border-radius:14px;background:#111827">
@@ -202,7 +197,7 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-bottom:1rem">
       <a href="blog-openclaw-setup.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">OpenClaw Setup Guide</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">Start here if you need the machine running before you start automating it.</span>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">Archived setup lessons from the same retired 2026 runtime.</span>
       </a>
       <a href="openclaw-playbook.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">OpenClaw Playbook</strong>
@@ -217,6 +212,7 @@
   </section>
 
 </article>
+</main>
 
 <footer>
   <div>

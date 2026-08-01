@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flight Funded — KDP Workbooks Funding Pilot Hours</title>
-<meta name="description" content="Flight Funded tracks Nick Rae's flight hours and KDP aviation workbook royalties as he works from 391.3 hours toward a Part 135 cockpit.">
+<meta name="description" content="Flight Funded tracks Nick Rae's flight hours and KDP aviation workbook royalties from 391.3 hours toward a 500-hour planning threshold.">
 <meta property="og:title" content="Flight Funded — KDP Workbooks Funding Pilot Hours">
-<meta property="og:description" content="Track flight hours and KDP aviation workbook royalties as Nick Rae works toward a Part 135 flying job.">
+<meta property="og:description" content="Track flight hours and KDP aviation workbook royalties from 391.3 hours toward a 500-hour planning threshold.">
 <meta property="og:url" content="https://nickrae.net/flight-funded/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://nickrae.net/flight-funded/og-card.png">
@@ -28,7 +28,7 @@
       "@type": "WebPage",
       "name": "Flight Funded — KDP Workbooks Funding Pilot Hours",
       "url": "https://nickrae.net/flight-funded/",
-      "description": "Track flight hours and KDP aviation workbook royalties as Nick Rae works toward a Part 135 flying job.",
+      "description": "Track flight hours and KDP aviation workbook royalties from 391.3 hours toward a 500-hour planning threshold.",
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" }
     },
     {
@@ -45,8 +45,8 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
     --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
-    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
-    --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
+    --text:#e2e8f0;--text-muted:#a8b4c6;--text-dim:#94a3b8;
+    --accent:#2563eb;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
     --border:#1e293b;--card:#131c2e;
     --green:#22c55e;--yellow:#eab308;--cyan:#06b6d4;--orange:#f97316;
   }
@@ -54,69 +54,35 @@
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:var(--accent2);text-decoration:none}
   a:hover{text-decoration:underline}
+  main p a{color:#93c5fd;text-decoration:underline;text-underline-offset:.18em}
 
-  /* ── ANIMATIONS ─────────────────────────────── */
-  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-  @keyframes slideLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
-  @keyframes pulse-red{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
-  @keyframes pulse-yellow{0%,100%{box-shadow:0 0 0 0 rgba(234,179,8,.15)}50%{box-shadow:0 0 0 10px rgba(234,179,8,0)}}
-  @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
-  @keyframes orbit{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-  @keyframes orbit2{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
-  @keyframes glow-accent{0%,100%{opacity:.05}50%{opacity:.12}}
-
-  .fade-up{opacity:0;animation:fadeUp .6s ease forwards}
-  .fade-in{opacity:0;animation:fadeIn .8s ease forwards}
-
-  /* scroll-reveal base */
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
-  .reveal.visible{opacity:1;transform:translateY(0)}
-  .reveal-left{opacity:0;transform:translateX(-18px);transition:opacity .5s ease,transform .5s ease}
-  .reveal-left.visible{opacity:1;transform:translateX(0)}
-
-  /* stagger children */
-  .stagger-1{animation-delay:.1s}
-  .stagger-2{animation-delay:.2s}
-  .stagger-3{animation-delay:.3s}
-  .stagger-4{animation-delay:.4s}
+  /* Content is visible without JavaScript. Reveal classes remain as harmless
+     hooks so older markup cannot hide information when scripts fail. */
+  .reveal,.reveal-left{opacity:1;transform:none}
+  :focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+  .skip-link{position:fixed;top:.5rem;left:.5rem;z-index:200;background:#fff;color:#0a0e17;padding:.65rem .9rem;border-radius:.4rem;font-weight:800;transform:translateY(-180%)}
+  .skip-link:focus{transform:none}
 
   /* ── NAV ─────────────────────────────────────── */
   nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
-  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
-  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
-  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:nowrap}
+  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px;color:var(--text);white-space:nowrap}
+  nav .logo:hover{text-decoration:none}
+  nav .links{display:flex;gap:1.5rem;font-size:.875rem;flex-wrap:nowrap;white-space:nowrap}
   nav .links a{color:var(--text-muted)}
   nav .links a:hover{color:var(--accent2);text-decoration:none}
 
   /* ── HERO ────────────────────────────────────── */
-  .hero{min-height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1.5rem 3rem;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);position:relative;overflow:hidden}
-
-  /* animated orbit rings */
-  .hero::before{
-    content:'';position:absolute;width:650px;height:650px;border-radius:50%;
-    border:1px solid rgba(59,130,246,.06);
-    top:50%;left:50%;
-    animation:orbit 40s linear infinite;
-    transform-origin:center center;
+  .hero{
+    min-height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    padding:6rem 1.5rem 3rem;position:relative;overflow:hidden;
+    background:
+      radial-gradient(circle at 22% 24%,rgba(96,165,250,.45) 0 1px,transparent 1.5px),
+      radial-gradient(circle at 78% 68%,rgba(6,182,212,.3) 0 1px,transparent 1.5px),
+      radial-gradient(circle at 50% 45%,rgba(59,130,246,.13),transparent 42%),
+      linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+    background-size:72px 72px,96px 96px,auto,auto;
   }
-  .hero::after{
-    content:'';position:absolute;width:400px;height:400px;border-radius:50%;
-    border:1px solid rgba(6,182,212,.05);
-    top:50%;left:50%;
-    animation:orbit2 25s linear infinite;
-  }
-  /* glow blob */
-  .hero-glow{
-    position:absolute;width:400px;height:400px;border-radius:50%;
-    background:radial-gradient(circle,rgba(59,130,246,.08) 0%,transparent 70%);
-    top:50%;left:50%;transform:translate(-50%,-50%);
-    animation:glow-accent 4s ease-in-out infinite;
-    pointer-events:none;
-  }
-
-  /* webgl canvas */
-  #webgl-hero{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none;display:block;opacity:.85}
 
   .hero-content{position:relative;z-index:1;max-width:700px}
 
@@ -127,25 +93,20 @@
     padding:.35rem 1rem;border-radius:2rem;
     font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
     margin-bottom:1.25rem;
-    animation:fadeIn .5s ease forwards, pulse-red 2.5s ease-in-out 1s infinite;
   }
   .badge-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;display:inline-block}
 
   .hero h1{
     font-size:2.6rem;font-weight:800;letter-spacing:-1px;
     margin-bottom:.75rem;line-height:1.2;
-    animation:fadeUp .7s ease .15s both;
   }
   .hero h1 span{
     background:linear-gradient(90deg,var(--accent2),var(--cyan),var(--accent2));
-    background-size:200% auto;
     -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-    animation:shimmer 4s linear infinite;
   }
   .hero .sub{
     color:var(--text-muted);font-size:1.05rem;max-width:560px;
     margin:0 auto 2rem;
-    animation:fadeUp .7s ease .3s both;
   }
 
   /* ── STATS ───────────────────────────────────── */
@@ -155,9 +116,8 @@
   .stat-card{
     background:var(--card);border:1px solid var(--border);border-radius:.75rem;
     padding:1.5rem;text-align:center;
-    transition:border-color .25s,transform .25s;
   }
-  .stat-card:hover{border-color:rgba(59,130,246,.3);transform:translateY(-2px)}
+  .stat-card:hover{border-color:rgba(59,130,246,.3)}
   .stat-card .icon{font-size:1.75rem;margin-bottom:.5rem}
   .stat-card .value{
     font-size:1.85rem;font-weight:800;color:var(--accent2);line-height:1;
@@ -174,9 +134,8 @@
   .progress-count span{color:var(--text);font-weight:700}
   .progress-bar-bg{background:var(--bg3);border-radius:2rem;height:14px;overflow:hidden}
   .progress-bar-fill{
-    height:100%;width:0;border-radius:2rem;
+    height:100%;border-radius:2rem;
     background:linear-gradient(90deg,var(--accent),var(--cyan));
-    transition:width 1.2s cubic-bezier(.4,0,.2,1);
   }
   .progress-bar-fill.green{background:linear-gradient(90deg,var(--green),var(--cyan))}
   .progress-footer{display:flex;justify-content:space-between;margin-top:.65rem;font-size:.78rem;color:var(--text-dim)}
@@ -192,9 +151,8 @@
   .income-card{
     background:var(--card);border:1px solid var(--border);border-radius:.75rem;
     padding:1.25rem 1.5rem;
-    transition:border-color .25s,transform .25s;
   }
-  .income-card:hover{border-color:rgba(59,130,246,.25);transform:translateY(-2px)}
+  .income-card:hover{border-color:rgba(59,130,246,.25)}
   .income-card .source{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.25rem}
   .income-card .amount{font-size:1.5rem;font-weight:800}
   .income-card .amount.green{color:var(--green)}
@@ -203,24 +161,14 @@
   .income-card .amount.muted{color:var(--text-muted)}
   .income-card .note{font-size:.78rem;color:var(--text-dim);margin-top:.35rem}
 
-  /* ── POSITIONS ───────────────────────────────── */
-  .positions-section{padding:3rem 1.5rem;background:var(--bg2)}
-  .position-card{
-    background:var(--card);border:1px solid var(--border);border-radius:.75rem;
-    padding:1.25rem 1.5rem;display:flex;justify-content:space-between;
-    align-items:center;flex-wrap:wrap;gap:1rem;
-    animation:pulse-yellow 3s ease-in-out infinite;
-    transition:border-color .3s;
-  }
-  .position-card + .position-card{margin-top:.75rem}
-  .pos-info .pos-title{font-weight:700;margin-bottom:.25rem}
-  .pos-info .pos-detail{font-size:.82rem;color:var(--text-muted)}
-  .pos-status{text-align:right}
-  .pos-badge{display:inline-block;padding:.3rem .85rem;border-radius:2rem;font-size:.75rem;font-weight:600}
-  .pos-badge.open{background:rgba(234,179,8,.1);color:var(--yellow);border:1px solid rgba(234,179,8,.3)}
-  .pos-badge.win{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2)}
-  .pos-badge.loss{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.2)}
-  .pos-price{font-size:.85rem;color:var(--text-muted);margin-top:.25rem}
+  /* ── HISTORICAL EXPERIMENTS ─────────────────── */
+  .history{margin-top:1.25rem;border:1px solid var(--border);border-radius:.75rem;background:rgba(15,23,41,.55);overflow:hidden}
+  .history summary{cursor:pointer;padding:1rem 1.15rem;font-weight:800;color:var(--text)}
+  .history summary::marker{color:var(--accent2)}
+  .history-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem;padding:0 1rem 1rem}
+  .history-item{background:var(--card);border:1px solid var(--border);border-radius:.65rem;padding:1rem}
+  .history-item h3{font-size:.95rem;margin-bottom:.35rem}
+  .history-item p{font-size:.84rem;color:var(--text-muted)}
 
   /* ── HOW IT WORKS ────────────────────────────── */
   .how-section{padding:4rem 1.5rem;background:var(--bg)}
@@ -228,10 +176,9 @@
   .how-card{
     background:var(--card);border:1px solid var(--border);border-radius:.75rem;
     padding:1.5rem;
-    transition:border-color .25s,transform .25s;
   }
-  .how-card:hover{border-color:rgba(59,130,246,.25);transform:translateY(-2px)}
-  .how-card .num{font-size:2rem;font-weight:900;color:var(--accent);opacity:.35;line-height:1;margin-bottom:.5rem}
+  .how-card:hover{border-color:rgba(59,130,246,.25)}
+  .how-card .num{font-size:2rem;font-weight:900;color:var(--accent2);opacity:1;line-height:1;margin-bottom:.5rem}
   .how-card h3{font-size:1rem;font-weight:700;margin-bottom:.5rem}
   .how-card p{font-size:.85rem;color:var(--text-muted)}
 
@@ -254,6 +201,11 @@
   .updates-archive[open] summary::after{content:'–'}
   .updates-archive .updates-grid{padding:0 1rem 1rem}
 
+  .study-link{display:block;border:1px solid var(--border);border-radius:.75rem;padding:1.4rem;margin-bottom:1rem;background:linear-gradient(135deg,#102033,#0f1729);color:var(--text)}
+  .study-link:hover{border-color:rgba(96,165,250,.45);text-decoration:none}
+  .study-link strong{display:block;font-size:1.05rem;margin-bottom:.25rem}
+  .study-link span{color:var(--text-muted);font-size:.9rem}
+
   /* ── FOOTER ──────────────────────────────────── */
   footer{padding:2rem 1.5rem;background:var(--bg);border-top:1px solid var(--border);text-align:center}
   footer p{color:var(--text-dim);font-size:.82rem}
@@ -261,27 +213,21 @@
   .last-updated{font-size:.75rem;color:var(--text-dim);text-align:right;margin-top:.75rem}
 
   @media(max-width:600px){
+    nav{padding:.65rem 0}
+    nav .inner{padding:0 .9rem;gap:.65rem}
+    nav .logo{font-size:.95rem}
+    nav .links{gap:.85rem;font-size:.8rem}
     .hero h1{font-size:1.9rem}
-    .position-card{flex-direction:column}
-    .pos-status{text-align:left}
-    .hero::before,.hero::after{width:90vw;height:90vw}
+    .hero{padding-top:5.25rem;min-height:auto}
+    .progress-card{padding:1.25rem}
+    .progress-footer{gap:.35rem;flex-wrap:wrap}
   }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
-    #webgl-hero{display:none}
-    .reveal,.reveal-left{opacity:1;transform:none}
   }
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
 <script>
   document.addEventListener('click', function (event) {
     var link = event.target.closest && event.target.closest('a[href]');
@@ -293,7 +239,6 @@
       if (host.includes('amazon.com') || host === 'a.co') product = product === 'other' ? 'amazon_workbook' : product;
       if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
       if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
-      if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
       var eventName = link.dataset.event || ((host.includes('amazon.com') || host === 'a.co') ? 'amazon_click' : 'outbound_cta_click');
       if (url.hostname !== window.location.hostname || product !== 'other' || link.dataset.event) {
         gtag('event', eventName, {
@@ -306,29 +251,28 @@
     } catch (e) {}
   });
 </script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 
-<nav>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation">
   <div class="inner">
-    <div class="logo">✈️ Nick Rae</div>
+    <a class="logo" href="https://nickrae.net">✈️ Nick Rae</a>
     <div class="links">
-      <a href="https://nickrae.net">Home</a>
-      <a href="https://nickrae.net/aviation-workbooks/">Pilot Workbooks</a>
-      <a href="https://youtube.com/@nicholasrae" target="_blank">YouTube</a>
-      <a href="https://x.com/nickrae" target="_blank">X / Twitter</a>
+      <a href="https://nickrae.net/aviation-workbooks/">Workbooks</a>
+      <a href="#updates">Receipts</a>
     </div>
   </div>
 </nav>
 
+<main id="main-content" tabindex="-1">
 <!-- HERO -->
-<section class="hero">
-  <canvas id="webgl-hero"></canvas>
-  <div class="hero-glow"></div>
+<section class="hero" aria-labelledby="page-title">
   <div class="hero-content">
-    <div class="badge"><span class="badge-dot"></span> Flight Funded Experiment</div>
-    <h1>Building a <span>Flight Funded Career</span></h1>
-    <p class="sub">I'm a commercial pilot building income streams to fund the next block of flight hours. KDP aviation workbooks are the cleanest proof line, FeedFare is live, and the AI automation material now stays in the background until it proves demand.</p>
+    <div class="badge"><span class="badge-dot" aria-hidden="true"></span> Flight Funded Experiment</div>
+    <h1 id="page-title">Building a <span>Flight Funded Career</span></h1>
+    <p class="sub">I'm a commercial pilot building useful aviation study products to fund the next block of flight hours. KDP aviation workbooks are the cleanest verified proof line.</p>
     <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem">
       <a href="../ifr-scenario-pack/" style="display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:white;font-weight:800;padding:.8rem 1.15rem;border-radius:.65rem;text-decoration:none" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="flight-funded-hero">Free IFR scenario pack</a>
       <a href="../aviation-workbooks/" style="display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--border);color:var(--text-muted);font-weight:700;padding:.8rem 1.15rem;border-radius:.65rem;text-decoration:none">📚 Pilot workbooks</a>
@@ -338,14 +282,14 @@
 </section>
 
 <!-- MAIN STATS -->
-<section class="stats-section">
+<section class="stats-section" aria-label="Flight and funding progress">
   <div class="container">
     <div class="stats-grid">
       <div class="stat-card reveal stagger-1">
         <div class="icon">✈️</div>
         <div class="value" data-count-decimal="391.3">391.3</div>
         <div class="label">Total Flight Hours</div>
-        <div class="sub-value">Part 135: 500 · ATP: 1,500</div>
+        <div class="sub-value">Next planning threshold: 500 · Long-term benchmark: 1,500</div>
       </div>
       <div class="stat-card reveal stagger-2">
         <div class="icon">💰</div>
@@ -363,23 +307,23 @@
       <div class="stat-card reveal stagger-4">
         <div class="icon">⏱️</div>
         <div class="value">~14</div>
-        <div class="label">Months to Part 135</div>
-        <div class="sub-value">~14 mo at 7.9 hrs/mo · 500 hrs minimum</div>
+        <div class="label">Months to 500 Hours</div>
+        <div class="sub-value">~14 mo at 7.9 hrs/mo · planning estimate</div>
       </div>
     </div>
 
     <!-- PART 135 PROGRESS -->
     <div class="progress-card reveal">
       <div class="progress-header">
-        <span class="progress-title">🎯 Part 135 Minimum — Near-Term Goal</span>
+        <span class="progress-title">🎯 500-Hour Planning Threshold</span>
         <span class="progress-count"><span>391.3</span> / 500 hours (108.7 remaining · ~14 months)</span>
       </div>
       <div class="progress-bar-bg">
-        <div class="progress-bar-fill" data-width="78.3" style="background:linear-gradient(90deg,var(--green),var(--cyan))"></div>
+        <div class="progress-bar-fill" data-width="78.3" style="width:78.3%;background:linear-gradient(90deg,var(--green),var(--cyan))" role="progressbar" aria-label="Progress to the 500-hour planning threshold" aria-valuemin="0" aria-valuemax="500" aria-valuenow="391.3" aria-valuetext="391.3 of 500 hours"></div>
       </div>
       <div class="progress-footer">
         <span>Takeoff</span>
-        <span>78.3% to Part 135</span>
+        <span>78.3% to 500 hours</span>
         <span>Goal: 500 hrs</span>
       </div>
     </div>
@@ -391,7 +335,7 @@
         <span class="progress-count"><span>391.3</span> / 1,500 hours (1,108.7 remaining)</span>
       </div>
       <div class="progress-bar-bg">
-        <div class="progress-bar-fill" data-width="26.1"></div>
+        <div class="progress-bar-fill" data-width="26.1" style="width:26.1%" role="progressbar" aria-label="Progress to 1,500-hour ATP minimum" aria-valuemin="0" aria-valuemax="1500" aria-valuenow="391.3" aria-valuetext="391.3 of 1,500 hours"></div>
       </div>
       <div class="progress-footer">
         <span>Takeoff</span>
@@ -407,7 +351,7 @@
         <span class="progress-count"><span>$1,047.23 + €46.83 + A$9.49</span> KDP aviation royalties tracked through the July 31 dashboard snapshot</span>
       </div>
       <div class="progress-bar-bg">
-        <div class="progress-bar-fill green" data-width="4.8"></div>
+        <div class="progress-bar-fill green" data-width="4.8" style="width:4.8%" role="progressbar" aria-label="Tracked KDP aviation royalties as a percentage of the near-term flight gap" aria-valuemin="0" aria-valuemax="100" aria-valuenow="4.8" aria-valuetext="4.8 percent of the near-term flight gap"></div>
       </div>
       <div class="progress-footer">
         <span>March-July aviation royalties tracked through July 31</span>
@@ -416,47 +360,19 @@
       </div>
     </div>
 
-    <p class="last-updated">Last updated: Aug 1, 2026 · <a href="https://youtube.com/@nicholasrae" target="_blank">Follow the journey on YouTube →</a></p>
-  </div>
-</section>
-
-<!-- KO-FI SUPPORT -->
-<section style="padding:2rem 1.5rem;background:var(--bg);border-bottom:1px solid var(--border)">
-  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-    <div>
-      <div style="font-weight:700;font-size:1rem;margin-bottom:.25rem">☕ Support the experiment</div>
-      <div style="font-size:.85rem;color:var(--text-muted)">Every dollar goes directly toward flight hours. Tracked publicly above.</div>
-    </div>
-    <a href="https://ko-fi.com/nickrae" target="_blank" data-product="kofi" data-placement="flight-funded-support" style="display:inline-flex;align-items:center;gap:.5rem;background:#FF5E5B;color:#fff;font-weight:700;font-size:.9rem;padding:.65rem 1.4rem;border-radius:.5rem;text-decoration:none;white-space:nowrap;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-      ☕ Buy me a coffee → flight time
-    </a>
+    <p class="last-updated">Last updated: Aug 1, 2026 · <a href="../aviation-workbooks/">Compare the pilot workbooks →</a></p>
   </div>
 </section>
 
 <!-- INCOME BREAKDOWN -->
 <section class="income-section">
   <div class="container">
-    <div class="section-title reveal-left">What’s Funding the Hours</div>
+    <h2 class="section-title reveal-left">What’s Funding the Hours</h2>
     <div class="income-grid">
-      <div class="income-card reveal stagger-1">
-        <div class="source">Kalshi Weather Bot</div>
-        <div class="amount yellow">⏸️ Paused</div>
-        <div class="note">Weather-only realized PnL is -$142.16 after stripping sports. Trading is paused and the bot is being rebuilt around calibration and cleaner scoring.</div>
-      </div>
-      <div class="income-card reveal stagger-2">
-        <div class="source">iOS App</div>
-        <div class="amount accent">🎉 FeedFare LIVE</div>
-        <div class="note">Build 26 approved Apr 2. New onboarding funnel, quiz-driven walking rules, delayed paywall. First trial conversion watch begins.</div>
-      </div>
-      <div class="income-card reveal stagger-3" style="border-color:rgba(96,165,250,.45)">
+      <div class="income-card reveal" style="border-color:rgba(96,165,250,.45)">
         <div class="source">Aviation Study Products</div>
         <div class="amount green">Live</div>
         <div class="note">Reconciled Jan-July KDP tracking now stands at 129 full-catalog books. The July 1-31 aviation snapshot shows 24 paid units, $192.85 USD plus €21.54 EUR and A$9.49, 0 refunds, and 438 KENP; March-July aviation tracking stands at 122 units and $1,047.23 USD plus €46.83 EUR and A$9.49. PPL contributed 10 July units, Instrument 9, Multi-Engine 4, and VFR Radio 1; KDP exports still do not prove Amazon Ads scale. <a href="../aviation-workbooks/">Compare the pilot workbook series →</a></div>
-      </div>
-      <div class="income-card reveal stagger-4">
-        <div class="source">AI Automation Notes</div>
-        <div class="amount muted">Background</div>
-        <div class="note">The OpenClaw playbook is still available, but it is not the lead offer until buyer demand proves it deserves oxygen.</div>
       </div>
     </div>
 
@@ -468,6 +384,24 @@
       </div>
       <a href="../aviation-workbooks/" style="display:inline-block;background:var(--accent);color:white;font-weight:700;font-size:.9rem;padding:.7rem 1.2rem;border-radius:.55rem;text-decoration:none;white-space:nowrap">Compare Pilot Workbooks</a>
     </div>
+
+    <details class="history">
+      <summary>Historical experiments and current status</summary>
+      <div class="history-grid">
+        <article class="history-item">
+          <h3>Kalshi weather bot — paused</h3>
+          <p>Weather-only realized PnL is -$142.16 after sports activity was stripped out. The LaunchAgent is off, there is no live restart, and no trading result is included in the funding total above. <a href="../blog/kalshi-weather-bot.html">Read the post-mortem →</a></p>
+        </article>
+        <article class="history-item">
+          <h3>FeedFare — live app, unproven funding lane</h3>
+          <p>FeedFare is live in the App Store and Build 26 was approved Apr 2. This page does not claim verified app revenue or include app revenue in the funding total above.</p>
+        </article>
+        <article class="history-item">
+          <h3>AI automation notes — background</h3>
+          <p>The OpenClaw playbook remains available, but it is not the lead offer and this page makes no buyer-demand claim for it.</p>
+        </article>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -479,7 +413,7 @@
       <div class="how-card reveal stagger-1">
         <div class="num">01</div>
         <h3>Flight hours</h3>
-        <p>The whole point is to close the gap between where I am now and a Part 135 cockpit. This page tracks the hours, the pace, and whether the timeline is actually improving or just getting romanticized.</p>
+        <p>The whole point is to reach the next planning threshold, then recheck real operator openings and requirements. This page tracks the hours, the pace, and whether the timeline is actually improving or just getting romanticized.</p>
       </div>
       <div class="how-card reveal stagger-2">
         <div class="num">02</div>
@@ -488,19 +422,17 @@
       </div>
       <div class="how-card reveal stagger-3">
         <div class="num">03</div>
-        <h3>Capital discipline</h3>
-        <p>If a system is unstable, it does not stay live just because it sounds cool on the internet. That is why the Kalshi bot is paused while the weather strategy gets rebuilt around calibration instead of ego.</p>
+        <h3>Proof standards</h3>
+        <p>Only reconciled flight-hour and royalty evidence belongs in the headline totals. Other experiments stay outside those totals unless their contribution can be verified.</p>
       </div>
     </div>
 
     <div style="margin-top:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem 1.5rem" class="reveal">
       <h2 style="font-size:1.1rem;margin-bottom:.5rem;color:var(--text)">Read next if you want the full picture</h2>
-      <p style="color:var(--text-muted);margin-bottom:1rem">These pages explain the flying path, the weather bot post-mortem, and the aviation products funding the experiment.</p>
+      <p style="color:var(--text-muted);margin-bottom:1rem">These pages explain the flying path and the aviation products funding the experiment.</p>
       <div style="display:flex;flex-wrap:wrap;gap:.75rem">
         <a href="../aviation-workbooks/" style="padding:.65rem 1rem;border:1px solid var(--border);border-radius:.6rem;color:var(--text-muted);text-decoration:none">📚 Pilot Workbooks</a>
         <a href="https://www.amazon.com/dp/B0H3KT5FHW" style="padding:.65rem 1rem;border:1px solid var(--border);border-radius:.6rem;color:var(--text-muted);text-decoration:none">🎙️ VFR Radio Calls</a>
-        <a href="../blog/kalshi-weather-bot.html" style="padding:.65rem 1rem;border:1px solid var(--border);border-radius:.6rem;color:var(--text-muted);text-decoration:none">🤖 Kalshi Weather Bot</a>
-        <a href="../aviation-workbooks/" style="padding:.65rem 1rem;border:1px solid var(--border);border-radius:.6rem;color:var(--text-muted);text-decoration:none">📚 Aviation Workbook Catalog</a>
         <a href="../blog/commercial-pilot-career-2026.html" style="padding:.65rem 1rem;border:1px solid var(--border);border-radius:.6rem;color:var(--text-muted);text-decoration:none">✈️ Commercial Pilot Career Guide</a>
         <a href="../blog/commercial-pilot-workbook-live.html" style="padding:.65rem 1rem;border:1px solid var(--border);border-radius:.6rem;color:var(--text-muted);text-decoration:none">📘 Commercial Workbook Launch</a>
         <a href="../blog/multi-engine-add-on-rating-workbook-live.html" style="padding:.65rem 1rem;border:1px solid var(--border);border-radius:.6rem;color:var(--text-muted);text-decoration:none">🛫 Multi-Engine Workbook Launch</a>
@@ -509,42 +441,25 @@
   </div>
 </section>
 
-<!-- OPEN POSITIONS -->
-<section class="positions-section">
-  <div class="container">
-    <div class="section-title reveal-left">Kalshi Bot Status</div>
-    <div class="position-card reveal" style="animation:none;border-color:rgba(234,179,8,.35)">
-      <div class="pos-info">
-        <div class="pos-title">⏸️ Kalshi Bot — Paused for Redesign</div>
-        <div class="pos-detail">The original live weather run lost money once sports activity was stripped out. The current job is to rebuild calibration and scoring before any live return.</div>
-      </div>
-      <div class="pos-status">
-        <div class="pos-badge open">PAUSED · redesign</div>
-        <div class="pos-price">Weather-only realized PnL: -$142.16 · LaunchAgent off · no live restart</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- HOW IT WORKS -->
 <section class="how-section">
   <div class="container">
-    <div class="section-title reveal-left">How the Experiment Works</div>
+    <h2 class="section-title reveal-left">How the Experiment Works</h2>
     <div class="how-grid">
       <div class="how-card reveal stagger-1">
         <div class="num">01</div>
         <h3>The Problem</h3>
-        <p>I need 108.7 more flight hours to reach the 500-hour Part 135 target. At about $200 per hour, that's roughly a $21,740 gap. Instead of waiting until I can afford more flying, I'm trying to build assets that help fund the next block of hours.</p>
+        <p>I need 108.7 more flight hours to reach the 500-hour planning threshold. It is not a universal hiring minimum. At about $200 per hour, it is roughly a $21,740 gap, so I am building useful assets to help fund the next block.</p>
       </div>
       <div class="how-card reveal stagger-2">
         <div class="num">02</div>
         <h3>The Strategy</h3>
-        <p>I'm testing three real funding lanes: iOS apps, aviation study products, and small digital products. Kalshi stays paused until the redesign earns its way back.</p>
+        <p>I'm building aviation study products that solve specific training problems, then tracking whether reconciled KDP royalties can fund additional flying.</p>
       </div>
       <div class="how-card reveal stagger-3">
         <div class="num">03</div>
-        <h3>The Bot</h3>
-        <p>The original weather bot compared NOAA and Open-Meteo forecasts to Kalshi prices, but the live version was overconfident and structurally flawed. It is now paused while I rebuild it around calibration, cleaner scoring, and better abstention.</p>
+        <h3>The Proof Standard</h3>
+        <p>Headline totals come from the flight log and reconciled KDP exports. Experiments without verified funding contribution stay in the collapsed historical record.</p>
       </div>
       <div class="how-card reveal stagger-4">
         <div class="num">04</div>
@@ -559,7 +474,7 @@
 <section class="updates-section" id="updates">
   <div class="container">
     <div class="updates-head">
-      <div class="section-title reveal-left" style="margin-bottom:0">Milestones</div>
+      <h2 class="section-title reveal-left" style="margin-bottom:0">Milestones</h2>
       <p class="updates-note">Condensed proof log: only the numbers that changed the flight-hours or revenue thesis. Longer receipts stay off the page.</p>
     </div>
 
@@ -581,7 +496,7 @@
       </div>
       <div class="update-row reveal">
         <div class="update-date">Jul 12, 2026</div>
-        <div class="update-text"><strong>ForeFlight experience report updated.</strong> Total time reached 391.3 hours, with 272.8 PIC and 120.7 cross-country. The 500-hour Part 135 gap is now 108.7 hours; 400 TT is 8.7 hours away.</div>
+        <div class="update-text"><strong>ForeFlight experience report updated.</strong> Total time reached 391.3 hours, with 272.8 PIC and 120.7 cross-country. The gap to the 500-hour planning threshold is 108.7 hours; 400 TT is 8.7 hours away.</div>
         <div class="update-meta"><span class="update-pill">391.3 TT</span><span class="update-pill">272.8 PIC</span><span class="update-pill">78.3%</span></div>
       </div>
       <div class="update-row reveal">
@@ -596,7 +511,7 @@
       </div>
       <div class="update-row reveal">
         <div class="update-date">Jun 25, 2026</div>
-        <div class="update-text"><strong>ForeFlight experience report updated.</strong> Total time reached 389.4 hours, with 270.9 PIC and 118.8 cross-country. The 500-hour Part 135 gap is now 110.6 hours.</div>
+        <div class="update-text"><strong>ForeFlight experience report updated.</strong> Total time reached 389.4 hours, with 270.9 PIC and 118.8 cross-country. The gap to the 500-hour planning threshold was 110.6 hours.</div>
         <div class="update-meta"><span class="update-pill">389.4 TT</span><span class="update-pill">270.9 PIC</span><span class="update-pill">77.9%</span></div>
       </div>
       <div class="update-row reveal">
@@ -616,7 +531,7 @@
       </div>
       <div class="update-row reveal">
         <div class="update-date">Jun 3, 2026</div>
-        <div class="update-text"><strong>ForeFlight experience report updated.</strong> Total time reached 384.5 hours, with 266.0 PIC and 113.9 cross-country. The 500-hour Part 135 gap is now 115.5 hours.</div>
+        <div class="update-text"><strong>ForeFlight experience report updated.</strong> Total time reached 384.5 hours, with 266.0 PIC and 113.9 cross-country. The gap to the 500-hour planning threshold was 115.5 hours.</div>
         <div class="update-meta"><span class="update-pill">384.5 TT</span><span class="update-pill">266.0 PIC</span><span class="update-pill">76.9%</span></div>
       </div>
       <div class="update-row reveal">
@@ -744,25 +659,6 @@
   </div>
 </section>
 
-<!-- STUDY RESOURCES -->
-<section style="padding:3rem 1.5rem;background:var(--bg2);border-top:1px solid var(--border)">
-  <div style="max-width:720px;margin:0 auto">
-    <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1.25rem;color:var(--text)">Study Resources</h2>
-    <div style="position:relative;width:100%;aspect-ratio:16/9;margin-bottom:1rem">
-      <iframe
-        src="https://www.youtube.com/embed/D7RBQzbZT-0"
-        title="Ground School Study Beats ✈️ | 1 Hour Lofi"
-        width="100%"
-        style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:8px"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-        loading="lazy"></iframe>
-    </div>
-    <p style="color:var(--text-muted);font-size:.95rem">Chill lofi beats for your next ground school session. Pair it with the <a href="https://a.co/d/0hExZLaf">PPL Workbook</a>, the <a href="https://www.amazon.com/dp/B0GW8BGNDP">Commercial Pilot Workbook</a>, or the <a href="https://www.amazon.com/dp/B0GX32PRCJ">Multi-Engine Workbook</a> and get to work.</p>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <section style="padding:2rem 1.5rem;background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div style="max-width:900px;margin:0 auto">
@@ -779,241 +675,17 @@
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <p>
     <a href="https://nickrae.net">nickrae.net</a> ·
-    <a href="https://youtube.com/@nicholasrae" target="_blank">YouTube</a> ·
-    <a href="https://x.com/nickrae" target="_blank">@nickrae</a> ·
-    <a href="https://a.co/d/0hExZLaf" target="_blank">PPL Workbook on Amazon</a>
+    <a href="https://x.com/nickrae" target="_blank" rel="noopener noreferrer">@nickrae</a> ·
+    <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener noreferrer">PPL Workbook on Amazon</a>
   </p>
   <p style="margin-top:.5rem">This is a real experiment. Results are not guaranteed. Not financial advice.</p>
 </footer>
 
-<script>
-// ── WEBGL STAR FIELD (Gemini 3.1 generated) ──────────────
-(function() {
-    const canvas = document.getElementById('webgl-hero');
-    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) {
-        canvas.style.display = 'none';
-        return;
-    }
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if (!gl) return;
-
-    const vsSource = `
-        attribute vec2 position;
-        void main() {
-            gl_Position = vec4(position, 0.0, 1.0);
-        }
-    `;
-
-    const fsSource = `
-        precision highp float;
-        uniform vec2 u_resolution;
-        uniform float u_time;
-
-        float hash21(vec2 p) {
-            p = fract(p * vec2(123.34, 456.21));
-            p += dot(p, p + 45.32);
-            return fract(p.x * p.y);
-        }
-
-        float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            f = f * f * (3.0 - 2.0 * f);
-            float a = hash21(i);
-            float b = hash21(i + vec2(1.0, 0.0));
-            float c = hash21(i + vec2(0.0, 1.0));
-            float d = hash21(i + vec2(1.0, 1.0));
-            return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-        }
-
-        float fbm(vec2 p) {
-            float v = 0.0;
-            float a = 0.5;
-            mat2 rot = mat2(0.866, -0.5, 0.5, 0.866);
-            for (int i=0; i<4; i++) {
-                v += a * noise(p);
-                p = rot * p * 2.0 + vec2(100.0);
-                a *= 0.5;
-            }
-            return v;
-        }
-
-        void main() {
-            vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);
-            vec3 col = vec3(0.01, 0.015, 0.04);
-
-            vec2 np = uv * 1.2;
-            float n1 = fbm(np + u_time * 0.02);
-            float n2 = fbm(np * 1.5 - u_time * 0.01 + vec2(5.2, 1.3));
-
-            vec3 nebCol1 = vec3(0.23, 0.51, 0.96) * n1 * n1 * 0.5;
-            vec3 nebCol2 = vec3(0.02, 0.71, 0.83) * n2 * n2 * n2 * 0.4;
-            col += nebCol1 + nebCol2;
-
-            float t = u_time * 0.15;
-
-            for(float i=0.; i<1.; i+=0.04) {
-                float depth = fract(i + t);
-                float scale = mix(15.0, 0.1, depth);
-                float fade = smoothstep(0.0, 0.2, depth) * smoothstep(1.0, 0.8, depth);
-
-                vec2 suv = uv * scale + i * 133.0;
-                vec2 id = floor(suv);
-                vec2 f = fract(suv) - 0.5;
-
-                float h = hash21(id);
-                if(h > 0.85) {
-                    float size = (h - 0.85) * 8.0;
-                    float d = length(f);
-
-                    vec3 starCol = mix(vec3(1.0), vec3(0.23, 0.51, 0.96), hash21(id * 3.3));
-                    starCol = mix(starCol, vec3(0.02, 0.71, 0.83), hash21(id * 7.1));
-
-                    float twinkle = sin(u_time * 5.0 + h * 100.0) * 0.5 + 0.5;
-                    size *= 0.8 + 0.4 * twinkle;
-
-                    float glow = 0.003 / (d + 0.001);
-                    col += starCol * glow * fade * size;
-                    col += vec3(1.0) * smoothstep(0.05, 0.0, d) * fade * size * 0.5;
-                }
-            }
-
-            gl_FragColor = vec4(col, 1.0);
-        }
-    `;
-
-    function compileShader(type, source) {
-        const shader = gl.createShader(type);
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        return shader;
-    }
-
-    const vs = compileShader(gl.VERTEX_SHADER, vsSource);
-    const fs = compileShader(gl.FRAGMENT_SHADER, fsSource);
-    const program = gl.createProgram();
-    gl.attachShader(program, vs);
-    gl.attachShader(program, fs);
-    gl.linkProgram(program);
-    gl.useProgram(program);
-
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-        -1.0, -1.0,  1.0, -1.0, -1.0,  1.0,
-        -1.0,  1.0,  1.0, -1.0,  1.0,  1.0
-    ]), gl.STATIC_DRAW);
-
-    const positionLocation = gl.getAttribLocation(program, "position");
-    gl.enableVertexAttribArray(positionLocation);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-    const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
-    const timeLocation = gl.getUniformLocation(program, "u_time");
-
-    function resize() {
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = canvas.clientWidth * dpr;
-        canvas.height = canvas.clientHeight * dpr;
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    let startTime = performance.now();
-    let animId = null;
-    function render(now) {
-        gl.uniform1f(timeLocation, (now - startTime) * 0.001);
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-        animId = requestAnimationFrame(render);
-    }
-    animId = requestAnimationFrame(render);
-
-    // Pause WebGL when hero is not visible (saves battery on mobile)
-    const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (!e.isIntersecting && animId) {
-                cancelAnimationFrame(animId);
-                animId = null;
-            } else if (e.isIntersecting && !animId) {
-                startTime = performance.now();
-                animId = requestAnimationFrame(render);
-            }
-        });
-    }, { threshold: 0.05 });
-    heroObserver.observe(canvas.parentElement);
-})();
-
-// ── INTERSECTION OBSERVER (scroll reveal) ────────────────
-const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (reduceMotion) {
-  document.querySelectorAll('.reveal,.reveal-left').forEach(el=>el.classList.add('visible'));
-} else {
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('visible');
-      // trigger progress bars
-      const bar = e.target.querySelector('.progress-bar-fill[data-width]');
-      if(bar) setTimeout(()=>{ bar.style.width = bar.dataset.width + '%'; }, 100);
-      // trigger counters
-      e.target.querySelectorAll('[data-count]').forEach(el=>countUp(el, parseInt(el.dataset.count)));
-      e.target.querySelectorAll('[data-count-decimal]').forEach(el=>countUpDecimal(el, parseFloat(el.dataset.countDecimal)));
-    }
-  });
-},{threshold:0.15});
-
-document.querySelectorAll('.reveal,.reveal-left').forEach(el=>observer.observe(el));
-
-// also observe progress cards directly for the bars
-document.querySelectorAll('.progress-card').forEach(el=>observer.observe(el));
-}
-
-// ── NUMBER COUNTER ───────────────────────────────────────
-function countUp(el, target){
-  const duration = 1200;
-  const start = performance.now();
-  function step(now){
-    const p = Math.min((now-start)/duration, 1);
-    const ease = 1-Math.pow(1-p, 3);
-    el.textContent = Math.round(ease*target);
-    if(p<1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-function countUpDecimal(el, target){
-  const duration = 1000;
-  const start = performance.now();
-  function step(now){
-    const p = Math.min((now-start)/duration, 1);
-    const ease = 1-Math.pow(1-p, 3);
-    el.textContent = (ease*target).toFixed(1);
-    if(p<1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-// ── HERO ENTRANCE ─────────────────────────────────────────
-window.addEventListener('load',()=>{
-  if (!reduceMotion) document.querySelector('.hero-content').style.animation='fadeUp .8s ease .1s both';
-});
-</script>
-<!-- KO-FI FLOATING WIDGET -->
-<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-<script>
-kofiWidgetOverlay.draw('nickrae', {
-  'type': 'floating-chat',
-  'floating-chat.donateButton.text': 'Fund a flight hour',
-  'floating-chat.donateButton.background-color': '#3b82f6',
-  'floating-chat.donateButton.text-color': '#fff'
-});
-</script>
 </body>
 </html>

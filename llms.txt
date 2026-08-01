@@ -4,20 +4,21 @@
 
 ## About
 
-Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight hours, working toward 500 hours for Part 135 and eventually 1,500 hours for ATP certification. His main public product lane is FAA-aligned aviation study material on Amazon KDP, including Clearance to Confidence: VFR Radio Calls Workbook. He also builds iOS apps and documents the Flight Funded experiment at nickrae.net. The OpenClaw playbook remains available but is a background builder lane, not the primary offer.
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight hours, working toward a 500-hour planning threshold and eventually the experience required for ATP certification. His main public product lane is FAA-aligned aviation study material on Amazon KDP, including Clearance to Confidence: VFR Radio Calls Workbook. He documents the Flight Funded experiment at nickrae.net. OpenClaw is a retired runtime; the dated playbook remains available as a background digital product, not the primary offer.
 
 ## Key Pages
 
 - [Home](https://nickrae.net/)
+- [About Nick Rae](https://nickrae.net/about/) — commercial airplane single- and multi-engine land pilot with instrument rating; workbook-author background and dated Flight Funded context
 - [Blog](https://nickrae.net/blog/)
 - [Flight Resume](https://nickrae.net/Nicholas_Rae_Flight_Resume.pdf) — current generic one-page pilot resume with verified 391.3 TT, 272.8 PIC, 311.7 C172, and 221.6 C172 PIC
 - [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and KDP aviation royalties: reconciled Jan-July tracking stands at 129 full-catalog books through July 31; the July 1-31 aviation snapshot shows 24 paid units, $192.85 USD + €21.54 EUR + A$9.49, 438 KENP, and 0 refunds; cumulative March-July aviation tracking is 122 units, $1,047.23 USD + €46.83 EUR + A$9.49
 - [Aviation Pilot Workbooks](https://nickrae.net/aviation-workbooks/) — FAA-aligned workbooks for private pilot, instrument, commercial, multi-engine, and VFR radio calls
 - [Free IFR Oral Exam Scenario Pack](https://nickrae.net/ifr-scenario-pack/) — free 10-card IFR oral exam scenario PDF; source-anchored study aid with chart-specific traps intentionally excluded
 - [IFR Oral Exam Scenarios](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — 10-question blog bridge using the rule-risk-action framework for instrument oral practice
-- [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — background AI-automation playbook, not the current lead offer
+- [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — background AI-operations kit built from documented 2026 OpenClaw operation; the runtime is no longer presented as current
 - [FeedFare](https://nickrae.net/feedfare/) — trade steps for screen time (iOS)
-- [Inflection Point](https://nickrae.net/inflection-point/) — personal growth OS with a 3-day access preview, free plan, and optional $14.99 lifetime unlock
+- [Inflection Point](https://nickrae.net/inflection-point/) — coming soon and awaiting App Store release; preview page only
 
 ## Blog Posts
 
@@ -27,10 +28,10 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 - [I Read Meta's Self-Improving AI Paper. Then I Implemented It.](https://nickrae.net/blog/self-improving-ai-agents.html)
 - [Setting Up OpenClaw: The 5 Things I Wish I Did First](https://nickrae.net/blog/blog-openclaw-setup.html)
 - [How I Earned My Commercial Pilot License at 45](https://nickrae.net/blog/blog-commercial-pilot.html) — first-hand career-change story with verified 391.3-hour totals and current 400/500-hour paid-flying context
-- [The Cheapest Ways to Build Flight Hours in 2026](https://nickrae.net/blog/blog-cheapest-flight-hours.html) — cost-per-hour comparison plus an interactive calculator for rental, club, safety-pilot, and paid-flying paths
+- [Cheapest Way to Build Flight Hours: 2026 Cost Guide](https://nickrae.net/blog/blog-cheapest-flight-hours.html) — cost comparison plus an interactive calculator for rental, club, safety-pilot, and paid-flying paths
 - [How to Become a Commercial Pilot in 2026](https://nickrae.net/blog/commercial-pilot-career-2026.html)
 - [The Ultimate Private Pilot Checkride Prep Guide](https://nickrae.net/blog/checkride-prep-guide.html) — FAA-S-ACS-6C source links, a visible checkride-week checklist, oral/flight guidance, and PPL-specific workbook path
-- [5 Apps Every Student Pilot Needs in 2026](https://nickrae.net/blog/student-pilot-apps-2026.html) — comparison table for ForeFlight, Prepware, E6B, CloudAhoy, and focus tools with intent-matched next steps
+- [Best Apps for Student Pilots in 2026: What to Buy First](https://nickrae.net/blog/student-pilot-apps-2026.html) — buying order for written prep, E6B math, ForeFlight planning, debriefing, and digital logbooks
 - [Setting Up OpenClaw: The 5 Things I Wish I Did First](https://nickrae.net/blog/blog-openclaw-setup.html)
 - [I've Been Running OpenClaw for 30 Days](https://nickrae.net/blog/openclaw-30-days.html)
 - [How I'm Using AI to Build Side Income as a Pilot](https://nickrae.net/blog/ai-aviation-business.html) — current Hermes/Talos workflow, verified aviation-product revenue proof, parked app status, and paper-only weather research
@@ -38,7 +39,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 ## Apps
 
 - [FeedFare — Trade Steps for Screen Time](https://apps.apple.com/us/app/feedfare/id6758923557) — step-to-screen tracking for better phone habits
-- Inflection Point — personal growth OS with 3-day access preview and optional $14.99 lifetime unlock
+- Inflection Point — preview-only personal growth OS awaiting App Store release
 
 ## Current Revenue Proof
 
@@ -65,5 +66,5 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 
 - Website: https://nickrae.net
 - LinkedIn: https://www.linkedin.com/in/nickrae
-- X/Twitter: https://twitter.com/nickrae
+- X: https://x.com/nickrae
 - GitHub: https://github.com/nicholasrae

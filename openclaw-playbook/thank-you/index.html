@@ -7,22 +7,18 @@
 <title>Thank You — OpenClaw Playbook</title>
 <meta name="description" content="Thank you for purchasing the OpenClaw Playbook.">
 <link rel="canonical" href="https://nickrae.net/openclaw-playbook/thank-you/">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
-<!-- Event snippet for Purchase conversion page -->
+
+<!-- Purchase conversion runs only after this browser has allowed analytics. -->
 <script>
   (function(){
     const params = new URLSearchParams(window.location.search);
     const transactionId = params.get('sale_id') || params.get('session_id') || params.get('order_id') || params.get('transaction_id') || params.get('purchase_id') || '';
     const value = Number(params.get('value') || '99');
     const currency = params.get('currency') || 'USD';
-    if (transactionId && typeof gtag === 'function') {
+    let sent = false;
+    function sendPurchase(){
+      if (sent || !transactionId || typeof gtag !== 'function') return;
+      sent = true;
       gtag('event', 'conversion', {
         'send_to': 'AW-18126210838/BBL1CIXF1qUcEJaOoMND',
         'value': Number.isFinite(value) ? value : 99,
@@ -30,6 +26,8 @@
         'transaction_id': transactionId
       });
     }
+    window.addEventListener('nickrae:analytics-ready', sendPurchase, {once:true});
+    sendPurchase();
   })();
 </script>
 <style>
@@ -40,6 +38,7 @@
   p{color:#d0d6e0;font-size:18px;margin-bottom:16px}.muted{color:#8a8f98;font-size:14px}
   a{color:#828fff;text-decoration:none}a:hover{text-decoration:underline}
 </style>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 <main>

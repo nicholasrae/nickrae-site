@@ -109,14 +109,7 @@
   }
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 <nav>
@@ -125,7 +118,7 @@
     <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
     <div class="links">
       <a href="../">Home</a>
-      <a href="../#building">Building</a>
+      <a href="../#workbooks">Workbooks</a>
       <a href="../#credentials">Flying</a>
       <a href="./">Blog</a>
       <a href="../flight-funded/" style="color:var(--accent2);font-weight:600">&#x1F6EB; Flight Funded</a>
@@ -134,6 +127,7 @@
   </div>
 </nav>
 
+<main id="main-content">
 <article>
   <div class="article-header">
     <div class="article-meta">
@@ -148,9 +142,9 @@
 
   <div class="article-content">
 
-    <p>I'm 46 years old. I have a <a href="blog-commercial-pilot.html">commercial pilot certificate</a>, 391.3 flight hours, and a very clear problem: I need 108.7 more hours to reach the 500-hour Part 135 target. At roughly $200 an hour, that's about $21,740 I need to generate from somewhere that isn't my day job managing a car electronics shop in Merced.</p>
+    <p>I'm 46 years old. I have a <a href="blog-commercial-pilot.html">commercial pilot certificate</a>, 391.3 flight hours, and a clear problem: I need 108.7 more hours to reach a 500-hour planning threshold. At roughly $200 an hour, that is about $21,740. Five hundred is not a universal hiring minimum, and paper-market results do not fund flight time.</p>
 
-    <p>That number has been sitting on my desk for a while. I've been building toward it through a few different angles — an iOS app, KDP workbooks, some content work — all orchestrated through <a href="blog-openclaw-setup.html">OpenClaw, my AI agent platform</a>. But a few months ago I started thinking about prediction markets. Specifically, Kalshi. Specifically, the weather markets.</p>
+    <p>That number had been sitting on my desk for a while. I tried several angles: an iOS app, KDP workbooks, content work, and weather-market research. At the time, <a href="blog-openclaw-setup.html">OpenClaw</a> orchestrated parts of that workflow. That runtime is now retired, and the market work is paper-only.</p>
 
     <p>Here's where my head went: I'm a pilot. Weather is not a hobby topic for me. I've been reading METARs, TAFs, area forecasts, and prog charts for two years — the same skills I built while earning my <a href="commercial-pilot-career-2026.html">commercial and instrument ratings</a>. I know what NOAA's models are good at and where they fall apart. And every time a weather event rolls through, there are real money markets on Kalshi asking things like "Will the high temperature in Phoenix exceed 105°F today?" or "Will it rain more than 0.25 inches in Seattle this week?"</p>
 
@@ -322,7 +316,7 @@
     <hr>
 
     <div class="author-box">
-      <strong>Nick Rae</strong> is a commercial pilot (ASEL/AMEL/IR) with 391.3 hours, a car electronics shop manager, and a builder based in Merced, CA. He's building income streams to fund the 108.7 hours between him and the 500-hour Part 135 target. Follow along on <a href="https://x.com/nickrae" target="_blank" rel="noopener">X @nickrae</a> or check the <a href="../flight-funded/">Flight Funded tracker</a> for live numbers.
+      <strong>Nick Rae</strong> is a commercial pilot (ASEL/AMEL/IR) with 391.3 hours, a general manager, and a builder based in Merced, CA. Aviation workbooks are the primary public revenue lane toward the 500-hour planning threshold. Follow along on <a href="https://x.com/nickrae" target="_blank" rel="noopener">X @nickrae</a> or check the <a href="../flight-funded/">Flight Funded tracker</a> for dated numbers.
     </div>
 
   </div>
@@ -354,6 +348,7 @@
     <a href="blog-openclaw-setup.html" class="nav-link">Next: Setting Up OpenClaw &#x2192;</a>
   </div>
 </article>
+</main>
 
 <footer>
   <div style="margin-bottom:.5rem">Build things. Fly planes. Keep moving.</div>

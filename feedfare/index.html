@@ -90,14 +90,6 @@
   @media(max-width:600px){.hero h1{font-size:1.8rem}}
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
 <script>
   document.addEventListener('click', function (event) {
     var link = event.target.closest && event.target.closest('a[href]');
@@ -121,6 +113,7 @@
     } catch (e) {}
   });
 </script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 
@@ -133,6 +126,7 @@
     </div>
   </div>
 </nav>
+<main id="main-content">
 
 <section class="hero">
   <div class="hero-content">
@@ -298,6 +292,7 @@
   <a href="https://apps.apple.com/us/app/feedfare/id6758923557" class="btn btn-primary">📱 Get FeedFare</a>
 </section>
 
+</main>
 <footer>
   <p>Built by <a href="https://nickrae.net">Nick Rae</a> · <a href="https://feedfare.app">feedfare.app</a> · <a href="https://x.com/nickrae">@nickrae</a></p>
   <p style="margin-top:.5rem">© 2026 Nick Rae · Merced, CA</p>

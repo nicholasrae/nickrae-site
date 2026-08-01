@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to Turn OpenClaw Into a Personal AI Operations System — Nick Rae</title>
-<meta name="description" content="A practical OpenClaw operating model for non-developers: context, memory, tools, scheduled jobs, verification, safety gates, and useful AI workflows.">
-<meta property="og:title" content="How to Turn OpenClaw Into a Personal AI Operations System">
-<meta property="og:description" content="The difference between an AI chatbot and a useful personal operations system is not a better prompt. It is context, tools, recurring jobs, verification, and guardrails.">
+<title>How I Turned OpenClaw Into an AI Operations System — 2026 Archive</title>
+<meta name="description" content="A dated 2026 OpenClaw case study on context, tools, scheduled jobs, verification, and safety gates. Nick's OpenClaw runtime is now retired.">
+<meta property="og:title" content="How I Turned OpenClaw Into an AI Operations System — 2026 Archive">
+<meta property="og:description" content="The reusable operating model from a retired 2026 OpenClaw runtime: context, tools, recurring jobs, verification, and guardrails.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/openclaw-personal-ai-operations-system.html">
 <meta property="og:type" content="article">
@@ -20,14 +20,14 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "headline": "How to Turn OpenClaw Into a Personal AI Operations System",
+      "headline": "How I Turned OpenClaw Into an AI Operations System — 2026 Archive",
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-05-03",
-      "dateModified": "2026-05-03",
+      "dateModified": "2026-08-01",
       "url": "https://nickrae.net/blog/openclaw-personal-ai-operations-system.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "A practical OpenClaw operating model for non-developers: context, memory, tools, scheduled jobs, verification, safety gates, and useful AI workflows.",
+      "description": "A dated 2026 OpenClaw case study. Nick's OpenClaw runtime is now retired.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/openclaw-personal-ai-operations-system.html" }
     },
     {
@@ -35,7 +35,7 @@
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
         { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "How to Turn OpenClaw Into a Personal AI Operations System", "item": "https://nickrae.net/blog/openclaw-personal-ai-operations-system.html" }
+        { "@type": "ListItem", "position": 3, "name": "OpenClaw AI Operations System — 2026 Archive", "item": "https://nickrae.net/blog/openclaw-personal-ai-operations-system.html" }
       ]
     }
   ]
@@ -90,14 +90,7 @@
   @media(max-width:640px){h1{font-size:1.75rem}article{padding:5rem 1rem 2rem}nav .links{display:none}.menu-toggle{display:block}}
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 
@@ -114,6 +107,7 @@
   </div>
 </nav>
 
+<main id="main-content">
 <article>
   <div class="article-header">
     <div class="article-meta">
@@ -122,15 +116,16 @@
       <span>Nick Rae</span>
       <span>~10 min read</span>
     </div>
-    <h1>How to Turn OpenClaw Into a Personal AI Operations System</h1>
-    <p class="lead">The difference between an AI chatbot and a useful AI operations system is not a clever prompt. It is context, tools, recurring jobs, verification, and guardrails. Less magic. More plumbing. The plumbing wins.</p>
+    <h1>How I Turned OpenClaw Into an AI Operations System — 2026 Archive</h1>
+    <p class="lead">The reusable lesson from this retired runtime is not a clever prompt. It is context, tools, recurring jobs, verification, and guardrails. Current implementation details belong to current documentation.</p>
   </div>
 
+  <div class="callout"><div class="callout-title">Status · August 1, 2026</div><p>This is a dated case study. My OpenClaw runtime is retired; my current stack uses Hermes Agent. The operating principles remain useful, but old interfaces and commands may not.</p></div>
   <p>Most people meet an AI agent the same way they meet a new chatbot: they open the interface, type a vague request, get a decent answer, and then wonder why it did not change their life.</p>
 
   <p>That is not really the agent's fault. A blank agent has no operating environment. It does not know your projects, your standards, your schedule, your risk tolerance, your files, your tools, or what finished work looks like.</p>
 
-  <p>OpenClaw became useful for me when I stopped treating it like a smarter chat window and started treating it like a small operations desk running on my iMac. Telegram is just the front counter. The real system is behind it.</p>
+  <p>During the 2026 operating period, OpenClaw became useful when I stopped treating it like a smarter chat window and treated it like a small operations desk running on my iMac. Telegram was the front counter; the system sat behind it.</p>
 
   <blockquote><p>A personal AI operations system is an agent with a job, a memory, a tool belt, a schedule, a verification loop, and written boundaries.</p></blockquote>
 
@@ -195,7 +190,7 @@
     <li>What would be dangerous to claim publicly?</li>
   </ul>
 
-  <p>This is why my OpenClaw Playbook context says the product is $99, no EPUB, and includes the full PDF plus Starter Kit ZIP. It also says not to claim sales without a fresh dashboard check. That one line prevents bad copy, bad ads, and fake confidence. Glorious little guardrail.</p>
+  <p>This is why the product context for my dated OpenClaw Playbook records the $99 price, no EPUB, and full PDF plus Starter Kit ZIP. It also forbids sales claims without a fresh dashboard check. That one line prevents bad copy, bad ads, and fake confidence. Glorious little guardrail.</p>
 
   <div class="callout">
     <div class="callout-title">Practical rule</div>
@@ -217,7 +212,7 @@
     <li><strong>Verification:</strong> What proves the work is actually complete?</li>
   </ol>
 
-  <p>When I ask OpenClaw to improve a funnel, I do not want inspirational copy suggestions. I want it to read the source, search for stale strings, patch files, run checks, push only when approved, wait for GitHub Pages, and fetch the live URL. Then it can tell me what happened.</p>
+  <p>During that period, a good funnel-improvement job meant reading the source, searching for stale strings, patching files, running checks, pushing only when approved, waiting for GitHub Pages, and fetching the live URL. The current Hermes-based process keeps the same verification standard.</p>
 
   <p>That is the difference between a helper and an operations system.</p>
 
@@ -306,7 +301,7 @@ summarize proof and remaining gaps</code></pre>
 
   <div class="cta-box">
     <h3>Want the operating system version, not the blog-post version?</h3>
-    <p>Start with the free sample. If the operator framing clicks, the full OpenClaw Playbook is $99 and includes the PDF plus Starter Kit ZIP.</p>
+    <p>Start with the free sample. The full $99 Playbook preserves the PDF and Starter Kit ZIP from that documented 2026 period; verify current tool details independently.</p>
     <p>
       <a href="/assets/playbook/OpenClaw-Playbook-Free-Sample.pdf" class="cta-btn cta-secondary">Read the Free Sample</a>
       <a href="../openclaw-playbook/" class="cta-btn">See the OpenClaw Playbook</a>
@@ -315,7 +310,7 @@ summarize proof and remaining gaps</code></pre>
 
   <h2>The bottom line</h2>
 
-  <p>OpenClaw becomes valuable when you stop asking it to be brilliant and start making it operational.</p>
+  <p>The OpenClaw period became valuable when I stopped asking the agent to be brilliant and started making it operational.</p>
 
   <p>Give it a channel. Give it context. Give it tools. Give it jobs. Make it prove the work. Fence off the dangerous stuff. Repeat until the useful loops become boring.</p>
 
@@ -343,6 +338,7 @@ summarize proof and remaining gaps</code></pre>
     <p style="margin:0;color:#94a3b8;font-size:.92rem">New here? Start at the <a href="../">homepage</a> or browse the <a href="./">full blog archive</a>.</p>
   </section>
 </article>
+</main>
 
 <footer>
   <div>

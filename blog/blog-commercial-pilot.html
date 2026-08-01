@@ -108,14 +108,7 @@
   }
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 <nav>
@@ -124,7 +117,7 @@
     <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
     <div class="links">
       <a href="../">Home</a>
-      <a href="../#building">Building</a>
+      <a href="../#workbooks">Workbooks</a>
       <a href="../#credentials">Flying</a>
       <a href="./">Blog</a>
       <a href="../flight-funded/" style="color:var(--accent2);font-weight:600">&#x1F6EB; Flight Funded</a>
@@ -133,6 +126,7 @@
   </div>
 </nav>
 
+<main id="main-content">
 <article>
   <div class="article-header">
     <div class="article-meta">
@@ -325,6 +319,7 @@
     <a href="blog-cheapest-flight-hours.html" class="nav-link">Next: Cheapest Ways to Build Flight Hours &#x2192;</a>
   </div>
 </article>
+</main>
 
 <footer>
   <div style="margin-bottom:.5rem">Build things. Fly planes. Keep moving.</div>

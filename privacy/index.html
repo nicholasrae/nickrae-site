@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Privacy Policy | Nick Rae</title>
+  <meta name="description" content="How nickrae.net handles optional analytics, outbound links, local preferences, and contact information.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://nickrae.net/privacy/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
+  <style>
+    *{box-sizing:border-box}html{color-scheme:dark}body{margin:0;background:#0a0e17;color:#e2e8f0;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:#93c5fd;text-decoration:underline;text-underline-offset:3px}a:focus-visible,button:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}.wrap{width:min(760px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}nav{border-bottom:1px solid #29364a;background:#07111f}nav .wrap{padding:1rem 0;display:flex;justify-content:space-between;align-items:center}nav a{font-weight:800;text-decoration:none}h1{font-size:clamp(2rem,7vw,3.2rem);line-height:1.1;margin:3rem 0 1rem}h2{font-size:1.35rem;margin:2.5rem 0 .6rem}p,li{color:#b9c5d8}.lead{font-size:1.1rem;color:#dbeafe}.card{margin:1.5rem 0;padding:1rem 1.2rem;border:1px solid #3b4a62;border-radius:.8rem;background:#111827}.status{display:inline-block;padding:.25rem .55rem;border-radius:999px;background:#172554;color:#bfdbfe;font-size:.8rem;font-weight:800}.buttons{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem}.buttons button{min-height:44px;border:2px solid #93c5fd;border-radius:.55rem;padding:.65rem .9rem;background:#1d4ed8;color:#fff;font:800 14px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}.buttons button.secondary{background:#111827;border-color:#94a3b8}footer{border-top:1px solid #29364a;padding-top:1.5rem;margin-top:3rem;color:#94a3b8}
+  </style>
+  <script src="/assets/site.js" defer></script>
+</head>
+<body data-page="privacy">
+  <nav><div class="wrap"><a href="/">NICK RAE</a><a href="/blog/">Blog</a></div></nav>
+  <main class="wrap">
+    <span class="status">Last updated August 1, 2026</span>
+    <h1>Privacy policy</h1>
+    <p class="lead">NickRae.net works without optional measurement. Google's analytics and advertising-measurement tag loads only after you choose “Allow measurement.”</p>
+
+    <h2>What this site stores</h2>
+    <p>The site may store one preference in your browser's local storage: whether you allowed or declined optional analytics. This keeps the privacy banner from asking on every page. Static tools, including the flight-hour calculator, run in your browser and do not send calculator inputs to NickRae.net.</p>
+
+    <h2>Optional Google analytics and advertising measurement</h2>
+    <p>If you allow measurement, the site loads Google's tag for aggregate traffic and outbound-conversion measurement. Events may include the page path, clicked link, CTA label, placement, destination host, and product category. Ad personalization signals are disabled by this site's loader. Google may still process technical information under its own policies.</p>
+    <p>If you choose “Necessary only,” the Google tag does not load on a fresh page. If you withdraw consent after allowing it, optional event measurement is disabled immediately, the loaded tag element is removed, and known Google measurement cookies are cleared. Reloading keeps the site in necessary-only mode. You can change the choice below.</p>
+
+    <div class="card" aria-labelledby="privacy-choice-title">
+      <h2 id="privacy-choice-title" style="margin-top:0">Your analytics choice</h2>
+      <p id="privacy-choice-status">Reading this browser's saved choice…</p>
+      <div class="buttons">
+        <button type="button" id="allow-analytics">Allow measurement</button>
+        <button type="button" class="secondary" id="deny-analytics">Necessary only</button>
+        <button type="button" class="secondary" id="reset-analytics">Ask me again</button>
+      </div>
+    </div>
+
+    <h2>External services and links</h2>
+    <p>The site links to services such as Amazon, Gumroad, Apple, YouTube, X, LinkedIn, GitHub, and standalone product sites. Those services receive normal request information when you follow a link and apply their own privacy policies. Purchases and downloads are processed by the destination service, not by NickRae.net.</p>
+
+    <h2>Emails and direct contact</h2>
+    <p>If you email Nick, the message and address are used to respond and maintain the conversation. This site does not run a public newsletter form or upload calculator inputs.</p>
+
+    <h2>Product-specific policies</h2>
+    <p>Apps and products may have separate privacy and terms pages describing their own data handling. Those product policies control for the product itself.</p>
+
+    <h2>Questions or deletion requests</h2>
+    <p>Email <a href="mailto:nick@nickrae.net?subject=NickRae.net%20privacy">nick@nickrae.net</a>. Because this is primarily a static site, NickRae.net generally does not maintain a user account database.</p>
+
+    <footer>© 2026 Nick Rae · <a href="/">Home</a></footer>
+  </main>
+  <script>
+    (() => {
+      const status = document.getElementById('privacy-choice-status');
+      function render(){
+        const choice = window.NickRaePrivacy?.consent();
+        status.textContent = choice === 'allow' ? 'Analytics allowed in this browser.' : choice === 'deny' ? 'Necessary features only in this browser.' : 'No choice saved yet.';
+      }
+      document.getElementById('allow-analytics').addEventListener('click',()=>{ window.NickRaePrivacy.allow(); render(); });
+      document.getElementById('deny-analytics').addEventListener('click',()=>{ window.NickRaePrivacy.deny(); render(); });
+      document.getElementById('reset-analytics').addEventListener('click',()=>{ window.NickRaePrivacy.reset(); });
+      window.addEventListener('DOMContentLoaded',render,{once:true});
+    })();
+  </script>
+</body>
+</html>

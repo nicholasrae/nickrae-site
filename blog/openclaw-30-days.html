@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I've Been Running OpenClaw for 30 Days — Here's What I Wish I Knew — Nick Rae</title>
-<meta name="description" content="Ran OpenClaw for 30 days. Here's what I wish I knew: top 5 setup steps, dos and don'ts, and the honest assessment of whether it's worth it.">
-<meta property="og:title" content="I've Been Running OpenClaw for 30 Days — Here's What I Wish I Knew">
-<meta property="og:description" content="Top 5 setup steps, dos and don'ts, and an honest 30-day assessment of OpenClaw as an AI agent platform.">
+<title>I Ran OpenClaw for 30 Days — Lessons From a Retired Runtime — Nick Rae</title>
+<meta name="description" content="A dated 2026 account of running OpenClaw for 30 days: setup lessons, safety rules, mistakes, and what survived after the runtime was retired.">
+<meta property="og:title" content="I Ran OpenClaw for 30 Days — Lessons From a Retired Runtime">
+<meta property="og:description" content="A dated 2026 account of OpenClaw setup lessons, safety rules, and mistakes. Nick's OpenClaw runtime is now retired.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/openclaw-30-days.html">
 <meta property="og:type" content="article">
@@ -20,13 +20,13 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "headline": "I've Been Running OpenClaw for 30 Days — Here's What I Wish I Knew",
+      "headline": "I Ran OpenClaw for 30 Days — Lessons From a Retired Runtime",
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-02-14",
       "url": "https://nickrae.net/blog/openclaw-30-days.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "Ran OpenClaw for 30 days. Here's what I wish I knew: top 5 setup steps, dos and don'ts, and the honest assessment of whether it's worth it.",
+      "description": "A dated 2026 account of running OpenClaw for 30 days. Nick's OpenClaw runtime is now retired.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/openclaw-30-days.html" }
     },
     {
@@ -34,7 +34,7 @@
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
         { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "I've Been Running OpenClaw for 30 Days — Here's What I Wish I Knew", "item": "https://nickrae.net/blog/openclaw-30-days.html" }
+        { "@type": "ListItem", "position": 3, "name": "I Ran OpenClaw for 30 Days", "item": "https://nickrae.net/blog/openclaw-30-days.html" }
       ]
     }
   ]
@@ -98,14 +98,7 @@
   }
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 <nav>
@@ -114,7 +107,7 @@
     <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
     <div class="links">
       <a href="../">Home</a>
-      <a href="../#building">Building</a>
+      <a href="../#workbooks">Workbooks</a>
       <a href="../#credentials">Flying</a>
       <a href="./">Blog</a>
       <a href="../flight-funded/" style="color:var(--accent2);font-weight:600">🛫 Flight Funded</a>
@@ -123,6 +116,7 @@
   </div>
 </nav>
 
+<main id="main-content">
 <article>
   <div class="article-header">
     <div class="article-meta">
@@ -131,15 +125,16 @@
       <span>Nick Rae</span>
       <span>~9 min read</span>
     </div>
-    <h1 class="article-title">I've Been Running OpenClaw for 30 Days — Here's What I Wish I Knew</h1>
-    <p class="article-excerpt">Most people install OpenClaw, open Telegram, type "hello," and get a capable AI that knows nothing about them. Here's the setup that actually unlocks it — from someone who learned the hard way.</p>
+    <h1 class="article-title">I Ran OpenClaw for 30 Days — Lessons From a Retired Runtime</h1>
+    <p class="article-excerpt">This is a dated 2026 operating account, preserved for its setup and safety lessons. My OpenClaw runtime is now retired, so current interfaces and commands may differ.</p>
   </div>
 
   <div class="article-content">
+    <div class="callout"><strong>Status · August 1, 2026:</strong> Historical operating notes. OpenClaw is not my current runtime. Use the principles, verify current documentation, and do not treat old commands as a live setup guide.</div>
     <p>When I first set up OpenClaw, I made the classic mistake: I installed it, opened Telegram, typed "hello," and expected magic.</p>
     <p>I got a capable AI that knew nothing about me, had no memory of previous conversations, no access to my tools, and answered questions with the same generic helpfulness as any free chatbot.</p>
     <p>The tool was powerful. I had set it up like a toy.</p>
-    <p>Thirty days later — after wiring it to Todoist, giving it persistent memory, setting up cron jobs that run while I sleep, and <a href="ai-aviation-business.html">building a workflow that genuinely moves my projects forward every day</a> — I understand what OpenClaw actually is: <strong>a 24/7 AI agent you have to configure to earn.</strong></p>
+    <p>At the 30-day checkpoint — after wiring it to Todoist, adding persistent memory, and setting up scheduled jobs — I understood the useful part: an agent only becomes operational when context, tools, verification, and boundaries are designed deliberately.</p>
     <p>Here's what I wish someone had told me before I started.</p>
 
     <h2>What Is OpenClaw, Actually?</h2>
@@ -172,7 +167,7 @@
 
     <h3>#3: Build a Cron Job That Works While You Sleep</h3>
     <p>OpenClaw's cron system lets you schedule jobs that run at any interval — hourly, daily, at 6AM — without you initiating anything. Your agent wakes up, executes the task, writes output to a file, and sends you a summary.</p>
-    <p>My most valuable cron job is the <strong>Morning Taskmaster</strong>: a 6AM job that reviews my Todoist, picks 1–3 tasks it can safely execute autonomously (research, drafts, optimization), does the work, posts a comment back to Todoist, and sends me a Telegram message before I wake up.</p>
+    <p>The most valuable cron job in that OpenClaw period was the <strong>Morning Taskmaster</strong>: a 6AM job that reviewed my Todoist, selected bounded tasks, posted results, and sent a concise Telegram summary.</p>
     <p>Other useful cron ideas:</p>
     <ul>
       <li><strong>Daily journal writer</strong> — Logs what was discussed and decided each day to a dated memory file</li>
@@ -191,7 +186,7 @@
     </ul>
 
     <h3>#5: Build a Memory System on Day One</h3>
-    <p>The agents that stay useful long-term are backed by persistent memory — not trusting chat history to remember everything. My setup:</p>
+    <p>The agents that stay useful long-term are backed by persistent memory — not blind trust in chat history. My setup during that period was:</p>
     <pre><code>memory/
 ├── YYYY-MM-DD.md     ← daily journal (written every evening)
 ├── LEARNINGS.md      ← rules from mistakes (the most important file)
@@ -223,13 +218,13 @@
       </div>
     </div>
 
-    <h2>The Honest Assessment After 30 Days</h2>
-    <p>OpenClaw is not a productivity hack. It's infrastructure.</p>
+    <h2>The Honest Assessment After 30 Days in 2026</h2>
+    <p>At that checkpoint, OpenClaw behaved like infrastructure rather than a productivity hack.</p>
     <p>The first week, I spent more time configuring it than I saved. The second week, it started doing useful things. By week three, it was running cron jobs every morning, managing my Todoist, drafting content, and keeping memory that made every conversation materially better than the last.</p>
-    <p>The ceiling is high. But the floor is also low — a badly configured OpenClaw will frustrate you and make you think it's overhyped. The setup tips in this post are the difference between those two outcomes.</p>
-    <blockquote>If you're on the fence: install it, spend 2 hours writing your identity files, set up one good cron job, and come back in a week. That's the honest minimum to evaluate what it can actually do.</blockquote>
+    <p>The ceiling was high, but the floor was low. The durable lesson was not “install this runtime.” It was to define identity, memory, safety gates, and one useful scheduled job before expanding.</p>
+    <blockquote>Historical takeaway: start with one bounded workflow, verify every external action, and judge the system by useful output rather than agent theater.</blockquote>
 
-    <h2>Quick Setup Checklist</h2>
+    <h2>2026 Setup Checklist, Preserved as Historical Reference</h2>
     <ul class="checklist">
       <li>Write AGENTS.md (identity, projects, safety rules)</li>
       <li>Write USER.md (who you are, schedule, preferences)</li>
@@ -240,7 +235,7 @@
       <li>Start LEARNINGS.md (even just two entries)</li>
       <li>Set $0 autonomous spend limit explicitly in AGENTS.md</li>
     </ul>
-    <p>Eight items. Two hours. If you do these before anything else, you'll have a genuinely useful agent by day seven. My follow-up post on <a href="self-improving-ai-agents.html">trajectory learning for AI agents</a> covers the next level of memory optimization once you've been running it for a few weeks. If you're curious what I'm actually using OpenClaw to build — including a <a href="kalshi-weather-bot.html">weather prediction bot on Kalshi</a> — the <a href="ai-aviation-business.html">AI side income post</a> has the full picture.</p>
+    <p>These eight items capture what mattered during that 2026 experiment. They are not a current OpenClaw installation guide. The <a href="ai-aviation-business.html">AI side-income post</a> explains the current Hermes-based stack and the paper-only status of the <a href="kalshi-weather-bot.html">weather-market research</a>.</p>
 
     <div class="author-box">
       <strong>Nick Rae</strong> writes about aviation, AI tools, and building software products as a one-person operation. He's the author of the <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank" rel="noopener">Private Pilot License Workbook</a> and the developer of <a href="../feedfare/">FeedFare</a>. Follow the build publicly at <a href="https://nickrae.net/flight-funded/">Flight Funded</a>.
@@ -255,11 +250,11 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-bottom:1rem">
       <a href="openclaw-playbook.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">OpenClaw Playbook</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The practical companion if you want the lessons without the scar tissue.</span>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The dated 2026 field guide if you want the lessons without the scar tissue.</span>
       </a>
       <a href="openclaw-cron-jobs-guide.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">OpenClaw Cron Jobs Guide</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The automation layer that turns setup into actual leverage.</span>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">A historical account of the automation layer used during that period.</span>
       </a>
       <a href="self-improving-ai-agents.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">Self-Improving AI Agents</strong>
@@ -271,9 +266,10 @@
 
   <div class="article-nav">
     <a href="./" class="nav-link">← All Posts</a>
-    <a href="blog-openclaw-setup.html" class="nav-link">More: Full OpenClaw Architecture →</a>
+    <a href="blog-openclaw-setup.html" class="nav-link">More: Archived OpenClaw Architecture →</a>
   </div>
 </article>
+</main>
 
 <footer>
   <p>© 2026 Nick Rae · <a href="mailto:nick@nickrae.net">nick@nickrae.net</a> · <a href="https://x.com/nickrae">@nickrae</a></p>

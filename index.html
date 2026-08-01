@@ -21,172 +21,138 @@
 </script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
-    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
-    --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
-    --border:#1e293b;--card:#131c2e;
-    --green:#22c55e;--yellow:#eab308;--cyan:#06b6d4;
-  }
+  *,*::before,*::after{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:var(--accent2);text-decoration:none}
-  a:hover{text-decoration:underline}
-
-  /* NAV */
-  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
-  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
-  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
-  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
-  nav .links a{color:var(--text-muted)}
-  nav .links a:hover{color:var(--accent2);text-decoration:none}
-  .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
-
-  /* SECTIONS */
-  section{padding:5rem 1.5rem}
-  .container{max-width:1000px;margin:0 auto}
-  .section-title{font-size:1.5rem;font-weight:700;margin-bottom:2rem;padding-bottom:.75rem;border-bottom:2px solid var(--accent);display:inline-block}
-
-  /* HERO */
-  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:4rem;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%);position:relative;overflow:hidden}
-  .hero::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(59,130,246,.06);top:50%;left:50%;transform:translate(-50%,-50%)}
-  .hero::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(59,130,246,.04);top:50%;left:50%;transform:translate(-50%,-50%)}
-  .hero-content{position:relative;z-index:1}
-  .hero .photo{width:160px;height:160px;border-radius:50%;background:var(--bg3);border:3px solid var(--accent);margin:0 auto 1.5rem;overflow:hidden}
-  .hero .photo img{width:100%;height:100%;object-fit:cover}
-  .hero h1{font-size:2.75rem;font-weight:800;letter-spacing:-1px;margin-bottom:.5rem}
-  .hero .title{font-size:1.2rem;color:var(--accent2);font-weight:500;margin-bottom:1rem}
-  .hero .tagline{color:var(--text-muted);max-width:580px;margin:0 auto 1.5rem;font-size:1.05rem}
-  .hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-  .btn{padding:.7rem 1.75rem;border-radius:.5rem;font-weight:600;font-size:.9rem;transition:transform 140ms cubic-bezier(.23,1,.32,1),background-color 140ms cubic-bezier(.23,1,.32,1),border-color 140ms cubic-bezier(.23,1,.32,1),color 140ms cubic-bezier(.23,1,.32,1),opacity 140ms cubic-bezier(.23,1,.32,1);display:inline-flex;align-items:center;gap:.5rem;touch-action:manipulation}.btn:active{transform:scale(.97)}.btn:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
-  .btn-primary{background:var(--accent);color:#fff;border:none}
-  .btn-primary:hover{background:#2563eb;text-decoration:none}
-  .btn-outline{border:1px solid var(--border);color:var(--text-muted);background:transparent}
-  .btn-outline:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
-
-  /* ABOUT */
-  .about-section{background:var(--bg2)}
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-  .about-grid p{color:var(--text-muted);margin-bottom:1rem}
-  .about-card{background:var(--card);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;border-radius:0 .5rem .5rem 0}
-  .about-card h3{font-size:1rem;margin-bottom:.75rem;color:var(--accent2)}
-  .about-card ul{list-style:none;color:var(--text-muted);font-size:.9rem}
-  .about-card ul li{padding:.25rem 0}
-  .about-card ul li::before{content:'✓ ';color:var(--accent2)}
-
-  /* PROJECTS */
-  .proj-section{background:var(--bg)}
-  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-  .proj-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;display:flex;flex-direction:column}
-  .proj-card h3{font-size:1.05rem;margin-bottom:.5rem}
-  .proj-card p{color:var(--text-muted);font-size:.85rem;margin-bottom:.75rem;flex:1}
-  .proj-badge{display:inline-block;font-size:.7rem;padding:.2rem .65rem;border-radius:1rem;font-weight:600;margin-right:.35rem}
-  .proj-badge.live{background:rgba(34,197,94,.12);color:var(--green)}
-  .proj-badge.review{background:rgba(234,179,8,.12);color:var(--yellow)}
-  .proj-badge.dev{background:rgba(6,182,212,.12);color:var(--cyan)}
-  .proj-badge.soon{background:rgba(100,116,139,.12);color:var(--text-dim)}
-  .proj-links{margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap}
-  .proj-links a{display:inline-block;padding:.35rem .75rem;border-radius:.3rem;font-size:.8rem;font-weight:600;text-decoration:none;transition:opacity .15s}
-  .proj-links a:hover{opacity:.85;text-decoration:none}
-  .proj-links .amazon{background:#FF9900;color:#111}
-  .proj-links .accent{background:var(--accent);color:#fff}
-
-  /* CREDENTIALS */
-  .cred-section{background:var(--bg2)}
-  .hours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:2.5rem}
-  .hour-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;text-align:center}
-  .hour-card .number{font-size:1.75rem;font-weight:800;color:var(--accent2)}
-  .hour-card .label{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;margin-top:.25rem}
-  .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-  .cred-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
-  .cred-card h3{font-size:.95rem;color:var(--accent2);margin-bottom:.75rem}
-  .cred-card ul{list-style:none;font-size:.9rem;color:var(--text-muted)}
-  .cred-card ul li{padding:.3rem 0;border-bottom:1px solid var(--border)}
-  .cred-card ul li:last-child{border:none}
-
-  /* EXPERIENCE */
-  .exp-section{background:var(--bg)}
-  .timeline{position:relative;padding-left:2rem}
-  .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--border)}
-  .timeline-item{position:relative;margin-bottom:2rem;padding-left:1.5rem}
-  .timeline-item::before{content:'';position:absolute;left:-2.05rem;top:.35rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
-  .timeline-item h3{font-size:1.05rem;margin-bottom:.25rem}
-  .timeline-item .date{font-size:.8rem;color:var(--accent2);font-weight:600;margin-bottom:.35rem}
-  .timeline-item p{color:var(--text-muted);font-size:.9rem}
-
-  /* EDUCATION */
-  .edu-section{background:var(--bg2)}
-  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-  .edu-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
-  .edu-card h3{font-size:1rem;margin-bottom:.25rem}
-  .edu-card .school{color:var(--accent2);font-size:.85rem;margin-bottom:.35rem}
-  .edu-card p{color:var(--text-muted);font-size:.85rem}
-
-  /* CONNECT */
-  .connect-section{background:var(--bg);text-align:center}
-  .connect-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.5rem}
-  .connect-link{display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text-muted);font-size:.85rem;padding:1rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:.75rem;min-width:120px;transition:border-color .2s}
-  .connect-link:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
-  .connect-link .icon{font-size:1.5rem}
-
-  /* FOOTER */
-  footer{text-align:center;padding:2rem 1.5rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem}
-  footer .motto{color:var(--text-muted);font-style:italic;margin-bottom:.5rem}
-
-  /* MOBILE */
-  @media(max-width:768px){
-    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
-    nav .links.open{display:flex}
-    .menu-toggle{display:block}
-    .hero h1{font-size:2rem}
-    .about-grid{grid-template-columns:1fr}
-    .cred-grid{grid-template-columns:1fr}
-    .edu-grid{grid-template-columns:1fr}
-    .hours-grid{grid-template-columns:repeat(3,1fr)}
+  :root{
+    --bg:#080d16;--bg-2:#0f1725;--bg-3:#141f31;--card:#111c2d;
+    --text:#f1f5f9;--muted:#aab7c9;--dim:#94a3b8;
+    --accent:#2563eb;--accent-hover:#1d4ed8;--accent-soft:#93c5fd;
+    --border:#2a3a50;--green:#4ade80;--amazon:#ff9900;
   }
-  @media(max-width:480px){
-    .hours-grid{grid-template-columns:repeat(2,1fr)}
-    section{padding:3.5rem 1rem}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent-soft);text-underline-offset:.18em}
+  a:hover{text-decoration-thickness:2px}
+  a:focus-visible,button:focus-visible{outline:3px solid #fbbf24;outline-offset:4px;border-radius:.25rem}
+  img{max-width:100%;height:auto}
+  .skip-link{position:fixed;left:1rem;top:-5rem;z-index:1000;background:#fff;color:#111827;padding:.65rem 1rem;border-radius:.4rem;font-weight:800}
+  .skip-link:focus{top:1rem}
+  .container{width:min(1080px,calc(100% - 3rem));margin-inline:auto}
+  .eyebrow{margin:0 0 .65rem;color:var(--accent-soft);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .section-heading{font-size:clamp(1.7rem,4vw,2.45rem);line-height:1.15;letter-spacing:-.025em;margin:0 0 .75rem}
+  .section-intro{max-width:720px;color:var(--muted);margin:0 0 1.75rem}
+  section{scroll-margin-top:5rem}
+
+  nav{position:fixed;inset:0 0 auto;z-index:100;background:rgba(8,13,22,.94);border-bottom:1px solid var(--border);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+  nav .inner{width:min(1120px,calc(100% - 3rem));height:4rem;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .logo{color:var(--text);font-size:1rem;font-weight:850;letter-spacing:.08em;text-decoration:none}
+  .nav-links{display:flex;align-items:center;gap:1.25rem;font-size:.88rem}
+  .nav-links a{color:var(--muted);text-decoration:none}
+  .nav-links a:first-child{color:var(--text);font-weight:750}
+  .nav-links a:hover{color:var(--text)}
+  .menu-toggle{display:none;min-width:44px;min-height:44px;border:1px solid var(--border);border-radius:.5rem;background:var(--bg-2);color:var(--text);font:inherit;font-size:1.25rem;cursor:pointer}
+
+  main{display:block}
+  .hero{min-height:92svh;padding:7.5rem 0 4.5rem;display:grid;align-items:center;background:radial-gradient(circle at 78% 22%,rgba(37,99,235,.22),transparent 27%),linear-gradient(180deg,#070b12 0%,var(--bg-2) 62%,var(--bg) 100%);overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(340px,.96fr);gap:3rem;align-items:center}
+  .hero h1{max-width:720px;margin:0 0 1.1rem;font-size:clamp(2.65rem,6vw,5.15rem);line-height:.97;letter-spacing:-.06em}
+  .hero .lede{max-width:660px;margin:0 0 1.4rem;color:#c3cfdd;font-size:1.08rem}
+  .hero-actions{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+  .button{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:.72rem 1.2rem;border:1px solid transparent;border-radius:.55rem;font-size:.9rem;font-weight:800;text-decoration:none;transition:transform 140ms ease,background-color 140ms ease,border-color 140ms ease}
+  .button:active{transform:scale(.97)}
+  .button-primary{background:var(--accent);color:#fff}
+  .button-primary:hover{background:var(--accent-hover);text-decoration:none}
+  .button-secondary{background:transparent;border-color:#52657d;color:var(--text)}
+  .button-secondary:hover{border-color:var(--accent-soft);text-decoration:none}
+  .proof-link{display:inline-block;margin-top:1rem;color:var(--muted);font-size:.9rem}
+  .author-line{display:flex;align-items:center;gap:.75rem;margin-top:1.25rem;color:var(--muted);font-size:.83rem}
+  .author-line img{width:48px;height:48px;object-fit:cover;border:1px solid #52657d;border-radius:50%}
+  .cover-stage{position:relative;min-height:445px;border:1px solid #334761;border-radius:1.6rem;background:linear-gradient(145deg,#0b1422,#1a2940);box-shadow:0 32px 90px rgba(0,0,0,.43);overflow:hidden}
+  .cover-stage::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(#000,transparent 85%)}
+  .cover{position:absolute;width:180px;border:1px solid rgba(255,255,255,.2);border-radius:.4rem;box-shadow:0 25px 65px rgba(0,0,0,.54);background:#0f172a}
+  .cover-main{width:218px;right:72px;top:52px;z-index:3;transform:rotate(3deg)}
+  .cover-left{left:45px;top:128px;z-index:2;transform:rotate(-9deg)}
+  .cover-right{right:30px;bottom:42px;z-index:1;transform:rotate(10deg)}
+  .stage-note{position:absolute;left:28px;bottom:27px;z-index:4;max-width:226px;padding:.85rem .95rem;border:1px solid rgba(74,222,128,.44);border-radius:.9rem;background:rgba(2,6,23,.9);color:#dbe6f3;font-size:.76rem}
+  .stage-note strong{display:block;color:#86efac;font-size:1.25rem;line-height:1.1;margin-bottom:.25rem}
+
+  .proof{padding:2.25rem 0;border-block:1px solid var(--border);background:var(--bg-2)}
+  .proof-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem}
+  .metric{padding:1rem;border:1px solid var(--border);border-radius:.75rem;background:var(--card)}
+  .metric strong{display:block;color:var(--text);font-size:1.3rem;line-height:1.1}
+  .metric span{display:block;margin-top:.35rem;color:var(--muted);font-size:.78rem;line-height:1.4}
+  .proof-copy{margin:1rem 0 0;color:var(--muted);font-size:.85rem}
+
+  .workbook-finder{padding:5.5rem 0}
+  .finder-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem}
+  .finder-card{display:flex;flex-direction:column;min-height:185px;padding:1.15rem;border:1px solid var(--border);border-radius:.85rem;background:var(--card);color:var(--text);text-decoration:none}
+  .finder-card:hover{border-color:var(--accent-soft);text-decoration:none;transform:translateY(-2px)}
+  .finder-card strong{font-size:1rem;line-height:1.25}
+  .finder-card span{margin:.5rem 0 .9rem;color:var(--muted);font-size:.82rem;line-height:1.45;flex:1}
+  .finder-card em{color:var(--accent-soft);font-size:.82rem;font-style:normal;font-weight:800}
+  .catalog-links,.direct-products{margin:1.25rem 0 0;color:var(--muted);font-size:.86rem}
+  .direct-products{margin-top:.55rem;font-size:.78rem}
+
+  .free-pack{padding:0 0 5.5rem}
+  .free-pack-card{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;padding:2rem;border:1px solid rgba(74,222,128,.42);border-radius:1rem;background:linear-gradient(135deg,#10251d,#0e1827)}
+  .free-pack-card h2{margin:0 0 .55rem;font-size:clamp(1.45rem,3vw,2rem)}
+  .free-pack-card p{margin:0;color:var(--muted)}
+
+  .pilot{padding:5.5rem 0;background:var(--bg-2);border-block:1px solid var(--border)}
+  .hours-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.75rem;margin:1.75rem 0}
+  .hour-card{padding:1rem .65rem;text-align:center;border:1px solid var(--border);border-radius:.75rem;background:var(--card)}
+  .hour-card strong{display:block;color:var(--accent-soft);font-size:1.35rem}
+  .hour-card span{display:block;color:var(--muted);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase}
+  .credential-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .credential-card{padding:1.35rem;border:1px solid var(--border);border-radius:.85rem;background:var(--card)}
+  .credential-card.wide{grid-column:1/-1}
+  .credential-card h3{margin:0 0 .75rem;font-size:1rem;color:var(--accent-soft)}
+  .credential-card ul{margin:0;padding:0;list-style:none;color:var(--muted);font-size:.87rem}
+  .credential-card li{padding:.38rem 0;border-bottom:1px solid var(--border)}
+  .credential-card li:last-child{border-bottom:0}
+  .aircraft-list{columns:2;column-gap:2rem}
+  .resume-row{margin-top:1.25rem}
+
+  .pilot-reading{padding:5rem 0}
+  .reading-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}
+  .reading-links a{padding:1rem;border:1px solid var(--border);border-radius:.75rem;background:var(--card);color:var(--text);font-size:.88rem;font-weight:700;text-decoration:none}
+  .reading-links a:hover{border-color:var(--accent-soft)}
+
+  .labs{padding:4.5rem 0;background:#0b111c;border-top:1px solid var(--border)}
+  .labs .section-heading{font-size:1.65rem;color:#d7e0eb}
+  .labs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+  .lab-card{padding:1rem;border:1px solid #26364a;border-radius:.75rem;background:#0e1724}
+  .lab-card h3{margin:0 0 .35rem;font-size:.95rem}
+  .lab-card p{margin:0 0 .65rem;color:var(--dim);font-size:.8rem}
+  .lab-card a{display:inline-flex;align-items:center;min-height:32px;margin:.15rem .45rem .15rem 0;padding:.1rem .2rem;font-size:.8rem}
+  .lab-card a+a::before{content:none}
+
+  .connect{padding:4.5rem 0;text-align:center}
+  .connect-links{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:1rem}
+  .connect-links a{min-height:44px;display:inline-flex;align-items:center;padding:.6rem .9rem;border:1px solid var(--border);border-radius:.55rem;color:var(--muted);text-decoration:none}
+  .connect-links a:hover{border-color:var(--accent-soft);color:var(--text)}
+  footer{padding:2rem 1.5rem;text-align:center;border-top:1px solid var(--border);color:var(--dim);font-size:.82rem}
+
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr}.hero-copy{text-align:center}.hero .lede{margin-inline:auto}.hero-actions,.author-line{justify-content:center}.cover-stage{width:min(100%,560px);min-height:390px;margin:auto}
+    .proof-grid{grid-template-columns:repeat(3,1fr)}.finder-grid{grid-template-columns:repeat(2,1fr)}.hours-grid{grid-template-columns:repeat(3,1fr)}.reading-links{grid-template-columns:repeat(2,1fr)}
   }
-
-  .proj-links .gumroad{background:#36a9ae;color:#fff}
-  .proj-links .site{background:var(--green);color:#111}
-  .avi-section{background:var(--bg3)}
-  .avi-books{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-bottom:2rem}
-  .avi-book{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:.75rem;padding:1.5rem}
-  .avi-book h3{font-size:1rem;margin-bottom:.35rem}
-  .avi-book .price{font-size:.85rem;color:var(--green);font-weight:700;margin-bottom:.75rem}
-  .avi-book p{color:var(--text-muted);font-size:.85rem;margin-bottom:.75rem}
-  .avi-freebies{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
-  .avi-freebies p{color:var(--text-muted);font-size:.85rem;flex:1;min-width:200px}
-  .social-bar{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem}
-  .social-bar a{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .75rem;border-radius:.35rem;font-size:.78rem;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--text-muted);transition:border-color .2s,color .2s}
-  .social-bar a:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
-
-
-  /* A+ KDP product-storefront pass */
-  .hero.product-hero{min-height:92vh;text-align:left;padding:7rem 1.5rem 4rem;background:radial-gradient(circle at 76% 24%,rgba(255,153,0,.14),transparent 22%),radial-gradient(circle at 28% 18%,rgba(96,165,250,.16),transparent 26%),linear-gradient(180deg,#070b12 0%,#101827 55%,#0a0e17 100%)}
-  .hero-layout{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(310px,.95fr);gap:3rem;align-items:center;position:relative;z-index:1}
-  .hero-kicker{display:inline-flex;align-items:center;gap:.45rem;color:#fbbf24;background:rgba(255,153,0,.09);border:1px solid rgba(255,153,0,.22);border-radius:999px;padding:.35rem .7rem;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
-  .hero.product-hero h1{font-size:clamp(2.6rem,6vw,5rem);line-height:.96;letter-spacing:-.065em;margin-bottom:1rem;max-width:760px}
-  .hero.product-hero .tagline{max-width:650px;margin:0 0 1.45rem;color:#b6c2d3;font-size:1.1rem}
-  .credential-chip{display:flex;align-items:center;gap:.7rem;margin-top:1.2rem;color:var(--text-muted);font-size:.86rem}
-  .credential-chip img{width:44px;height:44px;border-radius:999px;border:1px solid rgba(148,163,184,.35);object-fit:cover}
-  .cover-stage{position:relative;min-height:430px;border-radius:1.8rem;background:linear-gradient(145deg,rgba(15,23,42,.96),rgba(30,41,59,.76));border:1px solid rgba(148,163,184,.22);box-shadow:0 34px 100px rgba(0,0,0,.44);overflow:hidden}
-  .cover-stage::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(180deg,rgba(0,0,0,.78),transparent 78%)}
-  .cover-stage::after{content:'KNEEBOARD STACK';position:absolute;left:1.35rem;bottom:1.15rem;color:rgba(226,232,240,.28);font-size:.72rem;font-weight:900;letter-spacing:.18em}
-  .cover-img{position:absolute;width:174px;border-radius:.4rem;box-shadow:0 26px 65px rgba(0,0,0,.52);border:1px solid rgba(255,255,255,.18);background:#0f172a}
-  .cover-main{width:205px;right:82px;top:58px;transform:rotate(3deg);z-index:3}.cover-left{left:64px;top:112px;transform:rotate(-9deg);z-index:2}.cover-right{right:36px;bottom:66px;transform:rotate(9deg);z-index:1}
-  .proof-pill{position:absolute;left:38px;bottom:54px;z-index:4;background:rgba(2,6,23,.82);border:1px solid rgba(34,197,94,.35);backdrop-filter:blur(10px);border-radius:1rem;padding:.9rem 1rem;max-width:230px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
-  .proof-pill strong{display:block;color:#86efac;font-size:1.35rem;line-height:1}.proof-pill span{display:block;color:#cbd5e1;font-size:.78rem;margin-top:.3rem}
-  .proof-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.75rem;margin-top:1.15rem}
-  .proof-metric{background:rgba(15,23,42,.72);border:1px solid rgba(148,163,184,.18);border-radius:.9rem;padding:1rem;text-align:left}.proof-metric strong{display:block;font-size:1.45rem;color:#f8fafc;line-height:1}.proof-metric span{display:block;color:var(--text-muted);font-size:.78rem;margin-top:.35rem}
-  .workbook-preview{display:grid;grid-template-columns:1.05fr .95fr;gap:1rem;align-items:stretch;margin-top:1.25rem;margin-bottom:1.25rem}.cover-shelf-card{background:linear-gradient(135deg,#101827,#0f1729);border:1px solid rgba(96,165,250,.3);border-radius:1rem;padding:1.25rem;display:grid;grid-template-columns:92px 1fr;gap:1rem;align-items:center;color:var(--text);text-decoration:none}.cover-shelf-card:hover{text-decoration:none;border-color:rgba(96,165,250,.62)}.cover-shelf-card img{width:92px;border-radius:.25rem;box-shadow:0 14px 36px rgba(0,0,0,.35)}.cover-shelf-card h3{font-size:1rem;margin-bottom:.35rem}.cover-shelf-card p{font-size:.83rem;color:var(--text-muted);margin:0}.cover-shelf-card.featured{grid-row:span 2;grid-template-columns:130px 1fr;border-color:rgba(255,153,0,.42)}.cover-shelf-card.featured img{width:130px}
-  @media(max-width:860px){.hero-layout,.workbook-preview{grid-template-columns:1fr}.hero.product-hero{text-align:center}.hero.product-hero .tagline{margin-left:auto;margin-right:auto}.credential-chip{justify-content:center}.cover-stage{min-height:380px}.proof-strip{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.cover-stage{min-height:330px}.cover-img{width:138px}.cover-main{width:160px;right:42px;top:48px}.cover-left{left:38px;top:112px}.cover-right{right:26px;bottom:72px}.proof-pill{left:22px;bottom:28px}.proof-strip{grid-template-columns:1fr}.cover-shelf-card,.cover-shelf-card.featured{grid-template-columns:86px 1fr}.cover-shelf-card img,.cover-shelf-card.featured img{width:86px}.hero-buttons{gap:.65rem}.btn{width:100%;justify-content:center}}
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
-  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav{background:#0a0e17}}
+  @media(max-width:700px){
+    .container,nav .inner{width:min(100% - 2rem,1080px)}
+    .menu-toggle{display:inline-flex;align-items:center;justify-content:center}
+    .nav-links{display:none;position:absolute;inset:4rem 0 auto;padding:1rem;background:#080d16;border-bottom:1px solid var(--border);flex-direction:column;align-items:stretch;gap:.2rem}
+    .nav-links.open{display:flex}.nav-links a{min-height:44px;display:flex;align-items:center;padding:.35rem 1rem}
+    .hero{min-height:auto;padding:6.5rem 0 3.5rem}.hero h1{font-size:clamp(2.55rem,13vw,4rem)}
+    .proof-grid{grid-template-columns:repeat(2,1fr)}.finder-grid,.credential-grid,.labs-grid{grid-template-columns:1fr}.credential-card.wide{grid-column:auto}
+    .free-pack-card{grid-template-columns:1fr}.free-pack-card .button{width:100%}.aircraft-list{columns:1}
+  }
+  @media(max-width:520px){
+    .hero-copy{text-align:left}.hero-actions{align-items:stretch}.hero-actions .button{width:100%}.author-line{justify-content:flex-start;align-items:flex-start}.proof-link{width:100%}
+    .cover-stage{min-height:315px}.cover{width:124px}.cover-main{width:154px;right:36px;top:38px}.cover-left{left:24px;top:105px}.cover-right{right:18px;bottom:60px}.stage-note{left:16px;bottom:18px;max-width:194px}
+    .proof-grid,.finder-grid,.hours-grid,.reading-links{grid-template-columns:1fr}.metric{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:.5rem}.metric span{margin:0}.finder-card{min-height:0}
+    .workbook-finder,.pilot{padding-block:4rem}.free-pack{padding-bottom:4rem}.pilot-reading,.labs,.connect{padding-block:3.5rem}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.001ms!important}}
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav{background:#080d16}}
 </style>
 <script type="application/ld+json">
 {
@@ -200,61 +166,28 @@
       "image": "https://nickrae.net/headshot.webp",
       "jobTitle": "Commercial Pilot",
       "description": "Commercial pilot, builder, and aviation workbook author from Merced, CA",
-      "knowsAbout": ["Commercial Aviation", "Flight Training", "iOS Development", "AI Automation", "Prediction Markets"],
-      "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "Professional License",
-        "name": "Commercial Instrument Multi-Engine Pilot Certificate"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/in/nickrae",
-        "https://twitter.com/nickrae",
-        "https://www.youtube.com/@nicholasrae",
-        "https://github.com/nicholasrae"
-      ],
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Car Plus",
-        "url": "https://www.carplusmerced.com"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Merced",
-        "addressRegion": "CA",
-        "addressCountry": "US"
-      }
+      "knowsAbout": ["Commercial Aviation", "Flight Training", "Pilot Checkride Preparation", "Aviation Publishing"],
+      "hasCredential": {"@type":"EducationalOccupationalCredential","credentialCategory":"Professional License","name":"Commercial Instrument Multi-Engine Pilot Certificate"},
+      "sameAs": ["https://www.linkedin.com/in/nickrae","https://x.com/nickrae","https://www.youtube.com/@nicholasrae","https://github.com/nicholasrae"],
+      "worksFor": {"@type":"Organization","name":"Car Plus","url":"https://www.carplusmerced.com"},
+      "address": {"@type":"PostalAddress","addressLocality":"Merced","addressRegion":"CA","addressCountry":"US"}
     },
     {
-      "@type": "WebSite",
-      "name": "Nick Rae",
-      "url": "https://nickrae.net/",
-      "description": "Nick Rae is a commercial pilot and aviation workbook author publishing FAA-aligned pilot study materials for PPL, IFR, commercial, multi-engine, and VFR radio calls.",
-      "author": { "@id": "https://nickrae.net/#person" }
+      "@type":"WebSite","name":"Nick Rae","url":"https://nickrae.net/","description":"Nick Rae is a commercial pilot and aviation workbook author publishing FAA-aligned pilot study materials for PPL, IFR, commercial, multi-engine, and VFR radio calls.","author":{"@id":"https://nickrae.net/#person"}
     },
     {
-      "@type": "ItemList",
-      "name": "Nick Rae Aviation Pilot Workbooks",
-      "url": "https://nickrae.net/aviation-workbooks/",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "url": "https://www.amazon.com/dp/B0H3KT5FHW", "name": "Clearance to Confidence: VFR Radio Calls Workbook" },
-        { "@type": "ListItem", "position": 2, "url": "https://a.co/d/0hExZLaf", "name": "Private Pilot License Workbook" },
-        { "@type": "ListItem", "position": 3, "url": "https://a.co/d/06zXHuEe", "name": "Instrument Rating Workbook" },
-        { "@type": "ListItem", "position": 4, "url": "https://www.amazon.com/dp/B0GW8BGNDP", "name": "The Complete Commercial Pilot Workbook" },
-        { "@type": "ListItem", "position": 5, "url": "https://www.amazon.com/dp/B0GXK6J9F5", "name": "Multi-Engine Add-On Rating Workbook" }
+      "@type":"ItemList","name":"Nick Rae Aviation Pilot Workbooks","url":"https://nickrae.net/aviation-workbooks/","itemListElement":[
+        {"@type":"ListItem","position":1,"url":"https://www.amazon.com/dp/B0H3KT5FHW","name":"Clearance to Confidence: VFR Radio Calls Workbook"},
+        {"@type":"ListItem","position":2,"url":"https://a.co/d/0hExZLaf","name":"Private Pilot License Workbook"},
+        {"@type":"ListItem","position":3,"url":"https://a.co/d/06zXHuEe","name":"Instrument Rating Workbook"},
+        {"@type":"ListItem","position":4,"url":"https://www.amazon.com/dp/B0GW8BGNDP","name":"The Complete Commercial Pilot Workbook"},
+        {"@type":"ListItem","position":5,"url":"https://www.amazon.com/dp/B0GXK6J9F5","name":"Multi-Engine Add-On Rating Workbook"}
       ]
     }
   ]
 }
 </script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
 <script>
   document.addEventListener('click', function (event) {
     var link = event.target.closest && event.target.closest('a[href]');
@@ -269,492 +202,196 @@
       if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
       var eventName = link.dataset.event || ((host.includes('amazon.com') || host === 'a.co') ? 'amazon_click' : 'outbound_cta_click');
       if (url.hostname !== window.location.hostname || product !== 'other' || link.dataset.event) {
-        gtag('event', eventName, {
-          event_category: link.dataset.category || (eventName === 'outbound_cta_click' ? 'outbound_cta' : 'site_engagement'),
-          product: product,
-          placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
-          link_url: url.href
-        });
+        gtag('event', eventName, {event_category:link.dataset.category || (eventName === 'outbound_cta_click' ? 'outbound_cta' : 'site_engagement'),product:product,placement:link.dataset.placement || document.body.dataset.page || window.location.pathname,link_url:url.href});
       }
     } catch (e) {}
   });
 </script>
+<script src="/assets/site.js" defer></script>
 </head>
-<body>
-
-<!-- NAV -->
-<nav>
+<body data-page="home">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav aria-label="Primary navigation">
   <div class="inner">
-    <div class="logo">NICK RAE</div>
-    <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
-    <div class="links">
-      <a href="aviation-workbooks/" style="color:var(--accent2);font-weight:700">📚 Pilot Workbooks</a>
-      <a href="flight-funded/">Flight Funded</a>
-      <a href="blog/">Blog</a>
-      <a href="#about">About</a>
+    <a class="logo" href="./" aria-label="Nick Rae home">NICK RAE</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span aria-hidden="true">☰</span><span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Menu</span></button>
+    <div class="nav-links" id="nav-links">
+      <a href="aviation-workbooks/">Pilot Workbooks</a>
+      <a href="ifr-scenario-pack/">Free IFR Pack</a>
       <a href="#credentials">Flying</a>
-      <a href="#building">Projects</a>
-      <a href="#connect">Connect</a>
+      <a href="blog/">Pilot Notes</a>
+      <a href="#labs">Labs &amp; Archive</a>
+      <a href="about/">About</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero product-hero">
-  <div class="hero-layout">
-    <div class="hero-copy">
-      <div class="hero-kicker">FAA-aligned pilot workbooks</div>
-      <h1>Pilot workbooks for the checkride in front of you.</h1>
-      <p class="tagline">Private, instrument, commercial, multi-engine, and VFR radio-call study tools written by a Commercial Instrument Multi-Engine pilot. Built for explanations, oral traps, and practical reps, not answer-key roulette.</p>
-      <div class="hero-buttons">
-        <a href="aviation-workbooks/" class="btn btn-primary" data-product="aviation_workbooks" data-placement="home-hero">Compare Pilot Workbooks</a>
-        <a href="ifr-scenario-pack/" class="btn btn-outline" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-hero">Free IFR Scenario Pack</a>
-        <a href="flight-funded/" class="btn btn-outline">See sales proof</a>
-      </div>
-      <div class="credential-chip">
-        <picture><source srcset="headshot.webp" type="image/webp"><img src="headshot.jpg" alt="Nick Rae in cockpit"></picture>
-        <span>Nick Rae · Commercial Pilot ASEL/AMEL · Instrument · Merced, CA</span>
-      </div>
-    </div>
-    <div class="cover-stage" aria-label="Nick Rae aviation workbook covers">
-      <img class="cover-img cover-left" src="assets/workbooks/private-pilot-cover.jpg" alt="Private Pilot License Workbook cover" loading="eager">
-      <img class="cover-img cover-main" src="assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager">
-      <img class="cover-img cover-right" src="assets/workbooks/instrument-rating-cover.jpg" alt="Instrument Rating Workbook cover" loading="eager">
-      <div class="proof-pill"><strong>129 books tracked</strong><span>Reconciled Jan-July KDP proof through Jul 31 · 122 aviation units in the March-July proof line</span></div>
-    </div>
-  </div>
-</section>
-
-<section style="padding:2rem 1.5rem;background:var(--bg);border-bottom:1px solid var(--border)">
-  <div class="container" style="max-width:1040px">
-    <div style="text-align:center;margin-bottom:1.35rem">
-      <div style="font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:.35rem">Choose your path</div>
-      <h2 style="font-size:1.45rem;margin-bottom:.45rem">What are you here to do?</h2>
-      <p style="color:var(--text-muted);max-width:660px;margin:0 auto">NickRae.net is part pilot log, part product shelf, part builder notebook. Start with the lane that matches your intent instead of spelunking through my entire operating system.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem">
-      <a href="aviation-workbooks/" style="display:block;background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.45);border-radius:1rem;padding:1.35rem;text-decoration:none;color:var(--text)">
-        <div style="font-size:1.4rem;margin-bottom:.4rem">✈️</div>
-        <h3 style="font-size:1.05rem;margin-bottom:.35rem">Buy the pilot workbook for your next checkride</h3>
-        <p style="color:var(--text-muted);font-size:.86rem;margin:0">Private, instrument, commercial, multi-engine, and VFR radio calls. Reconciled Jan-July tracking now stands at 129 full-catalog books. July 1-31 aviation proof: 24 paid units, $192.85 USD + €21.54 EUR + A$9.49, 438 KENP, and 0 refunds; cumulative March-July aviation tracking: 122 units / $1,047.23 USD + €46.83 EUR + A$9.49.</p>
-      </a>
-      <a href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-path-card" style="display:block;background:linear-gradient(135deg,#1a2236,#0f1729);border:1px solid rgba(34,197,94,.38);border-radius:1rem;padding:1.35rem;text-decoration:none;color:var(--text)">
-        <div style="font-size:1.4rem;margin-bottom:.4rem">📡</div>
-        <h3 style="font-size:1.05rem;margin-bottom:.35rem">Practice 10 IFR oral answers for free</h3>
-        <p style="color:var(--text-muted);font-size:.86rem;margin:0">Start with the free IFR Oral Exam Scenario Pack, then use the Instrument workbook if you need deeper reps.</p>
-      </a>
-      <a href="#building" style="display:block;background:linear-gradient(135deg,#10251d,#0f1729);border:1px solid rgba(34,197,94,.28);border-radius:1rem;padding:1.35rem;text-decoration:none;color:var(--text)">
-        <div style="font-size:1.4rem;margin-bottom:.4rem">⚡</div>
-        <h3 style="font-size:1.05rem;margin-bottom:.35rem">See the apps and experiments</h3>
-        <p style="color:var(--text-muted);font-size:.86rem;margin:0">FeedFare, Inflection Point, Flight Funded, and the public builder log behind them.</p>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section style="padding:2rem 1.5rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="container" style="max-width:1040px">
-    <div style="background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.38);border-radius:1rem;padding:1.5rem 1.75rem">
-      <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
-        <div style="flex:1;min-width:260px">
-          <div style="font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:.35rem">Current revenue proof</div>
-          <h2 style="font-size:1.45rem;margin-bottom:.45rem">Pilot workbooks are the cleanest money line.</h2>
-          <p style="color:var(--text-muted);margin:0">KDP proof is now shown like proof, not buried in a paragraph. Dashboard data is useful demand signal, not a magic ad-scaling license. Novel technology: telling the truth.</p>
+<main id="main-content" tabindex="-1">
+  <section class="hero" aria-labelledby="home-heading">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">FAA-aligned pilot workbooks</p>
+        <h1 id="home-heading">The workbook for the checkride in front of you.</h1>
+        <p class="lede">Private, instrument, commercial, multi-engine, and VFR radio-call study tools written by a Commercial Instrument Multi-Engine pilot. Practical reps and explained answers—not answer-key roulette.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="aviation-workbooks/#chooser" data-product="aviation_workbooks" data-placement="home-hero">Find your workbook</a>
+          <a class="button button-secondary" href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-hero">Free IFR pack</a>
         </div>
-        <div class="proj-links" style="margin-top:0">
-          <a href="aviation-workbooks/" class="site">Compare Workbooks</a>
-          <a href="ifr-scenario-pack/" class="accent" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-proof">Free IFR Pack</a>
-          <a href="flight-funded/" class="accent">See proof log</a>
+        <a class="proof-link" href="flight-funded/">See the Flight Funded proof log →</a>
+        <div class="author-line">
+          <picture>
+            <source type="image/webp" srcset="headshot-160.webp 160w, headshot-320.webp 320w" sizes="48px">
+            <img src="headshot.jpg" width="1280" height="960" alt="Nick Rae in a cockpit" loading="lazy" decoding="async">
+          </picture>
+          <span>Nick Rae · Commercial Pilot ASEL/AMEL · Instrument · Merced, CA</span>
         </div>
       </div>
-      <div class="proof-strip" aria-label="KDP sales proof summary">
-        <div class="proof-metric"><strong>24</strong><span>July paid units through Jul 31</span></div>
-        <div class="proof-metric"><strong>$192.85</strong><span>July USD royalties verified</span></div>
-        <div class="proof-metric"><strong>€21.54 + A$9.49</strong><span>July non-USD royalties verified</span></div>
-        <div class="proof-metric"><strong>438</strong><span>July KENP read through Jul 31</span></div>
-        <div class="proof-metric"><strong>129</strong><span>Reconciled full-catalog books tracked Jan-July</span></div>
+      <div class="cover-stage" aria-label="Three Nick Rae aviation workbook covers">
+        <picture>
+          <source type="image/webp" srcset="assets/workbooks/private-pilot-cover-240.webp 240w, assets/workbooks/private-pilot-cover-480.webp 480w" sizes="(max-width:520px) 124px, 180px">
+          <img class="cover cover-left" src="assets/workbooks/private-pilot-cover.jpg" width="1000" height="1293" alt="Private Pilot License Workbook cover" loading="lazy" decoding="async">
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="assets/workbooks/vfr-radio-calls-cover-240.webp 240w, assets/workbooks/vfr-radio-calls-cover-480.webp 480w" sizes="(max-width:520px) 154px, 218px">
+          <img class="cover cover-main" src="assets/workbooks/vfr-radio-calls-cover.jpg" width="1000" height="1293" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="assets/workbooks/instrument-rating-cover-240.webp 240w, assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:520px) 124px, 180px">
+          <img class="cover cover-right" src="assets/workbooks/instrument-rating-cover.jpg" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="lazy" decoding="async">
+        </picture>
+        <div class="stage-note"><strong>129 books tracked</strong>Reconciled Jan–July full-catalog KDP proof through Jul 31.</div>
       </div>
     </div>
-   </div>
- </section>
+  </section>
 
-<!-- ABOUT -->
-<section style="padding:2rem 1.5rem;background:var(--bg);border-bottom:1px solid var(--border)">
-  <div class="container" style="max-width:960px">
-    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-start;justify-content:space-between">
-      <div style="flex:1;min-width:260px">
-        <div style="font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:.35rem">Start Here for Student Pilots</div>
-        <h2 style="font-size:1.45rem;margin-bottom:.45rem">Best aviation reads on the site right now</h2>
-        <p style="color:var(--text-muted);margin:0">The pages already getting search traction now point at each other on purpose. Google likes a clean topic cluster. So do I.</p>
+  <section class="proof" aria-labelledby="proof-heading">
+    <div class="container">
+      <p class="eyebrow" id="proof-heading">Current verified KDP signal</p>
+      <div class="proof-grid">
+        <div class="metric"><strong>24</strong><span>July paid units through Jul 31</span></div>
+        <div class="metric"><strong>$192.85</strong><span>July USD royalties verified</span></div>
+        <div class="metric"><strong>€21.54 + A$9.49</strong><span>July non-USD royalties verified</span></div>
+        <div class="metric"><strong>438</strong><span>July KENP through Jul 31 · 0 refunds</span></div>
+        <div class="metric"><strong>122</strong><span>Cumulative March–July aviation workbook units</span></div>
       </div>
-      <div class="proj-links" style="margin-top:0;gap:.75rem;flex-wrap:wrap">
-        <a href="aviation-workbooks/" class="site">📚 Pilot Workbook Series</a>
-        <a href="blog/checkride-prep-guide.html" class="site">✈️ Checkride Prep Guide</a>
-        <a href="blog/student-pilot-apps-2026.html" class="gumroad">📱 Best Apps for Student Pilots</a>
-        <a href="blog/blog-cheapest-flight-hours.html" class="site">💸 Cheapest Ways to Build Hours</a>
-        <a href="blog/commercial-pilot-career-2026.html" class="accent">🧭 Commercial Pilot Career Path</a>
+      <p class="proof-copy">Cumulative March–July aviation tracking: <strong>122 units / $1,047.23 USD + €46.83 EUR + A$9.49</strong>. Reconciled Jan–July full-catalog tracking: <strong>129 books</strong>. Useful demand proof, not a magic ad-scaling license.</p>
+    </div>
+  </section>
+
+  <section class="workbook-finder" id="workbooks" aria-labelledby="finder-heading">
+    <div class="container">
+      <p class="eyebrow">Start with the rating in front of you</p>
+      <h2 class="section-heading" id="finder-heading">Find your workbook</h2>
+      <p class="section-intro">Do not buy a whole shelf when one checkride is trying to punch you in the mouth. Pick the problem you need to solve now.</p>
+      <div class="finder-grid">
+        <a class="finder-card" href="aviation-workbooks/#ppl" data-product="ppl_workbook" data-placement="home-finder"><strong>Student pilot / PPL</strong><span>Written-test fluency, explained answers, and oral-exam thinking.</span><em>See PPL workbook →</em></a>
+        <a class="finder-card" href="aviation-workbooks/#instrument" data-product="instrument_workbook" data-placement="home-finder"><strong>IFR training</strong><span>Weather, procedures, charts, systems, and scenario decisions.</span><em>See Instrument workbook →</em></a>
+        <a class="finder-card" href="aviation-workbooks/#commercial" data-product="commercial_workbook" data-placement="home-finder"><strong>Commercial candidate</strong><span>Commercial ACS review, maneuvers, judgment, and explanations.</span><em>See Commercial workbook →</em></a>
+        <a class="finder-card" href="aviation-workbooks/#multi-engine" data-product="multi_engine_workbook" data-placement="home-finder"><strong>Multi-engine add-on</strong><span>Vmc, OEI, PA-44 flows, engine-out calls, and oral traps.</span><em>See Multi-Engine workbook →</em></a>
+        <a class="finder-card" href="aviation-workbooks/#vfr-radio" data-product="vfr_radio_calls_workbook" data-placement="home-finder"><strong>VFR radio calls</strong><span>Call-building, ATC replies, readbacks, CTAF flows, and out-loud reps.</span><em>See Radio Calls workbook →</em></a>
+      </div>
+      <p class="catalog-links"><a href="aviation-workbooks/">Compare every workbook and current price</a> · <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="home-finder">Full Amazon catalog</a> · <a href="https://nicholasrae.gumroad.com/l/ppl-oral-flashcards" target="_blank" rel="noopener" data-product="ppl_oral_flashcards" data-placement="home-finder">PPL oral flashcards</a></p>
+      <p class="direct-products">Direct Amazon links: <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-finder-direct">PPL</a> · <a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="home-finder-direct">Instrument</a> · <a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="home-finder-direct">Commercial</a> · <a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="home-finder-direct">Multi-Engine paperback</a> / <a href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="home-finder-direct">Kindle</a> · <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-finder-direct">VFR Radio paperback</a> / <a href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="home-finder-direct">Kindle</a></p>
+    </div>
+  </section>
+
+  <section class="free-pack" aria-labelledby="ifr-pack-heading">
+    <div class="container">
+      <div class="free-pack-card">
+        <div><p class="eyebrow">Not ready to buy?</p><h2 id="ifr-pack-heading">Practice 10 IFR oral answers for free.</h2><p>Currency, alternates, fuel, readbacks, holding, MDA discipline, and equipment checks—source-anchored and built for out-loud reps.</p></div>
+        <a class="button button-secondary" href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-free-pack">Get the free IFR pack</a>
       </div>
     </div>
-    <div style="margin-top:1.25rem;background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.35);border-radius:1rem;padding:1.35rem 1.5rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
-      <div style="flex:1;min-width:250px">
-        <div style="font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:.35rem">Studying for a checkride?</div>
-        <h3 style="font-size:1.2rem;margin-bottom:.4rem">Start with the workbook series.</h3>
-        <p style="color:var(--text-muted);margin:0">Private, instrument, commercial, multi-engine, and VFR radio prep built around practical questions, oral exam traps, call-building drills, and checkride reality.</p>
+  </section>
+
+  <section class="pilot" id="credentials" aria-labelledby="credentials-heading">
+    <div class="container">
+      <p class="eyebrow">Written by a working commercial pilot</p>
+      <h2 class="section-heading" id="credentials-heading">Flight credentials</h2>
+      <p class="section-intro">I earned private, instrument, commercial, and multi-engine ratings in under 18 months. The workbooks come from training pressure, not generic aviation-content soup.</p>
+      <div class="hours-grid" aria-label="Flight-hour totals">
+        <div class="hour-card"><strong>391.3</strong><span>Total Hours</span></div>
+        <div class="hour-card"><strong>272.8</strong><span>PIC</span></div>
+        <div class="hour-card"><strong>120.7</strong><span>Cross-Country</span></div>
+        <div class="hour-card"><strong>99.4</strong><span>Sim Instrument</span></div>
+        <div class="hour-card"><strong>37.8</strong><span>Night</span></div>
+        <div class="hour-card"><strong>30.1</strong><span>Multi-Engine</span></div>
       </div>
-      <div class="proj-links" style="margin-top:0">
-        <a href="aviation-workbooks/" class="site">Compare Pilot Workbooks</a>
-        <a href="ifr-scenario-pack/" class="accent" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-checkride-start">Free IFR Pack</a>
+      <div class="credential-grid">
+        <div class="credential-card">
+          <h3>Certificates &amp; ratings</h3>
+          <ul><li>Commercial Pilot — ASEL, AMEL</li><li>Instrument Rating</li><li>Private Pilot — ASEL</li><li>Complex Endorsement</li><li>High-Performance Endorsement</li><li>Washington, D.C. SFRA Training</li></ul>
+        </div>
+        <div class="credential-card">
+          <h3>Medical &amp; documents</h3>
+          <ul><li>Third Class privileges through May 31, 2027; Second Class renewal planned before paid flight duty</li><li>US Passport</li><li>Flight Review — Valid through August 2027</li><li>DC SFRA Training — Certified</li><li>Complex &amp; High-Performance Endorsed</li><li>FAA WINGS — Basic Phase 5 | Advanced Phase 2 | Master Phase 1</li></ul>
+        </div>
+        <div class="credential-card wide">
+          <h3>Aircraft flown — 7 types, 211 flights</h3>
+          <ul class="aircraft-list"><li>Cessna 172 Skyhawk — 311.7 hrs</li><li>Rockwell Commander 114A — 39.2 hrs</li><li>Piper Seminole (PA-44) — 20.0 hrs</li><li>Piper Seneca (PA-34) — 7.7 hrs</li><li>Piper Cherokee (PA-28) — 7.0 hrs</li><li>Cessna 182 Skylane — 3.3 hrs</li><li>Piper Aztec (PA-27) — 2.4 hrs</li></ul>
+        </div>
+      </div>
+      <p class="resume-row"><a href="Nicholas_Rae_Flight_Resume.pdf?v=20260722-generic" target="_blank" rel="noopener">Download the current flight resume (PDF) →</a></p>
+    </div>
+  </section>
+
+  <section class="pilot-reading" aria-labelledby="reading-heading">
+    <div class="container">
+      <p class="eyebrow">Keep studying</p>
+      <h2 class="section-heading" id="reading-heading">Pilot notes</h2>
+      <div class="reading-links">
+        <a href="blog/checkride-prep-guide.html">Private pilot checkride prep guide →</a>
+        <a href="blog/ifr-oral-exam-scenarios.html">10 IFR oral-exam scenarios →</a>
+        <a href="blog/student-pilot-apps-2026.html">Best student pilot apps for 2026 →</a>
+        <a href="blog/blog-cheapest-flight-hours.html">Cheapest way to build flight hours: cost guide →</a>
+        <a href="blog/commercial-pilot-career-2026.html">Commercial pilot career path →</a>
+        <a href="blog/from-369-5-to-500-hours.html">How to reach 500 flight hours →</a>
+        <a href="blog/commercial-pilot-workbook-live.html">Commercial workbook launch notes →</a>
+        <a href="blog/multi-engine-add-on-rating-workbook-live.html">Multi-engine workbook launch notes →</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section class="about-section" id="about">
-  <div class="container">
-    <h2 class="section-title">About</h2>
-    <div class="about-grid">
-      <div>
-        <p>Midlife career 2.0: commercial pilot, aviation workbook author, and builder. Based in Merced, CA.</p>
-        <p>The public site now puts the useful revenue lane first: pilot study workbooks on Amazon KDP. I still build iOS apps and AI automation, but the aviation products are the clearest buyer path and proof line. Novel concept: lead with what sells.</p>
-        <p>Two decades of managing teams, budgets, and high-pressure operations gave me a foundation that shows up everywhere now: CRM on the flight deck, clean explanations in the workbooks, product decisions in my apps, and risk controls in automation research.</p>
-      </div>
-      <div>
-        <div class="about-card">
-          <h3>What I Bring</h3>
-          <ul>
-            <li>Commercial Pilot — ASEL, AMEL, Instrument</li>
-            <li>iOS apps shipped to App Store</li>
-            <li>Aviation workbook author on Amazon KDP</li>
-            <li>AI-powered workflow automation as a background builder lane</li>
-            <li>Prediction-market automation research</li>
-            <li>20+ years leadership under pressure</li>
-            <li>Self-published aviation author (Amazon KDP)</li>
-            <li>Board Member — Runways &amp; Rescues (501c)3 nonprofit)</li>
-          </ul>
-        </div>
+  <section class="labs" id="labs" aria-labelledby="labs-heading">
+    <div class="container">
+      <p class="eyebrow">Secondary lane</p>
+      <h2 class="section-heading" id="labs-heading">Labs &amp; Archive</h2>
+      <p class="section-intro">I still build apps, AI automation, and experiments. They live down here so they do not compete with the pilot workbooks at the front door.</p>
+      <div class="labs-grid">
+        <div class="lab-card"><h3>Flight Funded</h3><p>The public 391.3-to-500-hour tracker and KDP proof log.</p><a href="flight-funded/">View tracker</a></div>
+        <div class="lab-card"><h3>FeedFare</h3><p>Trade steps for screen time. Live on the App Store.</p><a href="feedfare/">Overview</a><a href="https://feedfare.app" target="_blank" rel="noopener">Site</a><a href="https://apps.apple.com/us/app/feedfare/id6758923557" target="_blank" rel="noopener">App Store</a></div>
+        <div class="lab-card"><h3>Inflection Point</h3><p>Preview-only personal growth OS awaiting App Store release.</p><a href="inflection-point/">Preview</a><a href="https://inflectionpoint.me" target="_blank" rel="noopener">Launch status</a></div>
+        <div class="lab-card"><h3>OpenClaw / AI automation</h3><p>The runtime is retired. The dated operator kit and build notes remain as a background archive.</p><a href="openclaw-playbook/">Operator kit</a><a href="blog/openclaw-personal-ai-operations-system.html">Build notes</a></div>
+        <div class="lab-card"><h3>Prediction-market research</h3><p>Paper-first Kalshi weather work, calibration gates, and the honest post-mortem.</p><a href="blog/kalshi-weather-bot.html">Read the post-mortem</a></div>
+        <div class="lab-card"><h3>Runways &amp; Rescues</h3><p>501(c)3 nonprofit using volunteer pilots to fly rescue animals to safety.</p><a href="https://nicholasrae.github.io/runways-rescues/" target="_blank" rel="noopener">Visit site</a></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- WHAT I'M BUILDING -->
-<section class="proj-section" id="building">
-  <div class="container">
-    <h2 class="section-title">What I'm Building</h2>
-    <div class="proj-grid">
-
-      <div class="proj-card" style="border-color:rgba(59,130,246,.4);background:linear-gradient(135deg,#131c2e,#0f1729)">
-        <h3>📚 Aviation Study Guides</h3>
-        <p>The main offer: FAA-aligned pilot workbooks for private, instrument, commercial, multi-engine, and VFR radio calls. Practical drills, checkride prep, radio scripts, and explanations instead of generic fluff.</p>
-        <span class="proj-badge live">Primary Revenue Lane</span>
-        <div class="proj-links">
-          <a href="aviation-workbooks/" class="site">📚 Compare Workbooks</a>
-          <a href="ifr-scenario-pack/" class="accent" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-building-card">📡 Free IFR Pack</a>
-          <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="amazon">🎙️ VFR Radio Calls</a>
-          <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" class="amazon">✈️ PPL Workbook</a>
-          <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" class="amazon">📖 Full Amazon Catalog</a>
-        </div>
-      </div>
-
-      <div class="proj-card">
-        <h3>🤖 Prediction-Market Automation Research</h3>
-        <p>Paper-first Kalshi weather research using NOAA + Open-Meteo forecasts, calibration gates, and risk controls. The live run is paused because the market baseline beat the bot. Useful lesson, mildly rude delivery.</p>
-        <span class="proj-badge review">Research · Paper Gate</span>
-        <div class="proj-links">
-          <a href="blog/kalshi-weather-bot.html" class="site">🌦️ Read the honest post-mortem</a>
-          <a href="flight-funded/" class="accent">📊 View tracker</a>
-        </div>
-      </div>
-
-      <div class="proj-card" style="border-color:rgba(59,130,246,.4);background:linear-gradient(135deg,#131c2e,#0f1729)">
-        <h3>🛫 Flight Funded</h3>
-        <p>Public live tracker documenting the push from 391.3 to 500 flight hours and the products funding it. Reconciled KDP proof now tracks 129 full-catalog books through July 31; the final July snapshot shows 24 paid units and $192.85 USD + €21.54 EUR + A$9.49, with cumulative March-July aviation tracking at 122 units and $1,047.23 USD + €46.83 EUR + A$9.49.</p>
-        <span class="proj-badge live">Live</span>
-        <div class="proj-links">
-          <a href="flight-funded/" class="accent">📊 View Tracker</a>
-          <a href="blog/from-369-5-to-500-hours.html" class="site">✈️ 391.3 → 500 Plan</a>
-        </div>
-      </div>
-
-      <div class="proj-card">
-        <h3>🍽️ FeedFare</h3>
-        <p>Trade steps for screen time. FeedFare helps you earn your scrolling with movement, streaks, and step-to-screen tracking. Live on the App Store while the deeper enforcement layer waits on Family Controls approval.</p>
-        <span class="proj-badge live">Live on App Store</span>
-        <div class="proj-links">
-          <a href="feedfare/" class="site">🍽️ FeedFare Page</a>
-          <a href="https://feedfare.app" target="_blank" rel="noopener" class="site">🌐 feedfare.app</a>
-          <a href="https://apps.apple.com/us/app/feedfare/id6758923557" target="_blank" rel="noopener" class="site">📱 App Store</a>
-        </div>
-      </div>
-
-      <div class="proj-card" style="border-color:rgba(99,102,241,.25);opacity:.86">
-        <h3>📘 OpenClaw / AI Automation Notes</h3>
-        <p>The playbook exists, but it is no longer the front-door offer. I keep the OpenClaw material as a background builder lane: useful for operators who already want AI automation, not the thing the homepage screams about.</p>
-        <span class="proj-badge dev">Background Lane</span>
-        <div class="proj-links">
-          <a href="openclaw-playbook/" class="gumroad">📘 OpenClaw Playbook</a>
-          <a href="blog/openclaw-personal-ai-operations-system.html" class="site">Read AI ops notes</a>
-        </div>
-      </div>
-
-      <div class="proj-card">
-        <h3>⚡ Inflection Point</h3>
-        <p>iOS personal growth OS for people who want structure, momentum, and a harder edge than generic habit apps. 3-day access preview, then free plan or $14.99 lifetime unlock. No subscription, no auto-renewal.</p>
-        <span class="proj-badge live">Live Site</span>
-        <div class="proj-links">
-          <a href="inflection-point/" class="site">⚡ Overview</a>
-          <a href="https://inflectionpoint.me" target="_blank" rel="noopener" class="accent">🌐 Launch Site</a>
-        </div>
-      </div>
-
-
-      <div class="proj-card" style="border-color:rgba(139,26,26,.4);background:linear-gradient(135deg,#1a0f0f,#2a1515)">
-        <h3>🐾 Runways &amp; Rescues</h3>
-        <p>501(c)3 nonprofit using volunteer pilots to fly rescue animals from danger to forever homes. Board member alongside founder Joe Orr. Domestic and international rescue missions, Eastern Seaboard and beyond.</p>
-        <span class="proj-badge live">Live</span>
-        <div class="proj-links">
-          <a href="https://nicholasrae.github.io/runways-rescues/" target="_blank" rel="noopener" class="accent">🌐 Visit Site</a>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-</section>
-
-<!-- AVIATION RESOURCES -->
-<section class="avi-section" id="aviation-resources">
-  <div class="container">
-    <h2 class="section-title">Aviation Resources</h2>
-    <p style="color:var(--text-muted);margin-bottom:1.5rem">Study materials I wrote to help student pilots, instrument applicants, commercial candidates, multi-engine add-on pilots, and pilots who freeze on frequency pass the written, survive the oral, and walk into the checkride less dumb.</p>
-    <div class="workbook-preview" aria-label="Featured aviation workbooks">
-      <a class="cover-shelf-card featured" href="aviation-workbooks/">
-        <img src="assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="lazy">
-        <div><h3>Start with the product shelf</h3><p>See the full workbook stack, current proof, format options, and the best fit for your next checkride.</p></div>
-      </a>
-      <a class="cover-shelf-card" href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-shelf">
-        <img src="assets/workbooks/instrument-rating-cover.jpg" alt="Instrument Rating Workbook cover" loading="lazy">
-        <div><h3>Free IFR oral pack</h3><p>Download 10 source-anchored IFR scenario cards before buying another workbook.</p></div>
-      </a>
-      <a class="cover-shelf-card" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-shelf">
-        <img src="assets/workbooks/private-pilot-cover.jpg" alt="Private Pilot License Workbook cover" loading="lazy">
-        <div><h3>Current demand leader</h3><p>Private Pilot License Workbook: 500+ practice questions with explanations.</p></div>
-      </a>
-      <a class="cover-shelf-card" href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-shelf">
-        <img src="assets/workbooks/vfr-radio-calls-cover.jpg" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="lazy">
-        <div><h3>Newest title</h3><p>VFR radio-call drills for pilots who freeze when the mic button gets rude.</p></div>
-      </a>
-    </div>
-    <div class="avi-books">
-      <div class="avi-book">
-        <h3>🎙️ Clearance to Confidence: VFR Radio Calls Workbook</h3>
-        <div class="price">$24.99 Paperback · $9.99 Kindle · Kindle Unlimited</div>
-        <p>Scenario-based radio call drills for pilots who need practical out-loud reps: build the call, anticipate the reply, read it back, and stop sounding surprised by aviation.</p>
-        <div class="proj-links">
-          <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" class="amazon">📘 Paperback</a>
-          <a href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" class="amazon">📱 Kindle</a>
-        </div>
-      </div>
-      <div class="avi-book">
-        <h3>✈️ Private Pilot License Workbook</h3>
-        <div class="price">$19.99 Print · $9.99 Kindle</div>
-        <p>500+ practice questions covering all PPL knowledge test topics. FAA-aligned, real exam format, fully explained answers.</p>
-        <div class="proj-links">
-          <a href="https://a.co/d/0hExZLaf" target="_blank" class="amazon">📚 Buy on Amazon</a>
-        </div>
-      </div>
-      <div class="avi-book">
-        <h3>📡 Instrument Rating Workbook</h3>
-        <div class="price">$24.99 Print · $9.99 Kindle</div>
-        <p>ACS-aligned IFR workbook for the written and oral. Weather, procedures, charts, systems, and the stuff that actually bites people on instrument training.</p>
-        <div class="proj-links">
-          <a href="https://a.co/d/06zXHuEe" target="_blank" class="amazon">📚 Buy on Amazon</a>
-        </div>
-      </div>
-      <div class="avi-book">
-        <h3>🛩️ The Complete Commercial Pilot Workbook</h3>
-        <div class="price">$24.99 Print · $9.99 Kindle</div>
-        <p>Written test and oral exam prep with practice questions, flight scenarios, and checkride review built around the commercial ACS instead of random trivia dumps.</p>
-        <div class="proj-links">
-          <a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" class="amazon">📚 Buy on Amazon</a>
-        </div>
-      </div>
-      <div class="avi-book">
-        <h3>🛫 Multi-Engine Add-On Rating Workbook</h3>
-        <div class="price">Paperback · Kindle</div>
-        <p>PA-44 Seminole-focused multi-engine checkride prep covering V-speeds, engine-out procedures, Vmc, OEI approaches, and oral exam review without the usual textbook sludge.</p>
-        <div class="proj-links">
-          <a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" class="amazon">📘 Paperback</a>
-          <a href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" class="amazon">📱 Kindle</a>
-        </div>
-      </div>
-      <div class="avi-book">
-        <h3>🗂️ PPL Oral Exam Flashcard Deck</h3>
-        <div class="price">$4.99 Digital</div>
-        <p>50 oral exam flashcards covering the questions a DPE is most likely to ask, with both a full PDF study deck and a printable 3x5 card version.</p>
-        <div class="proj-links">
-          <a href="https://nicholasrae.gumroad.com/l/ppl-oral-flashcards" target="_blank" class="gumroad">🎯 Get on Gumroad</a>
-        </div>
+  <section class="connect" id="connect" aria-labelledby="connect-heading">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h2 class="section-heading" id="connect-heading">Talk flying, training, or workbooks.</h2>
+      <div class="connect-links">
+        <a href="about/">About Nick</a><a href="mailto:nick@nickrae.net">nick@nickrae.net</a><a href="https://linkedin.com/in/nickrae" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/nickrae" target="_blank" rel="noopener">X / @nickrae</a><a href="https://github.com/nicholasrae" target="_blank" rel="noopener">GitHub</a><a href="https://www.instagram.com/nickrae76" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@nicholasrae" target="_blank" rel="noopener">YouTube</a><a href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener">Gumroad</a>
       </div>
     </div>
-    <div class="avi-freebies">
-      <h3>🎁 Free Pilot Cheat Sheets</h3>
-      <p>Quick-reference cheat sheets for checkride prep, plus low-cost study tools for student pilots. Grab the extras on Gumroad; buy the workbooks on Amazon.</p>
-      <div class="proj-links" style="flex-shrink:0">
-        <a href="aviation-workbooks/" target="_blank" rel="noopener" class="gumroad">📚 Compare Workbooks</a>
-        <a href="https://nicholasrae.gumroad.com" target="_blank" class="gumroad">🎁 Gumroad Store</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FLIGHT CREDENTIALS -->
-<section class="cred-section" id="credentials">
-  <div class="container">
-    <h2 class="section-title">Flight Credentials</h2>
-    <div style="margin-bottom:1.5rem;text-align:right;">
-      <a href="Nicholas_Rae_Flight_Resume.pdf?v=20260722-generic" class="btn btn-outline" target="_blank" rel="noopener" style="font-size:.8rem;padding:.5rem 1.25rem;">📄 Download Flight Resume</a>
-    </div>
-    <div class="hours-grid">
-      <div class="hour-card"><div class="number">391.3</div><div class="label">Total Hours</div></div>
-      <div class="hour-card"><div class="number">272.8</div><div class="label">PIC</div></div>
-      <div class="hour-card"><div class="number">120.7</div><div class="label">Cross-Country</div></div>
-      <div class="hour-card"><div class="number">99.4</div><div class="label">Sim Instrument</div></div>
-      <div class="hour-card"><div class="number">37.8</div><div class="label">Night</div></div>
-      <div class="hour-card"><div class="number">30.1</div><div class="label">Multi-Engine</div></div>
-    </div>
-    <div class="cred-grid">
-      <div class="cred-card">
-        <h3>Certificates & Ratings</h3>
-        <ul>
-          <li>Commercial Pilot — ASEL, AMEL</li>
-          <li>Instrument Rating</li>
-          <li>Private Pilot — ASEL</li>
-          <li>Complex Endorsement</li>
-          <li>High-Performance Endorsement</li>
-          <li>Washington, D.C. SFRA Training</li>
-        </ul>
-      </div>
-      <div class="cred-card">
-        <h3>Medical & Documents</h3>
-        <ul>
-          <li>Third Class privileges through May 31, 2027; Second Class renewal planned before paid flight duty</li>
-          <li>US Passport</li>
-          <li>Flight Review — Valid through August 2027</li>
-          <li>DC SFRA Training — Certified</li>
-          <li>Complex &amp; High-Performance Endorsed</li>
-          <li>FAA WINGS — Basic Phase 5 | Advanced Phase 2 | Master Phase 1</li>
-        </ul>
-      </div>
-      <div class="cred-card" style="grid-column:1/-1">
-        <h3>Aircraft Flown — 7 Types, 211 Flights</h3>
-        <ul style="display:grid;grid-template-columns:1fr 1fr;gap:0">
-          <li>Cessna 172 Skyhawk — 311.7 hrs</li>
-          <li>Rockwell Commander 114A — 39.2 hrs</li>
-          <li>Piper Seminole (PA-44) — 20.0 hrs</li>
-          <li>Piper Seneca (PA-34) — 7.7 hrs</li>
-          <li>Piper Cherokee (PA-28) — 7.0 hrs</li>
-          <li>Cessna 182 Skylane — 3.3 hrs</li>
-          <li>Piper Aztec (PA-27) — 2.4 hrs</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section class="exp-section" id="experience">
-  <div class="container">
-    <h2 class="section-title">Experience</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="date">2025 — Present</div>
-        <h3>Independent Builder</h3>
-        <p>Publishing FAA-aligned pilot workbooks on Amazon KDP, maintaining iOS apps including FeedFare, building practical AI automation workflows, and researching prediction-market automation with strict paper gates.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="date">2025 — Present</div>
-        <h3>Board Member — Runways &amp; Rescues</h3>
-        <p>501(c)3 nonprofit using volunteer pilots to fly rescue animals from danger to forever homes — across the country and beyond. Coordinating multi-leg domestic and international rescue missions, including medical transport flights. Co-founded by fellow commercial pilot Joe Orr. <a href="https://nicholasrae.github.io/runways-rescues/" target="_blank" rel="noopener" style="color:var(--accent)">runwaysandrescues.org</a></p>
-      </div>
-      <div class="timeline-item">
-        <div class="date">November 2024 — Present</div>
-        <h3>Flight Experience</h3>
-        <p>Plan and conduct day and night VFR and IFR cross-country flights using conservative weather analysis, performance planning, fuel management, airport evaluation, and go/no-go decision-making. Logged 311.7 hours in the Cessna 172 across 167 flights, including 221.6 hours PIC, with additional complex, high-performance, technically advanced, and light multiengine experience.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="date">2024 — 2025</div>
-        <h3>Skywarrior Flight Training — Pensacola, FL</h3>
-        <p>Earned PPL, Instrument Rating, Commercial certificate, and Multi-Engine rating in under 18 months. Trained in Class C airspace (Pensacola Regional). Completed Complex and High-Performance endorsements. Intensive, full-time accelerated program focused on procedural discipline and IFR proficiency.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="date">2017 — Present</div>
-        <h3>General Manager — Car Plus (Automotive)</h3>
-        <p>Direct daily operations for a 10-person automotive business generating more than $750,000 in annual revenue, with accountability for personnel, scheduling, financial performance, customer service, vendor coordination, regulatory compliance, documentation, and consistent operating standards.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="date">2017 — 2023</div>
-        <h3>Football Coach — Offensive & Defensive Coordinator</h3>
-        <p>Coached at the high school and junior college level. Game planning, player development, and coordinating under pressure — the same skills that make for a disciplined, team-oriented aviator.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section class="edu-section" id="education">
-  <div class="container">
-    <h2 class="section-title">Education</h2>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <h3>BS General Studies</h3>
-        <div class="school">University of Nevada, Reno</div>
-        <p>Minor in Information Systems</p>
-      </div>
-      <div class="edu-card">
-        <h3>Graduate Certificate — Management & Leadership</h3>
-        <div class="school">Liberty University</div>
-        <p>Graduate-level coursework in organizational leadership</p>
-      </div>
-      <div class="edu-card">
-        <h3>FAA Certificates</h3>
-        <div class="school">Federal Aviation Administration</div>
-        <p>Commercial Pilot — ASEL/AMEL, Instrument Rating, Complex & High-Performance Endorsed</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONNECT -->
-<section class="connect-section" id="connect">
-  <div class="container">
-    <h2 class="section-title">Connect</h2>
-    <p style="color:var(--text-muted);margin-bottom:.5rem">Whether it's about flying, building, or working together — I'd like to hear from you.</p>
-    <div class="connect-links">
-      <a href="mailto:nick@nickrae.net" class="connect-link"><span class="icon">✉</span>nick@nickrae.net</a>
-      <a href="https://linkedin.com/in/nickrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">in</span>LinkedIn</a>
-      <a href="https://x.com/nickrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">𝕏</span>@nickrae</a>
-      <a href="https://github.com/nicholasrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">⌨</span>GitHub</a>
-      <a href="https://www.instagram.com/nickrae76" target="_blank" rel="noopener" class="connect-link"><span class="icon">📷</span>Instagram</a>
-      <a href="https://www.youtube.com/@nicholasrae" target="_blank" rel="noopener" class="connect-link"><span class="icon">▶</span>YouTube</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="motto">Build things. Fly planes. Keep moving.</div>
-  <div class="social-bar" style="justify-content:center;margin-bottom:.75rem">
-    <a href="https://x.com/nickrae" target="_blank" rel="noopener">𝕏 @nickrae</a>
-    <a href="https://linkedin.com/in/nickrae" target="_blank" rel="noopener">in LinkedIn</a>
-    <a href="https://www.youtube.com/@nicholasrae" target="_blank" rel="noopener">▶ YouTube</a>
-    <a href="https://github.com/nicholasrae" target="_blank" rel="noopener">⌨ GitHub</a>
-    <a href="https://feedfare.app" target="_blank" rel="noopener">🍽️ FeedFare</a>
-    <a href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener">🎁 Gumroad</a>
-  </div>
-  <div>© 2026 Nick Rae · Merced, CA</div>
-</footer>
-
+  </section>
+</main>
+<footer><div>Build things. Fly planes. Keep moving.</div><div>© 2026 Nick Rae · Merced, CA · <a href="about/">About</a></div></footer>
+<script>
+  (function () {
+    var button = document.querySelector('.menu-toggle');
+    var links = document.getElementById('nav-links');
+    if (!button || !links) return;
+    button.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(open));
+    });
+    links.addEventListener('click', function (event) {
+      if (event.target.closest('a')) { links.classList.remove('open'); button.setAttribute('aria-expanded', 'false'); }
+    });
+  }());
+</script>
 </body>
 </html>

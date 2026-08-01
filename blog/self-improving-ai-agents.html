@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I Read Meta's Self-Improving AI Paper. Then I Implemented It. — Nick Rae</title>
-<meta name="description" content="Facebook Research published a paper on AI agents that rewrite themselves. Here's what it actually means, how it maps to my OpenClaw setup, and the one thing I built from it the same night.">
+<meta name="description" content="A March 2026 account of mapping Facebook Research's HyperAgents paper to a then-current OpenClaw setup. That runtime is now retired.">
 <meta property="og:title" content="I Read Meta's Self-Improving AI Paper. Then I Implemented It.">
-<meta property="og:description" content="Facebook Research published a paper on AI agents that rewrite themselves. Here's what it actually means, how it maps to my OpenClaw setup, and the one thing I built from it the same night.">
+<meta property="og:description" content="A dated 2026 HyperAgents experiment mapped to Nick's now-retired OpenClaw runtime.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/self-improving-ai-agents.html">
 <meta property="og:type" content="article">
@@ -26,7 +26,7 @@
       "datePublished": "2026-03-24",
       "url": "https://nickrae.net/blog/self-improving-ai-agents.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "Facebook Research published a paper on AI agents that rewrite themselves. Here's what it actually means, how it maps to my OpenClaw setup, and the one thing I built from it the same night.",
+      "description": "A March 2026 account of mapping the HyperAgents paper to Nick's now-retired OpenClaw runtime.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/self-improving-ai-agents.html" },
       "keywords": ["AI agents", "self-improving AI", "OpenClaw", "HyperAgents", "automation", "cron jobs"]
     },
@@ -89,14 +89,7 @@
   @media(max-width:600px){h1{font-size:1.5rem}.numbers-grid{grid-template-columns:1fr 1fr}}
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-</script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 
@@ -104,10 +97,10 @@
   <div class="inner">
     <a href="/" class="logo">✈️ Nick Rae</a>
     <div class="links">
-      <a href="/#building">Projects</a>
+      <a href="/#workbooks">Workbooks</a>
       <a href="/blog/">Blog</a>
       <a href="/flight-funded/">Flight Funded</a>
-      <a href="https://x.com/nickrae" target="_blank">@nickrae</a>
+      <a href="https://x.com/nickrae" target="_blank" rel="noopener">@nickrae</a>
     </div>
   </div>
 </nav>
@@ -119,7 +112,9 @@
     <div class="post-meta">Nick Rae &nbsp;·&nbsp; March 24, 2026 &nbsp;·&nbsp; 8 min read</div>
   </div>
 
-  <p>Last night someone dropped a link to a new paper from Facebook Research: <a href="https://arxiv.org/abs/2603.19461" target="_blank">HyperAgents</a>. The tagline is "self-referential self-improving agents that can optimize for any computable task." I read the whole thing, had my AI agent analyze it, and had the core idea implemented in my own system within a couple of hours.</p>
+  <div class="callout"><div class="label">Status · August 1, 2026</div><p>This article preserves a March 2026 experiment. The OpenClaw runtime described below is retired; the current stack uses Hermes Agent. Historical task counts and market automations are not current operating claims.</p></div>
+
+  <p>In March 2026, someone dropped a link to a new paper from Facebook Research: <a href="https://arxiv.org/abs/2603.19461" target="_blank" rel="noopener">HyperAgents</a>. The tagline is "self-referential self-improving agents that can optimize for any computable task." I read the whole thing, had my AI agent analyze it, and implemented the core idea in my then-current system within a couple of hours.</p>
 
   <p>Here's what the paper actually says, why it matters, and what I built from it — in plain English, no PhD required.</p>
 
@@ -174,15 +169,15 @@
 
   <p>The system learned that raw attitude doesn't matter. Process does. That tracks with how I think about my own automation setup.</p>
 
-  <h2>How This Maps to My Setup</h2>
+  <h2>How This Mapped to My March 2026 Setup</h2>
 
-  <p>I run an AI agent on an iMac called Talos. It manages 60+ automated tasks that run on schedules — morning briefings, a Kalshi weather prediction bot, app store monitoring, content pipelines. The whole thing is built on <a href="https://openclaw.ai" target="_blank">OpenClaw</a>.</p>
+  <p>At that point, I ran an AI agent on an iMac called Talos. It managed 60+ scheduled tasks, including morning briefings, paper/live-era weather-market work, app monitoring, and content pipelines. The runtime was <a href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a>; it is now retired, and market work is paper-only.</p>
 
-  <p>When I mapped the HyperAgents architecture to what I've already built, the overlap was closer than I expected:</p>
+  <p>When I mapped the HyperAgents architecture to what I had built then, the overlap was closer than I expected:</p>
 
   <table>
     <thead>
-      <tr><th>HyperAgents Concept</th><th>My Setup (Talos)</th></tr>
+      <tr><th>HyperAgents Concept</th><th>March 2026 Setup (Talos)</th></tr>
     </thead>
     <tbody>
       <tr><td>Task agents doing specific jobs</td><td>60+ cron jobs, each with a focused task</td></tr>
@@ -193,21 +188,21 @@
     </tbody>
   </table>
 
-  <p>The architecture is the same. Run tasks, evaluate results, extract learnings, improve the system. I've been building toward this without a formal name for it.</p>
+  <p>The architecture was similar: run tasks, evaluate results, extract learnings, and improve the system. I had been building toward that without a formal name for it.</p>
 
   <h3>Where I Fall Short</h3>
 
-  <p>HyperAgents' defining move is that the meta agent is <em>editable</em>. The improvement machinery rewrites itself. In my setup, the improvement machinery — the analyzer scripts, the format of LEARNINGS.md, the heartbeat logic — is fixed. It runs the same analysis every time.</p>
+  <p>HyperAgents' defining move is that the meta agent is <em>editable</em>. The improvement machinery rewrites itself. In my March 2026 setup, the analyzer scripts, LEARNINGS.md format, and heartbeat logic were fixed.</p>
 
-  <p>If my cron analyzer isn't catching a failure pattern, nothing rewrites the analyzer. The task agents improve (slightly, via tips injected into prompts), but the improvement layer itself doesn't evolve.</p>
+  <p>If the cron analyzer missed a failure pattern, nothing rewrote the analyzer. Task agents improved slightly through prompt tips, but the improvement layer itself did not evolve.</p>
 
-  <p>The second gap: my crons are siloed. Each one analyzes its own transcripts. HyperAgents' biggest gains came from cross-domain transfer. My Kalshi bot doesn't inform my FeedFare crons, and vice versa. The cross-domain insight sits on the table unused.</p>
+  <p>The second gap was siloed crons. Each analyzed its own transcripts. HyperAgents' biggest gains came from cross-domain transfer, while the Kalshi and FeedFare jobs did not inform each other.</p>
 
   <h2>What I Built</h2>
 
   <p>The single most actionable thing the paper revealed wasn't a new architecture — it was the difference between logging scores and logging reasoning.</p>
 
-  <p>What most systems do (including mine, until last night):</p>
+  <p>What most systems did, including mine before that experiment:</p>
 
   <pre><code># Basic log entry
 cron_score: 0.63
@@ -229,7 +224,7 @@ timestamp: 2026-03-23</code></pre>
 
   <p>The difference: it's not logging the score. It's logging the <em>causal story</em>. What failed, why, what the hypothesis is, how many times the same thing has happened in a row, and whether to escalate. That's what makes improvements compound instead of repeating the same diagnosis every cycle.</p>
 
-  <p>I added this as a new layer to my existing cron transcript analyzer. Every time it runs now, it writes a structured insight entry per cron to <code>memory/cron-insights/{cron-name}.json</code>. The next run loads the history before deciding what to flag. If the same failure mode hits three times in a row, it escalates.</p>
+  <p>I added this as a layer to the then-current cron transcript analyzer. It wrote a structured insight entry per cron to <code>memory/cron-insights/{cron-name}.json</code>, loaded history on the next run, and escalated repeated failure modes.</p>
 
   <p>First run with the new system detected:</p>
 
@@ -241,7 +236,7 @@ timestamp: 2026-03-23</code></pre>
 
   <div class="callout">
     <div class="label">The Compounding Part</div>
-    <p>The insights persist across runs. "Repeated 2x" in the output means the system has now seen the same failure twice and is tracking it as a pattern, not a fluke. At 3x it escalates to me. This is the feedback loop that makes improvements accumulate instead of reset.</p>
+    <p>In that experiment, insights persisted across runs. "Repeated 2x" meant the system had seen the same failure twice and was tracking it as a pattern. At 3x it escalated. That was the feedback loop that made improvements accumulate instead of reset.</p>
   </div>
 
   <h2>The Honest Limitations of the Paper</h2>
@@ -264,9 +259,9 @@ timestamp: 2026-03-23</code></pre>
 
   <p>Raw logs don't compound. "Error at 3am" doesn't help the next run. But "third consecutive timeout failure on morning-brief, hypothesis: 9am burst collision, fix applied: staggered by 15min, watch next 3 runs" — that compounds. Each run builds on the reasoning of the last one instead of starting from scratch.</p>
 
-  <p>The GitHub repo is at <a href="https://github.com/facebookresearch/Hyperagents" target="_blank">facebookresearch/Hyperagents</a> if you want to dig into the code. The paper is <a href="https://arxiv.org/abs/2603.19461" target="_blank">arXiv 2603.19461</a>.</p>
+  <p>The GitHub repo is at <a href="https://github.com/facebookresearch/Hyperagents" target="_blank" rel="noopener">facebookresearch/Hyperagents</a> if you want to dig into the code. The paper is <a href="https://arxiv.org/abs/2603.19461" target="_blank" rel="noopener">arXiv 2603.19461</a>.</p>
 
-  <p>The implementation I built for my own setup took about two hours. Most of that was reading the paper carefully enough to understand what the actual insight was, not the headline.</p>
+  <p>The implementation took about two hours. Most of that was reading the paper carefully enough to understand the actual insight, not the headline.</p>
 
   <p>The headline is "AI that rewrites itself." The insight is "log the reasoning, not just the score."</p>
 
@@ -277,11 +272,11 @@ timestamp: 2026-03-23</code></pre>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-bottom:1rem">
       <a href="openclaw-playbook.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">OpenClaw Playbook</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The practical operator’s guide built from running these systems daily.</span>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The dated operator guide built from the retired 2026 runtime.</span>
       </a>
       <a href="openclaw-cron-jobs-guide.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">OpenClaw Cron Jobs Guide</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The scheduled backbone underneath the fancier agent behavior.</span>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">The archived scheduled backbone underneath that agent behavior.</span>
       </a>
       <a href="ai-aviation-business.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">AI Side Income as a Pilot</strong>
@@ -293,7 +288,7 @@ timestamp: 2026-03-23</code></pre>
 
   <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0">
 
-  <p style="color:var(--text-dim);font-size:.875rem"><em>I'm Nick Rae — commercial pilot, iOS developer, and automation builder in Merced, CA. I write about building side income to fund flight hours. My agent Talos runs this whole operation while I'm at my day job selling car stereos. Follow along at <a href="https://x.com/nickrae">@nickrae</a> or check the <a href="/flight-funded/">Flight Funded tracker</a> for live numbers.</em></p>
+  <p style="color:var(--text-dim);font-size:.875rem"><em>I'm Nick Rae — commercial pilot, iOS developer, and automation builder in Merced, CA. I write about building side income to fund flight hours. Talos now operates on Hermes Agent; the OpenClaw material is a dated archive. Follow along at <a href="https://x.com/nickrae">@nickrae</a> or check the <a href="/flight-funded/">Flight Funded tracker</a> for dated numbers.</em></p>
 
 </main>
 
@@ -301,9 +296,9 @@ timestamp: 2026-03-23</code></pre>
   <div>© 2026 Nick Rae · Merced, CA · <a href="/">Back to Home</a></div>
   <div>
     <a href="../feedfare/">FeedFare App</a> ·
-    <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank">PPL Workbook</a> ·
+    <a href="https://www.amazon.com/dp/B0GN81JP9R" target="_blank" rel="noopener">PPL Workbook</a> ·
     <a href="/flight-funded/">Flight Funded</a> ·
-    <a href="https://x.com/nickrae" target="_blank">@nickrae</a>
+    <a href="https://x.com/nickrae" target="_blank" rel="noopener">@nickrae</a>
   </div>
 </footer>
 

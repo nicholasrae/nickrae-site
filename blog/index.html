@@ -52,7 +52,7 @@
 </script>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;--text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;--accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);--border:#1e293b;--card:#131c2e;--green:#22c55e}
+  :root{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;--text:#e2e8f0;--text-muted:#a8b4c7;--text-dim:#94a3b8;--accent:#2563eb;--accent2:#7db8ff;--accent-glow:rgba(59,130,246,.15);--border:#29364a;--card:#131c2e;--green:#22c55e}
   html{scroll-behavior:smooth}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:var(--accent2);text-decoration:none} a:hover{text-decoration:underline}
@@ -73,18 +73,13 @@
   .post-meta{display:flex;align-items:center;gap:1rem;margin-bottom:.85rem;font-size:.875rem;color:var(--text-dim);flex-wrap:wrap} .post-date{color:var(--accent2)} .post-category{background:var(--accent-glow);color:var(--accent2);padding:.25rem .75rem;border-radius:1rem;font-weight:600}
   .post-title{font-size:1.35rem;font-weight:700;margin-bottom:.75rem;line-height:1.3} .post-title a{color:var(--text)} .post-title a:hover{color:var(--accent2)} .post-excerpt{color:var(--text-muted);margin-bottom:1rem;line-height:1.6} .read-more{color:var(--accent2);font-weight:700;font-size:.9rem}
   .cross-links{padding:2rem 1.5rem;background:var(--bg2);border-top:1px solid var(--border)} .cross-links div{max-width:900px;margin:0 auto;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;font-size:.85rem} .cross-links a{padding:.5rem 1rem;border:1px solid var(--border);border-radius:.5rem;color:var(--text-muted)}
-  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:0}
+  .archive-details{margin-top:2.75rem;border-top:1px solid var(--border);padding-top:1.25rem}.archive-details>summary{cursor:pointer;color:#bfdbfe;text-transform:uppercase;letter-spacing:.12em;font-weight:900;font-size:.78rem;list-style:none;padding:.75rem 0}.archive-details>summary::-webkit-details-marker{display:none}.archive-details>summary::after{content:' +';float:right}.archive-details[open]>summary::after{content:' −'}.archive-note{color:var(--text-muted);font-size:.9rem;margin:.25rem 0 1rem}
+  a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #fbbf24;outline-offset:3px;border-radius:.25rem}
+  footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:0} footer a{text-decoration:underline;text-underline-offset:.2em}
   @media(max-width:768px){nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)} nav .links.open{display:flex} .menu-toggle{display:block} .page-title{font-size:2rem} main{padding:5rem 1rem 2rem} .post-card{padding:1.35rem}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.post-card:hover{transform:none}}
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126210838"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18126210838');
-  document.addEventListener('click', function(event){
+<script>document.addEventListener('click', function(event){
     var el = event.target.closest && event.target.closest('a[href],button[data-event]');
     if(!el || typeof gtag !== 'function') return;
     try {
@@ -96,23 +91,18 @@
         link_url: url ? url.href : undefined
       });
     } catch(e) {}
-  });
-</script>
+  });</script>
+<script src="/assets/site.js" defer></script>
 </head>
 <body data-page="blog-index">
 <nav><div class="inner"><div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div><button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button><div class="links"><a href="../">Home</a><a href="../aviation-workbooks/">Pilot Workbooks</a><a href="../ifr-scenario-pack/">Free IFR Pack</a><a href="../flight-funded/">Flight Funded</a><a href="../#connect">Connect</a></div></div></nav>
 <main>
   <div class="page-header"><h1 class="page-title">Pilot Training Blog</h1><p class="page-subtitle">Aviation study guides, checkride prep, Flight Funded proof, and older AI automation notes. The current lane is pilot workbooks and IFR scenario practice.</p></div>
-  <section class="featured-cluster" aria-label="Featured aviation guides"><h2>Start Here: IFR Pack and Pilot Workbooks</h2><p>If Google or a tired student pilot lands here, these are the pages I want them to find first.</p><div class="featured-grid">
+  <section class="featured-cluster" aria-label="Start here for pilots"><h2>Start with the problem in front of you</h2><p>Choose the next useful step: prepare for the oral, find the right workbook, lower the cost of hour building, or simplify the app stack.</p><div class="featured-grid">
     <a class="featured-link" href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="blog-featured"><strong>Free IFR Oral Exam Scenario Pack</strong><span>10 source-anchored cards for out-loud instrument oral practice.</span></a>
-    <a class="featured-link" href="ifr-oral-exam-scenarios.html" data-event="blog_internal_click" data-product="ifr_oral_scenarios_post" data-placement="blog-featured"><strong>IFR Oral Exam Scenarios</strong><span>Ten example prompts using rule, risk, and action before you download the PDF.</span></a>
     <a class="featured-link" href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="blog-featured"><strong>Aviation Pilot Workbook Series</strong><span>Private, instrument, commercial, multi-engine, and VFR radio-call prep.</span></a>
-    <a class="featured-link" href="checkride-prep-guide.html" data-event="blog_internal_click" data-product="checkride_guide" data-placement="blog-featured"><strong>Private Pilot Checkride Prep Guide</strong><span>Oral, ACS, and flight-test prep from someone who actually did the ride.</span></a>
-  </div></section>
-  <section class="start-here" aria-label="Start here for pilots"><h2>Start here for pilots</h2><p>Pick the lane matching the problem in front of you. Sequence beats hoarding tabs.</p><div class="start-grid">
-    <a class="start-card" href="ifr-oral-exam-scenarios.html" data-event="blog_internal_click" data-product="ifr_oral_scenarios_post" data-placement="blog-start-here"><strong>IFR / checkride</strong><span>IFR oral scenarios, private checkride prep, and study-stack guidance.</span></a>
-    <a class="start-card" href="blog-cheapest-flight-hours.html" data-event="blog_internal_click" data-product="hour_building_post" data-placement="blog-start-here"><strong>Hour building</strong><span>Cheapest hours, commercial pilot path, and 391.3 to 500-hour plan.</span></a>
-    <a class="start-card" href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="blog-start-here"><strong>Workbook / proof</strong><span>Workbook catalog, launch posts, and Flight Funded proof.</span></a>
+    <a class="featured-link" href="blog-cheapest-flight-hours.html" data-event="blog_internal_click" data-product="hour_building_post" data-placement="blog-featured"><strong>Cheapest Ways to Build Flight Hours</strong><span>Compare safety-pilot, club, CAP, CFI, and paid-flying paths with an editable calculator.</span></a>
+    <a class="featured-link" href="student-pilot-apps-2026.html" data-event="blog_internal_click" data-product="student_pilot_apps" data-placement="blog-featured"><strong>Best Student Pilot Apps</strong><span>What to buy first for written prep, cockpit math, flight planning, and debriefing.</span></a>
   </div></section>
   <div class="section-label">Aviation and Flight Funded</div>
   <div class="blog-posts">
@@ -136,8 +126,8 @@
     </article>
     <article class="post-card">
       <div class="post-meta"><span class="post-date">April 23, 2026</span><span class="post-category">✈️ Flight Funded</span><span>~8 min read</span></div>
-      <h2 class="post-title"><a href="from-369-5-to-500-hours.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How I’m Getting from 391.3 to 500 Flight Hours</a></h2>
-      <p class="post-excerpt">The current gap is 108.7 hours. Here is the real plan to close it without pretending money, currency, or time are optional details.</p>
+      <h2 class="post-title"><a href="from-369-5-to-500-hours.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How to Reach 500 Flight Hours: My 108.7-Hour Plan</a></h2>
+      <p class="post-excerpt">Current totals, monthly pace, cost controls, recurrency, and the real plan from 391.3 to 500 hours.</p>
       <a href="from-369-5-to-500-hours.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
     <article class="post-card">
@@ -166,8 +156,8 @@
     </article>
     <article class="post-card">
       <div class="post-meta"><span class="post-date">March 2026</span><span class="post-category">✈️ Aviation</span><span>~10 min read</span></div>
-      <h2 class="post-title"><a href="blog-cheapest-flight-hours.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">The Cheapest Ways to Build Flight Hours in 2026</a></h2>
-      <p class="post-excerpt">A practical guide to legitimate methods for building pilot flight time affordably, including paid and lower-cost paths.</p>
+      <h2 class="post-title"><a href="blog-cheapest-flight-hours.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">Cheapest Way to Build Flight Hours: 2026 Cost Guide</a></h2>
+      <p class="post-excerpt">Compare low-cost and paid hour-building paths, then run your own numbers with the free calculator.</p>
       <a href="blog-cheapest-flight-hours.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
     <article class="post-card">
@@ -184,8 +174,8 @@
     </article>
     <article class="post-card">
       <div class="post-meta"><span class="post-date">February 15, 2026</span><span class="post-category">✈️ Training</span><span>~6 min read</span></div>
-      <h2 class="post-title"><a href="student-pilot-apps-2026.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">5 Apps Every Student Pilot Needs in 2026</a></h2>
-      <p class="post-excerpt">The apps I actually used during training, not just the ones flight schools push.</p>
+      <h2 class="post-title"><a href="student-pilot-apps-2026.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">Best Apps for Student Pilots in 2026: What to Buy First</a></h2>
+      <p class="post-excerpt">A practical buying order for written prep, cockpit math, flight planning, debriefing, and logbook tools.</p>
       <a href="student-pilot-apps-2026.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
     <article class="post-card">
@@ -195,18 +185,20 @@
       <a href="ai-aviation-business.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
   </div>
-  <div class="section-label">AI and automation archive</div>
+  <details class="archive-details">
+  <summary>Archived AI and automation writing</summary>
+  <p class="archive-note">Historical operating notes remain available for readers and search, but aviation is the current primary lane. Nick's OpenClaw runtime is retired; these are dated 2026 records.</p>
   <div class="blog-posts" aria-label="AI and automation archive">
     <article class="post-card">
       <div class="post-meta"><span class="post-date">May 3, 2026</span><span class="post-category">🤖 AI Tools</span><span>~10 min read</span></div>
-      <h2 class="post-title"><a href="openclaw-personal-ai-operations-system.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How to Turn OpenClaw Into a Personal AI Operations System</a></h2>
-      <p class="post-excerpt">A warmer entry point for OpenClaw as a personal operations layer: workflows, agents, reports, and decisions.</p>
+      <h2 class="post-title"><a href="openclaw-personal-ai-operations-system.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How I Turned OpenClaw Into an AI Operations System</a></h2>
+      <p class="post-excerpt">A dated case study from the retired runtime: workflows, agents, reports, decisions, and guardrails.</p>
       <a href="openclaw-personal-ai-operations-system.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
     <article class="post-card">
       <div class="post-meta"><span class="post-date">April 3, 2026</span><span class="post-category">🤖 OpenClaw</span><span>~5 min read</span></div>
-      <h2 class="post-title"><a href="openclaw-playbook.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I Wrote a Playbook for Running OpenClaw Without Writing Code</a></h2>
-      <p class="post-excerpt">A field guide to setup, memory, cron jobs, coding agents, cost control, security, and practical AI workflows.</p>
+      <h2 class="post-title"><a href="openclaw-playbook.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">Inside the Dated 2026 OpenClaw Playbook</a></h2>
+      <p class="post-excerpt">What the archived field guide preserves about setup, memory, scheduled work, cost control, and security.</p>
       <a href="openclaw-playbook.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
     <article class="post-card">
@@ -218,28 +210,29 @@
     <article class="post-card">
       <div class="post-meta"><span class="post-date">March 2026</span><span class="post-category">🤖 AI Tools</span><span>~10 min read</span></div>
       <h2 class="post-title"><a href="self-improving-ai-agents.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I Read Meta's Self-Improving AI Paper. Then I Implemented It.</a></h2>
-      <p class="post-excerpt">What changed when I rebuilt the agent memory system around execution history.</p>
+      <p class="post-excerpt">A March 2026 experiment with execution history, preserved from the retired runtime.</p>
       <a href="self-improving-ai-agents.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
     <article class="post-card">
       <div class="post-meta"><span class="post-date">March 2026</span><span class="post-category">🤖 AI Tools</span><span>~8 min read</span></div>
-      <h2 class="post-title"><a href="blog-openclaw-setup.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">Setting Up OpenClaw: The 5 Things I Wish I Did First</a></h2>
-      <p class="post-excerpt">The setup steps that mattered: identity, cron jobs, one channel, USER.md, and skills.</p>
+      <h2 class="post-title"><a href="blog-openclaw-setup.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">OpenClaw Setup in 2026: Five Lessons</a></h2>
+      <p class="post-excerpt">Archived lessons on identity, scheduled work, one channel, USER.md, and skills.</p>
       <a href="blog-openclaw-setup.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
     <article class="post-card">
       <div class="post-meta"><span class="post-date">February 22, 2026</span><span class="post-category">🤖 AI Tools</span><span>~10 min read</span></div>
-      <h2 class="post-title"><a href="openclaw-30-days.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I've Been Running OpenClaw for 30 Days</a></h2>
-      <p class="post-excerpt">Top setup steps, mistakes, and whether an AI agent platform stays useful after novelty wears off.</p>
+      <h2 class="post-title"><a href="openclaw-30-days.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">I Ran OpenClaw for 30 Days</a></h2>
+      <p class="post-excerpt">A dated 2026 assessment of setup lessons and mistakes from the retired runtime.</p>
       <a href="openclaw-30-days.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
     <article class="post-card">
       <div class="post-meta"><span class="post-date">March 14, 2026</span><span class="post-category">🤖 AI Tools</span><span>~8 min read</span></div>
-      <h2 class="post-title"><a href="openclaw-cron-jobs-guide.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How I Run 50+ AI Cron Jobs on OpenClaw</a></h2>
-      <p class="post-excerpt">Morning briefings, alerts, publishing checks, and watchdogs without turning cron into a second job.</p>
+      <h2 class="post-title"><a href="openclaw-cron-jobs-guide.html" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card">How I Ran 46 AI Cron Jobs on OpenClaw</a></h2>
+      <p class="post-excerpt">The archived March 2026 snapshot: useful patterns, expensive mistakes, and safety lessons.</p>
       <a href="openclaw-cron-jobs-guide.html" class="read-more" data-event="blog_internal_click" data-product="blog_post" data-placement="blog-card-read-more">Read more →</a>
     </article>
   </div>
+  </details>
 </main>
 <section class="cross-links"><div><a href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="blog-footer">🎁 Free IFR Pack</a><a href="../aviation-workbooks/" data-event="blog_internal_click" data-product="aviation_workbooks" data-placement="blog-footer">📚 Compare Pilot Workbooks</a><a href="https://www.amazon.com/dp/B0H3KT5FHW" data-event="amazon_click" data-product="vfr_radio_calls_workbook" data-placement="blog-footer">🎙️ VFR Radio Calls</a><a href="../flight-funded/" data-event="blog_internal_click" data-product="flight_funded" data-placement="blog-footer">🛫 Flight Funded Tracker</a><a href="https://x.com/nickrae">X @nickrae</a></div></section>
 <footer><div>© 2026 Nick Rae · Merced, CA · <a href="../">Back to Home</a></div></footer>
