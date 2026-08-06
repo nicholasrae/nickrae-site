@@ -12,7 +12,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 - [About Nick Rae](https://nickrae.net/about/) — commercial airplane single- and multi-engine land pilot with instrument rating; workbook-author background and dated Flight Funded context
 - [Blog](https://nickrae.net/blog/)
 - [Flight Resume](https://nickrae.net/Nicholas_Rae_Flight_Resume.pdf) — current generic one-page pilot resume with verified 391.3 TT, 272.8 PIC, 311.7 C172, and 221.6 C172 PIC
-- [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and KDP aviation royalties: reconciled Jan-August tracking stands at 135 full-catalog books through August 5; the August month-to-date aviation snapshot shows 6 paid units processed through August 5, $49.66 USD + €8.88 EUR, 112 KENP through August 6, and 0 refunds; cumulative March-August aviation tracking is 128 units, $1,096.89 USD + €55.71 EUR + A$9.49
+- [Flight Funded](https://nickrae.net/flight-funded/) — tracking flight hours and dashboard-estimated KDP aviation royalties: reconciled Jan-August tracking stands at 135 full-catalog books through August 5; the August month-to-date aviation snapshot shows 6 paid units processed through August 5, $49.66 USD + €8.88 EUR in estimated royalties, 112 KENP through August 6, and 0 refunds; cumulative March-August aviation tracking is 128 units, $1,096.89 USD + €55.71 EUR + A$9.49 in dashboard-estimated royalties, not settled payouts
 - [Aviation Pilot Workbooks](https://nickrae.net/aviation-workbooks/) — FAA-aligned workbooks for private pilot, instrument, commercial, multi-engine, and VFR radio calls
 - [Free IFR Oral Exam Scenario Pack](https://nickrae.net/ifr-scenario-pack/) — free 10-card IFR oral exam scenario PDF; source-anchored study aid with chart-specific traps intentionally excluded
 - [IFR Oral Exam Scenarios](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — 10-question blog bridge using the rule-risk-action framework for instrument oral practice
@@ -43,7 +43,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 
 ## Current Revenue Proof
 
-- Reconciled KDP tracking through August 5, 2026: 135 full-catalog books. The August month-to-date aviation dashboard snapshot shows 6 paid units processed through August 5, $49.66 USD + €8.88 EUR, 0 refunds, and 112 KENP through August 6; March-August aviation tracking is 128 units, $1,096.89 USD + €55.71 EUR + A$9.49. Amazon Ads scale remains HOLD until same-window Campaign, Search Term, Targeting, and Placement evidence proves attribution and repeatability.
+- Reconciled KDP tracking through August 5, 2026: 135 full-catalog books. The August month-to-date aviation dashboard snapshot shows 6 paid units processed through August 5, $49.66 USD + €8.88 EUR in estimated royalties, 0 refunds, and 112 KENP through August 6; March-August aviation tracking is 128 units, $1,096.89 USD + €55.71 EUR + A$9.49 in dashboard-estimated royalties, not settled payouts. Amazon Ads scale remains HOLD until same-window Campaign, Search Term, Targeting, and Placement evidence proves attribution and repeatability.
 - Kalshi weather bot remains paused/gated until calibration earns trust.
 
 ## Background Digital Products
