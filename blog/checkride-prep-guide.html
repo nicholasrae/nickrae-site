@@ -24,7 +24,7 @@
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-02-14",
-      "dateModified": "2026-07-18",
+      "dateModified": "2026-08-17",
       "url": "https://nickrae.net/blog/checkride-prep-guide.html",
       "image": "https://nickrae.net/og-image.jpg",
       "description": "A practical private pilot checkride prep guide covering the oral exam, ACS study plan, common DPE questions, and flight maneuvers worth over-preparing.",
@@ -45,7 +45,7 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
     --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
-    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
+    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#718096;
     --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.15);
     --border:#1e293b;--card:#131c2e;
   }
@@ -53,14 +53,16 @@
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:var(--accent2);text-decoration:none}
   a:hover{text-decoration:underline}
+  .skip-link{position:fixed;top:-5rem;left:1rem;z-index:1000;background:#f8fafc;color:#0f172a;padding:.7rem 1rem;border-radius:.5rem;font-weight:800}
+  .skip-link:focus{top:1rem}
 
   /* NAV */
-  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
-  nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
-  nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
-  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
-  nav .links a{color:var(--text-muted)}
-  nav .links a:hover{color:var(--accent2);text-decoration:none}
+  .site-nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
+  .site-nav .inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  .site-nav .logo{font-weight:700;font-size:1.1rem;letter-spacing:.5px}
+  .site-nav .links{display:flex;gap:1.5rem;font-size:.875rem}
+  .site-nav .links a{color:var(--text-muted)}
+  .site-nav .links a:hover{color:var(--accent2);text-decoration:none}
   .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
 
   /* ARTICLE */
@@ -70,14 +72,26 @@
   .article-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:1.5rem;line-height:1.2}
   .article-excerpt{color:var(--text-muted);font-size:1.1rem;line-height:1.6}
   .article-content{color:var(--text-muted);line-height:1.7}
-  .article-content h3{color:var(--text);font-size:1.3rem;font-weight:700;margin:2.5rem 0 1rem;line-height:1.3}
-  .article-content h4{color:var(--text);font-size:1.1rem;font-weight:600;margin:2rem 0 .75rem}
+  .article-content h2{color:var(--text);font-size:1.3rem;font-weight:700;margin:2.5rem 0 1rem;line-height:1.3}
+  .article-content h3{color:var(--text);font-size:1.1rem;font-weight:600;margin:2rem 0 .75rem}
   .article-content p{margin-bottom:1.25rem}
   .article-content ul, .article-content ol{margin:1.25rem 0;padding-left:1.5rem}
   .article-content li{margin-bottom:.5rem}
   .article-content strong{color:var(--accent2);font-weight:600}
   .article-content em{color:var(--text)}
   .article-content blockquote{background:var(--card);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:0 .5rem .5rem 0}
+  .inline-workbook-cta{margin:2rem 0;padding:1.25rem 1.5rem;background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.35);border-radius:.85rem}
+  .inline-workbook-cta strong{display:block;color:var(--text);font-size:1.1rem;margin-bottom:.45rem}
+  .inline-workbook-cta p{margin-bottom:1rem}
+  .cta-blue{display:inline-flex;align-items:center;background:#2563eb;color:#fff;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none}
+  .cta-blue:hover{color:#fff}
+  .video-lite{position:relative;width:100%;max-width:560px;aspect-ratio:16/9;margin-bottom:.9rem;overflow:hidden;border-radius:6px;background:#020617}
+  .video-lite-trigger{position:absolute;inset:0;display:block;color:#fff;text-decoration:none}
+  .video-lite-trigger:hover{text-decoration:none}
+  .video-lite-trigger img{display:block;width:100%;height:100%;object-fit:cover}
+  .video-lite-play{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:4rem;height:4rem;border-radius:50%;background:rgba(15,23,42,.92);border:2px solid #fff;color:#fff;font-size:1.45rem;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .video-lite-label{position:absolute;left:.75rem;right:.75rem;bottom:.75rem;padding:.5rem .7rem;border-radius:.4rem;background:rgba(2,6,23,.88);color:#fff;font-size:.88rem;font-weight:700;text-align:center}
+  .video-lite iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
   /* NAVIGATION */
   .article-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
@@ -86,11 +100,12 @@
 
   /* FOOTER */
   footer{text-align:center;padding:3rem 1.5rem 2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.85rem;margin-top:4rem}
+  footer a{text-decoration:underline;text-underline-offset:.16em}
 
   /* MOBILE */
   @media(max-width:768px){
-    nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
-    nav .links.open{display:flex}
+    .site-nav .links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(10,14,23,.97);flex-direction:column;padding:1rem 1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+    .site-nav .links.open{display:flex}
     .menu-toggle{display:block}
     .article-title{font-size:2rem}
     article{padding:5rem 1rem 2rem}
@@ -102,8 +117,10 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <!-- NAV -->
-<nav>
+<nav class="site-nav">
   <div class="inner">
     <div class="logo"><a href="../" style="color:var(--text);text-decoration:none">NICK RAE</a></div>
     <button class="menu-toggle" onclick="document.querySelector('.links').classList.toggle('open')" aria-label="Menu">☰</button>
@@ -122,7 +139,7 @@
 <main id="main-content">
 <article>
   <header class="article-header">
-    <div class="article-meta">February 2026 · Updated July 18, 2026 · Training</div>
+    <div class="article-meta">February 2026 · Updated August 17, 2026 · Training</div>
     <h1 class="article-title">Private Pilot Checkride Prep Guide (2026): Oral, ACS, and Flight Test</h1>
     <p class="article-excerpt">A practical private pilot checkride prep guide covering the oral exam, ACS study plan, common DPE questions, and flight maneuvers worth over-preparing.</p>
   </header>
@@ -138,7 +155,7 @@
     </div>
 
     <div style="margin:2rem 0;padding:1.25rem 1.5rem;background:linear-gradient(135deg,#102033,#0f1729);border:1px solid rgba(96,165,250,.35);border-radius:.85rem">
-      <h3 style="margin-top:0;color:var(--accent2)">Build the training stack around the checkride</h3>
+      <h2 style="margin-top:0;color:var(--accent2)">Build the training stack around the checkride</h2>
       <p style="color:var(--text-muted);margin-bottom:.8rem">The checkride is the gate, so everything should support that gate: study reps, cockpit tools, and the next hour-building problem after you pass.</p>
       <ul style="color:var(--text-muted);margin-bottom:0">
         <li><a href="student-pilot-apps-2026.html">Best student pilot apps for 2026</a> — what to buy first and what can wait.</li>
@@ -147,11 +164,11 @@
       </ul>
     </div>
 
-    <h3>Understanding the Modern Private Pilot Checkride</h3>
+    <h2>Understanding the Modern Private Pilot Checkride</h2>
 
     <p>Today's <strong>private pilot checkride</strong> is not just a maneuver demonstration. FAA-S-ACS-6C integrates aeronautical knowledge, risk management, and flight proficiency across the applicable tasks.</p>
 
-    <h4>What the Current ACS Asks You to Demonstrate</h4>
+    <h3>What the Current ACS Asks You to Demonstrate</h3>
 
     <p><strong>Risk Management</strong>: Identify, assess, and mitigate the risks attached to the scenario, aircraft, environment, and task.</p>
 
@@ -161,11 +178,11 @@
 
     <p><strong>Human Factors</strong>: Recognize limitations such as fatigue, distraction, external pressure, and deteriorating judgment before they become operational problems.</p>
 
-    <h3>Oral Exam Mastery: The Foundation of Success</h3>
+    <h2>Oral Exam Mastery: The Foundation of Success</h2>
 
     <p>The oral portion exposes whether you can apply knowledge to the flight in front of you. Your <strong>PPL checkride prep</strong> should prioritize understanding and source use over surface-level memorization.</p>
 
-    <h4>Core Knowledge Areas</h4>
+    <h3>Core Knowledge Areas</h3>
 
     <p><strong>Federal Aviation Regulations (Part 61, 91)</strong></p>
     <ul>
@@ -199,7 +216,7 @@
       <li>Ground effect and other aerodynamic phenomena</li>
     </ul>
 
-    <h4>Oral Exam Strategy Tips</h4>
+    <h3>Oral Exam Strategy Tips</h3>
 
     <p><strong>Think Like a Pilot, Not a Student</strong>: When asked about weather minimums, don't just recite numbers—explain why those minimums exist and how they relate to safety.</p>
 
@@ -209,26 +226,28 @@
 
     <p><strong>Show Your Decision-Making Process</strong>: Walk the DPE through your thinking when analyzing scenarios. They want to see sound reasoning, not just correct answers.</p>
 
+    <aside class="inline-workbook-cta" aria-label="Private Pilot Workbook">
+      <strong>Turn the oral into practice reps.</strong>
+      <p>Use the Private Pilot Workbook to expose weak knowledge areas and practice explaining the “why” before checkride day.</p>
+      <a class="cta-blue" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-event="amazon_click" data-product="ppl_workbook" data-placement="checkride-inline-cta">See the PPL Workbook on Amazon</a>
+    </aside>
+
     <div style="margin:2rem 0;padding:1.25rem 1.5rem;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px">
-      <div style="position:relative;width:100%;max-width:560px;aspect-ratio:16/9;margin-bottom:.9rem">
-        <iframe
-          src="https://www.youtube.com/embed/D7RBQzbZT-0"
-          title="Ground School Study Beats ✈️ | 1 Hour Lofi"
-          width="100%"
-          style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:6px"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          loading="lazy"></iframe>
+      <div class="video-lite" data-video-id="D7RBQzbZT-0">
+        <a class="video-lite-trigger" href="https://www.youtube.com/watch?v=D7RBQzbZT-0" target="_blank" rel="noopener" aria-label="Play Ground School Study Beats on YouTube">
+          <img src="../assets/checkride-study-beats.webp" width="960" height="540" loading="lazy" alt="">
+          <span class="video-lite-play" aria-hidden="true">▶</span>
+          <span class="video-lite-label">Play Ground School Study Beats</span>
+        </a>
       </div>
       <p style="color:var(--text-muted);font-size:.9rem">🎧 Need study music? <a href="https://www.youtube.com/watch?v=D7RBQzbZT-0">Ground School Study Beats</a> — 1 hour of lofi for your next study session.</p>
     </div>
 
-    <h3>Flight Test Preparation: Beyond Basic Proficiency</h3>
+    <h2>Flight Test Preparation: Beyond Basic Proficiency</h2>
 
     <p>The practical portion of your <strong>private pilot checkride</strong> tests not just your ability to fly, but your ability to operate safely and efficiently in the national airspace system.</p>
 
-    <h4>Essential Maneuvers and Standards</h4>
+    <h3>Essential Maneuvers and Standards</h3>
 
     <p><strong>Takeoffs and Landings</strong></p>
     <ul>
@@ -254,7 +273,7 @@
       <li>Diversion procedures and lost communication protocols</li>
     </ul>
 
-    <h4>Performance Standards That Matter</h4>
+    <h3>Performance Standards That Matter</h3>
 
     <ul>
       <li><strong>Altitude Control</strong>: ±100 feet during normal operations, ±200 feet during unusual attitudes</li>
@@ -263,11 +282,11 @@
       <li><strong>Radio Work</strong>: Clear, concise communication using standard phraseology</li>
     </ul>
 
-    <h3>Risk Management: The Key to Modern Checkrides</h3>
+    <h2>Risk Management: The Key to Modern Checkrides</h2>
 
     <p>FAA-S-ACS-6C integrates risk-management elements throughout the applicable Areas of Operation and Tasks, alongside knowledge and flight-skill elements.</p>
 
-    <h4>The PAVE Checklist in Practice</h4>
+    <h3>The PAVE Checklist in Practice</h3>
 
     <ul>
       <li><strong>Pilot</strong>: Honest assessment of your skills, experience, and current state</li>
@@ -276,7 +295,7 @@
       <li><strong>External Pressures</strong>: Schedule pressure, passenger expectations, and other factors</li>
     </ul>
 
-    <h4>Demonstrating Risk Management Skills</h4>
+    <h3>Demonstrating Risk Management Skills</h3>
 
     <p><strong>Scenario-Based Planning</strong>: Show how you'd modify or cancel a flight based on changing conditions</p>
 
@@ -286,11 +305,11 @@
 
     <p><strong>Continuous Risk Assessment</strong>: Demonstrate how you'd monitor and respond to changing conditions during flight</p>
 
-    <h3>Study Timeline: The 8-Week Countdown</h3>
+    <h2>Study Timeline: The 8-Week Countdown</h2>
 
     <p>Effective <strong>pilot exam study guide 2026</strong> preparation requires structured, progressive learning rather than cramming.</p>
 
-    <h4>Weeks 8-6: Foundation Building</h4>
+    <h3>Weeks 8-6: Foundation Building</h3>
     <ul>
       <li>Complete knowledge test if not already done</li>
       <li>Review all ACS tasks and associated knowledge</li>
@@ -298,7 +317,7 @@
       <li>Begin scenario-based study approach</li>
     </ul>
 
-    <h4>Weeks 5-3: Application and Integration</h4>
+    <h3>Weeks 5-3: Application and Integration</h3>
     <ul>
       <li>Practice oral exam scenarios with instructors or pilots</li>
       <li>Integrate knowledge across different subject areas</li>
@@ -306,7 +325,7 @@
       <li>Increase flight training frequency and variety</li>
     </ul>
 
-    <h4>Weeks 2-1: Final Preparation</h4>
+    <h3>Weeks 2-1: Final Preparation</h3>
     <ul>
       <li>Take multiple practice oral exams</li>
       <li>Review emergency procedures extensively</li>
@@ -314,11 +333,11 @@
       <li>Ensure all required documents and endorsements are current</li>
     </ul>
 
-    <h3>Common Checkride Traps and How to Avoid Them</h3>
+    <h2>Common Checkride Traps and How to Avoid Them</h2>
 
     <p>Even well-prepared candidates can fail due to common oversights and misconceptions.</p>
 
-    <h4>Documentation Issues</h4>
+    <h3>Documentation Issues</h3>
     <ul>
       <li>Expired medical certificate or flight review</li>
       <li>Missing required instructor endorsements</li>
@@ -326,7 +345,7 @@
       <li>Improper aircraft documentation</li>
     </ul>
 
-    <h4>Knowledge Application Problems</h4>
+    <h3>Knowledge Application Problems</h3>
     <ul>
       <li>Memorizing regulations without understanding purpose</li>
       <li>Inability to apply weather knowledge to real scenarios</li>
@@ -334,7 +353,7 @@
       <li>Weak correlation between ground study and flight operations</li>
     </ul>
 
-    <h4>Flight Performance Errors</h4>
+    <h3>Flight Performance Errors</h3>
     <ul>
       <li>Inadequate preflight planning and preparation</li>
       <li>Poor task management and prioritization during flight</li>
@@ -342,11 +361,11 @@
       <li>Inadequate communication with ATC or examiner</li>
     </ul>
 
-    <h3>Technology and Modern Checkride Expectations</h3>
+    <h2>Technology and Modern Checkride Expectations</h2>
 
     <p>Today's <strong>private pilot checkride</strong> reflects the reality of modern general aviation flying. Having the right <a href="student-pilot-apps-2026.html">apps and digital tools</a> integrated into your training is no longer optional.</p>
 
-    <h4>GPS and Electronic Flight Display Integration</h4>
+    <h3>GPS and Electronic Flight Display Integration</h3>
     <ul>
       <li>Understanding GPS navigation modes and limitations</li>
       <li>Proper use of electronic flight displays</li>
@@ -354,7 +373,7 @@
       <li>Integration of traditional and modern navigation methods</li>
     </ul>
 
-    <h4>Weather Technology Applications</h4>
+    <h3>Weather Technology Applications</h3>
     <ul>
       <li>Using tablet-based weather applications effectively</li>
       <li>Understanding limitations of real-time weather data</li>
@@ -362,11 +381,11 @@
       <li>Maintaining situational awareness when technology fails</li>
     </ul>
 
-    <h3>Post-Checkride: Maintaining and Improving Skills</h3>
+    <h2>Post-Checkride: Maintaining and Improving Skills</h2>
 
     <p>Passing your <strong>private pilot checkride</strong> is just the beginning of your aviation journey. If you're already thinking about what comes next, I wrote a <a href="commercial-pilot-career-2026.html">full guide to the commercial pilot career path in 2026</a> with requirements, costs, and realistic timelines.</p>
 
-    <h4>Continuing Education Priorities</h4>
+    <h3>Continuing Education Priorities</h3>
     <ul>
       <li>Regular flight review preparation and participation</li>
       <li>Ongoing weather and regulation updates</li>
@@ -374,7 +393,7 @@
       <li>Building experience in different aircraft and environments</li>
     </ul>
 
-    <h4>Building Experience Safely</h4>
+    <h3>Building Experience Safely</h3>
     <ul>
       <li>Flying with experienced pilots when possible</li>
       <li>Gradually expanding personal minimums as skills improve</li>
@@ -382,7 +401,7 @@
       <li>Honest self-assessment and continued learning</li>
     </ul>
 
-    <h3 id="checkride-week-checklist">Private Pilot Checkride Week Checklist</h3>
+    <h2 id="checkride-week-checklist">Private Pilot Checkride Week Checklist</h2>
 
     <p>This is the short operational list I would use to keep the final week from turning into random studying:</p>
 
@@ -398,7 +417,7 @@
 
     <blockquote><strong>What I would repeat:</strong> practice rule, risk, and action together. A correct number is useful; explaining what it means for this airplane, this weather, and this flight is better.</blockquote>
 
-    <h3>Your Checkride Success Plan</h3>
+    <h2>Your Checkride Success Plan</h2>
 
     <p>Success on the <strong>private pilot checkride</strong> comes from thorough preparation, genuine understanding, and the ability to demonstrate sound judgment under pressure.</p>
 
@@ -456,15 +475,15 @@
   </section>
 
     <div style="margin:2.5rem 0;padding:1.5rem;border:1px solid rgba(96,165,250,.35);border-radius:.85rem;background:linear-gradient(135deg,#102033,#0f1729)">
-      <h3 style="color:var(--accent2);margin-bottom:.65rem">📚 Studying for a checkride? Start with the workbook series.</h3>
+      <h2 style="color:var(--accent2);margin-bottom:.65rem">📚 Studying for a checkride? Start with the workbook series.</h2>
       <p style="color:var(--text-muted);margin-bottom:1rem">I built pilot workbooks for private, instrument, commercial, and multi-engine prep so you can drill questions, oral topics, and weak spots before the DPE finds them for you.</p>
-      <a href="../aviation-workbooks/" style="display:inline-block;background:var(--accent);color:white;padding:.65rem 1.2rem;border-radius:.5rem;font-weight:700;font-size:.9rem;text-decoration:none">Compare Pilot Workbooks →</a>
+      <a href="../aviation-workbooks/" style="display:inline-block;background:#2563eb;color:white;padding:.65rem 1.2rem;border-radius:.5rem;font-weight:700;font-size:.9rem;text-decoration:none">Compare Pilot Workbooks →</a>
     </div>
 
 
   <section aria-label="Private pilot checkride workbook" style="margin-top:2.75rem;padding:1.5rem;border:1px solid rgba(96,165,250,.35);border-radius:14px;background:linear-gradient(135deg,#102033,#0f1729)">
     <div style="font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#93c5fd;margin-bottom:.6rem">Private pilot checkride prep</div>
-    <h3 style="color:#e2e8f0;margin:0 0 .65rem">Drill the rating in front of you.</h3>
+    <h2 style="color:#e2e8f0;margin:0 0 .65rem">Drill the rating in front of you.</h2>
     <p style="color:#94a3b8;margin-bottom:1rem">Use the FAA checklist above for source control, then use the Private Pilot Workbook to expose weak knowledge areas before the oral.</p>
     <div style="display:flex;gap:.75rem;flex-wrap:wrap">
       <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-event="amazon_click" data-product="ppl_workbook" data-placement="checkride-primary-cta" style="display:inline-flex;align-items:center;background:#ff9900;color:#111;padding:.7rem 1rem;border-radius:.6rem;font-weight:800;text-decoration:none">See the PPL Workbook on Amazon</a>
@@ -487,6 +506,22 @@
 
 
 <script>
+  document.addEventListener('click', function(event){
+    var trigger = event.target.closest && event.target.closest('.video-lite-trigger');
+    if(!trigger) return;
+    event.preventDefault();
+    var shell = trigger.closest('.video-lite');
+    if(!shell || shell.querySelector('iframe')) return;
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + shell.dataset.videoId + '?autoplay=1';
+    iframe.title = 'Ground School Study Beats — 1 Hour Lofi';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allowFullscreen = true;
+    shell.replaceChildren(iframe);
+    iframe.focus();
+  });
+
   document.addEventListener('click', function(event){
     var el = event.target.closest && event.target.closest('a[data-event]');
     if(!el || typeof gtag !== 'function') return;
