@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How I Ran 46 AI Cron Jobs on OpenClaw — 2026 Archive — Nick Rae</title>
-<meta name="description" content="A dated March 2026 account of running 46 OpenClaw cron jobs, including useful patterns, expensive mistakes, and safety lessons. The runtime is now retired.">
-<meta property="og:title" content="How I Ran 46 AI Cron Jobs on OpenClaw — 2026 Archive">
+<title>How I Ran Dozens of AI Cron Jobs on OpenClaw — 2026 Archive — Nick Rae</title>
+<meta name="description" content="A dated March 2026 account of running dozens of OpenClaw cron jobs, including useful patterns, expensive mistakes, and safety lessons. The runtime is now retired.">
+<meta property="og:title" content="How I Ran Dozens of AI Cron Jobs on OpenClaw — 2026 Archive">
 <meta property="og:description" content="Historical OpenClaw cron-job patterns and safety lessons from 2026. Nick's OpenClaw runtime is now retired.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/openclaw-cron-jobs-guide.html">
@@ -20,13 +20,13 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "headline": "How I Ran 46 AI Cron Jobs on OpenClaw — 2026 Archive",
+      "headline": "How I Ran Dozens of AI Cron Jobs on OpenClaw — 2026 Archive",
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-03-26",
       "url": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "A dated March 2026 account of running 46 OpenClaw cron jobs. Nick's runtime is now retired.",
+      "description": "A dated March 2026 account of running dozens of OpenClaw cron jobs. Nick's runtime is now retired.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html" }
     },
     {
@@ -34,7 +34,7 @@
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
         { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "How I Ran 46 AI Cron Jobs on OpenClaw", "item": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html" }
+        { "@type": "ListItem", "position": 3, "name": "How I Ran Dozens of AI Cron Jobs on OpenClaw", "item": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html" }
       ]
     }
   ]
@@ -104,16 +104,16 @@
       <time datetime="2026-03-26">March 26, 2026</time>
       <span>12 min read</span>
     </div>
-    <h1>How I Ran 46 AI Cron Jobs on OpenClaw — 2026 Archive</h1>
+    <h1>How I Ran Dozens of AI Cron Jobs on OpenClaw — 2026 Archive</h1>
     <p class="lead">This page preserves the March 26, 2026 operating snapshot: what worked, what broke, and which safety lessons survived. My OpenClaw runtime is now retired; market work is paper-only, and current interfaces may differ.</p>
   </div>
 
   <div class="callout"><div class="callout-title">Status · August 1, 2026</div><p>Historical operating notes, not a current-system claim or live setup guide. Verify present documentation before adapting any example.</p></div>
   <p>At the beginning of that OpenClaw period, the agent did exactly one thing: answer questions when I asked them. It was a chatbot. An expensive one.</p>
 
-  <p>At the March 26 snapshot, it ran 46 automated jobs on schedules ranging from 30 minutes to weekly. I then estimated roughly $30 per month in API tokens and more than eight hours saved per week. Those were operating-period estimates, not current measurements.</p>
+  <p>At the March 26 snapshot, it ran dozens of automated jobs at varied intervals. I then estimated modest monthly API costs and meaningful weekly time savings. Those were operating-period estimates, not current measurements.</p>
 
-  <p>I'm not a developer. I manage a mobile electronics shop in Merced, California. The only code I've ever written is the occasional shell command my agent told me to paste into Terminal. Everything in this post was built by describing what I wanted in plain English and letting the agent figure out the implementation.</p>
+  <p>I'm not a developer. I manage a small business in Central California. The only code I've ever written is the occasional shell command my agent told me to paste into Terminal. Everything in this post was built by describing what I wanted in plain English and letting the agent figure out the implementation.</p>
 
   <h2>What a cron job actually is</h2>
 
@@ -121,7 +121,7 @@
 
   <h2>The cron categories that mattered most</h2>
 
-  <p>I started with one. Then three. Then 15. Then 54. Then I deleted the ones that were doing nothing useful. A small handful of cron categories drove most of the value for me.</p>
+  <p>I started with one, expanded too far, then deleted the jobs that were doing nothing useful. A small handful of cron categories drove most of the value for me.</p>
 
   <h3>1. Briefing crons</h3>
 
@@ -222,7 +222,7 @@
     <a href="../openclaw-playbook/">📘 OpenClaw Playbook</a> ·
     <a href="https://twitter.com/nickrae">@nickrae</a>
   </div>
-  <div style="margin-top:.5rem">© 2026 Nick Rae · Merced, CA · <a href="../">Back to Home</a></div>
+  <div style="margin-top:.5rem">© 2026 Nick Rae · Central California · <a href="../">Back to Home</a></div>
 </footer>
 
 </body>
