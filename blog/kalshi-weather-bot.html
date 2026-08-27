@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I Built a Weather Prediction Bot. Then Live Trading Humbled It. — Nick Rae</title>
-<meta name="description" content="A commercial pilot built a Kalshi weather bot, took it live, then paused it after calibration and market-baseline checks showed the model was not capital-ready.">
+<meta name="description" content="A commercial pilot built a Kalshi weather bot, took it live, then closed the hypothesis after market-relative tests failed. Evidence preserved; live trading off.">
 <meta property="og:title" content="I Built a Weather Prediction Bot. Then Live Trading Humbled It.">
-<meta property="og:description" content="The paper results looked great. The live run and calibration audit said not yet. Here is the honest post-mortem.">
+<meta property="og:description" content="The paper results looked great. Later market-relative tests killed the hypothesis. Here is the honest post-mortem.">
 <meta property="og:image" content="https://nickrae.net/og-image.jpg">
 <meta property="og:url" content="https://nickrae.net/blog/kalshi-weather-bot.html">
 <meta property="og:type" content="article">
@@ -24,9 +24,10 @@
       "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
       "datePublished": "2026-03-15",
+      "dateModified": "2026-08-27",
       "url": "https://nickrae.net/blog/kalshi-weather-bot.html",
       "image": "https://nickrae.net/og-image.jpg",
-      "description": "A commercial pilot built a Kalshi weather bot, took it live, then paused it after calibration and market-baseline checks showed the model was not capital-ready.",
+      "description": "A commercial pilot built a Kalshi weather bot, took it live, then closed the hypothesis after market-relative tests failed. Evidence is preserved and live trading is off.",
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/kalshi-weather-bot.html" }
     },
     {
@@ -132,12 +133,12 @@
   <div class="article-header">
     <div class="article-meta">
       <span class="article-category">&#x1F916; AI Tools</span>
-      <span>March 2026</span>
+      <span>March 2026 · Updated August 27, 2026</span>
       <span>Nick Rae</span>
       <span>~10 min read</span>
     </div>
     <h1 class="article-title">I Built a Weather Prediction Bot. Then Live Trading Humbled It.</h1>
-    <p class="article-excerpt">The paper results looked great. The live run and follow-up calibration audit did not. This is the honest breakdown of what worked, what failed, and why the bot stays paused until the gate earns trust.</p>
+    <p class="article-excerpt">The paper results looked great. The live run and later market-relative tests did not. This is the honest breakdown of what worked, what failed, and why the weather hypothesis is now closed with live trading off.</p>
   </div>
 
   <div class="article-content">
@@ -150,9 +151,11 @@
 
     <p>I thought: I probably have better-than-random intuition here. What if I built a bot to make those trades systematically and found out?</p>
 
-    <p>The bot ran paper for 35 days: 217 resolved trades, 76.5% win rate, and $1,773 in simulated profit. On March 28 it went live with a $424 bankroll. Later, after stripping noisy results and auditing calibration, the honest answer was uglier: the weather-only live run was not capital-ready, and the current gate still blocks live trading.</p>
+    <p>The bot ran paper for 35 days: 217 resolved trades, 76.5% win rate, and $1,773 in simulated profit. On March 28 it went live with a $424 bankroll. Later, after stripping noisy results and auditing calibration, the honest answer was uglier: the weather-only live run was not capital-ready, and subsequent paper research failed to prove a durable market-relative edge.</p>
 
     <blockquote><strong>April 25 update:</strong> Kalshi weather is paused. The newest gate audit fixed bogus candidate-flow blockers, but the model still loses to the market baseline and needs more clean paper/live-gated data. I am leaving the original build notes below because the failure mode is the lesson.</blockquote>
+
+    <blockquote><strong>August 27 final update:</strong> The weather-market hypothesis is closed, not waiting for another threshold adjustment. The preserved forward paper bankroll finished at <strong>$175.01</strong>, with <strong>−$24.99 realized paper P&amp;L, 1 win, 19 losses, and zero open positions</strong>. Later versions either lost to the market baseline, produced zero valid opportunities, lacked trustworthy historical provenance, or found zero executable settlement-source crossings. The collectors are paused, the evidence is preserved, and live trading remains off. I am leaving the original build notes below because the failure mode is the useful part.</blockquote>
 
     <h2>Why Weather Prediction Markets</h2>
 
@@ -172,9 +175,9 @@
 
     <h3>Data Sources</h3>
 
-    <p>The bot pulls from two forecast APIs: <strong>NOAA's National Digital Forecast Database (NDFD)</strong> and <strong>Open-Meteo</strong>. NOAA is the authoritative US source. Open-Meteo provides ensemble model data with uncertainty spreads. Together they give me a probability distribution for temperature, precipitation, and wind at any US location.</p>
+    <p>The original bot pulled from two forecast APIs: <strong>NOAA's National Digital Forecast Database (NDFD)</strong> and <strong>Open-Meteo</strong>. NOAA is the authoritative US source. Open-Meteo provided ensemble model data with uncertainty spreads. Together they produced a probability distribution for temperature, precipitation, and wind at US locations.</p>
 
-    <p>For each market, the bot identifies the relevant location and variable, queries both APIs, and builds a forecast ensemble. The ensemble spread tells me how confident the models are. Wide spread means high uncertainty; tight spread means the models agree.</p>
+    <p>For each market, the original bot identified the relevant location and variable, queried both APIs, and built a forecast ensemble. The ensemble spread represented model uncertainty: wide spread meant low confidence; tight spread meant the models agreed.</p>
 
     <h3>Probability Estimation</h3>
 
@@ -184,25 +187,25 @@
 
     <h3>Strategies</h3>
 
-    <p>The bot runs two strategies, and this is where the real lesson is.</p>
+    <p>The original bot ran two strategies, and this is where the real lesson began.</p>
 
-    <p><strong>CALIBRATION</strong> is the primary strategy. It looks for markets where my probability estimate and the market price disagree by a meaningful margin. If I think there's a 70% chance something happens and the market is paying 55 cents on the dollar (implying 55%), that's a 15-point edge and I take the trade.</p>
+    <p><strong>CALIBRATION</strong> was the primary strategy. It looked for markets where my probability estimate and the market price disagreed by a meaningful margin. If the model estimated a 70% probability while the market paid 55 cents on the dollar (implying 55%), it labeled the gap as a 15-point edge.</p>
 
     <p><strong>BOUNDARY_FADE</strong> was a second strategy I added, looking to fade markets priced near the boundary — extreme events, thin probability ranges. It seemed clever in theory. The data killed it. BOUNDARY_FADE averaged <strong>negative $19.38 per trade</strong>. It's disabled now.</p>
 
     <h3>Position Sizing: Kelly Criterion</h3>
 
-    <p>This part matters more than most people think. I use a fractional Kelly Criterion to size each position. Kelly tells you the mathematically optimal fraction of your bankroll to bet given your edge and the odds. Full Kelly is aggressive enough to cause significant drawdowns, so I use a fraction of it.</p>
+    <p>This part matters more than most people think. The original bot used a fractional Kelly Criterion to size each position. Kelly estimates a bankroll fraction from an assumed edge and the odds. Full Kelly is aggressive enough to cause significant drawdowns, so the bot used a fraction of it.</p>
 
-    <p>The formula: <code>f = (edge * odds) / (odds - 1)</code>, then I take a fraction of that (typically 25-50% Kelly) based on my confidence in the edge estimate. Position sizes are capped so no single trade risks more than a defined percentage of the bankroll.</p>
+    <p>The formula used was <code>f = (edge * odds) / (odds - 1)</code>, followed by a 25-50% Kelly fraction based on confidence in the estimated edge. Position sizes were capped so no single trade risked more than a defined percentage of the bankroll. Better sizing could limit damage; it could not rescue a bad probability estimate.</p>
 
     <h3>Storm Mode</h3>
 
-    <p>One detail I'm proud of: the bot has a storm mode. Normally it scans for new markets every 30 minutes. When there's a significant weather event in the forecast — a front moving through, a major precipitation event, an extreme heat warning — it shifts to scanning every 10 minutes. More markets open during events, they're more volatile, and the edge windows close faster.</p>
+    <p>One detail I was proud of: the bot had a storm mode. Normally it scanned for new markets every 30 minutes. When there was a significant weather event in the forecast — a front moving through, a major precipitation event, an extreme heat warning — it shifted to scanning every 10 minutes. More frequent scanning was sound plumbing, but sound plumbing did not create an edge.</p>
 
-    <h2>What the Numbers Say</h2>
+    <h2>What the Original Paper Numbers Said</h2>
 
-    <p>After 217 resolved paper trades on a $1,000 simulated bankroll:</p>
+    <p>After 217 resolved paper trades on a $1,000 simulated bankroll, the original diagnostic ledger reported the numbers below. They are historical paper results, not current performance, investable proof, or revenue.</p>
 
     <div class="stat-grid">
       <div class="stat-card">
@@ -264,10 +267,10 @@
       <li>CALIBRATION-only run: 100% of simulations profitable</li>
     </ul>
 
-    <p>That's not a guarantee of future results. Monte Carlo assumes the future looks like the past. But 98.3% profitable across 10,000 runs with median profit of $873 is a signal worth taking seriously.</p>
+    <p>That was never a guarantee of future results. Monte Carlo assumed the future would look like a noisy historical sample. Later market-relative testing showed that this simulation was not evidence of a durable edge.</p>
 
     <blockquote>
-      The edge isn't huge. $7.32 per trade on a $1,000 bankroll is not going to fund a Citation X. But it's real, it's consistent, and it compounds.
+      At the time, the paper ledger looked consistent. Later testing did not confirm that the apparent edge was real or durable.
     </blockquote>
 
     <h2>The Gate That Wasn't Strict Enough</h2>
@@ -287,28 +290,30 @@
 
     <p><strong>Update (April 25, 2026):</strong> The bot is paused again. A later gate audit showed candidate flow was partially blocked by bad cluster logic, but after fixing that, the remaining block was real: not enough settled live data, not enough trading days, and final decision quality still worse than the market baseline. That is not a green light. That is the safety system doing its job.</p>
 
+    <p><strong>Update (August 27, 2026):</strong> The evidence loop is complete. V1 lost money, V2 lost to the market baseline or found zero opportunity density, V3 could not produce a trustworthy leakage-safe holdout, and the V4 crossing replay found zero valid settlement-source crossings or executable transitions. The weather hypotheses are killed, collectors are paused, and live remains off.</p>
+
     <h2>What I Got Wrong</h2>
 
     <p>BOUNDARY_FADE is the obvious one. I was pattern-matching to a trading concept that sounds good in a book and didn't do the work to validate it before trading it. By the time I had 13 trades of data, it had already cost me $252 in simulated profit. That's actually a cheap lesson in paper trading terms. In live trading it would have been real money.</p>
 
-    <p>The other thing I underestimated: how much the model spread matters. Early on I was using point forecasts from NOAA without accounting for forecast uncertainty. A mean temperature of 98°F means something very different when the ensemble spread is 2°F versus 8°F. I now weight my confidence in an edge by the spread. Tight spread, high confidence, bigger position. Wide spread, uncertain, smaller position or skip.</p>
+    <p>The other thing I underestimated: how much the model spread matters. Early on I was using point forecasts from NOAA without accounting for forecast uncertainty. A mean temperature of 98°F means something very different when the ensemble spread is 2°F versus 8°F. Later versions accounted for spread and abstained more aggressively, but better uncertainty handling still did not prove an executable edge.</p>
 
     <h2>What's Next</h2>
 
-    <p>The short answer: I keep it in paper/gated mode until it earns another shot. No threshold heroics. No tuning it into passing because I want the story to be cleaner. If the model cannot beat the market baseline after enough settled data, the strategy gets killed or rebuilt.</p>
+    <p>For this weather thesis: nothing. No threshold heroics, precipitation expansion, wind expansion, collector restart, or live retry. The code and evidence stay preserved so the lesson remains auditable, but the hypothesis is <strong>killed</strong>.</p>
 
-    <p>I'm also looking at extending the model to precipitation and wind markets, not just temperature. Temperature is the cleanest signal because NOAA's temperature forecasts are very good. Precipitation is noisier. But there might be edge in specific market types where the noise works in my favor.</p>
+    <p>As of August 27, a separate MLB cross-stat logical-dominance idea is collecting a frozen seven-day paper-only proof through September 3. It has no account or order path, no schedule, and no claimed edge. It is a distinct hypothesis, not a weather-bot sequel.</p>
 
     <p>The longer game is still the same: build income streams that can fund flight hours. But KDP and digital products are cleaner proof right now than prediction-market bravado. I wrote about the <a href="ai-aviation-business.html">full picture of how I'm using AI to build side income as a pilot</a>, and I keep the current numbers on the <a href="../flight-funded/">Flight Funded tracker</a>.</p>
 
-    <p>391.3 hours and counting. The bot can sit in the penalty box until the math stops embarrassing itself.</p>
+    <p>391.3 hours and counting. The weather bot is not funding them, and pretending otherwise would be worse than killing the project.</p>
 
     <div class="cta-box">
-      <h3>&#x1F4D8; Want the Exact System Behind the Bot?</h3>
-      <p>I wrote up the OpenClaw setup behind this whole automation stack in <strong>The Non-Developer's OpenClaw Playbook</strong>. It covers cron jobs, model routing, memory files, coding-agent workflow, safety gates, and the mistakes that cost money before they taught anything useful.</p>
+      <h3>&#x1F4D8; Historical Automation Case Study</h3>
+      <p>The OpenClaw runtime behind the original experiment is retired. The preserved playbook and build story remain available as dated case studies in cron jobs, model routing, memory files, coding-agent workflow, safety gates, and the mistakes that cost money before they taught anything useful. They are not a current runtime recommendation.</p>
       <div class="cta-links">
-        <a href="../openclaw-playbook/">Get the Playbook &#x2192;</a>
-        <a href="openclaw-playbook.html" style="background:var(--bg3);border:1px solid var(--border);">Read the Playbook story &#x2192;</a>
+        <a href="../openclaw-playbook/">View the archived operator kit &#x2192;</a>
+        <a href="openclaw-playbook.html" style="background:var(--bg3);border:1px solid var(--border);">Read the historical build story &#x2192;</a>
         <a href="../flight-funded/" style="background:var(--bg3);border:1px solid var(--border);">Flight Funded Tracker &#x2192;</a>
       </div>
     </div>
@@ -333,11 +338,11 @@
       </a>
       <a href="../flight-funded/" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">Flight Funded</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">See how trading results roll into the bigger flight-hour equation.</span>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">See why paper-market results are excluded from the flight-funding total.</span>
       </a>
       <a href="openclaw-playbook.html" style="display:block;padding:1rem;border:1px solid #1e293b;border-radius:10px;background:#0f172a;color:#e2e8f0;text-decoration:none">
         <strong style="display:block;color:#e2e8f0;font-size:.98rem">OpenClaw Playbook</strong>
-        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">A practical look at the agent stack running the automation.</span>
+        <span style="display:block;color:#94a3b8;font-size:.88rem;line-height:1.55;margin-top:.4rem">A dated look at the retired agent stack behind the original experiment.</span>
       </a>
     </div>
     <p style="margin:0;color:#94a3b8;font-size:.92rem">New here? Start at the <a href="../">homepage</a> or browse the <a href="./">full blog archive</a>.</p>
