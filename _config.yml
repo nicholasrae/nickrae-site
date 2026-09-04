@@ -1,0 +1,9 @@
+# GitHub Pages builds main / using Jekyll (legacy Pages source).
+# Preserve internal originals in Git, but never copy them into the public site.
+# This is artifact exclusion, not removal from Git history or a public repository.
+exclude:
+  - PLAYBOOK_CONVERSION_MEMO_2026-04-03.md
+  - WEBSITE_CONVERSION_MEMO_2026-04-03.md
+  - SITE_TEARDOWN_2026-04-03.md
+  - INDEX_HTML_REDIRECT_NOTES.md
+  - sketches

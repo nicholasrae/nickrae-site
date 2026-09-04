@@ -1,0 +1,24 @@
+/* Progressive enhancement: links work without scripts; JS opts into disclosure. */
+nav .menu-toggle { min-width:44px; min-height:44px; }
+nav a:focus-visible, nav button:focus-visible { outline:3px solid #fbbf24; outline-offset:3px; }
+@media (max-width:860px) {
+  /* Keep expanded/no-JS headers in flow instead of covering the article. */
+  body nav { position:sticky !important; top:0; }
+  nav .inner, nav .nav-inner { height:auto !important; min-height:64px; flex-wrap:wrap; }
+  nav .menu-toggle { display:none !important; }
+  nav .links, nav .nav-links {
+    display:flex !important; position:static !important; inset:auto !important;
+    width:100%; flex-basis:100%; flex-wrap:wrap; flex-direction:row !important;
+    align-items:center; gap:.25rem .75rem !important; padding:.5rem 0 !important;
+    max-height:none; overflow:visible; opacity:1; visibility:visible;
+  }
+  nav .links a, nav .nav-links a, nav .nav-links a:not(.nav-cta) {
+    display:inline-flex !important; align-items:center; min-width:44px; min-height:44px;
+    padding:.35rem .5rem; width:auto;
+  }
+  nav.navigation-enhanced .menu-toggle { display:inline-flex !important; align-items:center; justify-content:center; }
+  nav.navigation-enhanced .links, nav.navigation-enhanced .nav-links { display:none !important; }
+  nav.navigation-enhanced .links.open, nav.navigation-enhanced .nav-links.open {
+    display:flex !important; max-height:60vh; overflow-y:auto;
+  }
+}

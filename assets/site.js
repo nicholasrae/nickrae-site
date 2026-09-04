@@ -4,6 +4,7 @@
   const TAG_ID = 'AW-18126210838';
   const CONSENT_KEY = 'nickrae_analytics_consent_v1';
   let analyticsReady = false;
+  let consentResizeObserver;
 
   function currentConsent() {
     try { return window.localStorage.getItem(CONSENT_KEY); }
@@ -135,7 +136,10 @@
   }
 
   function removeBanner() {
+    consentResizeObserver?.disconnect();
     document.getElementById('privacy-consent')?.remove();
+    document.getElementById('privacy-consent-spacer')?.remove();
+    document.documentElement.style.removeProperty('--privacy-banner-space');
   }
 
   function showBanner() {
@@ -174,7 +178,8 @@
       #privacy-consent{position:fixed;z-index:2147483647;left:1rem;right:1rem;bottom:1rem;max-width:920px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.1rem;background:#07111f;color:#f8fafc;border:2px solid #60a5fa;border-radius:.8rem;box-shadow:0 18px 55px rgba(0,0,0,.55);font:500 14px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
       .privacy-consent-copy{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}.privacy-consent-copy strong{font-size:1rem}.privacy-consent-copy span{color:#dbeafe}.privacy-consent-copy a{color:#bfdbfe;text-decoration:underline;text-underline-offset:2px}
       .privacy-consent-actions{display:flex;gap:.6rem;flex:none}.privacy-consent-actions button{min-height:44px;border:2px solid #94a3b8;border-radius:.55rem;padding:.55rem .85rem;background:#111827;color:#fff;font:800 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;cursor:pointer}.privacy-consent-actions button.allow{background:#1d4ed8;border-color:#93c5fd}.privacy-consent-actions button:focus-visible,.privacy-consent-copy a:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
-      @media(max-width:700px){#privacy-consent{align-items:stretch;flex-direction:column}.privacy-consent-actions{display:grid;grid-template-columns:1fr 1fr}.privacy-consent-actions button{width:100%}}
+      html{scroll-padding-bottom:var(--privacy-banner-space,0px)}
+      @media(max-width:700px){#privacy-consent{align-items:stretch;flex-direction:column;max-height:40dvh;overflow-y:auto}.privacy-consent-actions{display:grid;grid-template-columns:1fr 1fr}.privacy-consent-actions button{width:100%}}
     `;
     banner.addEventListener('click', (event) => {
       const button = event.target.closest('button[data-consent]');
@@ -186,9 +191,60 @@
     });
     document.head.appendChild(style);
     document.body.appendChild(banner);
+    // Reserve actual overlay height so bottom-of-page content remains reachable
+    // without accepting tracking. Keep the allowance correct on zoom/rotation.
+    const spacer = document.createElement('div');
+    spacer.id = 'privacy-consent-spacer';
+    spacer.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(spacer);
+    const reserveSpace = () => {
+      const space = `${Math.ceil(banner.getBoundingClientRect().height) + 32}px`;
+      spacer.style.height = space;
+      document.documentElement.style.setProperty('--privacy-banner-space', space);
+    };
+    reserveSpace();
+    if (typeof ResizeObserver === 'function') {
+      consentResizeObserver = new ResizeObserver(reserveSpace);
+      consentResizeObserver.observe(banner);
+    }
+  }
+
+  function enhanceNavigation() {
+    document.querySelectorAll('nav').forEach((nav, index) => {
+      const original = nav.querySelector('.menu-toggle');
+      const links = nav.querySelector('.links, .nav-links');
+      if (!original || !links) return;
+      // Retire legacy inline and attached toggle listeners (some pages had both).
+      const button = original.cloneNode(true);
+      button.removeAttribute('onclick');
+      button.type = 'button';
+      button.setAttribute('aria-label', 'Navigation menu');
+      if (!links.id) links.id = `site-navigation-${index}`;
+      button.setAttribute('aria-controls', links.id);
+      original.replaceWith(button);
+      const setOpen = (open) => {
+        links.classList.toggle('open', open);
+        button.setAttribute('aria-expanded', String(open));
+      };
+      setOpen(false);
+      button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+      links.addEventListener('click', (event) => {
+        if (event.target.closest('a')) setOpen(false);
+      });
+      nav.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+          setOpen(false);
+          button.focus();
+        }
+      });
+      const mobile = window.matchMedia('(max-width:860px)');
+      mobile.addEventListener('change', () => setOpen(false));
+      nav.classList.add('navigation-enhanced');
+    });
   }
 
   function init() {
+    enhanceNavigation();
     addPrivacyLink();
     preserveCheckoutAttribution();
     attachGlobalTracking();

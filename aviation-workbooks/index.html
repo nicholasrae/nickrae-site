@@ -95,6 +95,9 @@
   .book h2{margin:0 0 .35rem;font-size:1.15rem;line-height:1.25}.price{margin-bottom:.55rem;color:#86efac;font-size:.82rem;font-weight:800}.book p{margin:0 0 .8rem;color:var(--muted);font-size:.85rem;flex:1}
   .product-links{display:flex;gap:.5rem;flex-wrap:wrap}.product-links a{min-height:40px;display:inline-flex;align-items:center;padding:.43rem .7rem;border-radius:.4rem;font-size:.78rem;font-weight:850;text-decoration:none;transition:transform 140ms ease}.amazon{background:var(--amazon);color:#111}.resource{background:#334155;color:#f1f5f9}
 
+  .study-preview{grid-column:1/-1;border-top:1px solid var(--border);padding-top:1rem;margin-top:.25rem;min-width:0}
+  .study-preview p,.study-preview li{font-size:.95rem;color:var(--text);margin:.7rem 0}
+  .study-preview .sample-note{font-size:.8rem;color:var(--muted)}
   .free-pack{padding:0 0 5rem}.free-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;padding:1.8rem;border:1px solid rgba(74,222,128,.42);border-radius:1rem;background:linear-gradient(135deg,#10251d,#0e1827)}.free-card h2{margin:0 0 .5rem;font-size:clamp(1.4rem,3vw,1.9rem)}.free-card p{margin:0;color:var(--muted)}
 
   .comparison{padding:5rem 0;background:var(--bg-2);border-block:1px solid var(--border)}.table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:.85rem}.compare-table{width:100%;min-width:760px;border-collapse:collapse;background:var(--card)}.compare-table th,.compare-table td{padding:.85rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}.compare-table tr:last-child td{border-bottom:0}.compare-table th{color:var(--accent-soft);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}.compare-table td{color:var(--muted);font-size:.84rem}.compare-table td:first-child{color:var(--text);font-weight:750}
@@ -135,6 +138,7 @@
   });
 </script>
 <script src="/assets/site.js" defer></script>
+<link rel="stylesheet" href="/assets/navigation.css">
 </head>
 <body data-page="aviation-workbooks">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -170,15 +174,9 @@
 
 <section class="proof" aria-labelledby="proof-heading">
   <div class="container">
-    <p class="eyebrow" id="proof-heading">Current verified sales signal</p>
-    <div class="metric-grid">
-      <div class="metric"><strong>27</strong><span>August aviation units: 8 PPL, 10 IFR, 5 Commercial, 2 Multi-Engine, 2 Radio Calls</span></div>
-      <div class="metric"><strong>$235.09</strong><span>August aviation royalties, plus €24.64 EUR, dashboard-estimated</span></div>
-      <div class="metric"><strong>1,187</strong><span>August KENP at month-end with 0 refunds</span></div>
-      <div class="metric"><strong>149</strong><span>Cumulative March–August aviation workbook units</span></div>
-      <div class="metric"><strong>157</strong><span>Reconciled Jan–August full-catalog books tracked</span></div>
-    </div>
-    <p class="proof-detail">Cumulative March–August aviation tracking: <strong>149 units / $1,282.32 USD + €71.47 EUR + A$9.49</strong>. Reconciled full-catalog tracking is 157 books. Royalty figures are KDP dashboard estimates, not settled payouts. That is buyer proof, not a claim that one workbook fits every pilot. <a href="../flight-funded/">See the Flight Funded proof log →</a></p>
+    <h2 class="eyebrow" id="proof-heading">Study the explanation, not just the answer</h2>
+    <p class="section-note">Choose your rating below, then inspect the current edition on Amazon before you buy. These workbooks support your instructor-led study, not a promise of a checkride result.</p>
+    <p class="proof-detail">149 aviation workbook units tracked March–August 2026; 157 across the full catalog January–August. <a href="../flight-funded/">Dated sales and royalty receipts →</a></p>
   </div>
 </section>
 
@@ -209,10 +207,12 @@
         <article class="book featured" id="ppl">
           <picture><source type="image/webp" srcset="../assets/workbooks/private-pilot-cover-240.webp 240w, ../assets/workbooks/private-pilot-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/private-pilot-cover.jpg" width="1000" height="1293" alt="Private Pilot License Workbook cover" loading="lazy" decoding="async"></picture>
           <div class="book-content"><span class="badge green">Strong current demand</span><h2>Private Pilot License Workbook</h2><div class="price">$19.99 Print · $9.99 Kindle</div><p>500+ practice questions covering PPL knowledge-test topics with explained answers and FAA-style wording.</p><div class="product-links"><a class="amazon" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="book-card">Buy on Amazon</a><a class="resource" href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener" data-product="free_cheat_sheets" data-placement="book-card">Free cheat sheets</a></div></div>
+        <div class="study-preview"><p><strong>Preview before you buy.</strong> Open the Amazon listing and use “Read Sample” when available to inspect the current edition’s questions and explanations.</p><p class="sample-note">For PPL, compare the question style with the areas you are studying and check how the answer key explains the reasoning.</p><a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="workbook-sample">See the current edition on Amazon →</a></div>
         </article>
         <article class="book" id="instrument">
           <picture><source type="image/webp" srcset="../assets/workbooks/instrument-rating-cover-240.webp 240w, ../assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/instrument-rating-cover.jpg" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="lazy" decoding="async"></picture>
           <div class="book-content"><span class="badge">IFR prep</span><h2>Instrument Rating Workbook</h2><div class="price">$24.99 Print · $9.99 Kindle</div><p>ACS-aligned IFR study for weather, procedures, charts, systems, and scenario thinking under instrument pressure.</p><div class="product-links"><a class="amazon" href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="book-card">Buy on Amazon</a></div></div>
+        <div class="study-preview"><p><strong>Preview before you buy.</strong> Open the Amazon listing and use “Read Sample” when available to inspect the current edition’s questions and explanations.</p><p class="sample-note">For IFR, look for scenario reasoning and source references that complement your CFII-led study.</p><a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="workbook-sample">See the current edition on Amazon →</a></div>
         </article>
         <article class="book" id="commercial">
           <picture><source type="image/webp" srcset="../assets/workbooks/commercial-pilot-cover-240.webp 240w, ../assets/workbooks/commercial-pilot-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/commercial-pilot-cover.jpg" width="1000" height="1293" alt="Complete Commercial Pilot Workbook cover" loading="lazy" decoding="async"></picture>
