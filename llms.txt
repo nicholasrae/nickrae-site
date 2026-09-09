@@ -22,6 +22,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 
 ## Blog Posts
 
+- [How to Study for Your Instrument Checkride When You Work Full-Time](https://nickrae.net/blog/instrument-checkride-full-time.html) — source-first ground-study workflow and adaptable weekly schedule for full-time workers; study aid, not flight instruction
 - [IFR Oral Exam Scenarios: 10 Questions That Prove Whether You Understand the Rating](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — bridge article for instrument students; routes to the free IFR scenario pack and aviation workbook shelf
 - [How I Turned OpenClaw Into an AI Operations System — 2026 Archive](https://nickrae.net/blog/openclaw-personal-ai-operations-system.html)
 - [I Built a Weather Prediction Bot. Then Live Trading Humbled It.](https://nickrae.net/blog/kalshi-weather-bot.html)
