@@ -75,6 +75,7 @@
   .stage-note{position:absolute;left:28px;bottom:27px;z-index:4;max-width:226px;padding:.85rem .95rem;border:1px solid rgba(74,222,128,.44);border-radius:.9rem;background:rgba(2,6,23,.9);color:#dbe6f3;font-size:.76rem}
   .stage-note strong{display:block;color:#86efac;font-size:1.25rem;line-height:1.1;margin-bottom:.25rem}
 
+  summary{cursor:pointer;min-height:44px;padding:.7rem 0;color:var(--accent-soft);font-weight:750}summary:focus-visible{outline:3px solid #fbbf24;outline-offset:4px}.secondary-details{margin-top:1rem}
   .proof{padding:2.25rem 0;border-block:1px solid var(--border);background:var(--bg-2)}
   .proof-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem}
   .metric{padding:1rem;border:1px solid var(--border);border-radius:.75rem;background:var(--card)}
@@ -174,12 +175,40 @@
       "@type":"WebSite","name":"Nick Rae","url":"https://nickrae.net/","description":"Nick Rae is a commercial pilot and aviation workbook author publishing FAA-aligned pilot study materials for PPL, IFR, commercial, multi-engine, and VFR radio calls.","author":{"@id":"https://nickrae.net/#person"}
     },
     {
-      "@type":"ItemList","name":"Nick Rae Aviation Pilot Workbooks","url":"https://nickrae.net/aviation-workbooks/","itemListElement":[
-        {"@type":"ListItem","position":1,"url":"https://www.amazon.com/dp/B0H3KT5FHW","name":"Clearance to Confidence: VFR Radio Calls Workbook"},
-        {"@type":"ListItem","position":2,"url":"https://a.co/d/0hExZLaf","name":"Private Pilot License Workbook"},
-        {"@type":"ListItem","position":3,"url":"https://a.co/d/06zXHuEe","name":"Instrument Rating Workbook"},
-        {"@type":"ListItem","position":4,"url":"https://www.amazon.com/dp/B0GW8BGNDP","name":"The Complete Commercial Pilot Workbook"},
-        {"@type":"ListItem","position":5,"url":"https://www.amazon.com/dp/B0GXK6J9F5","name":"Multi-Engine Add-On Rating Workbook"}
+"@type": "ItemList",
+      "name": "Nick Rae Aviation Pilot Workbooks",
+      "url": "https://nickrae.net/aviation-workbooks/",
+      "itemListElement": [
+            {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "url": "https://a.co/d/0hExZLaf",
+                  "name": "Private Pilot License Workbook"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "url": "https://a.co/d/06zXHuEe",
+                  "name": "Instrument Rating Workbook"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "url": "https://www.amazon.com/dp/B0GW8BGNDP",
+                  "name": "The Complete Commercial Pilot Workbook"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "url": "https://www.amazon.com/dp/B0GXK6J9F5",
+                  "name": "Multi-Engine Add-On Rating Workbook"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 5,
+                  "url": "https://www.amazon.com/dp/B0H3KT5FHW",
+                  "name": "Clearance to Confidence: VFR Radio Calls Workbook"
+            }
       ]
     }
   ]
@@ -234,9 +263,9 @@
         <p class="lede">Private, instrument, commercial, multi-engine, and VFR radio-call study tools written by a Commercial Instrument Multi-Engine pilot. Practical reps and explained answers—not answer-key roulette.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="aviation-workbooks/#chooser" data-product="aviation_workbooks" data-placement="home-hero">Find your workbook</a>
-          <a class="button button-secondary" href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-hero">Free IFR pack</a>
+
         </div>
-        <a class="proof-link" href="flight-funded/">See the Flight Funded proof log →</a>
+
         <div class="author-line">
           <picture>
             <source type="image/webp" srcset="headshot-160.webp 160w, headshot-320.webp 320w" sizes="48px">
@@ -258,22 +287,8 @@
           <source type="image/webp" srcset="assets/workbooks/instrument-rating-cover-240.webp 240w, assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:520px) 124px, 180px">
           <img class="cover cover-right" src="assets/workbooks/instrument-rating-cover.jpg" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="lazy" decoding="async">
         </picture>
-        <div class="stage-note"><strong>157 copies tracked</strong>Full KDP catalog, January–August 2026. Aviation totals are reported separately.</div>
+        <div class="stage-note"><strong>Practice. Explain. Repeat.</strong>Choose the workbook for your rating, then preview the teaching before you buy.</div>
       </div>
-    </div>
-  </section>
-
-  <section class="proof" aria-labelledby="proof-heading">
-    <div class="container">
-      <p class="eyebrow" id="proof-heading">Current verified KDP signal</p>
-      <div class="proof-grid">
-        <div class="metric"><strong>27</strong><span>August aviation-workbook paid units at month-end</span></div>
-        <div class="metric"><strong>$235.09</strong><span>August aviation royalties, dashboard-estimated</span></div>
-        <div class="metric"><strong>€24.64</strong><span>August aviation EUR royalties, dashboard-estimated</span></div>
-        <div class="metric"><strong>1,187</strong><span>August KENP at month-end · 0 refunds</span></div>
-        <div class="metric"><strong>149</strong><span>Cumulative March–August aviation workbook units</span></div>
-      </div>
-      <p class="proof-copy">Cumulative March–August aviation tracking: <strong>149 units / $1,282.32 USD + €71.47 EUR + A$9.49</strong>. Reconciled Jan–August full-catalog tracking: <strong>157 books</strong>. Royalty figures are dashboard estimates, not settled payouts or a magic ad-scaling license.</p>
     </div>
   </section>
 
@@ -289,25 +304,22 @@
         <a class="finder-card" href="aviation-workbooks/#multi-engine" data-product="multi_engine_workbook" data-placement="home-finder"><strong>Multi-engine add-on</strong><span>Vmc, OEI, PA-44 flows, engine-out calls, and oral traps.</span><em>See Multi-Engine workbook →</em></a>
         <a class="finder-card" href="aviation-workbooks/#vfr-radio" data-product="vfr_radio_calls_workbook" data-placement="home-finder"><strong>VFR radio calls</strong><span>Call-building, ATC replies, readbacks, CTAF flows, and out-loud reps.</span><em>See Radio Calls workbook →</em></a>
       </div>
+      <p class="catalog-links"><a href="aviation-workbooks/#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="home-finder-sample">Try an Instrument workbook question + answer</a></p>
+      <details class="secondary-details"><summary>More buying options and resources</summary>
       <p class="catalog-links"><a href="aviation-workbooks/">Compare every workbook and current price</a> · <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="home-finder">Full Amazon catalog</a> · <a href="https://nicholasrae.gumroad.com/l/ppl-oral-flashcards" target="_blank" rel="noopener" data-product="ppl_oral_flashcards" data-placement="home-finder">PPL oral flashcards</a></p>
       <p class="direct-products">Direct Amazon links: <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-finder-direct">PPL</a> · <a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="home-finder-direct">Instrument</a> · <a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="home-finder-direct">Commercial</a> · <a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="home-finder-direct">Multi-Engine paperback</a> / <a href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="home-finder-direct">Kindle</a> · <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-finder-direct">VFR Radio paperback</a> / <a href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="home-finder-direct">Kindle</a></p>
+      </details>
     </div>
   </section>
 
-  <section class="free-pack" aria-labelledby="ifr-pack-heading">
-    <div class="container">
-      <div class="free-pack-card">
-        <div><p class="eyebrow">Not ready to buy?</p><h2 id="ifr-pack-heading">Practice 10 IFR oral answers for free.</h2><p>Currency, alternates, fuel, readbacks, holding, MDA discipline, and equipment checks—source-anchored and built for out-loud reps.</p></div>
-        <a class="button button-secondary" href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-free-pack">Get the free IFR pack</a>
-      </div>
-    </div>
-  </section>
 
   <section class="pilot" id="credentials" aria-labelledby="credentials-heading">
     <div class="container">
       <p class="eyebrow">Written by a working commercial pilot</p>
       <h2 class="section-heading" id="credentials-heading">Flight credentials</h2>
       <p class="section-intro">I earned private, instrument, commercial, and multi-engine ratings in under 18 months. The workbooks come from training pressure, not generic aviation-content soup.</p>
+      <p class="section-intro"><strong>Commercial Pilot ASEL/AMEL · Instrument · 391.3 total hours</strong> (July 2026 logbook total; unchanged at the September confirmation). <a href="about/">About Nick</a> · <a href="flight-funded/">Dated flight and publishing proof</a></p>
+      <details class="secondary-details"><summary>Full credentials and flight-hour breakdown</summary>
       <div class="hours-grid" aria-label="Flight-hour totals">
         <div class="hour-card"><strong>391.3</strong><span>Total Hours</span></div>
         <div class="hour-card"><strong>272.8</strong><span>PIC</span></div>
@@ -330,7 +342,28 @@
           <ul class="aircraft-list"><li>Cessna 172 Skyhawk — 311.7 hrs</li><li>Rockwell Commander 114A — 39.2 hrs</li><li>Piper Seminole (PA-44) — 20.0 hrs</li><li>Piper Seneca (PA-34) — 7.7 hrs</li><li>Piper Cherokee (PA-28) — 7.0 hrs</li><li>Cessna 182 Skylane — 3.3 hrs</li><li>Piper Aztec (PA-27) — 2.4 hrs</li></ul>
         </div>
       </div>
+      </details>
       <p class="resume-row"><a href="Nicholas_Rae_Flight_Resume.pdf?v=20260722-generic" target="_blank" rel="noopener">Download the current flight resume (PDF) →</a></p>
+    </div>
+  </section>
+
+  <section class="free-pack" aria-labelledby="ifr-pack-heading">
+    <div class="container">
+      <div class="free-pack-card">
+        <div><p class="eyebrow">Not ready to buy?</p><h2 id="ifr-pack-heading">Practice 10 IFR oral answers for free.</h2><p>Currency, alternates, fuel, readbacks, holding, MDA discipline, and equipment checks—source-anchored and built for out-loud reps.</p></div>
+        <div><a class="button button-secondary" href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-free-pack">Get the free IFR pack</a><p><a href="ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="home-hero">Free IFR pack overview</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" aria-labelledby="proof-heading">
+    <div class="container">
+      <h2 class="section-heading" id="proof-heading">Dated proof, not a pass-rate claim</h2>
+      <p class="proof-copy"><a href="flight-funded/">Flight Funded carries the sales, royalties, payouts, and flight-hour history →</a></p>
+      <details class="secondary-details"><summary>Preserved August 2026 publishing snapshot</summary>
+        <p class="proof-copy">August aviation-workbook paid units at month-end: <strong>27</strong>. Dashboard-estimated royalties: <strong>$235.09 USD + €24.64 EUR</strong>. August KENP at month-end: <strong>1,187</strong>; <strong>0 refunds</strong>.</p>
+        <p class="proof-copy">Cumulative March–August aviation tracking: <strong>149 units / $1,282.32 USD + €71.47 EUR + A$9.49</strong>. Reconciled January–August full-catalog tracking: <strong>157 books</strong>. Royalty figures are dashboard estimates, not settled payouts or ad-scale proof. Purchases do not establish a checkride outcome.</p>
+      </details>
     </div>
   </section>
 
@@ -355,7 +388,8 @@
     <div class="container">
       <p class="eyebrow">Secondary lane</p>
       <h2 class="section-heading" id="labs-heading">Labs &amp; Archive</h2>
-      <p class="section-intro">I still build apps, AI automation, and experiments. They live down here so they do not compete with the pilot workbooks at the front door.</p>
+      <p class="section-intro">Explore my apps, AI automation, and dated project notes.</p>
+      <details class="secondary-details"><summary>Explore apps, experiments, and archived work</summary>
       <div class="labs-grid">
         <div class="lab-card"><h3>Flight Funded</h3><p>The public 391.3-to-500-hour tracker and KDP proof log.</p><a href="flight-funded/">View tracker</a></div>
         <div class="lab-card"><h3>FeedFare</h3><p>Trade steps for screen time. Live on the App Store.</p><a href="feedfare/">Overview</a><a href="https://feedfare.app" target="_blank" rel="noopener">Site</a><a href="https://apps.apple.com/us/app/feedfare/id6758923557" target="_blank" rel="noopener">App Store</a></div>
@@ -364,6 +398,7 @@
         <div class="lab-card"><h3>Prediction-market research</h3><p>A closed Kalshi weather experiment, preserved evidence, and the honest post-mortem.</p><a href="blog/kalshi-weather-bot.html">Read the post-mortem</a></div>
         <div class="lab-card"><h3>Runways &amp; Rescues</h3><p>501(c)3 nonprofit using volunteer pilots to fly rescue animals to safety.</p><a href="https://nicholasrae.github.io/runways-rescues/" target="_blank" rel="noopener">Visit site</a></div>
       </div>
+      </details>
     </div>
   </section>
 

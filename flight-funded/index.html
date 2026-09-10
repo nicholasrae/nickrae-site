@@ -74,7 +74,7 @@
 
   /* ── HERO ────────────────────────────────────── */
   .hero{
-    min-height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    min-height:0;display:flex;align-items:center;justify-content:center;text-align:center;
     padding:6rem 1.5rem 3rem;position:relative;overflow:hidden;
     background:
       radial-gradient(circle at 22% 24%,rgba(96,165,250,.45) 0 1px,transparent 1.5px),
@@ -285,18 +285,19 @@
 <!-- MAIN STATS -->
 <section class="stats-section" aria-label="Flight and funding progress">
   <div class="container">
+    <h2 class="section-title">Dated snapshot</h2><p style="color:var(--text-muted);margin-bottom:1rem">These are the recorded checkpoints below, not a live dashboard or a new confirmation. Each metric has its own evidence date. <a href="#updates">Recent receipts and older history ↓</a></p>
     <div class="stats-grid">
       <div class="stat-card reveal stagger-1">
         <div class="icon">✈️</div>
         <div class="value" data-count-decimal="391.3">391.3</div>
         <div class="label">Total Flight Hours</div>
-        <div class="sub-value">Next planning threshold: 500 · Long-term benchmark: 1,500</div>
+        <div class="sub-value">ForeFlight report: Jul 12, 2026 · Next planning threshold: 500 · Long-term benchmark: 1,500</div>
       </div>
       <div class="stat-card reveal stagger-2">
         <div class="icon">💰</div>
         <div class="value">$1,282.32</div>
         <div class="label">Estimated KDP Aviation Royalties (USD)</div>
-        <div class="sub-value">157 full-catalog books tracked at August month-end · 149 March-August aviation units · + €71.47 EUR + A$9.49</div>
+        <div class="sub-value">March–August 2026, recorded Sep 1 · 149 aviation units · Separately: €71.47 EUR and A$9.49 AUD (not converted). Jan–August full catalog: 157 books.</div>
         <div style="margin-top:.75rem"><a href="../aviation-workbooks/" style="color:var(--accent2);font-size:.82rem;font-weight:800;text-decoration:none">See the workbook catalog →</a></div>
       </div>
       <div class="stat-card reveal stagger-3">
@@ -309,10 +310,11 @@
         <div class="icon">⏱️</div>
         <div class="value">~14</div>
         <div class="label">Months to 500 Hours</div>
-        <div class="sub-value">~14 mo at 7.9 hrs/mo · planning estimate</div>
+        <div class="sub-value">Jul 12 hour balance ÷ Jun 25 historical pace · ~14 mo at 7.9 hrs/mo, not a current forecast or arrival date</div>
       </div>
     </div>
 
+    <p style="color:var(--text-muted);margin-bottom:1.5rem"><strong>Settled payouts: not verified in this snapshot.</strong> No payout amount or payout as-of date is established here. Estimated royalties are not cash received, profit after costs, or flight hours purchased.</p>
     <!-- PART 135 PROGRESS -->
     <div class="progress-card reveal">
       <div class="progress-header">
@@ -348,20 +350,20 @@
     <!-- FUNDING PROGRESS -->
     <div class="progress-card reveal">
       <div class="progress-header">
-        <span class="progress-title">💸 Tracked Funding Progress</span>
+        <span class="progress-title">💸 Estimated Royalties vs. Planning Cost (USD Only)</span>
         <span class="progress-count"><span>$1,282.32 + €71.47 + A$9.49</span> dashboard-estimated KDP aviation royalties tracked at August month-end</span>
       </div>
       <div class="progress-bar-bg">
-        <div class="progress-bar-fill green" data-width="5.9" style="width:5.9%" role="progressbar" aria-label="Tracked KDP aviation royalties as a percentage of the near-term flight gap" aria-valuemin="0" aria-valuemax="100" aria-valuenow="5.9" aria-valuetext="5.9 percent of the near-term flight gap"></div>
+        <div class="progress-bar-fill green" data-width="5.9" style="width:5.9%" role="progressbar" aria-label="Estimated USD KDP aviation royalties as a percentage of the planning cost, not cash funding" aria-valuemin="0" aria-valuemax="100" aria-valuenow="5.9" aria-valuetext="5.9 percent of the near-term flight gap"></div>
       </div>
       <div class="progress-footer">
         <span>March-August estimated aviation royalties tracked at month-end</span>
-        <span>5.9% of near-term gap</span>
-        <span>$21,740 near-term flight gap</span>
+        <span>USD only: 5.9% of estimated gap; EUR/AUD excluded</span>
+        <span>108.7 hours × assumed $200 USD/hour = $21,740</span>
       </div>
     </div>
 
-    <p class="last-updated">Last updated: Sep 1, 2026 · <a href="../aviation-workbooks/">Compare the pilot workbooks →</a></p>
+    <p class="last-updated">Royalty checkpoint recorded: Sep 1, 2026 (August month-end) · <a href="../aviation-workbooks/">Compare the pilot workbooks →</a></p>
   </div>
 </section>
 
@@ -406,6 +408,7 @@
   </div>
 </section>
 
+<details class="history" style="max-width:1000px;margin:1rem auto"><summary>Method, planning assumptions, and related reading</summary>
 <!-- WHAT FLIGHT FUNDED MEASURES -->
 <section class="how-section">
   <div class="container">
@@ -471,12 +474,13 @@
   </div>
 </section>
 
+</details>
 <!-- UPDATES LOG -->
 <section class="updates-section" id="updates">
   <div class="container">
     <div class="updates-head">
-      <h2 class="section-title reveal-left" style="margin-bottom:0">Milestones</h2>
-      <p class="updates-note">Condensed proof log: only the numbers that changed the flight-hours or revenue thesis. Longer receipts stay off the page.</p>
+      <h2 class="section-title reveal-left" style="margin-bottom:0">Recent receipts</h2>
+      <p class="updates-note">Two recent royalty checkpoints are shown. Expand the older receipts for the flight-log updates and complete historical disclosures; their original dates and facts are preserved.</p>
     </div>
 
     <div class="updates-grid">
@@ -490,6 +494,8 @@
         <div class="update-text"><strong>KDP reached the 150-book full-catalog proof gate.</strong> The August 24 dashboard snapshot shows 21 paid units across the full catalog, including 20 aviation-workbook units, with 0 refunds and 883 KENP. Reconciled tracking reaches 150 full-catalog books and 142 aviation units / $1,208.34 USD plus €71.47 EUR and A$9.49 in dashboard-estimated aviation royalties, not settled payouts. The 150th full-catalog unit is non-aviation. Amazon Ads remains HOLD because this dashboard does not prove attribution.</div>
         <div class="update-meta"><span class="update-pill">150 tracked books</span><span class="update-pill">142 aviation units</span><span class="update-pill">$1,208.34 tracked</span><span class="update-pill">883 KENP</span></div>
       </div>
+    </div>
+    <details class="updates-archive"><summary>Older flight and royalty receipts — Aug 11 back to Apr 23, 2026</summary><div class="updates-grid">
       <div class="update-row reveal">
         <div class="update-date">Aug 11, 2026</div>
         <div class="update-text"><strong>August KDP proof advanced again.</strong> August month-to-date shows 14 paid aviation-workbook units processed through Aug 10, $115.90 USD plus €15.35 EUR in estimated royalties, 398 KENP through Aug 11, and 0 refunds. Reconciled tracking reaches 143 full-catalog books and 136 aviation units / $1,163.13 USD plus €62.18 EUR and A$9.49 in dashboard-estimated royalties, not settled payouts. Amazon Ads remains HOLD SCALE because this dashboard does not prove attribution.</div>
@@ -607,8 +613,9 @@
       </div>
     </div>
 
+    </details>
     <details class="updates-archive">
-      <summary>Earlier checkpoints</summary>
+      <summary>Earlier experiment and launch checkpoints</summary>
       <div class="updates-grid">
         <div class="update-row reveal">
           <div class="update-date">Apr 25, 2026</div>

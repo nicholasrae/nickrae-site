@@ -153,7 +153,9 @@
     const heading = document.createElement('strong');
     heading.textContent = 'Privacy choice';
     const message = document.createElement('span');
-    message.textContent = 'This site uses optional Google analytics and advertising measurement only if you allow it. Necessary site features work without tracking.';
+    message.id = 'privacy-consent-description';
+    message.textContent = 'Optional Google analytics and ad measurement. Off unless allowed; read and download either way.';
+    banner.setAttribute('aria-describedby', message.id);
     const details = document.createElement('a');
     details.href = '/privacy/';
     details.textContent = 'Privacy details';
@@ -175,11 +177,11 @@
     const style = document.createElement('style');
     style.id = 'privacy-consent-style';
     style.textContent = `
-      #privacy-consent{position:fixed;z-index:2147483647;left:1rem;right:1rem;bottom:1rem;max-width:920px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.1rem;background:#07111f;color:#f8fafc;border:2px solid #60a5fa;border-radius:.8rem;box-shadow:0 18px 55px rgba(0,0,0,.55);font:500 14px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-      .privacy-consent-copy{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}.privacy-consent-copy strong{font-size:1rem}.privacy-consent-copy span{color:#dbeafe}.privacy-consent-copy a{color:#bfdbfe;text-decoration:underline;text-underline-offset:2px}
-      .privacy-consent-actions{display:flex;gap:.6rem;flex:none}.privacy-consent-actions button{min-height:44px;border:2px solid #94a3b8;border-radius:.55rem;padding:.55rem .85rem;background:#111827;color:#fff;font:800 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;cursor:pointer}.privacy-consent-actions button.allow{background:#1d4ed8;border-color:#93c5fd}.privacy-consent-actions button:focus-visible,.privacy-consent-copy a:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
+      #privacy-consent{position:fixed;z-index:2147483647;left:1rem;right:1rem;bottom:1rem;max-width:920px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:.65rem;padding:.65rem .8rem;background:#07111f;color:#f8fafc;border:1px solid #94a3b8;border-radius:.65rem;box-shadow:0 18px 55px rgba(0,0,0,.55);font:500 14px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+      .privacy-consent-copy{display:flex;align-items:baseline;gap:.25rem .6rem;flex-wrap:wrap}.privacy-consent-copy strong{font-size:1rem}.privacy-consent-copy span{color:#dbeafe}.privacy-consent-copy a{color:#bfdbfe;text-decoration:underline;text-underline-offset:2px}
+      .privacy-consent-actions{display:flex;gap:.6rem;flex:none}.privacy-consent-actions button{min-height:44px;border:2px solid #94a3b8;border-radius:.55rem;padding:.55rem .85rem;background:#111827;color:#fff;font:800 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;cursor:pointer}.privacy-consent-actions button.allow{background:#111827;border-color:#94a3b8}.privacy-consent-actions button:focus-visible,.privacy-consent-copy a:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
       html{scroll-padding-bottom:var(--privacy-banner-space,0px)}
-      @media(max-width:700px){#privacy-consent{align-items:stretch;flex-direction:column;max-height:40dvh;overflow-y:auto}.privacy-consent-actions{display:grid;grid-template-columns:1fr 1fr}.privacy-consent-actions button{width:100%}}
+      @media(max-width:700px){#privacy-consent{align-items:stretch;flex-direction:column;left:.5rem;right:.5rem;bottom:.5rem;max-height:40dvh;overflow-y:auto}.privacy-consent-actions{display:grid;grid-template-columns:1fr 1fr}.privacy-consent-actions button{width:100%}}
     `;
     banner.addEventListener('click', (event) => {
       const button = event.target.closest('button[data-consent]');
@@ -189,7 +191,7 @@
       if (button.dataset.consent === 'allow') loadAnalytics();
       else disableAnalytics();
     });
-    document.head.appendChild(style);
+    if (!document.getElementById(style.id)) document.head.appendChild(style);
     document.body.appendChild(banner);
     // Reserve actual overlay height so bottom-of-page content remains reachable
     // without accepting tracking. Keep the allowance correct on zoom/rotation.
@@ -198,7 +200,7 @@
     spacer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(spacer);
     const reserveSpace = () => {
-      const space = `${Math.ceil(banner.getBoundingClientRect().height) + 32}px`;
+      const space = `${Math.ceil(banner.getBoundingClientRect().height) + 32}px`; // includes bottom inset and focus-outline clearance
       spacer.style.height = space;
       document.documentElement.style.setProperty('--privacy-banner-space', space);
     };

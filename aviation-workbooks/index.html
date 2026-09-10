@@ -98,8 +98,15 @@
   .study-preview{grid-column:1/-1;border-top:1px solid var(--border);padding-top:1rem;margin-top:.25rem;min-width:0}
   .study-preview p,.study-preview li{font-size:.95rem;color:var(--text);margin:.7rem 0}
   .study-preview .sample-note{font-size:.8rem;color:var(--muted)}
+  #instrument-sample{scroll-margin-top:6rem}
+  #instrument-sample h3{font-size:1.25rem;line-height:1.4;margin:.25rem 0 .75rem}
+  #instrument-sample h4{margin:1rem 0 .5rem}
+  #instrument-sample blockquote{margin:.75rem 0;padding:.25rem 1rem;border-left:3px solid var(--blue)}
+  #instrument-sample summary{cursor:pointer;padding:.8rem 0;font-weight:700;min-height:44px}
+  #instrument-sample a{text-decoration:underline;text-underline-offset:3px}
   .free-pack{padding:0 0 5rem}.free-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;padding:1.8rem;border:1px solid rgba(74,222,128,.42);border-radius:1rem;background:linear-gradient(135deg,#10251d,#0e1827)}.free-card h2{margin:0 0 .5rem;font-size:clamp(1.4rem,3vw,1.9rem)}.free-card p{margin:0;color:var(--muted)}
 
+  .swipe-cue{display:none;color:var(--muted);font-size:.85rem}.table-scroll:focus-visible{outline:3px solid #fbbf24;outline-offset:4px}@media(max-width:800px){.swipe-cue{display:block}}
   .comparison{padding:5rem 0;background:var(--bg-2);border-block:1px solid var(--border)}.table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:.85rem}.compare-table{width:100%;min-width:760px;border-collapse:collapse;background:var(--card)}.compare-table th,.compare-table td{padding:.85rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}.compare-table tr:last-child td{border-bottom:0}.compare-table th{color:var(--accent-soft);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}.compare-table td{color:var(--muted);font-size:.84rem}.compare-table td:first-child{color:var(--text);font-weight:750}
 
   .use-note{padding:4rem 0 0}.use-card{padding:1.5rem;border:1px solid var(--border);border-radius:.9rem;background:var(--card)}.use-card h2{margin:0 0 .55rem;font-size:1.35rem}.use-card p{margin:0;color:var(--muted)}
@@ -159,7 +166,7 @@
       <p class="hero-lede">FAA-aligned workbooks for private, instrument, commercial, multi-engine, and VFR radio calls. Practice the questions, explain the answer, and stop hoping the DPE never asks “why?”</p>
       <div class="hero-actions">
         <a class="button button-primary" href="#chooser" data-product="aviation_workbooks" data-placement="workbooks-hero">Find your workbook</a>
-        <a class="button button-secondary" href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="workbooks-hero">Free IFR pack</a>
+
       </div>
       <a class="catalog-link" href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="workbooks-hero">Browse the full Amazon catalog →</a>
     </div>
@@ -167,18 +174,11 @@
       <picture><source type="image/webp" srcset="../assets/workbooks/private-pilot-cover-240.webp 240w, ../assets/workbooks/private-pilot-cover-480.webp 480w" sizes="(max-width:520px) 124px, 178px"><img class="hero-cover left" src="../assets/workbooks/private-pilot-cover.jpg" width="1000" height="1293" alt="Private Pilot License Workbook cover" loading="lazy" decoding="async"></picture>
       <picture><source type="image/webp" srcset="../assets/workbooks/vfr-radio-calls-cover-240.webp 240w, ../assets/workbooks/vfr-radio-calls-cover-480.webp 480w" sizes="(max-width:520px) 154px, 218px"><img class="hero-cover main" src="../assets/workbooks/vfr-radio-calls-cover.jpg" width="1000" height="1293" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager" fetchpriority="high" decoding="async"></picture>
       <picture><source type="image/webp" srcset="../assets/workbooks/instrument-rating-cover-240.webp 240w, ../assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:520px) 124px, 178px"><img class="hero-cover bottom" src="../assets/workbooks/instrument-rating-cover.jpg" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="lazy" decoding="async"></picture>
-      <div class="hero-proof"><strong>27 August aviation units</strong>Verified in the month-end KDP dashboard snapshot.</div>
+      <div class="hero-proof"><strong>Choose your rating</strong>Preview the questions. Compare formats. Buy on Amazon.</div>
     </div>
   </div>
 </header>
 
-<section class="proof" aria-labelledby="proof-heading">
-  <div class="container">
-    <h2 class="eyebrow" id="proof-heading">Study the explanation, not just the answer</h2>
-    <p class="section-note">Choose your rating below, then inspect the current edition on Amazon before you buy. These workbooks support your instructor-led study, not a promise of a checkride result.</p>
-    <p class="proof-detail">149 aviation workbook units tracked March–August 2026; 157 across the full catalog January–August. <a href="../flight-funded/">Dated sales and royalty receipts →</a></p>
-  </div>
-</section>
 
   <section class="chooser" id="chooser" aria-labelledby="chooser-heading">
     <div class="container">
@@ -195,56 +195,85 @@
     </div>
   </section>
 
+  <section class="use-note" id="samples" aria-labelledby="samples-heading"><div class="container"><div class="use-card">
+    <h2 id="samples-heading">Preview before you buy</h2>
+    <p>Try the Instrument workbook question below, then reveal its original answer. For a broader look at any workbook’s contents, open its Amazon listing and use “Read Sample” when available. Check the selected format and publication details before buying.</p>
+    <p>Choose a workbook that complements your instructor-led study. Use current FAA publications and the applicable ACS to check references. The free IFR pack is a separate study resource, not an excerpt from either workbook.</p>
+    <p><a href="#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="workbook-preview-guide">Try the Instrument sample →</a> · <a href="#ppl" data-product="ppl_workbook" data-placement="workbook-preview-guide">PPL workbook and preview guidance →</a></p>
+  </div></div></section>
+
   <section class="products" id="books" aria-labelledby="books-heading">
     <div class="container">
       <h2 class="section-title" id="books-heading">Pick the workbook for your next checkride</h2>
-      <p class="section-note">The explanations are the product. Practice until you know why the answer works before the DPE starts pulling threads.</p>
+      <p class="section-note">The explanations are the product. Practice until you know why the answer works before the DPE starts pulling threads. Reference prices are shown below; confirm the current price and available formats on Amazon. Kindle Unlimited is subscription reading, separate from buying a Kindle edition.</p>
       <div class="books">
-        <article class="book featured" id="vfr-radio">
-          <picture><source type="image/webp" srcset="../assets/workbooks/vfr-radio-calls-cover-240.webp 240w, ../assets/workbooks/vfr-radio-calls-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/vfr-radio-calls-cover.jpg" width="1000" height="1293" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="lazy" decoding="async"></picture>
-          <div class="book-content"><span class="badge green">New on Amazon</span><h2>Clearance to Confidence: VFR Radio Calls Workbook</h2><div class="price">$24.99 Paperback · $9.99 Kindle · Kindle Unlimited</div><p>Scenario-based radio drills: build the call, anticipate the reply, read it back, and run variations out loud.</p><div class="product-links"><a class="amazon" href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="book-card">Paperback</a><a class="amazon" href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="book-card">Kindle</a></div></div>
-        </article>
         <article class="book featured" id="ppl">
           <picture><source type="image/webp" srcset="../assets/workbooks/private-pilot-cover-240.webp 240w, ../assets/workbooks/private-pilot-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/private-pilot-cover.jpg" width="1000" height="1293" alt="Private Pilot License Workbook cover" loading="lazy" decoding="async"></picture>
-          <div class="book-content"><span class="badge green">Strong current demand</span><h2>Private Pilot License Workbook</h2><div class="price">$19.99 Print · $9.99 Kindle</div><p>500+ practice questions covering PPL knowledge-test topics with explained answers and FAA-style wording.</p><div class="product-links"><a class="amazon" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="book-card">Buy on Amazon</a><a class="resource" href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener" data-product="free_cheat_sheets" data-placement="book-card">Free cheat sheets</a></div></div>
+          <div class="book-content"><span class="badge green">Strong current demand</span><h2>Private Pilot License Workbook</h2><div class="price">$19.99 Paperback · $9.99 Kindle</div><p>500+ practice questions covering PPL knowledge-test topics with explained answers and FAA-style wording.</p><div class="product-links"><a class="amazon" href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="book-card">Paperback on Amazon</a><a class="resource" href="https://nicholasrae.gumroad.com" target="_blank" rel="noopener" data-product="free_cheat_sheets" data-placement="book-card">Free cheat sheets</a></div></div>
         <div class="study-preview"><p><strong>Preview before you buy.</strong> Open the Amazon listing and use “Read Sample” when available to inspect the current edition’s questions and explanations.</p><p class="sample-note">For PPL, compare the question style with the areas you are studying and check how the answer key explains the reasoning.</p><a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="workbook-sample">See the current edition on Amazon →</a></div>
         </article>
         <article class="book" id="instrument">
           <picture><source type="image/webp" srcset="../assets/workbooks/instrument-rating-cover-240.webp 240w, ../assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/instrument-rating-cover.jpg" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="lazy" decoding="async"></picture>
-          <div class="book-content"><span class="badge">IFR prep</span><h2>Instrument Rating Workbook</h2><div class="price">$24.99 Print · $9.99 Kindle</div><p>ACS-aligned IFR study for weather, procedures, charts, systems, and scenario thinking under instrument pressure.</p><div class="product-links"><a class="amazon" href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="book-card">Buy on Amazon</a></div></div>
-        <div class="study-preview"><p><strong>Preview before you buy.</strong> Open the Amazon listing and use “Read Sample” when available to inspect the current edition’s questions and explanations.</p><p class="sample-note">For IFR, look for scenario reasoning and source references that complement your CFII-led study.</p><a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="workbook-sample">See the current edition on Amazon →</a></div>
+          <div class="book-content"><span class="badge">IFR prep</span><h2>Instrument Rating Workbook</h2><div class="price">$24.99 Paperback · $9.99 Kindle</div><p>ACS-aligned IFR study for weather, procedures, charts, systems, and scenario thinking under instrument pressure.</p><div class="product-links"><a class="amazon" href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="book-card">Paperback on Amazon</a></div></div>
+        <div class="study-preview" id="instrument-sample" aria-labelledby="instrument-sample-heading">
+          <h3 id="instrument-sample-heading">Try a real Instrument workbook question</h3>
+          <p><strong>Exercise 2.6 — VOR Checks, item 2 only.</strong> A tiny promotional excerpt from <cite>Instrument Rating Workbook</cite>, First Edition — 2026, Version 1.0 (February 2026). Prompt: PDF page 46; consolidated answer: PDF page 153.</p>
+          <p class="sample-note">Page references are 1-based physical pages in the 158-page paperback interior, not Kindle locations. Selected text is exact; layout is reformatted, not a reproduction of the full pages. Other exercise items are omitted.</p>
+          <h4>Question — from the workbook</h4>
+          <blockquote class="sample-question"><p>2. You perform a dual VOR check. VOR #1 reads 271° and VOR #2 reads 268°. Is this acceptable?</p><p>☐ Yes ☐ No — The difference is ______°. Maximum allowed: ______°.</p></blockquote>
+          <details class="sample-answer"><summary>Show the workbook answer</summary><p><strong>Consolidated answer key, item 2:</strong></p><blockquote><p>2) Difference is 3°. Maximum 4°. Yes, acceptable.</p></blockquote>
+            <p><strong>Source check — added for this sample:</strong> 271° − 268° = 3°, within the 4° maximum variation in <a href="https://www.ecfr.gov/current/title-14/part-91/section-91.171">14 CFR §91.171(c)</a>. This assumes two VOR units independent except for the antenna, tuned to the same VOR ground facility. Passing this comparison alone does not establish aircraft airworthiness or authorize a flight.</p>
+            <p class="sample-note">Checked September 10, 2026 against §91.171(c) and <a href="https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap1_section_1.html">FAA AIM 1-1-4</a>. Limited to this excerpt; not a full-book review or CFII endorsement.</p>
+          </details>
+          <p><a href="../assets/workbooks/instrument-rating-sample.pdf" data-event="workbook_sample_download" data-product="instrument_workbook" data-placement="instrument-sample" download>Download this sample PDF (1 page)</a> · <a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="workbook-sample">See the full workbook on Amazon →</a></p>
+          <details class="sample-disclaimer"><summary>Original workbook disclaimer</summary><p>This workbook is designed for training and educational purposes. While every effort has been made to ensure accuracy, the author assumes no responsibility for errors or omissions. For actual flight training and testing, always consult current official FAA publications.</p><p>FAA Disclaimer: This material is not endorsed by the Federal Aviation Administration.</p><p class="sample-note">From PDF page 2. Copyright © 2026 Nick Rae. All rights reserved. Sample published with author permission.</p></details>
+          <p class="sample-note">Training and educational use only. Consult current official FAA publications and your instructor. Not FAA endorsed.</p>
+        </div>
         </article>
         <article class="book" id="commercial">
           <picture><source type="image/webp" srcset="../assets/workbooks/commercial-pilot-cover-240.webp 240w, ../assets/workbooks/commercial-pilot-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/commercial-pilot-cover.jpg" width="1000" height="1293" alt="Complete Commercial Pilot Workbook cover" loading="lazy" decoding="async"></picture>
-          <div class="book-content"><span class="badge">Commercial ACS</span><h2>The Complete Commercial Pilot Workbook</h2><div class="price">$24.99 Print · $9.99 Kindle</div><p>Written and oral prep with practice questions, flight scenarios, and commercial-pilot judgment.</p><div class="product-links"><a class="amazon" href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="book-card">Buy on Amazon</a></div></div>
+          <div class="book-content"><span class="badge">Commercial ACS</span><h2>The Complete Commercial Pilot Workbook</h2><div class="price">$24.99 Paperback · $9.99 Kindle</div><p>Written and oral prep with practice questions, flight scenarios, and commercial-pilot judgment.</p><div class="product-links"><a class="amazon" href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="book-card">Paperback on Amazon</a></div></div>
         </article>
         <article class="book" id="multi-engine">
           <picture><source type="image/webp" srcset="../assets/workbooks/multi-engine-cover-240.webp 240w, ../assets/workbooks/multi-engine-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/multi-engine-cover.jpg" width="1000" height="1293" alt="Multi-Engine Add-On Rating Workbook cover" loading="lazy" decoding="async"></picture>
-          <div class="book-content"><span class="badge">PA-44 focused</span><h2>Multi-Engine Add-On Rating Workbook</h2><div class="price">Paperback · Kindle</div><p>Seminole-focused prep for V-speeds, Vmc, OEI approaches, engine-out procedures, and oral traps.</p><div class="product-links"><a class="amazon" href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="book-card">Paperback</a><a class="amazon" href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="book-card">Kindle</a></div></div>
+          <div class="book-content"><span class="badge">PA-44 focused</span><h2>Multi-Engine Add-On Rating Workbook</h2><div class="price">Paperback · Kindle — check current price on Amazon</div><p>Seminole-focused prep for V-speeds, Vmc, OEI approaches, engine-out procedures, and oral traps.</p><div class="product-links"><a class="amazon" href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="book-card">Paperback on Amazon</a><a class="amazon" href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="book-card">Kindle on Amazon</a></div></div>
+        </article>
+        <article class="book featured" id="vfr-radio">
+          <picture><source type="image/webp" srcset="../assets/workbooks/vfr-radio-calls-cover-240.webp 240w, ../assets/workbooks/vfr-radio-calls-cover-480.webp 480w" sizes="(max-width:520px) 88px, 126px"><img class="book-cover" src="../assets/workbooks/vfr-radio-calls-cover.jpg" width="1000" height="1293" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="lazy" decoding="async"></picture>
+          <div class="book-content"><span class="badge green">VFR radio practice</span><h2>Clearance to Confidence: VFR Radio Calls Workbook</h2><div class="price">$24.99 Paperback · $9.99 Kindle · Also available to Kindle Unlimited subscribers</div><p>Scenario-based radio drills: build the call, anticipate the reply, read it back, and run variations out loud.</p><div class="product-links"><a class="amazon" href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="book-card">Paperback on Amazon</a><a class="amazon" href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="book-card">Kindle on Amazon</a></div></div>
         </article>
       </div>
     </div>
   </section>
 
   <section class="free-pack" aria-labelledby="free-heading">
-    <div class="container"><div class="free-card"><div><p class="eyebrow">Free IFR scenario pack</p><h2 id="free-heading">Practice 10 IFR oral answers before buying another workbook.</h2><p>Source-anchored cards for currency, alternates, fuel, readbacks, holding, MDA discipline, and equipment checks. It is a study aid, not flight instruction.</p></div><a class="button button-secondary" href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="workbooks-ifr-cta">Get the free IFR pack</a></div></div>
+    <div class="container"><div class="free-card"><div><p class="eyebrow">Free IFR scenario pack</p><h2 id="free-heading">Practice 10 IFR oral answers before buying another workbook.</h2><p>Source-anchored cards for currency, alternates, fuel, readbacks, holding, MDA discipline, and equipment checks. It is a study aid, not flight instruction.</p></div><div><a class="button button-secondary" href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="workbooks-ifr-cta">Get the free IFR pack</a><p><a href="../ifr-scenario-pack/" data-event="lead_magnet_view" data-product="ifr_scenario_pack" data-placement="workbooks-hero">Free IFR pack overview</a></p></div></div></div>
   </section>
 
   <section class="comparison" aria-labelledby="compare-heading">
     <div class="container">
       <h2 class="section-title" id="compare-heading">Compare the workbook lanes</h2>
       <p class="section-note">Amazon controls current availability and price display. Open the product page before buying.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable pilot workbook comparison table">
+      <p class="swipe-cue" id="compare-swipe">Swipe left/right to compare all columns. Keyboard: focus the table, then use the arrow keys.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable pilot workbook comparison table" aria-describedby="compare-swipe">
         <table class="compare-table"><thead><tr><th scope="col">Workbook</th><th scope="col">Best for</th><th scope="col">What it trains</th><th scope="col">Format / preview path</th></tr></thead><tbody>
-          <tr><td>Private Pilot License Workbook</td><td>Student pilots and rusty fundamentals</td><td>Knowledge-test review, explained answers, oral-exam thinking</td><td>$19.99 Print · $9.99 Kindle; use Amazon Look Inside when available</td></tr>
-          <tr><td>Instrument Rating Workbook</td><td>IFR students and procedure review</td><td>Weather, charts, regulations, approach decisions, systems</td><td>$24.99 Print · $9.99 Kindle; open the Amazon page</td></tr>
-          <tr><td>Complete Commercial Pilot Workbook</td><td>Commercial candidates</td><td>ACS review, commercial judgment, maneuvers, scenario answers</td><td>$24.99 Print · $9.99 Kindle</td></tr>
-          <tr><td>Multi-Engine Add-On Workbook</td><td>PA-44 and multi-engine add-on pilots</td><td>V-speeds, Vmc, OEI operations, engine-out procedures</td><td>Paperback · Kindle</td></tr>
-          <tr><td>Clearance to Confidence: VFR Radio Calls</td><td>Student, rusty, and radio-tense pilots</td><td>Call-building, readbacks, CTAF, towered/non-towered flows</td><td>$24.99 Paperback · $9.99 Kindle · Kindle Unlimited</td></tr>
+          <tr><td>Private Pilot License Workbook</td><td>Student pilots and rusty fundamentals</td><td>Knowledge-test review, explained answers, oral-exam thinking</td><td>$19.99 Paperback · $9.99 Kindle; use Amazon Look Inside when available</td></tr>
+          <tr><td>Instrument Rating Workbook</td><td>IFR students and procedure review</td><td>Weather, charts, regulations, approach decisions, systems</td><td>$24.99 Paperback · $9.99 Kindle; <a href="#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="workbook-comparison">try the sample</a></td></tr>
+          <tr><td>Complete Commercial Pilot Workbook</td><td>Commercial candidates</td><td>ACS review, commercial judgment, maneuvers, scenario answers</td><td>$24.99 Paperback · $9.99 Kindle</td></tr>
+          <tr><td>Multi-Engine Add-On Workbook</td><td>PA-44 and multi-engine add-on pilots</td><td>V-speeds, Vmc, OEI operations, engine-out procedures</td><td>Paperback · Kindle — check current price on Amazon</td></tr>
+          <tr><td>Clearance to Confidence: VFR Radio Calls</td><td>Student, rusty, and radio-tense pilots</td><td>Call-building, readbacks, CTAF, towered/non-towered flows</td><td>$24.99 Paperback · $9.99 Kindle · Also available to Kindle Unlimited subscribers</td></tr>
         </tbody></table>
       </div>
     </div>
   </section>
+
+<section class="proof" aria-labelledby="proof-heading">
+  <div class="container">
+    <h2 class="eyebrow" id="proof-heading">Study the explanation, not just the answer</h2>
+    <p class="section-note">Choose the rating you are studying, then inspect the current edition on Amazon before you buy. These workbooks support your instructor-led study, not a promise of a checkride result.</p>
+    <p class="proof-detail">27 August aviation units verified in the month-end KDP dashboard snapshot. 149 aviation workbook units tracked March–August 2026; 157 across the full catalog January–August. <a href="../flight-funded/">Dated sales and royalty receipts →</a></p>
+  </div>
+</section>
 
   <section class="use-note" aria-labelledby="use-heading"><div class="container"><div class="use-card"><h2 id="use-heading">Use the workbook. Do not worship the workbook.</h2><p>These are focused study and checkride-prep tools. Use them with FAA handbooks, the applicable ACS, your instructor, and real flight training. Read a short section, answer without peeking, then explain why the answer survives the next question.</p></div></div></section>
 
