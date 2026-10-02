@@ -4,15 +4,15 @@
 
 ## About
 
-Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight hours documented in the July 12, 2026 ForeFlight report, working toward a 500-hour planning threshold and eventually the experience required for ATP certification. His main public product lane is FAA-aligned aviation study material on Amazon KDP, including Clearance to Confidence: VFR Radio Calls Workbook. He documents the Flight Funded experiment at nickrae.net. OpenClaw is a retired runtime; the dated playbook remains available as a background digital product, not the primary offer.
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight hours documented in the October 2, 2026 ForeFlight report, working toward a 500-hour planning threshold and eventually the experience required for ATP certification. His main public product lane is FAA-aligned aviation study material on Amazon KDP, including Clearance to Confidence: VFR Radio Calls Workbook. He documents the Flight Funded experiment at nickrae.net. OpenClaw is a retired runtime; the dated playbook remains available as a background digital product, not the primary offer.
 
 ## Key Pages
 
 - [Home](https://nickrae.net/)
 - [About Nick Rae](https://nickrae.net/about/) — commercial airplane single- and multi-engine land pilot with instrument rating; workbook-author background and dated Flight Funded context
 - [Blog](https://nickrae.net/blog/)
-- [Flight Resume](https://nickrae.net/Nicholas_Rae_Flight_Resume.pdf) — current generic one-page pilot resume with verified 391.3 TT, 272.8 PIC, 311.7 C172, and 221.6 C172 PIC
-- [Flight Funded](https://nickrae.net/flight-funded/) — KDP proof through September 29, 2026: 190 full-catalog books since January; 181 aviation units since March / $1,594.23 USD + €71.47 EUR + A$9.49 in estimated aviation royalties. September 1–29 alone: 33 full-catalog paperbacks / $314.83 USD; aviation subset 32 / $311.91 USD; 523 KENP and 0 refunds. August month-end baseline plus September once, not overlapping snapshots. Estimates are not deposits or Amazon Ads attribution; flight hours remain dated July 12 and pace June 25, 2026; settled payouts unverified. Not a verified final September close.
+- [Flight Resume](https://nickrae.net/Nicholas_Rae_Flight_Resume.pdf?v=20261002-generic) — current generic one-page pilot resume with verified 393.1 TT, 274.6 PIC, 311.7 C172, and 221.6 C172 PIC
+- [Flight Funded](https://nickrae.net/flight-funded/) — KDP proof through September 29, 2026: 190 full-catalog books since January; 181 aviation units since March / $1,594.23 USD + €71.47 EUR + A$9.49 in estimated aviation royalties. September 1–29 alone: 33 full-catalog paperbacks / $314.83 USD; aviation subset 32 / $311.91 USD; 523 KENP and 0 refunds. August month-end baseline plus September once, not overlapping snapshots. Estimates are not deposits or Amazon Ads attribution; flight hours are dated October 2 and the historical pace June 25, 2026; settled payouts unverified. Not a verified final September close.
 - [Aviation Pilot Workbooks](https://nickrae.net/aviation-workbooks/) — FAA-aligned workbooks for private pilot, instrument, commercial, multi-engine, and VFR radio calls
 - [Instrument workbook sample](https://nickrae.net/aviation-workbooks/#instrument-sample) — Exercise 2.6, item 2 only: dual VOR check question and original answer, accessible HTML plus one-page PDF; First Edition 2026, Version 1.0 (February 2026), paperback interior PDF pages 46 and 153; this excerpt checked September 10, 2026 against 14 CFR 91.171(c) and FAA AIM 1-1-4, not a full-book review
 - [Free IFR Oral Exam Scenario Pack](https://nickrae.net/ifr-scenario-pack/) — free 10-card IFR oral exam scenario PDF, available directly with no email required; source-anchored study aid with chart-specific traps intentionally excluded
@@ -29,7 +29,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 - [I Built a Weather Prediction Bot. Then Live Trading Humbled It.](https://nickrae.net/blog/kalshi-weather-bot.html)
 - [I Read Meta's Self-Improving AI Paper. Then I Implemented It.](https://nickrae.net/blog/self-improving-ai-agents.html)
 - [OpenClaw Setup in 2026: Five Lessons From a Retired Runtime](https://nickrae.net/blog/blog-openclaw-setup.html)
-- [How I Earned My Commercial Pilot License at 45](https://nickrae.net/blog/blog-commercial-pilot.html) — first-hand career-change story with verified 391.3-hour totals and current 400/500-hour paid-flying context
+- [How I Earned My Commercial Pilot License at 45](https://nickrae.net/blog/blog-commercial-pilot.html) — first-hand career-change story with verified 393.1-hour totals and current 400/500-hour paid-flying context
 - [Cheapest Way to Build Flight Hours: 2026 Cost Guide](https://nickrae.net/blog/blog-cheapest-flight-hours.html) — eligibility-aware, all-in cost comparison and prepay checklist plus an interactive calculator for rental, club, safety-pilot, and paid-flying paths
 - [How to Become a Commercial Pilot in 2026](https://nickrae.net/blog/commercial-pilot-career-2026.html)
 - [The Ultimate Private Pilot Checkride Prep Guide](https://nickrae.net/blog/checkride-prep-guide.html) — FAA-S-ACS-6C source links, an illustrative study timeline, a visible checkride-week checklist, oral/flight guidance, and PPL-specific workbook path
@@ -37,7 +37,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 391.3 flight h
 - [I Ran OpenClaw for 30 Days — Lessons From a Retired Runtime](https://nickrae.net/blog/openclaw-30-days.html)
 - [How I'm Using AI to Build Side Income as a Pilot](https://nickrae.net/blog/ai-aviation-business.html) — current Hermes/Talos workflow, verified aviation-product revenue proof, parked app status, and closed legacy weather hypotheses; separate newer research is unproven and not live or funding proof
 
-- [From 369.5 to 500 Hours](https://nickrae.net/blog/from-369-5-to-500-hours.html) — historical personal planning snapshot, not a hiring minimum or confirmation of current medical privileges; retains the August 1 snapshot and separately dated records
+- [From 369.5 to 500 Hours](https://nickrae.net/blog/from-369-5-to-500-hours.html) — personal planning snapshot updated from the October 2, 2026 report: 393.1 total hours, 106.9 remaining to 500; not a hiring minimum or confirmation of current medical privileges; pace remains a historical scenario
 
 ## Apps
 
