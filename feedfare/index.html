@@ -1,305 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FeedFare — Steps and Screen-Time Goals</title>
-<meta name="description" content="FeedFare is an iPhone step-tracking and self-accountability app. Set walking goals and track earned minutes. Do not rely on it to block other apps.">
-<meta property="og:title" content="FeedFare — Steps and Screen-Time Goals">
-<meta property="og:description" content="Track steps and earned minutes for your own screen-time goals. Self-accountability, with no system-level blocking guarantee.">
-<meta property="og:url" content="https://nickrae.net/feedfare/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@nickrae">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
-<link rel="canonical" href="https://nickrae.net/feedfare/">
-<script>
-  if (window.location.pathname === '/feedfare/index.html') {
-    window.location.replace(`https://nickrae.net/feedfare/${window.location.search}${window.location.hash}`);
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f9">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>FeedFare — Walk first. Scroll later. | Nick Rae</title>
+  <meta name="description" content="Earn screen time by walking. FeedFare uses Apple Health and Screen Time to protect the apps you choose. US $4.99 once, full access, no subscriptions. iOS 17+.">
+  <link rel="canonical" href="https://nickrae.net/feedfare/">
+  <link rel="icon" href="assets/favicon.png?v=build29" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=build29">
+  <meta name="apple-itunes-app" content="app-id=6758923557">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nickrae.net/feedfare/">
+  <meta property="og:title" content="FeedFare — Walk first. Scroll later.">
+  <meta property="og:description" content="Turn your steps into time for the apps you choose. Available now for US $4.99 once, with full access and no subscriptions.">
+  <meta property="og:image" content="https://nickrae.net/feedfare/assets/feedfare-launch-social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FeedFare's blue footprint icon and native dashboard with example data. Walk first. Scroll later.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@nickrae">
+  <meta name="twitter:title" content="FeedFare — Walk first. Scroll later.">
+  <meta name="twitter:description" content="Earn screen time with your steps. US $4.99 once. Full access. No subscriptions.">
+  <meta name="twitter:image" content="https://nickrae.net/feedfare/assets/feedfare-launch-social.png">
+  <meta name="twitter:image:alt" content="FeedFare's blue footprint icon and native dashboard with example data.">
+  <link rel="stylesheet" href="assets/site.css?v=20260928">
+  <link rel="stylesheet" href="assets/launch.css?v=20261005">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "FeedFare: Earn Screen Time",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "iOS 17 or later; iPadOS 17 or later",
+    "url": "https://nickrae.net/feedfare/",
+    "downloadUrl": "https://apps.apple.com/us/app/feedfare-earn-screen-time/id6758923557",
+    "image": "https://nickrae.net/feedfare/assets/app-icon-256.webp",
+    "screenshot": "https://nickrae.net/feedfare/assets/dashboard-native-800.webp",
+    "description": "Earn screen time with your steps and use it for timed access to selected apps. App protection requires Screen Time authorization.",
+    "author": {"@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/"},
+    "offers": {
+      "@type": "Offer",
+      "price": "4.99",
+      "priceCurrency": "USD",
+      "eligibleRegion": "US",
+      "url": "https://apps.apple.com/us/app/feedfare-earn-screen-time/id6758923557"
+    }
   }
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "FeedFare",
-  "applicationCategory": "HealthApplication",
-  "operatingSystem": "iOS",
-  "url": "https://nickrae.net/feedfare/",
-  "downloadUrl": "https://apps.apple.com/us/app/feedfare/id6758923557",
-  "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
-  "description": "FeedFare is an iPhone step-tracking and self-accountability app for walking goals and earned minutes. Do not rely on it to block other apps.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
-}
-</script>
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#0a0e17;--bg2:#111827;--bg3:#1a2332;
-    --text:#e2e8f0;--text-muted:#94a3b8;--text-dim:#64748b;
-    --accent:#3b82f6;--accent2:#60a5fa;
-    --border:#1e293b;--card:#131c2e;
-    --green:#22c55e;
-  }
-  html{scroll-behavior:smooth}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:var(--accent2);text-decoration:none}
-  a:hover{text-decoration:underline}
-  nav{position:fixed;top:0;width:100%;background:rgba(10,14,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:.75rem 0}
-  nav .inner{max-width:900px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
-  nav .logo{font-weight:700;font-size:1.1rem}
-  nav .links{display:flex;gap:1.5rem;font-size:.875rem}
-  nav .links a{color:var(--text-muted)}
-  .hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1.5rem 3rem;background:linear-gradient(180deg,var(--bg),var(--bg2))}
-  .hero-content{max-width:650px}
-  .hero h1{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:.75rem}
-  .hero .sub{color:var(--text-muted);font-size:1.1rem;margin-bottom:2rem}
-  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 2rem;border-radius:.5rem;font-weight:700;font-size:1rem;transition:opacity .2s}
-  .btn-primary{background:var(--accent);color:#fff}
-  .btn-primary:hover{opacity:.9;text-decoration:none}
-  .btn-outline{border:1px solid var(--border);color:var(--text-muted);background:transparent;margin-left:.75rem}
-  .btn-outline:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
-  .features{padding:4rem 1.5rem;background:var(--bg2)}
-  .container{max-width:900px;margin:0 auto}
-  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
-  .feat-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
-  .feat-card .icon{font-size:1.75rem;margin-bottom:.75rem}
-  .feat-card h3{font-size:1rem;margin-bottom:.5rem}
-  .feat-card p{color:var(--text-muted);font-size:.85rem}
-  .cta-section{padding:4rem 1.5rem;text-align:center;background:var(--bg)}
-  .content-section{padding:4rem 1.5rem;background:var(--bg)}
-  .content-section.alt{background:var(--bg2)}
-  .section-title{font-size:1.75rem;font-weight:800;margin-bottom:1rem;text-align:center}
-  .section-intro{max-width:760px;margin:0 auto 2rem;color:var(--text-muted);text-align:center}
-  .section-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
-  .info-card{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
-  .info-card h3{font-size:1rem;margin-bottom:.6rem}
-  .info-card p,.info-card li{color:var(--text-muted);font-size:.9rem}
-  .info-card ul{padding-left:1.1rem}
-  .faq-list{display:grid;gap:1rem;max-width:860px;margin:0 auto}
-  .faq-item{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem 1.5rem}
-  .faq-item h3{font-size:1rem;margin-bottom:.5rem}
-  .faq-item p{color:var(--text-muted);font-size:.9rem}
-  .cta-section h2{font-size:1.75rem;font-weight:800;margin-bottom:.75rem}
-  .cta-section p{color:var(--text-muted);margin-bottom:1.5rem}
-  footer{padding:2rem 1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--text-dim);font-size:.85rem}
-  @media(max-width:600px){.hero h1{font-size:1.8rem}}
-</style>
-
-<script>
-  document.addEventListener('click', function (event) {
-    var link = event.target.closest && event.target.closest('a[href]');
-    if (!link || typeof gtag !== 'function') return;
-    try {
-      var url = new URL(link.href, window.location.href);
-      var host = url.hostname.replace(/^www\./, '');
-      var product = link.dataset.product || 'other';
-      if (host.includes('amazon.com') || host === 'a.co') product = product === 'other' ? 'amazon_workbook' : product;
-      if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
-      if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
-      if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
-      if (url.hostname !== window.location.hostname || product !== 'other') {
-        gtag('event', 'outbound_cta_click', {
-          event_category: 'outbound_cta',
-          product: product,
-          placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
-          link_url: url.href
-        });
-      }
-    } catch (e) {}
-  });
-</script>
-<script src="/assets/site.js" defer></script>
-<link rel="stylesheet" href="/assets/navigation.css">
+  </script>
+  <script>
+    if (window.location.pathname === '/feedfare/index.html') {
+      window.location.replace('/feedfare/' + window.location.search + window.location.hash);
+    }
+  </script>
+  <script src="/assets/site.js" defer></script>
 </head>
-<body>
+<body id="top" data-page="feedfare-launch">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap nav launch-nav" aria-label="Main navigation">
+      <a class="brand" href="/feedfare/" aria-label="FeedFare home">
+        <img src="assets/app-icon-64.webp" srcset="assets/app-icon-128.webp 2x" width="38" height="38" alt="" decoding="async">
+        <span translate="no">FeedFare</span>
+      </a>
+      <div class="launch-nav-links"><a href="/">By Nick Rae</a><a href="https://feedfare.app/support.html">Support</a></div>
+      <a class="button button-small" href="https://apps.apple.com/us/app/feedfare-earn-screen-time/id6758923557" data-product="feedfare" data-placement="feedfare_nav">Get FeedFare <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-<nav>
-  <div class="inner">
-    <div class="logo">🍽️ FeedFare</div>
-    <div class="links">
-      <a href="https://nickrae.net">Nick Rae</a>
-      <a href="https://feedfare.app">feedfare.app</a>
-    </div>
-  </div>
-</nav>
-<main id="main-content">
+  <main id="main-content">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Now available on the App Store</p>
+        <h1 id="hero-title">Walk first.<span>Scroll later.</span></h1>
+        <p class="hero-description">Earn screen time with your steps. Choose the apps you want to spend less time in, then take a walk before your next scroll.</p>
+        <div class="launch-price"><strong>US $4.99 once.</strong><span>Full access. No subscriptions.</span></div>
+        <div class="hero-actions">
+          <a class="button" href="https://apps.apple.com/us/app/feedfare-earn-screen-time/id6758923557" data-product="feedfare" data-placement="feedfare_hero">Download on the App Store <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="#how-it-works">How it works <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="store-note">For iPhone and iPad with iOS or iPadOS 17 or later. Regional prices and device compatibility are shown on the App Store.</p>
+      </div>
+      <figure class="hero-visual">
+        <div class="product-stage">
+          <span class="preview-badge">FeedFare · The native app</span>
+          <div class="stage-orbit" aria-hidden="true"></div>
+          <div class="phone"><img src="assets/dashboard-native-480.webp" srcset="assets/dashboard-native-480.webp 480w, assets/dashboard-native-800.webp 800w" sizes="(max-width: 800px) 215px, 250px" width="480" height="1044" alt="FeedFare dashboard showing example steps, earned minutes, and a customizable walking rule." fetchpriority="high" decoding="async"></div>
+          <div class="earn-chip" aria-hidden="true"><span>Your walking rule</span><strong>100 steps → 5 min</strong></div>
+        </div>
+        <figcaption class="native-caption">Actual simulator screen · example data.</figcaption>
+      </figure>
+    </section>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>Steps Toward Better Phone Habits</h1>
-    <p class="sub">Set a walking goal and track earned minutes as a personal screen-time budget.</p>
-    <p style="margin-bottom:1.5rem"><strong>Self-accountability, not an app blocker.</strong> Do not rely on FeedFare to block other apps. Following your screen-time budget is up to you.</p>
-    <a href="https://apps.apple.com/us/app/feedfare/id6758923557" class="btn btn-primary">📱 Download on the App Store</a>
-    <a href="https://feedfare.app" class="btn btn-outline">🌐 feedfare.app</a>
-  </div>
-</section>
+    <section class="section border-top wrap" id="how-it-works" aria-labelledby="how-title">
+      <div class="section-head"><div><p class="eyebrow">A little movement. A better balance.</p><h2 id="how-title">Your next scroll<br>starts with a walk.</h2></div><p>Set a rule that fits your day. Let the steps you take make room for the apps you enjoy.</p></div>
+      <div class="how-grid">
+        <article class="step"><span class="step-number" aria-hidden="true">01</span><h3>Choose your apps.</h3><p>Connect Screen Time and select individual apps to protect. You decide where you want a little more intention.</p></article>
+        <article class="step"><span class="step-number" aria-hidden="true">02</span><h3>Earn your minutes.</h3><p>Connect Apple Health and choose your walking rule. By default, every 100 steps earns 5 minutes. Unused minutes carry over.</p></article>
+        <article class="step"><span class="step-number" aria-hidden="true">03</span><h3>Enjoy a timed session.</h3><p>Spend earned minutes to unlock one selected app. Your other selections stay protected, and protection returns when the session ends.</p></article>
+      </div>
+      <p class="footnote">App protection depends on Screen Time permission and Apple's system services. Each timed session unlocks one app. Website blocking is not supported.</p>
+    </section>
 
-<section class="features">
-  <div class="container">
-    <div class="feat-grid">
-      <div class="feat-card">
-        <div class="icon">🚶</div>
-        <h3>Walk First, Earn Your Minutes</h3>
-        <p>Set a daily goal and turn movement into earned screen time. Less mindless scrolling, more intentional use.</p>
+    <section class="section preview-section" id="the-app" aria-labelledby="preview-title">
+      <div class="wrap">
+        <div class="section-head"><div><p class="eyebrow">Built for iPhone and iPad</p><h2 id="preview-title">Small steps.<br>Visible progress.</h2></div><p>Your steps, earned time, and streaks, together in a native app that feels at home on iOS.</p></div>
+        <div class="preview-layout">
+          <article class="preview-card"><div class="preview-card-copy"><h3>See your<br>days add up.</h3><p>A clear daily history of your movement and earned minutes.</p><a class="text-link" href="assets/activity-native-800.webp">View full Activity screen <span aria-hidden="true">↗</span></a></div><div class="screenshot-window"><img src="assets/activity-native-480.webp" srcset="assets/activity-native-480.webp 480w, assets/activity-native-800.webp 800w" sizes="(max-width: 600px) 125px, 180px" width="480" height="1044" alt="FeedFare Activity screen with example daily step counts and earned screen time." loading="lazy" decoding="async"></div></article>
+          <article class="preview-card"><div class="preview-card-copy"><h3>Find your<br>own momentum.</h3><p>Follow your recent activity, track streaks, and claim milestone bonuses.</p><a class="text-link" href="assets/stats-native-800.webp">View full Stats screen <span aria-hidden="true">↗</span></a></div><div class="screenshot-window"><img src="assets/stats-native-480.webp" srcset="assets/stats-native-480.webp 480w, assets/stats-native-800.webp 800w" sizes="(max-width: 600px) 125px, 180px" width="480" height="1044" alt="FeedFare Stats screen showing an example weekly steps chart and streak progress." loading="lazy" decoding="async"></div></article>
+        </div>
+        <p class="preview-note">Actual simulator screens with example data. Appearance adapts to your system, including Liquid Glass on supported iOS versions.</p>
       </div>
-      <div class="feat-card">
-        <div class="icon">❤️</div>
-        <h3>iPhone Step Tracking</h3>
-        <p>Track steps toward a personal walking goal. Apple Health, Apple Watch, and third-party fitness-tracker syncing are not promised here.</p>
-      </div>
-      <div class="feat-card">
-        <div class="icon">🔥</div>
-        <h3>Streaks & Bonuses</h3>
-        <p>Build daily streaks. Hit milestones. Earn bonus screen time for consistency. The longer you stay active, the better the reward loop gets.</p>
-      </div>
-      <div class="feat-card">
-        <div class="icon">📊</div>
-        <h3>Analytics Dashboard</h3>
-        <p>Review your steps, earned minutes, and recorded progress. These in-app records are not a measurement of all time spent in other apps.</p>
-      </div>
-      <div class="feat-card">
-        <div class="icon">🔒</div>
-        <h3>Step-to-Screen Tracking</h3>
-        <p>See how your movement translates into earned minutes so you can build a cleaner relationship with Instagram, TikTok, YouTube, and the rest.</p>
-      </div>
-      <div class="feat-card">
-        <div class="icon">⚡</div>
-        <h3>Free to Start</h3>
-        <p>Free download with optional in-app purchases. Check the app's current offer for feature limits, subscription prices, and any trial eligibility before purchasing.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="content-section alt">
-  <div class="container">
-    <h2 class="section-title">How FeedFare Works</h2>
-    <p class="section-intro">FeedFare pairs walking with a personal screen-time budget: walk, record earned minutes, and choose to stay within your goal. The minutes are an in-app motivation tool, not permission enforced by iOS.</p>
-    <div class="section-grid">
-      <div class="info-card">
-        <h3>1. Set a daily movement goal</h3>
-        <p>Pick the step target that matches your real life. The point is not to cosplay as an ultramarathoner. The point is to create a threshold that nudges you out of passive scrolling and into motion you can actually sustain.</p>
-      </div>
-      <div class="info-card">
-        <h3>2. Earn minutes by walking</h3>
-        <p>Use step tracking and earned minutes as a personal reminder to walk before you scroll. Do not rely on FeedFare to control access to other apps.</p>
-      </div>
-      <div class="info-card">
-        <h3>3. Build a healthier loop</h3>
-        <p>The app is designed to make better phone habits feel concrete. You see the trade in front of you: more steps, more minutes, less mindless consumption. Over time, that makes your screen use feel intentional instead of automatic.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <section class="section wrap privacy-row" aria-labelledby="privacy-title">
+      <div><p class="eyebrow">Your permissions. Your pace.</p><h2 id="privacy-title">Connected<br>with purpose.</h2><a class="text-link" href="privacy.html">Read the app privacy policy <span aria-hidden="true">↗</span></a></div>
+      <ul class="privacy-points">
+        <li><strong>Steps from Apple Health.</strong><p>With permission, FeedFare reads step counts, including compatible Apple Watch steps after they sync to Health. Motion &amp; Fitness provides live iPhone steps while FeedFare is open. Background Health updates can arrive later.</p></li>
+        <li><strong>App protection through Screen Time.</strong><p>Choose which apps to protect and when to start a session. Permissions and system settings can affect protection. <a href="https://feedfare.app/support.html#screen-time">Get help with setup</a>.</p></li>
+        <li><strong>Your progress stays on your device.</strong><p>The native app stores progress and app selections locally, with no advertising or third-party analytics SDK. Device backups follow your Apple settings.</p></li>
+      </ul>
+    </section>
 
-<section class="content-section">
-  <div class="container">
-    <h2 class="section-title">Who FeedFare Is For</h2>
-    <p class="section-intro">FeedFare is for people who do not need another lecture about discipline. They need a system that makes better choices easier. If your default move is opening Instagram, TikTok, YouTube, or whatever black hole owns your thumb, this gives that behavior a price.</p>
-    <div class="section-grid">
-      <div class="info-card">
-        <h3>People trying to cut mindless scrolling</h3>
-        <p>If you know your phone is stealing time without giving much back, FeedFare gives you a more honest relationship with it. You can still use the apps you like. You just stop pretending there is no cost.</p>
+    <section class="wrap" id="download" aria-labelledby="download-title">
+      <div class="availability">
+        <div><p class="eyebrow">Available now</p><h2 id="download-title">One purchase.<br>A little more intention.</h2><p>Get the full FeedFare app for US $4.99. No subscription, in-app trial, or paywall.</p><a class="button button-light" href="https://apps.apple.com/us/app/feedfare-earn-screen-time/id6758923557" data-product="feedfare" data-placement="feedfare_download">Get FeedFare <span aria-hidden="true">↗</span></a></div>
+        <div class="availability-notes"><h3>Already own FeedFare?</h3><p>Install the native update through the App Store using the Apple Account that owns the app. Existing owners get full native access on supported devices.</p><p>Previous subscription plans have been retired and no longer renew. <a href="https://feedfare.app/support.html#billing">Help with previous purchases</a>.</p><p>Requires iOS or iPadOS 17+. Local prices and availability are shown on the App Store.</p></div>
       </div>
-      <div class="info-card">
-        <h3>Walkers who want extra motivation</h3>
-        <p>Some people need a gym plan. Some just need a reason to get off the couch and move more every day. Earning screen time can be weirdly effective because the reward is immediate and the rules are simple.</p>
-      </div>
-      <div class="info-card">
-        <h3>iPhone users who like simple systems</h3>
-        <p>FeedFare is for iPhone users who want a simple walking-and-screen-time routine and are comfortable following a self-directed budget.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="content-section alt">
-  <div class="container">
-    <h2 class="section-title">A Personal Commitment, Not a System Lock</h2>
-    <p class="section-intro">FeedFare is presented here as a personal motivation tool, not a parental-control or device-management solution. No system-level app restriction is promised.</p>
-    <div class="section-grid">
-      <div class="info-card">
-        <h3>It is not just punishment</h3>
-        <p>The commitment is yours: walk before you scroll. Use earned minutes as a reminder, not a guarantee of enforced restrictions.</p>
+    <section class="section wrap faq-layout" id="faq" aria-labelledby="faq-title">
+      <div class="faq-intro"><p class="eyebrow">Before your first walk</p><h2 id="faq-title">A few helpful<br>answers.</h2><p>More setup help and troubleshooting are available on the FeedFare website.</p><a class="text-link" href="https://feedfare.app/support.html">Visit support <span aria-hidden="true">↗</span></a></div>
+      <div class="faq-list">
+        <details><summary>How do my steps become screen time?</summary><p>You set the conversion rule in FeedFare. The default is 100 steps for 5 minutes, so 500 steps earns 25 minutes at that setting. Spend your balance on timed access to one selected app. Unused earned minutes carry over.</p></details>
+        <details><summary>Does FeedFare actually protect apps?</summary><p>Yes. With Screen Time authorization, FeedFare protects the individual apps you select. Starting a session temporarily unlocks one app; the other selected apps stay protected. Protection returns when the session ends. Permissions can be revoked, so FeedFare is not an unbreakable lock or a substitute for parental supervision.</p></details>
+        <details><summary>Can I use Apple Watch steps?</summary><p>FeedFare can read steps from a compatible Apple Watch after they sync to Apple Health on your iPhone. Updates can be delayed; open FeedFare and refresh if your total has not caught up. A watch is not required to count steps with your iPhone.</p></details>
+        <details><summary>Is there a subscription?</summary><p>No. The current native app is a one-time US $4.99 download with full access. Regional prices vary. Previous FeedFare subscription plans have been retired. Existing owners receive full native access when they install the update on a supported device.</p></details>
+        <details><summary>Which devices does it support?</summary><p>FeedFare supports iPhone and iPad with iOS or iPadOS 17 or later. Features depend on the permissions and capabilities available on your device. Older installed versions may have different features. Check the App Store listing for current compatibility.</p></details>
       </div>
-      <div class="info-card">
-        <h3>It makes movement useful</h3>
-        <p>Walking is already one of the easiest health habits to keep. FeedFare gives it another job. Your steps are no longer abstract health points. They become something you can spend.</p>
-      </div>
-      <div class="info-card">
-        <h3>It fits real life</h3>
-        <p>You are allowed to be a normal person. The goal is not monk mode. The goal is making your phone habits less dumb while building a little more movement into the day.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="content-section">
-  <div class="container">
-    <h2 class="section-title">Privacy, Permissions, and What FeedFare Tracks</h2>
-    <p class="section-intro">Step tracking and earned minutes are intended to support your personal walking goals. Review the <a href="privacy.html">privacy policy</a> and the App Store privacy disclosures before downloading; subscription processing involves Apple and RevenueCat.</p>
-    <div class="section-grid">
-      <div class="info-card">
-        <h3>Step counts</h3>
-        <p>FeedFare reads the step information needed to track your progress toward the goal you set. That is what powers the earn-your-minutes loop.</p>
-      </div>
-      <div class="info-card">
-        <h3>Usage tied to the reward system</h3>
-        <p>The app focuses on the behavior loop: movement, earned time, and progress. The point is to help you understand the trade between activity and screen use, not bury you in metrics you will never look at again.</p>
-      </div>
-      <div class="info-card">
-        <h3>Built by a real person, not a faceless app mill</h3>
-        <p>FeedFare was built by <a href="https://nickrae.net">Nick Rae</a>. If you want the broader story behind the project, the main site explains the apps, aviation work, and automation stack behind everything else being built.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="content-section alt">
-  <div class="container">
-    <h2 class="section-title">FeedFare FAQ</h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <h3>Is FeedFare a screen time blocker?</h3>
-        <p>Use FeedFare as a step-tracking and self-accountability tool, not a guaranteed app blocker. Do not rely on it for operating-system restrictions. You remain responsible for following your screen-time budget.</p>
-      </div>
-      <div class="faq-item">
-        <h3>How does FeedFare count steps?</h3>
-        <p>Check the permissions requested by your installed version in the app and iOS Settings. Apple Health or Apple Watch syncing should not be assumed.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Who should use FeedFare?</h3>
-        <p>Anyone who wants healthier phone habits without deleting every social app and pretending they will never use them again. It is especially good for people who respond better to earned rewards than to shame-based restrictions.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Is FeedFare free?</h3>
-        <p>The App Store lists FeedFare as a free download with in-app purchases. Check the current in-app offer for included features and prices. No trial or specific daily free-minute allowance is promised on this page.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Where can I download FeedFare?</h3>
-        <p>You can download FeedFare on the <a href="https://apps.apple.com/us/app/feedfare/id6758923557">App Store</a>, or visit <a href="https://feedfare.app">feedfare.app</a> for the main product site.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta-section">
-  <h2>Take Your First Step</h2>
-  <p>Free download with optional in-app purchases. Use for self-accountability; no system-level app blocking is promised. The App Store currently lists iOS 15.1 or later.</p>
-  <a href="https://apps.apple.com/us/app/feedfare/id6758923557" class="btn btn-primary">📱 Get FeedFare</a>
-</section>
-
-</main>
-<footer>
-  <p>Built by <a href="https://nickrae.net">Nick Rae</a> · <a href="https://feedfare.app">feedfare.app</a> · <a href="https://x.com/nickrae">@nickrae</a></p>
-  <p style="margin-top:.5rem"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></p>
-  <p style="margin-top:.5rem">© 2026 Nick Rae · Central California</p>
-</footer>
-
+    <section class="about wrap" aria-labelledby="about-title"><div><p class="eyebrow">An independent app by Nick Rae</p><h2 id="about-title">A simple idea,<br>made for everyday life.</h2></div><p>I built FeedFare to give a little movement a place in the moments we would otherwise spend scrolling. Choose your apps, find your walking rule, and make it part of your day. <a href="/about/">More about Nick</a>.</p></section>
+  </main>
+  <footer class="footer"><div class="wrap"><div class="footer-top"><a class="brand" href="/feedfare/"><img src="assets/app-icon-64.webp" width="32" height="32" alt="" loading="lazy"><span translate="no">FeedFare</span></a><nav class="footer-links" aria-label="Footer navigation"><a href="https://feedfare.app/">FeedFare website</a><a href="https://feedfare.app/support.html">Support</a><a href="privacy.html">App privacy</a><a href="terms.html">Terms</a><a href="/privacy/">Website privacy</a><a href="/">Nick Rae</a></nav></div><div class="footer-bottom"><span>© 2026 Nick Rae · Walk first. Scroll later.</span><span>Available on the App Store.</span></div></div></footer>
 </body>
 </html>

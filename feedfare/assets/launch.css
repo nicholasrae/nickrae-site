@@ -1,0 +1,10 @@
+/* Launch-page additions; shared FeedFare policy styles stay unchanged. */
+.launch-nav-links{display:flex;align-items:center;gap:24px;margin-left:auto}
+.launch-nav-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--muted);font-size:14px;text-decoration:none}
+.launch-nav-links a:hover{color:var(--blue);text-decoration:underline}
+.launch-price{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-top:25px;color:var(--muted);font-size:15px}
+.launch-price strong{color:var(--ink);font-size:18px;font-weight:750}
+.hero-actions{gap:12px 22px;margin-top:22px}
+.about .eyebrow{margin-bottom:16px}
+@media(max-width:800px){.launch-nav-links{gap:18px}.launch-nav{gap:20px}}
+@media(max-width:600px){.launch-nav{gap:8px 16px}.launch-nav-links{order:3;width:100%;margin:0;justify-content:space-between;gap:12px}.launch-nav-links a{font-size:13px}.launch-price{font-size:14px;margin-top:20px}.launch-price strong{font-size:17px}.hero-actions .button{font-size:13px}}

@@ -126,6 +126,14 @@
   .lab-card p{margin:0 0 .65rem;color:var(--dim);font-size:.8rem}
   .lab-card a{display:inline-flex;align-items:center;min-height:32px;margin:.15rem .45rem .15rem 0;padding:.1rem .2rem;font-size:.8rem}
   .lab-card a+a::before{content:none}
+  .feedfare-lab{border-color:#34527a;background:#101d30}
+  .feedfare-lab .lab-app-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+  .feedfare-lab .lab-app-header img{width:48px;height:48px;flex-shrink:0;border-radius:12px}
+  .feedfare-lab h3{margin:0;font-size:1rem}
+  .feedfare-lab .lab-app-status{display:block;color:var(--green);font-size:.67rem;font-weight:750;letter-spacing:.07em;text-transform:uppercase}
+  .feedfare-lab .lab-app-price{color:var(--muted);font-size:.76rem}
+  .feedfare-lab .lab-app-price strong{color:var(--text)}
+  .feedfare-lab a{min-height:44px}
 
   .connect{padding:4.5rem 0;text-align:center}
   .connect-links{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;margin-top:1rem}
@@ -403,7 +411,12 @@
       <details class="secondary-details"><summary>Explore apps, experiments, and archived work</summary>
       <div class="labs-grid">
         <div class="lab-card"><h3>Flight Funded</h3><p>The public 393.1-to-500-hour tracker and KDP proof log.</p><a href="flight-funded/">View tracker</a></div>
-        <div class="lab-card"><h3>FeedFare</h3><p>Trade steps for screen time. Live on the App Store.</p><a href="feedfare/">Overview</a><a href="https://feedfare.app" target="_blank" rel="noopener">Site</a><a href="https://apps.apple.com/us/app/feedfare/id6758923557" target="_blank" rel="noopener">App Store</a></div>
+        <div class="lab-card feedfare-lab">
+          <div class="lab-app-header"><img src="/feedfare/assets/app-icon-128.webp?v=build29" width="48" height="48" alt="" loading="lazy" decoding="async"><div><span class="lab-app-status">Now available</span><h3>FeedFare</h3></div></div>
+          <p>Walk to earn minutes for the apps you choose. Native for iPhone and iPad, with selected-app protection through Screen Time permission.</p>
+          <p class="lab-app-price"><strong>US $4.99 once</strong> · Full app. No subscriptions.</p>
+          <a href="feedfare/">Explore FeedFare →</a><a href="https://apps.apple.com/us/app/feedfare-earn-screen-time/id6758923557" target="_blank" rel="noopener">App Store ↗</a>
+        </div>
         <div class="lab-card"><h3>Inflection Point</h3><p>Preview-only personal growth OS awaiting App Store release.</p><a href="inflection-point/">Preview</a><a href="https://inflectionpoint.me" target="_blank" rel="noopener">Launch status</a></div>
         <div class="lab-card"><h3>OpenClaw / AI automation</h3><p>The runtime is retired. The dated operator kit and build notes remain as a background archive.</p><a href="openclaw-playbook/">Operator kit</a><a href="blog/openclaw-personal-ai-operations-system.html">Build notes</a></div>
         <div class="lab-card"><h3>Prediction-market research</h3><p>A closed Kalshi weather experiment, preserved evidence, and the honest post-mortem.</p><a href="blog/kalshi-weather-bot.html">Read the post-mortem</a></div>

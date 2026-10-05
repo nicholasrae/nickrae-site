@@ -18,7 +18,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight h
 - [Free IFR Oral Exam Scenario Pack](https://nickrae.net/ifr-scenario-pack/) — free 10-card IFR oral exam scenario PDF, available directly with no email required; source-anchored study aid with chart-specific traps intentionally excluded
 - [IFR Oral Exam Scenarios](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — 10-question blog bridge using the rule-risk-action framework for instrument oral practice
 - [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — background AI-operations kit built from documented 2026 OpenClaw operation; the runtime is no longer presented as current
-- [FeedFare](https://nickrae.net/feedfare/) — walking goals and a personal screen-time budget (iOS); self-accountability, not system-level app blocking
+- [FeedFare](https://nickrae.net/feedfare/) — native iPhone/iPad app for iOS/iPadOS 17 or later. Walk to earn minutes for selected apps; Apple Health supplies step counts, optional Motion supplies live steps, and Screen Time provides selected-app protection with permission. One-time US $4.99 download with the full native app included and no required subscription; regional prices are shown on the App Store. Protection depends on authorization and system behavior.
 - [Inflection Point](https://nickrae.net/inflection-point/) — coming soon and awaiting App Store release; preview page only
 
 ## Blog Posts
@@ -41,7 +41,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight h
 
 ## Apps
 
-- [FeedFare — Trade Steps for Screen Time](https://apps.apple.com/us/app/feedfare/id6758923557) — step-to-screen tracking for better phone habits
+- [FeedFare — Earn Screen Time](https://apps.apple.com/us/app/feedfare-earn-screen-time/id6758923557) — now available: native walking-to-earn app with timed access to selected apps through Screen Time. US $4.99 one-time download; full native access with no in-app paywall, trial, or subscription. Existing owners receive full native access when they install the update on a supported device. Previous subscription plans have been retired and no longer renew.
 - Inflection Point — preview-only personal growth OS awaiting App Store release
 
 ## Current Revenue Proof
