@@ -92,6 +92,14 @@
   .finder-card em{color:var(--accent-soft);font-size:.82rem;font-style:normal;font-weight:800}
   .catalog-links,.direct-products{margin:1.25rem 0 0;color:var(--muted);font-size:.86rem}
   .direct-products{margin-top:.55rem;font-size:.78rem}
+  .ppl-signup{max-width:700px;margin:2.5rem auto 0;scroll-margin-top:6rem}
+  .ppl-signup .formkit-form[data-uid="899d974875"]{width:100%;margin:0;border-radius:1rem!important}
+  .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-header h2{margin:0;font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;letter-spacing:-.025em}
+  .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit{min-height:46px;background-color:var(--accent)!important;font-weight:700!important}
+  .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-field{min-width:0}
+  .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-input:focus-visible,.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit:focus-visible{outline:3px solid #b45309;outline-offset:3px}
+  .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit>span{transition:background-color 140ms ease}
+  .ppl-signup-note{margin:.85rem 0 0;color:var(--muted);font-size:.82rem;text-align:center}
 
   .free-pack{padding:0 0 5.5rem}
   .free-pack-card{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;padding:2rem;border:1px solid rgba(74,222,128,.42);border-radius:1rem;background:linear-gradient(135deg,#10251d,#0e1827)}
@@ -146,6 +154,7 @@
     .proof-grid{grid-template-columns:repeat(3,1fr)}.finder-grid{grid-template-columns:repeat(2,1fr)}.hours-grid{grid-template-columns:repeat(3,1fr)}.reading-links{grid-template-columns:repeat(2,1fr)}
   }
   @media(max-width:700px){
+    .ppl-signup .formkit-form[data-uid="899d974875"] [data-style="minimal"]{padding:20px!important}
     .container,nav .inner{width:min(100% - 2rem,1080px)}
     .menu-toggle{display:inline-flex;align-items:center;justify-content:center}
     .nav-links{display:none;position:absolute;inset:4rem 0 auto;padding:1rem;background:#080d16;border-bottom:1px solid var(--border);flex-direction:column;align-items:stretch;gap:.2rem}
@@ -317,6 +326,10 @@
       <p class="catalog-links"><a href="aviation-workbooks/">Compare every workbook and current price</a> · <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="home-finder">Full Amazon catalog</a> · <a href="https://nicholasrae.gumroad.com/l/ppl-oral-flashcards" target="_blank" rel="noopener" data-product="ppl_oral_flashcards" data-placement="home-finder">PPL oral flashcards</a></p>
       <p class="direct-products">Direct Amazon links: <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-finder-direct">PPL</a> · <a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="home-finder-direct">Instrument</a> · <a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="home-finder-direct">Commercial</a> · <a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="home-finder-direct">Multi-Engine paperback</a> / <a href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="home-finder-direct">Kindle</a> · <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-finder-direct">VFR Radio paperback</a> / <a href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="home-finder-direct">Kindle</a></p>
       </details>
+      <div class="ppl-signup" id="free-ppl-cards" role="region" aria-label="Free private pilot oral scenario cards">
+        <script async data-uid="899d974875" src="https://nick-rae.kit.com/899d974875/index.js"></script>
+        <p class="ppl-signup-note">Confirm your email to receive the cards. <a href="privacy/">Privacy details</a> · <a href="https://nick-rae.kit.com/899d974875">Open the signup form →</a></p>
+      </div>
     </div>
   </section>
 
