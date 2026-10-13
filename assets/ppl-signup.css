@@ -1,0 +1,17 @@
+/* Shared presentation for the existing Kit PPL cards form. */
+.ppl-signup{max-width:700px;margin:2.5rem auto 0;scroll-margin-top:6rem}
+.ppl-signup .formkit-form[data-uid="899d974875"]{width:100%;margin:0;border-radius:1rem!important}
+.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-header h2{margin:0;font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;letter-spacing:-.025em}
+.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit{min-height:46px;background-color:#2563eb!important;font-weight:700!important}
+.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-field{min-width:0}
+.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-input:focus-visible,.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit:focus-visible{outline:3px solid #b45309;outline-offset:3px}
+.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit>span{transition:background-color 140ms ease}
+.ppl-signup .ppl-signup-note{margin:.85rem 0 0;color:var(--muted,var(--text-muted,#aab7c9));font-size:.82rem;text-align:center}
+.ppl-signup-note a{text-decoration:underline;text-underline-offset:.18em}
+.ppl-signup a:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
+@media(max-width:700px){
+  .ppl-signup .formkit-form[data-uid="899d974875"] [data-style="minimal"]{padding:20px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit>span{transition:none}
+}
