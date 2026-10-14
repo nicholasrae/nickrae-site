@@ -195,7 +195,7 @@
   }
 </style>
 
-<script src="/assets/site.js?v=e1e11ddb009e" defer></script>
+<script src="/assets/site.js?v=3c9079c42e39" defer></script>
 <script>document.documentElement.classList.add('js-nav');</script>
 <link rel="stylesheet" href="/assets/navigation.css?v=53dcc09ff85f">
 <link rel="stylesheet" href="/assets/article.css?v=615d70b926ed">
@@ -573,8 +573,8 @@
       status.dataset.state = 'complete';
       status.textContent = 'Estimate updated: ' + remaining.toFixed(1) + ' hours remaining; flight school ' + money(schoolCost) + '; flying club ' + money(clubCost) + '. ' + (months === null ? 'Add monthly safety-pilot or paid hours to estimate a timeline.' : months + (months === 1 ? ' month' : ' months') + ' at your monthly pace.');
 
-      if(track && typeof gtag === 'function'){
-        gtag('event', 'flight_hour_calculator_use', {
+      if(track && window.NickRaeMeasurement){
+        window.NickRaeMeasurement.track('flight_hour_calculator_use', {
           event_category: 'site_tool',
           product: 'flight_hour_calculator',
           placement: 'cheapest-flight-hours'

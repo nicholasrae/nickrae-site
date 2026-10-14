@@ -2,10 +2,21 @@
   'use strict';
 
   const TAG_ID = 'AW-18126210838';
+  // Set only after the production web stream and its Measurement ID are verified.
+  const GA4_ID = 'G-VLXK9FKZ0R';
+  const ga4Configured = typeof GA4_ID === 'string' && /^G-[A-Z0-9]+$/.test(GA4_ID);
   const CONSENT_KEY = 'nickrae_analytics_consent_v1';
   let analyticsReady = false;
+  let analyticsInitialized = false;
+  let analyticsConfigured = false;
+  let analyticsLoaded = false;
+  let analyticsScript;
+  let pageViewSent = false;
   let consentResizeObserver;
   let consentRevision = 0;
+  let consentOverride;
+  let withdrawalReloadRequested = false;
+  if (ga4Configured) window[`ga-disable-${GA4_ID}`] = true;
   const WORKBOOK_PRODUCTS = {
     'private-pilot': 'ppl_workbook',
     'instrument-rating': 'instrument_workbook',
@@ -15,13 +26,19 @@
   };
 
   function currentConsent() {
+    // A failed storage write must never undo a withdrawal on this page.
+    if (consentOverride !== undefined) return consentOverride;
     try { return window.localStorage.getItem(CONSENT_KEY); }
     catch (_) { return null; }
   }
 
   function setConsent(value) {
     if (value !== currentConsent()) consentRevision += 1;
-    try { window.localStorage.setItem(CONSENT_KEY, value); }
+    consentOverride = value === 'allow' ? undefined : value;
+    try {
+      if (value === null) window.localStorage.removeItem(CONSENT_KEY);
+      else window.localStorage.setItem(CONSENT_KEY, value);
+    }
     catch (_) {}
   }
 
@@ -34,40 +51,91 @@
     } catch (_) { return ''; }
   }
 
-  function trackEvent(name, parameters) {
-    if (!analyticsReady || currentConsent() !== 'allow' || typeof window.gtag !== 'function') return false;
+  function trackEvent(name, parameters = {}) {
+    if (!ga4Configured || !analyticsReady || currentConsent() !== 'allow' || typeof window.gtag !== 'function') return false;
+    const details = {};
+    ['event_category', 'product', 'placement', 'form_id', 'destination_host'].forEach((key) => {
+      if (typeof parameters[key] === 'string') details[key] = parameters[key];
+    });
+    if (parameters.link_url) details.link_url = measurementUrl(parameters.link_url);
     window.gtag('event', name, {
+      ...details,
       page_path: window.location.pathname,
-      measurement_version: '2026-10-13',
-      ...parameters
+      page_location: measurementUrl(window.location.href),
+      page_referrer: document.referrer ? measurementUrl(document.referrer) : '',
+      measurement_version: '2026-10-14',
+      send_to: GA4_ID
     });
     return true;
+  }
+
+  function activateMeasurement() {
+    if (!analyticsLoaded || analyticsReady || currentConsent() !== 'allow') return;
+    window.gtag('consent', 'update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'denied'
+    });
+    if (ga4Configured) window[`ga-disable-${GA4_ID}`] = false;
+    if (!analyticsConfigured) {
+      analyticsConfigured = true;
+      // A connected Ads destination may already share the GA4 tag. Disable all
+      // automatic config pageviews, then emit exactly one explicitly to GA4.
+      const config = {
+        send_page_view: false,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+        page_location: measurementUrl(window.location.href),
+        page_referrer: document.referrer ? measurementUrl(document.referrer) : ''
+      };
+      window.gtag('set', config);
+      window.gtag('config', TAG_ID, config);
+      if (ga4Configured) window.gtag('config', GA4_ID, config);
+    }
+    analyticsReady = true;
+    if (!pageViewSent) pageViewSent = trackEvent('page_view');
+    window.dispatchEvent(new CustomEvent('nickrae:analytics-ready'));
   }
 
   function loadAnalytics() {
     // Local previews and staging hosts must never pollute production reports.
     if (window.location.protocol !== 'https:' || !['nickrae.net', 'www.nickrae.net'].includes(window.location.hostname)) return;
     if (analyticsReady || currentConsent() !== 'allow') return;
-    analyticsReady = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function gtag(){ window.dataLayer.push(arguments); };
-    window.gtag('consent', 'default', {
-      ad_storage: 'granted',
-      analytics_storage: 'granted',
-      ad_user_data: 'granted',
-      ad_personalization: 'denied'
-    });
-    window.gtag('js', new Date());
-    window.gtag('config', TAG_ID, {
-      allow_ad_personalization_signals: false,
-      page_location: measurementUrl(window.location.href),
-      page_referrer: document.referrer ? measurementUrl(document.referrer) : ''
-    });
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(TAG_ID)}`;
-    document.head.appendChild(script);
-    window.dispatchEvent(new CustomEvent('nickrae:analytics-ready'));
+    if (!analyticsInitialized) {
+      analyticsInitialized = true;
+      // Recheck permission on load before configuring either destination. A
+      // withdrawal during the request must not leave a queued granted config.
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      window.gtag('js', new Date());
+    }
+
+    if (!analyticsScript) {
+      analyticsScript = document.createElement('script');
+      analyticsScript.async = true;
+      analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(TAG_ID)}`;
+      analyticsScript.onload = () => {
+        analyticsLoaded = true;
+        activateMeasurement();
+      };
+      analyticsScript.onerror = () => {
+        analyticsScript?.remove();
+        analyticsScript = null;
+        analyticsLoaded = false;
+        analyticsReady = false;
+      };
+    }
+    // Reuse the same already-started script after withdrawal. Re-creating it
+    // could initialize automatic listeners twice or replay dataLayer history.
+    if (!analyticsScript.isConnected) document.head.appendChild(analyticsScript);
+    activateMeasurement();
   }
 
   function clearGoogleCookies() {
@@ -86,7 +154,8 @@
   }
 
   function disableAnalytics() {
-    const wasLoaded = analyticsReady || Boolean(document.querySelector('script[src*="googletagmanager.com/gtag/js"]'));
+    if (ga4Configured) window[`ga-disable-${GA4_ID}`] = true;
+    const wasLoaded = analyticsInitialized;
     if (wasLoaded && typeof window.gtag === 'function') {
       try {
         window.gtag('consent', 'update', {
@@ -105,6 +174,17 @@
       try { delete window.gtag; } catch (_) {}
       try { delete window.dataLayer; } catch (_) {}
     }
+  }
+
+  function reloadWithoutMeasurement(force = false) {
+    if (withdrawalReloadRequested || (!force && !analyticsInitialized)) return;
+    try {
+      // Read durable storage, not the page override: never reload into an old
+      // saved allowance if the browser rejected the withdrawal/reset write.
+      if (window.localStorage.getItem(CONSENT_KEY) === 'allow') return;
+    } catch (_) { return; }
+    withdrawalReloadRequested = true;
+    window.location.reload();
   }
 
   function workbookProduct(url) {
@@ -232,10 +312,8 @@
     banner.addEventListener('click', (event) => {
       const button = event.target.closest('button[data-consent]');
       if (!button) return;
-      setConsent(button.dataset.consent);
-      removeBanner();
-      if (button.dataset.consent === 'allow') loadAnalytics();
-      else disableAnalytics();
+      if (button.dataset.consent === 'allow') window.NickRaePrivacy.allow();
+      else window.NickRaePrivacy.deny();
     });
     if (!document.getElementById(style.id)) document.head.appendChild(style);
     document.body.appendChild(banner);
@@ -461,10 +539,34 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
   else init();
 
+  window.addEventListener('storage', (event) => {
+    if (event.key !== CONSENT_KEY && event.key !== null) return;
+    // Another tab can revoke consent while this tab still has Google's SDK.
+    consentRevision += 1;
+    if (currentConsent() === 'allow') loadAnalytics();
+    else {
+      disableAnalytics();
+      reloadWithoutMeasurement();
+    }
+  });
+
   window.NickRaePrivacy = {
     consent: currentConsent,
     allow(){ setConsent('allow'); removeBanner(); loadAnalytics(); },
-    deny(){ setConsent('deny'); removeBanner(); disableAnalytics(); },
-    reset(){ try { localStorage.removeItem(CONSENT_KEY); } catch (_) {} location.reload(); }
+    deny(){
+      setConsent('deny');
+      removeBanner();
+      disableAnalytics();
+      reloadWithoutMeasurement();
+    },
+    reset(){
+      setConsent(null);
+      // Revoke active measurement before navigation can trigger unload events.
+      disableAnalytics();
+      reloadWithoutMeasurement(true);
+    }
   };
+  // Shared entry point for the calculator; it uses the same consent, host,
+  // destination and URL protections as clicks and signup measurement.
+  window.NickRaeMeasurement = Object.freeze({track: trackEvent});
 })();
