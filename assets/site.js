@@ -212,7 +212,7 @@
   }
 
   function enhanceNavigation() {
-    document.querySelectorAll('nav').forEach((nav, index) => {
+    document.querySelectorAll('body > nav:not(.sticky-cta), body > header > nav:not(.sticky-cta)').forEach((nav, index) => {
       const original = nav.querySelector('.menu-toggle');
       const links = nav.querySelector('.links, .nav-links');
       if (!original || !links) return;
@@ -245,8 +245,87 @@
     });
   }
 
+  function enhanceArticleTables() {
+    if (!document.body.classList.contains('article-page')) return;
+    document.querySelectorAll('main table').forEach((table, index) => {
+      // Existing accessible scroll regions already provide their own names/hints.
+      if (table.closest('[role="region"][tabindex], .article-table-scroll')) return;
+      const existing = table.parentElement;
+      const reuse = existing?.matches('.summary-table, .table-wrap, .table-scroll');
+      const region = reuse ? existing : document.createElement('div');
+      if (!reuse) {
+        table.before(region);
+        region.appendChild(table);
+      }
+      region.classList.add('article-table-scroll');
+      region.tabIndex = 0;
+      region.setAttribute('role', 'region');
+      const headings = [...document.querySelectorAll('main h2, main h3')];
+      const heading = headings.filter((item) => item.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_FOLLOWING).pop();
+      const label = table.caption?.textContent.trim() || heading?.textContent.trim() || `Article comparison ${index + 1}`;
+      if (!region.hasAttribute('aria-label') && !region.hasAttribute('aria-labelledby')) {
+        region.setAttribute('aria-label', `${label} table`);
+      }
+      const hint = document.createElement('p');
+      hint.className = 'article-table-hint';
+      hint.id = `article-table-hint-${index + 1}`;
+      hint.textContent = 'Scroll sideways to read the full table. Keyboard: focus the table, then use the arrow keys.';
+      region.after(hint);
+      const describedBy = region.getAttribute('aria-describedby');
+      region.setAttribute('aria-describedby', [describedBy, hint.id].filter(Boolean).join(' '));
+      const updateHint = () => { hint.hidden = region.scrollWidth <= region.clientWidth + 1; };
+      updateHint();
+      if (typeof ResizeObserver === 'function') {
+        const observer = new ResizeObserver(updateHint);
+        observer.observe(region);
+        observer.observe(table);
+      } else window.addEventListener('resize', updateHint, {passive: true});
+    });
+  }
+
+  function enhancePplSignup() {
+    const uid = '899d974875';
+    document.querySelectorAll('.ppl-signup').forEach((signup, index) => {
+      const enhance = () => {
+        const form = signup.querySelector(`form[data-uid="${uid}"]`);
+        if (form) {
+          signup.dataset.kitUid = uid;
+          const email = form.querySelector('input[name="email_address"]');
+          if (email) {
+            if (!email.id) email.id = `ppl-email-${uid}-${index + 1}`;
+            email.autocomplete = 'email';
+            email.spellcheck = false;
+            if (![...form.querySelectorAll('label')].some((label) => label.htmlFor === email.id)) {
+              const label = document.createElement('label');
+              label.className = 'ppl-email-label';
+              label.htmlFor = email.id;
+              label.textContent = 'Email address';
+              email.before(label);
+            }
+          }
+        }
+        if (signup.dataset.kitUid !== uid) return;
+        signup.querySelectorAll('.formkit-alert-error, [data-element="errors"]').forEach((alert) => {
+          alert.setAttribute('role', 'alert');
+          alert.setAttribute('aria-live', 'assertive');
+          alert.setAttribute('aria-atomic', 'true');
+        });
+        signup.querySelectorAll('.formkit-alert-success').forEach((status) => {
+          status.setAttribute('role', 'status');
+          status.setAttribute('aria-live', 'polite');
+          status.setAttribute('aria-atomic', 'true');
+        });
+      };
+      enhance();
+      const observer = new MutationObserver(enhance);
+      observer.observe(signup, {childList: true, subtree: true, attributes: true, attributeFilter: ['class']});
+    });
+  }
+
   function init() {
     enhanceNavigation();
+    enhanceArticleTables();
+    enhancePplSignup();
     addPrivacyLink();
     preserveCheckoutAttribution();
     attachGlobalTracking();

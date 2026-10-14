@@ -7,3 +7,5 @@ exclude:
   - SITE_TEARDOWN_2026-04-03.md
   - INDEX_HTML_REDIRECT_NOTES.md
   - sketches
+  - scripts
+  - data

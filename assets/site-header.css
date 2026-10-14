@@ -1,0 +1,93 @@
+/* Core-site header only. App/product headers and workbook quick actions are excluded. */
+body > nav.site-header,
+body > nav.site-header * { box-sizing: border-box; }
+body > nav.site-header {
+  --site-header-inner-height: 63px;
+  position: sticky;
+  inset: 0 auto auto;
+  z-index: 100;
+  width: 100%;
+  min-height: 64px;
+  margin: 0;
+  padding: 0;
+  background: #0a0e17;
+  border: 0;
+  border-bottom: 1px solid #273449;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  backdrop-filter: none;
+}
+body > nav.site-header > .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: .75rem;
+  width: min(1120px, 100%);
+  max-width: 1120px;
+  min-height: 63px;
+  height: auto;
+  margin: 0 auto;
+  padding: .5rem 1rem;
+}
+body > nav.site-header a { text-decoration: none; }
+body > nav.site-header .logo {
+  flex: none;
+  color: #e2e8f0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+body > nav.site-header .nav-links {
+  display: flex;
+  position: static;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1.1rem;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: .85rem;
+}
+body > nav.site-header .nav-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0;
+  color: #b9c5d8;
+  font-weight: 500;
+  white-space: nowrap;
+}
+body > nav.site-header .nav-links a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+body > nav.site-header .menu-toggle {
+  display: none;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #475569;
+  border-radius: .5rem;
+  background: #111827;
+  color: #e2e8f0;
+  font: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+body > nav.site-header :is(a, button):focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+/* navigation.css owns the <=860px disclosure/no-JS visibility. */

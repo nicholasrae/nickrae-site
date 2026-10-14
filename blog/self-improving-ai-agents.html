@@ -7,13 +7,13 @@
 <meta name="description" content="A March 2026 account of mapping Facebook Research's HyperAgents paper to a then-current OpenClaw setup. That runtime is now retired.">
 <meta property="og:title" content="I Read Meta's Self-Improving AI Paper. Then I Implemented It.">
 <meta property="og:description" content="A dated 2026 HyperAgents experiment mapped to Nick's now-retired OpenClaw runtime.">
-<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+
 <meta property="og:url" content="https://nickrae.net/blog/self-improving-ai-agents.html">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@nickrae">
 <link rel="canonical" href="https://nickrae.net/blog/self-improving-ai-agents.html">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -21,21 +21,56 @@
     {
       "@type": "BlogPosting",
       "headline": "I Read Meta's Self-Improving AI Paper. Then I Implemented It.",
-      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
-      "publisher": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "author": {
+        "@type": "Person",
+        "name": "Nick Rae",
+        "url": "https://nickrae.net/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Nick Rae",
+        "url": "https://nickrae.net/"
+      },
       "datePublished": "2026-03-24",
       "url": "https://nickrae.net/blog/self-improving-ai-agents.html",
-      "image": "https://nickrae.net/og-image.jpg",
+      "image": "https://nickrae.net/assets/social/self-improving-ai-agents.png",
       "description": "A March 2026 account of mapping the HyperAgents paper to Nick's now-retired OpenClaw runtime.",
-      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://nickrae.net/blog/self-improving-ai-agents.html" },
-      "keywords": ["AI agents", "self-improving AI", "OpenClaw", "HyperAgents", "automation", "cron jobs"]
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://nickrae.net/blog/self-improving-ai-agents.html",
+        "image": "https://nickrae.net/assets/social/self-improving-ai-agents.png"
+      },
+      "keywords": [
+        "AI agents",
+        "self-improving AI",
+        "OpenClaw",
+        "HyperAgents",
+        "automation",
+        "cron jobs"
+      ],
+      "dateModified": "2026-03-24"
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nickrae.net/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nickrae.net/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "I Read Meta's Self-Improving AI Paper. Then I Implemented It.", "item": "https://nickrae.net/blog/self-improving-ai-agents.html" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nickrae.net/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Pilot Notes",
+          "item": "https://nickrae.net/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "I Read Meta's Self-Improving AI Paper. Then I Implemented It.",
+          "item": "https://nickrae.net/blog/self-improving-ai-agents.html"
+        }
       ]
     }
   ]
@@ -90,23 +125,18 @@
 </style>
 
 <script src="/assets/site.js" defer></script>
+<script>document.documentElement.classList.add('js-nav');</script>
 <link rel="stylesheet" href="/assets/navigation.css">
+<link rel="stylesheet" href="/assets/article.css">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><meta name="theme-color" content="#080d16">
+<meta property="og:image" content="https://nickrae.net/assets/social/self-improving-ai-agents.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="I Read Meta&#x27;s Self-Improving AI Paper. Then I Implemented It. — Nick Rae"><meta name="twitter:image" content="https://nickrae.net/assets/social/self-improving-ai-agents.png"><meta name="twitter:image:alt" content="I Read Meta&#x27;s Self-Improving AI Paper. Then I Implemented It. — Nick Rae">
 </head>
-<body>
+<body class="article-page">
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
-<nav>
-  <div class="inner">
-    <a href="/" class="logo">✈️ Nick Rae</a>
-    <div class="links">
-      <a href="/#workbooks">Workbooks</a>
-      <a href="/blog/">Blog</a>
-      <a href="/flight-funded/">Flight Funded</a>
-      <a href="https://x.com/nickrae" target="_blank" rel="noopener">@nickrae</a>
-    </div>
-  </div>
-</nav>
+<nav class="site-header" aria-label="Primary navigation"><div class="inner"><a class="logo" href="/">NICK RAE</a><button class="menu-toggle" type="button" aria-label="Navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button><div class="nav-links" id="nav-links"><a href="/">Home</a><a href="/aviation-workbooks/">Pilot Workbooks</a><a href="/blog/">Pilot Notes</a><a href="/ifr-scenario-pack/">Free IFR Pack</a><a href="/about/">About</a><a href="/#connect">Connect</a></div></div></nav>
 
-<main>
+<main id="main-content" tabindex="-1">
   <div class="post-header">
     <div class="post-tag">AI &amp; Automation</div>
     <h1>I Read Meta's Self-Improving AI Paper. Then I Implemented It.</h1>
@@ -176,7 +206,7 @@
 
   <p>When I mapped the HyperAgents architecture to what I had built then, the overlap was closer than I expected:</p>
 
-  <table>
+  <div class="article-table-scroll" role="region" tabindex="0" aria-label="How This Mapped to My March 2026 Setup table"><table>
     <thead>
       <tr><th>HyperAgents Concept</th><th>March 2026 Setup (Talos)</th></tr>
     </thead>
@@ -187,7 +217,7 @@
       <tr><td>Archive of past agent versions</td><td>Git history of the workspace</td></tr>
       <tr><td>Meta agent analyzing results</td><td>Nightly self-learning cron, cron transcript analyzer</td></tr>
     </tbody>
-  </table>
+  </table></div><p class="article-table-hint">Scroll sideways if needed. Keyboard: focus the table, then use the arrow keys.</p>
 
   <p>The architecture was similar: run tasks, evaluate results, extract learnings, and improve the system. I had been building toward that without a formal name for it.</p>
 

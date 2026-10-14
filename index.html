@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>document.documentElement.classList.add('js-nav');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nick Rae — Aviation Pilot Workbooks by a Commercial Pilot</title>
 <meta name="description" content="FAA-aligned pilot workbooks by commercial pilot Nick Rae: private, instrument, commercial, multi-engine, and VFR radio calls.">
 <meta property="og:title" content="Nick Rae — Aviation Pilot Workbooks by a Commercial Pilot">
 <meta property="og:description" content="Compare FAA-aligned pilot workbooks for PPL, IFR, commercial, multi-engine, and VFR radio calls.">
-<meta property="og:image" content="https://nickrae.net/og-image.jpg">
+
 <meta property="og:url" content="https://nickrae.net/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -19,7 +20,7 @@
     window.location.replace(`https://nickrae.net/${window.location.search}${window.location.hash}`);
   }
 </script>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+
 <style>
   *,*::before,*::after{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -162,6 +163,8 @@
   }
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.001ms!important}}
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav{background:#080d16}}
+
+  .hero{min-height:0;padding-top:3rem}.hero h1{font-size:clamp(2.6rem,5.6vw,4.7rem);line-height:1.03;letter-spacing:-.045em;text-wrap:balance}.hero .lede{max-width:580px}.hero-actions .button-secondary{font-weight:750}.workbook-finder{padding-top:4rem}.teaching-teaser{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;margin:2.5rem 0 1rem;padding:1.75rem;border:1px solid var(--border);border-radius:1rem;background:linear-gradient(135deg,#101e31,#0c1421)}.teaching-teaser h3{font-size:1.6rem;line-height:1.2;margin:0 0 .8rem}.teaching-teaser p{color:var(--muted)}.teaching-teaser a{font-weight:800}.teaser-question{padding:1.4rem;background:#eaf1fa;color:#13243a;border-radius:.8rem;border-left:4px solid #2563eb}.teaser-question span{font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;font-weight:800}.teaser-question>p{color:#13243a;font-size:1.15rem;font-weight:750;line-height:1.5}.teaser-question .teaser-source{font-size:.76rem;font-weight:500;color:#3d526d}.finder-card{transition:transform 140ms ease,border-color 140ms ease}@media(max-width:700px){.hero{padding-top:3rem}.hero-grid{gap:1.75rem}.hero h1{font-size:clamp(2.6rem,10vw,3.6rem)}.hero .lede{font-size:1rem}.cover-stage{min-height:290px}.teaching-teaser{grid-template-columns:1fr;gap:1rem;padding:1.1rem}.hero-actions .button{width:100%}.author-line{font-size:.78rem}.workbook-finder{padding-top:3rem}}@media(prefers-reduced-motion:reduce){.finder-card{transition:none}}
 </style>
 <script type="application/ld+json">
 {
@@ -175,48 +178,68 @@
       "image": "https://nickrae.net/headshot.webp",
       "jobTitle": "Commercial Pilot",
       "description": "Commercial pilot, builder, and aviation workbook author based in Central California",
-      "knowsAbout": ["Commercial Aviation", "Flight Training", "Pilot Checkride Preparation", "Aviation Publishing"],
-      "hasCredential": {"@type":"EducationalOccupationalCredential","credentialCategory":"Professional License","name":"Commercial Instrument Multi-Engine Pilot Certificate"},
-      "sameAs": ["https://www.linkedin.com/in/nickrae","https://x.com/nickrae","https://www.youtube.com/@nicholasrae","https://github.com/nicholasrae"]
+      "knowsAbout": [
+        "Commercial Aviation",
+        "Flight Training",
+        "Pilot Checkride Preparation",
+        "Aviation Publishing"
+      ],
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Professional License",
+        "name": "Commercial Instrument Multi-Engine Pilot Certificate"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/nickrae",
+        "https://x.com/nickrae",
+        "https://www.youtube.com/@nicholasrae",
+        "https://github.com/nicholasrae"
+      ]
     },
     {
-      "@type":"WebSite","name":"Nick Rae","url":"https://nickrae.net/","description":"Nick Rae is a commercial pilot and aviation workbook author publishing FAA-aligned pilot study materials for PPL, IFR, commercial, multi-engine, and VFR radio calls.","author":{"@id":"https://nickrae.net/#person"}
+      "@type": "WebSite",
+      "name": "Nick Rae",
+      "url": "https://nickrae.net/",
+      "description": "Nick Rae is a commercial pilot and aviation workbook author publishing FAA-aligned pilot study materials for PPL, IFR, commercial, multi-engine, and VFR radio calls.",
+      "author": {
+        "@id": "https://nickrae.net/#person"
+      }
     },
     {
-"@type": "ItemList",
+      "@type": "ItemList",
       "name": "Nick Rae Aviation Pilot Workbooks",
       "url": "https://nickrae.net/aviation-workbooks/",
       "itemListElement": [
-            {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "url": "https://a.co/d/0hExZLaf",
-                  "name": "Private Pilot License Workbook"
-            },
-            {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "url": "https://a.co/d/06zXHuEe",
-                  "name": "Instrument Rating Workbook"
-            },
-            {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "url": "https://www.amazon.com/dp/B0GW8BGNDP",
-                  "name": "The Complete Commercial Pilot Workbook"
-            },
-            {
-                  "@type": "ListItem",
-                  "position": 4,
-                  "url": "https://www.amazon.com/dp/B0GXK6J9F5",
-                  "name": "Multi-Engine Add-On Rating Workbook"
-            },
-            {
-                  "@type": "ListItem",
-                  "position": 5,
-                  "url": "https://www.amazon.com/dp/B0H3KT5FHW",
-                  "name": "Clearance to Confidence: VFR Radio Calls Workbook"
-            }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "url": "https://nickrae.net/aviation-workbooks/private-pilot/",
+          "name": "Private Pilot License Workbook"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "url": "https://nickrae.net/aviation-workbooks/instrument-rating/",
+          "name": "Instrument Rating Workbook"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "url": "https://nickrae.net/aviation-workbooks/commercial-pilot/",
+          "name": "The Complete Commercial Pilot Workbook"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "url": "https://nickrae.net/aviation-workbooks/multi-engine/",
+          "name": "Multi-Engine Add-On Rating Workbook"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "url": "https://nickrae.net/aviation-workbooks/vfr-radio/",
+          "name": "Clearance to Confidence: VFR Radio Calls Workbook"
+        }
       ]
     }
   ]
@@ -243,23 +266,22 @@
   });
 </script>
 <script src="/assets/site.js" defer></script>
-<link rel="stylesheet" href="/assets/navigation.css">
+
+
 <link rel="stylesheet" href="/assets/ppl-signup.css">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><meta name="theme-color" content="#080d16">
+<meta property="og:image" content="https://nickrae.net/assets/social/home.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Pilot workbooks. Practice the why. — Nick Rae"><meta name="twitter:image" content="https://nickrae.net/assets/social/home.png"><meta name="twitter:image:alt" content="Pilot workbooks. Practice the why. — Nick Rae">
+
+<link rel="stylesheet" href="/assets/site-header.css">
+<link rel="stylesheet" href="/assets/navigation.css">
 </head>
 <body data-page="home">
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<nav aria-label="Primary navigation">
+<nav class="site-header" aria-label="Primary navigation">
   <div class="inner">
-    <a class="logo" href="./" aria-label="Nick Rae home">NICK RAE</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span aria-hidden="true">☰</span><span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Menu</span></button>
-    <div class="nav-links" id="nav-links">
-      <a href="aviation-workbooks/">Pilot Workbooks</a>
-      <a href="ifr-scenario-pack/">Free IFR Pack</a>
-      <a href="#credentials">Flying</a>
-      <a href="blog/">Pilot Notes</a>
-      <a href="#labs">Labs &amp; Archive</a>
-      <a href="about/">About</a>
-    </div>
+    <a class="logo" href="/">NICK RAE</a>
+    <button class="menu-toggle" type="button" aria-label="Navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div class="nav-links" id="nav-links"><a href="/">Home</a><a href="/aviation-workbooks/">Pilot Workbooks</a><a href="/blog/">Pilot Notes</a><a href="/ifr-scenario-pack/">Free IFR Pack</a><a href="/about/">About</a><a href="/#connect">Connect</a></div>
   </div>
 </nav>
 
@@ -268,11 +290,11 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">FAA-aligned pilot workbooks</p>
-        <h1 id="home-heading">The workbook for the checkride in front of you.</h1>
-        <p class="lede">Private, instrument, commercial, multi-engine, and VFR radio-call study tools written by a Commercial Instrument Multi-Engine pilot. Practical reps and explained answers—not answer-key roulette.</p>
+        <h1 id="home-heading">Pilot workbooks. Practice the why.</h1>
+        <p class="lede">Private, instrument, commercial, multi-engine and VFR radio-call study. Practice with explained answers, then check the references with your instructor.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="aviation-workbooks/#chooser" data-product="aviation_workbooks" data-placement="home-hero">Find your workbook</a>
-
+          <a class="button button-primary" href="#workbooks" data-product="aviation_workbooks" data-placement="home-hero">Find your workbook</a>
+          <a class="button button-secondary" href="#free-ppl-cards" data-product="free_ppl_cards" data-placement="home-hero-free">Try 5 free PPL cards</a>
         </div>
 
         <div class="author-line">
@@ -305,19 +327,20 @@
     <div class="container">
       <p class="eyebrow">Start with the rating in front of you</p>
       <h2 class="section-heading" id="finder-heading">Find your workbook</h2>
-      <p class="section-intro">Do not buy a whole shelf when one checkride is trying to punch you in the mouth. Pick the problem you need to solve now.</p>
+      <p class="section-intro">Start with your rating. Preview the question style and explanations, then choose the format you will use.</p>
       <div class="finder-grid">
-        <a class="finder-card" href="aviation-workbooks/#ppl" data-product="ppl_workbook" data-placement="home-finder"><strong>Student pilot / PPL</strong><span>Written-test fluency, explained answers, and oral-exam thinking.</span><em>See PPL workbook →</em></a>
-        <a class="finder-card" href="aviation-workbooks/#instrument" data-product="instrument_workbook" data-placement="home-finder"><strong>IFR training</strong><span>Weather, procedures, charts, systems, and scenario decisions.</span><em>See Instrument workbook →</em></a>
-        <a class="finder-card" href="aviation-workbooks/#commercial" data-product="commercial_workbook" data-placement="home-finder"><strong>Commercial candidate</strong><span>Commercial ACS review, maneuvers, judgment, and explanations.</span><em>See Commercial workbook →</em></a>
-        <a class="finder-card" href="aviation-workbooks/#multi-engine" data-product="multi_engine_workbook" data-placement="home-finder"><strong>Multi-engine add-on</strong><span>Vmc, OEI, PA-44 flows, engine-out calls, and oral traps.</span><em>See Multi-Engine workbook →</em></a>
-        <a class="finder-card" href="aviation-workbooks/#vfr-radio" data-product="vfr_radio_calls_workbook" data-placement="home-finder"><strong>VFR radio calls</strong><span>Call-building, ATC replies, readbacks, CTAF flows, and out-loud reps.</span><em>See Radio Calls workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/private-pilot/" data-product="ppl_workbook" data-placement="home-finder"><strong>Student pilot / PPL</strong><span>Written-test fluency, explained answers, and oral-exam thinking.</span><em>See PPL workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/instrument-rating/" data-product="instrument_workbook" data-placement="home-finder"><strong>IFR training</strong><span>Weather, procedures, charts, systems, and scenario decisions.</span><em>See Instrument workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/commercial-pilot/" data-product="commercial_workbook" data-placement="home-finder"><strong>Commercial candidate</strong><span>Commercial ACS review, maneuvers, judgment, and explanations.</span><em>See Commercial workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/multi-engine/" data-product="multi_engine_workbook" data-placement="home-finder"><strong>Multi-engine add-on</strong><span>Vmc, OEI, PA-44 flows, engine-out calls, and oral traps.</span><em>See Multi-Engine workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/vfr-radio/" data-product="vfr_radio_calls_workbook" data-placement="home-finder"><strong>VFR radio calls</strong><span>Call-building, ATC replies, readbacks, CTAF flows, and out-loud reps.</span><em>See Radio Calls workbook →</em></a>
       </div>
       <p class="catalog-links"><a href="aviation-workbooks/#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="home-finder-sample">Try an Instrument workbook question + answer</a></p>
       <details class="secondary-details"><summary>More buying options and resources</summary>
-      <p class="catalog-links"><a href="aviation-workbooks/">Compare every workbook and current price</a> · <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="home-finder">Full Amazon catalog</a> · <a href="https://nicholasrae.gumroad.com/l/ppl-oral-flashcards" target="_blank" rel="noopener" data-product="ppl_oral_flashcards" data-placement="home-finder">PPL oral flashcards</a></p>
-      <p class="direct-products">Direct Amazon links: <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-finder-direct">PPL</a> · <a href="https://a.co/d/06zXHuEe" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="home-finder-direct">Instrument</a> · <a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="home-finder-direct">Commercial</a> · <a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="home-finder-direct">Multi-Engine paperback</a> / <a href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="home-finder-direct">Kindle</a> · <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-finder-direct">VFR Radio paperback</a> / <a href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="home-finder-direct">Kindle</a></p>
+      <p class="catalog-links"><a href="aviation-workbooks/">Compare workbook scope and formats</a> · <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="home-finder">Full Amazon catalog</a> · <a href="https://nicholasrae.gumroad.com/l/ppl-oral-flashcards" target="_blank" rel="noopener" data-product="ppl_oral_flashcards" data-placement="home-finder">Paid 50-card PPL deck</a></p>
+      <p class="direct-products">Direct Amazon links: <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-finder-direct">PPL</a> · <a href="https://www.amazon.com/dp/B0GQLQYLDN" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="home-finder-direct">Instrument</a> · <a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="home-finder-direct">Commercial</a> · <a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="home-finder-direct">Multi-Engine paperback</a> / <a href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="home-finder-direct">Kindle</a> · <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-finder-direct">VFR Radio paperback</a> / <a href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="home-finder-direct">Kindle</a></p>
       </details>
+      <div class="teaching-teaser"><div><p class="eyebrow">Look inside the teaching</p><h3>Read a question. Explain the decision.</h3><p>A useful study session goes beyond choosing an answer. Try a real Instrument workbook question, reveal its explanation, and follow the source reference.</p><a href="/aviation-workbooks/#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="home-teaching">Try the worked question →</a></div><div class="teaser-question"><span>From the Instrument workbook</span><p>VOR #1 reads 271°. VOR #2 reads 268°. Is the difference acceptable?</p><p class="teaser-source">Exercise 2.6, item 2 · 2026 source edition<br>Prompt page 46 · answer page 153</p></div></div>
       <div class="ppl-signup" id="free-ppl-cards" role="region" aria-label="Free private pilot oral scenario cards">
         <script async data-uid="899d974875" src="https://nick-rae.kit.com/899d974875/index.js"></script>
         <p class="ppl-signup-note">Confirm your email to receive the cards. <a href="privacy/">Privacy details</a> · <a href="https://nick-rae.kit.com/899d974875">Open the signup form →</a></p>
@@ -326,20 +349,13 @@
   </section>
 
 
-  <section class="free-pack" aria-labelledby="gospels-heading">
-    <div class="container">
-      <div class="credential-card" style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
-        <img src="assets/books/walk-through-the-gospels-cover.webp" width="1020" height="1320" style="width:116px;height:auto" alt="Walk Through the Gospels front cover by Nick Rae" loading="lazy" decoding="async">
-        <div style="flex:1;min-width:min(100%,240px)"><p class="eyebrow">New book · Beyond aviation</p><h2 id="gospels-heading" style="margin:0 0 .5rem;font-size:1.5rem">Walk Through the Gospels</h2><p style="color:var(--muted);margin:0 0 1rem">60 large-print Bible word searches, from the Nativity to the empty tomb. Optional hidden reflections and full-size answer keys. Now available in paperback.</p><a href="walk-through-the-gospels/" data-event="product_view" data-product="walk_through_the_gospels" data-placement="home-new-book">Explore the book →</a></div>
-      </div>
-    </div>
-  </section>
+
 
   <section class="pilot" id="credentials" aria-labelledby="credentials-heading">
     <div class="container">
-      <p class="eyebrow">Written by a working commercial pilot</p>
+      <p class="eyebrow">Commercial pilot · Workbook author</p>
       <h2 class="section-heading" id="credentials-heading">Flight credentials</h2>
-      <p class="section-intro">I earned private, instrument, commercial, and multi-engine ratings in under 18 months. The workbooks come from training pressure, not generic aviation-content soup.</p>
+      <p class="section-intro">I built these study tools alongside my own private, instrument, commercial and multi-engine training. The focus is understanding an answer well enough to explain it out loud.</p>
       <p class="section-intro"><strong>Commercial Pilot ASEL/AMEL · Instrument · 393.1 total hours</strong> (October 2, 2026 ForeFlight report). <a href="about/">About Nick</a> · <a href="flight-funded/">Dated flight and publishing proof</a></p>
       <details class="secondary-details"><summary>Full credentials and flight-hour breakdown</summary>
       <div class="hours-grid" aria-label="Flight-hour totals">
@@ -378,23 +394,12 @@
     </div>
   </section>
 
-  <section class="proof" aria-labelledby="proof-heading">
-    <div class="container">
-      <h2 class="section-heading" id="proof-heading">Dated proof, not a pass-rate claim</h2>
-      <p class="proof-copy"><a href="flight-funded/">Flight Funded carries the sales, royalties, payouts, and flight-hour history →</a></p>
-      <p class="proof-copy"><strong>September 1–29, 2026:</strong> 32 aviation paperbacks / <strong>$311.91 USD</strong> in dashboard-estimated royalties. Full catalog: 33 paperbacks / $314.83 USD, with 523 KENP and 0 refunds. KENP is page-read engagement, not paid units. Not a verified final September close.</p>
-      <p class="proof-copy">Tracked through September 29: <strong>181 aviation units / $1,594.23 USD + €71.47 EUR + A$9.49</strong> since March; <strong>190 full-catalog books</strong> since January. August month-end baseline plus September only; estimates are not deposits, profit, or ad-scale proof. Purchases do not establish a checkride outcome.</p>
-      <details class="secondary-details"><summary>Preserved August 2026 publishing snapshot</summary>
-        <p class="proof-copy">August aviation-workbook paid units at month-end: <strong>27</strong>. Dashboard-estimated royalties: <strong>$235.09 USD + €24.64 EUR</strong>. August KENP at month-end: <strong>1,187</strong>; <strong>0 refunds</strong>.</p>
-        <p class="proof-copy">Cumulative March–August aviation tracking: <strong>149 units / $1,282.32 USD + €71.47 EUR + A$9.49</strong>. Reconciled January–August full-catalog tracking: <strong>157 books</strong>. Royalty figures are dashboard estimates, not settled payouts or ad-scale proof. Purchases do not establish a checkride outcome.</p>
-      </details>
-    </div>
-  </section>
+  <section class="proof" aria-labelledby="proof-heading"><div class="container"><h2 class="section-heading" id="proof-heading">Follow the work behind the workbooks</h2><p class="proof-copy">Flight Funded keeps the dated flight-hour, publishing and royalty records in one place, including their source dates and limitations. Book sales are a progress record, not a pass-rate claim.</p><p><a href="flight-funded/">Read the dated records →</a></p></div></section>
 
   <section class="pilot-reading" aria-labelledby="reading-heading">
     <div class="container">
       <p class="eyebrow">Keep studying</p>
-      <h2 class="section-heading" id="reading-heading">Pilot notes</h2>
+      <h2 class="section-heading" id="reading-heading">Pilot Notes</h2>
       <div class="reading-links">
         <a href="blog/checkride-prep-guide.html">Private pilot checkride prep guide →</a>
         <a href="blog/ifr-oral-exam-scenarios.html">10 IFR oral-exam scenarios →</a>
@@ -408,7 +413,16 @@
     </div>
   </section>
 
-  <section class="labs" id="labs" aria-labelledby="labs-heading">
+  <section class="free-pack" aria-labelledby="gospels-heading">
+    <div class="container">
+      <div class="credential-card" style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center">
+        <img src="assets/books/walk-through-the-gospels-cover-240.webp" srcset="assets/books/walk-through-the-gospels-cover-240.webp 240w, assets/books/walk-through-the-gospels-cover-480.webp 480w" sizes="116px" width="1020" height="1320" style="width:116px;height:auto" alt="Walk Through the Gospels front cover by Nick Rae" loading="lazy" decoding="async">
+        <div style="flex:1;min-width:min(100%,240px)"><p class="eyebrow">Other books by Nick Rae</p><h2 id="gospels-heading" style="margin:0 0 .5rem;font-size:1.5rem">Walk Through the Gospels</h2><p style="color:var(--muted);margin:0 0 1rem">60 large-print Bible word searches, from the Nativity to the empty tomb. Optional hidden reflections and full-size answer keys. Now available in paperback.</p><a href="walk-through-the-gospels/" data-event="product_view" data-product="walk_through_the_gospels" data-placement="home-new-book">Explore the book →</a></div>
+      </div>
+    </div>
+  </section>
+
+<section class="labs" id="labs" aria-labelledby="labs-heading">
     <div class="container">
       <p class="eyebrow">Secondary lane</p>
       <h2 class="section-heading" id="labs-heading">Labs &amp; Archive</h2>

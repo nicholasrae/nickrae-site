@@ -7,7 +7,7 @@
 <meta name="description" content="A dated 2026 field guide from a retired OpenClaw operation: PDF, templates, scripts, and checklists. Current interfaces and commands may differ.">
 <meta property="og:title" content="OpenClaw Operator Kit — Dated 2026 Field Guide">
 <meta property="og:description" content="A dated 2026 field guide from a retired OpenClaw operation: PDF, templates, scripts, and checklists. Current interfaces and commands may differ.">
-<meta property="og:image" content="https://nickrae.net/assets/playbook/playbook-cover-001.jpg">
+
 <meta property="og:url" content="https://nickrae.net/openclaw-playbook/">
 <meta property="og:type" content="product">
 <meta name="twitter:card" content="summary_large_image">
@@ -18,7 +18,7 @@
     window.location.replace(`https://nickrae.net/openclaw-playbook/${window.location.search}${window.location.hash}`);
   }
 </script>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📘</text></svg>">
+
 
 <script type="application/ld+json">
 {
@@ -29,8 +29,15 @@
       "name": "OpenClaw Operator Kit",
       "description": "A dated 2026 field guide from a retired OpenClaw operation: PDF plus Starter Kit ZIP with templates, checklists, scripts, and cron examples. Current interfaces and commands may differ; compatibility with current runtimes is not verified.",
       "image": "https://nickrae.net/assets/playbook/playbook-cover-001.jpg",
-      "brand": { "@type": "Brand", "name": "Nick Rae" },
-      "author": { "@type": "Person", "name": "Nick Rae", "url": "https://nickrae.net/" },
+      "brand": {
+        "@type": "Brand",
+        "name": "Nick Rae"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Nick Rae",
+        "url": "https://nickrae.net/"
+      },
       "offers": {
         "@type": "Offer",
         "url": "https://nicholasrae.gumroad.com/l/openclaw-playbook",
@@ -79,12 +86,54 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Is this only for OpenClaw?", "acceptedAnswer": { "@type": "Answer", "text": "No. The examples come from my OpenClaw workflows operated in 2026; that runtime is now retired. The broader method can be adapted to Hermes, Claude, ChatGPT, Codex, Cursor, and other tool-using agent stacks, but current interfaces and commands may differ. Compatibility with current runtimes is not verified." } },
-        { "@type": "Question", "name": "Do I need to code?", "acceptedAnswer": { "@type": "Answer", "text": "You do not need to be a developer to use the core workflows. You do need to be willing to configure tools, review output, and set clear safety rules." } },
-        { "@type": "Question", "name": "Is this a prompt pack?", "acceptedAnswer": { "@type": "Answer", "text": "No. It includes prompts and templates, but the main value is the operating system: memory, tools, cron jobs, verification, delegation, cost control, and safety rules." } },
-        { "@type": "Question", "name": "What is included?", "acceptedAnswer": { "@type": "Answer", "text": "Gumroad delivers the full 163-page PDF plus a Starter Kit ZIP with templates, checklists, local operator scripts, cron config examples, and a search-only ads test plan." } },
-        { "@type": "Question", "name": "What format do I get?", "acceptedAnswer": { "@type": "Answer", "text": "The product is delivered digitally through Gumroad as a PDF plus Starter Kit ZIP. There is no EPUB." } },
-        { "@type": "Question", "name": "What is the refund policy?", "acceptedAnswer": { "@type": "Answer", "text": "At publication, the Gumroad checkout states a 30-day money-back guarantee." } }
+        {
+          "@type": "Question",
+          "name": "Is this only for OpenClaw?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The examples come from my OpenClaw workflows operated in 2026; that runtime is now retired. The broader method can be adapted to Hermes, Claude, ChatGPT, Codex, Cursor, and other tool-using agent stacks, but current interfaces and commands may differ. Compatibility with current runtimes is not verified."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You do not need to be a developer to use the core workflows. You do need to be willing to configure tools, review output, and set clear safety rules."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this a prompt pack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It includes prompts and templates, but the main value is the operating system: memory, tools, cron jobs, verification, delegation, cost control, and safety rules."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gumroad delivers the full 163-page PDF plus a Starter Kit ZIP with templates, checklists, local operator scripts, cron config examples, and a search-only ads test plan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What format do I get?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The product is delivered digitally through Gumroad as a PDF plus Starter Kit ZIP. There is no EPUB."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the refund policy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At publication, the Gumroad checkout states a 30-day money-back guarantee."
+          }
+        }
       ]
     }
   ]
@@ -116,7 +165,7 @@
   .subhead{font-size:clamp(1.08rem,2vw,1.32rem);line-height:1.65;color:var(--muted);max-width:720px;margin-bottom:1.6rem}
   .hero-actions,.cta-row{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:8px;padding:.82rem 1.1rem;font-size:14px;font-weight:590;border:1px solid var(--border);transition:transform .16s,background .16s,border-color .16s;color:var(--text)}
-  .btn:hover{transform:translateY(-1px);text-decoration:none}.btn-primary{background:var(--accent);border-color:rgba(130,143,255,.4);color:#fff}.btn-primary:hover{background:var(--accent3)}.btn-secondary{background:rgba(255,255,255,.03);color:var(--muted)}.btn-secondary:hover{background:rgba(255,255,255,.06);color:var(--text)}
+  .btn:hover{transform:translateY(-1px);text-decoration:none}.btn-primary{background:var(--accent);border-color:rgba(130,143,255,.4);color:#fff}.btn-primary:hover{background:#4f46e5;color:#fff}.btn-secondary{background:rgba(255,255,255,.03);color:var(--muted)}.btn-secondary:hover{background:rgba(255,255,255,.06);color:var(--text)}
   .risk{margin-top:1rem;color:var(--dim);font-size:13px}.risk strong{color:var(--muted);font-weight:510}.product-facts{display:grid;gap:.35rem;margin-top:1rem;color:var(--dim);font-size:13px}.product-facts strong{color:var(--text)}
   .hero-proof{margin:.85rem 0 1.1rem;padding:.75rem .9rem;border:1px solid rgba(113,112,255,.28);border-radius:12px;background:rgba(113,112,255,.07);color:var(--muted);font-size:14px}.hero-proof strong{color:var(--text)}
   .cover-wrap{position:relative}.cover-card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--border);border-radius:22px;padding:1rem;box-shadow:var(--shadow);transform:rotate(1.4deg)}
@@ -139,9 +188,13 @@
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
   @media(max-width:860px){.hero-grid,.workflow,.split,.cred-grid{grid-template-columns:1fr}.cards,.proof-grid,.trust-grid{grid-template-columns:1fr 1fr}.nav-links a:not(.nav-cta){display:none}.float-card{position:static;width:auto;margin-top:1rem}.cover-card{transform:none}.bundle-callout ul{grid-template-columns:1fr}}
   @media(max-width:560px){.cards,.proof-grid,.trust-grid{grid-template-columns:1fr}.hero{padding-top:3.5rem}.btn{width:100%}.hero-actions,.cta-row{width:100%}}
+main [id]{scroll-margin-top:6rem}
 </style>
+<script>document.documentElement.classList.add('js-nav');</script>
 <link rel="stylesheet" href="/assets/navigation.css">
 <script src="/assets/site.js" defer></script>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><meta name="theme-color" content="#080d16">
+<meta property="og:image" content="https://nickrae.net/assets/social/openclaw-playbook.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Inside the Dated 2026 OpenClaw Playbook — Nick Rae"><meta name="twitter:image" content="https://nickrae.net/assets/social/openclaw-playbook.png"><meta name="twitter:image:alt" content="Inside the Dated 2026 OpenClaw Playbook — Nick Rae">
 </head>
 <body>
 <nav class="nav">

@@ -1,0 +1,62 @@
+{
+  "verified_date": "2026-10-13",
+  "identity_source": "https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX",
+  "price_policy": "Amazon controls current price and regional availability; an outbound click is not a purchase.",
+  "products": [
+    {
+      "id": "ppl",
+      "slug": "private-pilot",
+      "name": "Private Pilot License Workbook",
+      "badge": "PPL foundations",
+      "product": "ppl_workbook",
+      "pb": "B0GN81JP9R",
+      "kindle": "B0GN3LCV4F",
+      "cover": "private-pilot",
+      "description": "500+ practice questions with explanations for private-pilot knowledge study and out-loud oral practice."
+    },
+    {
+      "id": "instrument",
+      "slug": "instrument-rating",
+      "name": "Instrument Rating Workbook",
+      "badge": "IFR study",
+      "product": "instrument_workbook",
+      "pb": "B0GQLQYLDN",
+      "kindle": "B0GQH7QX62",
+      "cover": "instrument-rating",
+      "description": "Study IFR weather, charts, procedures and scenario decisions, then work through a source-labeled VOR example."
+    },
+    {
+      "id": "commercial",
+      "slug": "commercial-pilot",
+      "name": "The Complete Commercial Pilot Workbook",
+      "badge": "Commercial prep",
+      "product": "commercial_workbook",
+      "pb": "B0GW8BGNDP",
+      "kindle": "B0GHPY4XL8",
+      "cover": "commercial-pilot",
+      "description": "Written and oral preparation with practice questions, flight scenarios and commercial-pilot judgment."
+    },
+    {
+      "id": "multi-engine",
+      "slug": "multi-engine",
+      "name": "Multi-Engine Add-On Rating Workbook",
+      "badge": "PA-44 focused",
+      "product": "multi_engine_workbook",
+      "pb": "B0GXK6J9F5",
+      "kindle": "B0GX32PRCJ",
+      "cover": "multi-engine",
+      "description": "Seminole-focused review of Vmc, one-engine-inoperative operations, systems and oral-exam reasoning."
+    },
+    {
+      "id": "vfr-radio",
+      "slug": "vfr-radio",
+      "name": "Clearance to Confidence: VFR Radio Calls Workbook",
+      "badge": "Radio practice",
+      "product": "vfr_radio_calls_workbook",
+      "pb": "B0H3KT5FHW",
+      "kindle": "B0H3HZ2BQG",
+      "cover": "vfr-radio-calls",
+      "description": "Build calls, anticipate ATC replies and practice readbacks for towered and non-towered flying."
+    }
+  ]
+}

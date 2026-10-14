@@ -1,0 +1,228 @@
+{
+  "updated": "2026-10-13",
+  "policy": "Dates track substantive content revisions. Visual and shared accessibility changes do not reset editorial review dates.",
+  "pages": [
+    {
+      "path": "about/index.html",
+      "url": "https://nickrae.net/about/",
+      "last_content_change": "2026-10-02",
+      "social_image": "https://nickrae.net/assets/social/about.png"
+    },
+    {
+      "path": "aviation-workbooks/commercial-pilot/index.html",
+      "url": "https://nickrae.net/aviation-workbooks/commercial-pilot/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/commercial-pilot.png"
+    },
+    {
+      "path": "aviation-workbooks/index.html",
+      "url": "https://nickrae.net/aviation-workbooks/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/aviation-workbooks.png"
+    },
+    {
+      "path": "aviation-workbooks/instrument-rating/index.html",
+      "url": "https://nickrae.net/aviation-workbooks/instrument-rating/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/instrument-rating.png"
+    },
+    {
+      "path": "aviation-workbooks/multi-engine/index.html",
+      "url": "https://nickrae.net/aviation-workbooks/multi-engine/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/multi-engine.png"
+    },
+    {
+      "path": "aviation-workbooks/private-pilot/index.html",
+      "url": "https://nickrae.net/aviation-workbooks/private-pilot/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/private-pilot.png"
+    },
+    {
+      "path": "aviation-workbooks/vfr-radio/index.html",
+      "url": "https://nickrae.net/aviation-workbooks/vfr-radio/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/vfr-radio.png"
+    },
+    {
+      "path": "blog/ai-aviation-business.html",
+      "url": "https://nickrae.net/blog/ai-aviation-business.html",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/ai-aviation-business.png"
+    },
+    {
+      "path": "blog/blog-cheapest-flight-hours.html",
+      "url": "https://nickrae.net/blog/blog-cheapest-flight-hours.html",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/blog-cheapest-flight-hours.png"
+    },
+    {
+      "path": "blog/blog-commercial-pilot.html",
+      "url": "https://nickrae.net/blog/blog-commercial-pilot.html",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/blog-commercial-pilot.png"
+    },
+    {
+      "path": "blog/blog-openclaw-setup.html",
+      "url": "https://nickrae.net/blog/blog-openclaw-setup.html",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/blog-openclaw-setup.png"
+    },
+    {
+      "path": "blog/checkride-prep-guide.html",
+      "url": "https://nickrae.net/blog/checkride-prep-guide.html",
+      "last_content_change": "2026-09-10",
+      "social_image": "https://nickrae.net/assets/social/checkride-prep-guide.png"
+    },
+    {
+      "path": "blog/commercial-pilot-career-2026.html",
+      "url": "https://nickrae.net/blog/commercial-pilot-career-2026.html",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/commercial-pilot-career-2026.png"
+    },
+    {
+      "path": "blog/commercial-pilot-workbook-live.html",
+      "url": "https://nickrae.net/blog/commercial-pilot-workbook-live.html",
+      "last_content_change": "2026-04-06",
+      "social_image": "https://nickrae.net/assets/social/commercial-pilot-workbook-live.png"
+    },
+    {
+      "path": "blog/feedfare-launch.html",
+      "url": "https://nickrae.net/blog/feedfare-launch.html",
+      "last_content_change": "2026-10-05",
+      "social_image": "https://nickrae.net/feedfare/assets/feedfare-launch-social.png"
+    },
+    {
+      "path": "blog/flight-funded-experiment.html",
+      "url": "https://nickrae.net/blog/flight-funded-experiment.html",
+      "last_content_change": "2026-04-02",
+      "social_image": "https://nickrae.net/assets/social/flight-funded-experiment.png"
+    },
+    {
+      "path": "blog/from-369-5-to-500-hours.html",
+      "url": "https://nickrae.net/blog/from-369-5-to-500-hours.html",
+      "last_content_change": "2026-10-02",
+      "social_image": "https://nickrae.net/assets/social/from-369-5-to-500-hours.png"
+    },
+    {
+      "path": "blog/ifr-oral-exam-scenarios.html",
+      "url": "https://nickrae.net/blog/ifr-oral-exam-scenarios.html",
+      "last_content_change": "2026-07-09",
+      "social_image": "https://nickrae.net/assets/social/ifr-oral-exam-scenarios.png"
+    },
+    {
+      "path": "blog/index.html",
+      "url": "https://nickrae.net/blog/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/pilot-notes.png"
+    },
+    {
+      "path": "blog/instrument-checkride-full-time.html",
+      "url": "https://nickrae.net/blog/instrument-checkride-full-time.html",
+      "last_content_change": "2026-09-09",
+      "social_image": "https://nickrae.net/assets/social/instrument-checkride-full-time.png"
+    },
+    {
+      "path": "blog/kalshi-weather-bot.html",
+      "url": "https://nickrae.net/blog/kalshi-weather-bot.html",
+      "last_content_change": "2026-10-02",
+      "social_image": "https://nickrae.net/assets/social/kalshi-weather-bot.png"
+    },
+    {
+      "path": "blog/multi-engine-add-on-rating-workbook-live.html",
+      "url": "https://nickrae.net/blog/multi-engine-add-on-rating-workbook-live.html",
+      "last_content_change": "2026-04-17",
+      "social_image": "https://nickrae.net/assets/social/multi-engine-add-on-rating-workbook-live.png"
+    },
+    {
+      "path": "blog/openclaw-30-days.html",
+      "url": "https://nickrae.net/blog/openclaw-30-days.html",
+      "last_content_change": "2026-09-04",
+      "social_image": "https://nickrae.net/assets/social/openclaw-30-days.png"
+    },
+    {
+      "path": "blog/openclaw-cron-jobs-guide.html",
+      "url": "https://nickrae.net/blog/openclaw-cron-jobs-guide.html",
+      "last_content_change": "2026-03-26",
+      "social_image": "https://nickrae.net/assets/social/openclaw-cron-jobs-guide.png"
+    },
+    {
+      "path": "blog/openclaw-personal-ai-operations-system.html",
+      "url": "https://nickrae.net/blog/openclaw-personal-ai-operations-system.html",
+      "last_content_change": "2026-08-01",
+      "social_image": "https://nickrae.net/assets/social/openclaw-personal-ai-operations-system.png"
+    },
+    {
+      "path": "blog/openclaw-playbook.html",
+      "url": "https://nickrae.net/blog/openclaw-playbook.html",
+      "last_content_change": "2026-10-02",
+      "social_image": "https://nickrae.net/assets/social/openclaw-playbook.png"
+    },
+    {
+      "path": "blog/self-improving-ai-agents.html",
+      "url": "https://nickrae.net/blog/self-improving-ai-agents.html",
+      "last_content_change": "2026-03-24",
+      "social_image": "https://nickrae.net/assets/social/self-improving-ai-agents.png"
+    },
+    {
+      "path": "blog/student-pilot-apps-2026.html",
+      "url": "https://nickrae.net/blog/student-pilot-apps-2026.html",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/student-pilot-apps-2026.png"
+    },
+    {
+      "path": "blog/walk-through-the-gospels-launch.html",
+      "url": "https://nickrae.net/blog/walk-through-the-gospels-launch.html",
+      "last_content_change": "2026-09-29",
+      "social_image": "https://nickrae.net/assets/social/walk-through-the-gospels-launch.png"
+    },
+    {
+      "path": "feedfare/index.html",
+      "url": "https://nickrae.net/feedfare/",
+      "last_content_change": "2026-10-05",
+      "social_image": null
+    },
+    {
+      "path": "flight-funded/index.html",
+      "url": "https://nickrae.net/flight-funded/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/flight-funded.png"
+    },
+    {
+      "path": "ifr-scenario-pack/index.html",
+      "url": "https://nickrae.net/ifr-scenario-pack/",
+      "last_content_change": "2026-09-10",
+      "social_image": "https://nickrae.net/assets/social/ifr-scenario-pack.png"
+    },
+    {
+      "path": "index.html",
+      "url": "https://nickrae.net/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/home.png"
+    },
+    {
+      "path": "inflection-point/index.html",
+      "url": "https://nickrae.net/inflection-point/",
+      "last_content_change": "2026-10-13",
+      "social_image": "https://nickrae.net/assets/social/inflection-point.png"
+    },
+    {
+      "path": "openclaw-playbook/index.html",
+      "url": "https://nickrae.net/openclaw-playbook/",
+      "last_content_change": "2026-09-04",
+      "social_image": "https://nickrae.net/assets/social/openclaw-playbook.png"
+    },
+    {
+      "path": "privacy/index.html",
+      "url": "https://nickrae.net/privacy/",
+      "last_content_change": "2026-10-13",
+      "social_image": null
+    },
+    {
+      "path": "walk-through-the-gospels/index.html",
+      "url": "https://nickrae.net/walk-through-the-gospels/",
+      "last_content_change": "2026-09-29",
+      "social_image": "https://nickrae.net/assets/social/gospels.png"
+    }
+  ]
+}

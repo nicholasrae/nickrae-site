@@ -1,0 +1,125 @@
+/* Opt-in article presentation. Product and app pages do not use article-page. */
+body.article-page {
+  --text-muted: #a8b4c7;
+  --text-dim: #94a3b8;
+  --accent: #2563eb;
+  --accent2: #7db8ff;
+}
+/* Shared header is opt-in on articles and the notes index only. */
+:is(.article-page, .notes-index) > nav.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: #0a0e17;
+  border-bottom: 1px solid #273449;
+}
+:is(.article-page, .notes-index) > nav.site-header .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  width: min(1120px, 100%);
+  min-height: 64px;
+  height: auto;
+  margin: 0 auto;
+  padding: .5rem 1rem;
+}
+:is(.article-page, .notes-index) > nav.site-header a { text-decoration: none; }
+:is(.article-page, .notes-index) > nav.site-header .logo {
+  color: #e2e8f0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+:is(.article-page, .notes-index) > nav.site-header .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  font-size: .85rem;
+}
+:is(.article-page, .notes-index) > nav.site-header .nav-links a { color: #b9c5d8; }
+:is(.article-page, .notes-index) > nav.site-header .nav-links a:hover { color: #fff; text-decoration: underline; text-underline-offset: .2em; }
+:is(.article-page, .notes-index) > nav.site-header .menu-toggle {
+  display: none;
+  min-height: 44px;
+  min-width: 44px;
+  border: 1px solid #475569;
+  border-radius: .5rem;
+  background: #111827;
+  color: #e2e8f0;
+  font: inherit;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.article-page main { min-width: 0; }
+.article-page main [id] { scroll-margin-top: 9rem; }
+.article-page :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 4px;
+}
+.article-page :is(article, .article-content, main) :is(p, li, blockquote, dd) a:not(:is(.btn, .button, .cta, .cta-blue)) {
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  text-decoration-thickness: 1px;
+  overflow-wrap: anywhere;
+}
+.article-page :is(article, .article-content, main) :is(p, li, blockquote, dd) a:hover {
+  text-decoration-thickness: 2px;
+}
+.article-page :is(h1, h2, h3) { text-wrap: balance; }
+.article-page :is(.article-meta, .post-meta, .meta, .source) { color: var(--text-dim); }
+.article-page .cta-links > a.primary,
+.article-page .cta-box > a:not(.amazon),
+.article-page .btn-primary {
+  background-color: #2563eb;
+  color: #fff;
+}
+.article-page .cta-links > a.primary:hover,
+.article-page .cta-box > a:not(.amazon):hover,
+.article-page .btn-primary:hover {
+  background-color: #1d4ed8;
+  color: #fff;
+  opacity: 1;
+}
+.article-page .article-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin-block: 1.5rem;
+  border: 1px solid #334155;
+  border-radius: .65rem;
+}
+.article-page .article-table-scroll > table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.article-page .article-table-scroll :is(th, td) { vertical-align: top; }
+.article-page .article-table-hint {
+  margin: -.9rem 0 1.5rem;
+  color: var(--text-muted);
+  font-size: .875rem;
+}
+.article-page .article-table-hint[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  html:has(body.article-page) { scroll-behavior: auto; }
+  .article-page *, .article-page *::before, .article-page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+:is(.article-page,.notes-index)>nav.site-header{padding:0}
+.article-page main>article{padding-top:3rem}
+.notes-index main{padding-top:0}
+.article-page .article-nav{position:static;inset:auto;width:100%;background:none;backdrop-filter:none;z-index:auto;border-bottom:0;padding-inline:0}
+:is(.article-page,.notes-index) .skip-link{position:fixed;top:-6rem;left:1rem;z-index:1000;background:#fff;color:#0f172a;padding:.7rem 1rem;border-radius:.35rem;font-weight:800}
+:is(.article-page,.notes-index) .skip-link:focus{top:1rem}
+@media(max-width:860px){.article-page main>article{padding-top:2rem}}

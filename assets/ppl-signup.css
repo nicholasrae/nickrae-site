@@ -4,6 +4,10 @@
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-header h2{margin:0;font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;letter-spacing:-.025em}
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit{min-height:46px;background-color:#2563eb!important;font-weight:700!important}
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-field{min-width:0}
+.ppl-signup .formkit-form[data-uid="899d974875"] .ppl-email-label{display:block;margin:0 0 .4rem;color:#334155;font-size:15px;font-weight:700;text-align:left}
+.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-fields{align-items:flex-end}
+.ppl-signup[data-kit-uid="899d974875"] .formkit-alert.formkit-alert-error{background:#fff1f2;border-color:#be123c;color:#9f1239}
+.ppl-signup[data-kit-uid="899d974875"] .formkit-alert.formkit-alert-success{background:#dcfce7;border-color:#15803d;color:#166534}
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-input:focus-visible,.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit:focus-visible{outline:3px solid #b45309;outline-offset:3px}
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit>span{transition:background-color 140ms ease}
 .ppl-signup .ppl-signup-note{margin:.85rem 0 0;color:var(--muted,var(--text-muted,#aab7c9));font-size:.82rem;text-align:center}

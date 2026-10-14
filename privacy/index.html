@@ -2,20 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+<script>document.documentElement.classList.add('js-nav');</script>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Privacy Policy | Nick Rae</title>
   <meta name="description" content="How nickrae.net handles optional analytics, Kit email signups, outbound links, local preferences, and contact information.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://nickrae.net/privacy/">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
+
   <style>
     *{box-sizing:border-box}html{color-scheme:dark}body{margin:0;background:#0a0e17;color:#e2e8f0;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:#93c5fd;text-decoration:underline;text-underline-offset:3px}a:focus-visible,button:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}.wrap{width:min(760px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}nav{border-bottom:1px solid #29364a;background:#07111f}nav .wrap{padding:1rem 0;display:flex;justify-content:space-between;align-items:center}nav a{font-weight:800;text-decoration:none}h1{font-size:clamp(2rem,7vw,3.2rem);line-height:1.1;margin:3rem 0 1rem}h2{font-size:1.35rem;margin:2.5rem 0 .6rem}p,li{color:#b9c5d8}.lead{font-size:1.1rem;color:#dbeafe}.card{margin:1.5rem 0;padding:1rem 1.2rem;border:1px solid #3b4a62;border-radius:.8rem;background:#111827}.status{display:inline-block;padding:.25rem .55rem;border-radius:999px;background:#172554;color:#bfdbfe;font-size:.8rem;font-weight:800}.buttons{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem}.buttons button{min-height:44px;border:2px solid #93c5fd;border-radius:.55rem;padding:.65rem .9rem;background:#1d4ed8;color:#fff;font:800 14px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}.buttons button.secondary{background:#111827;border-color:#94a3b8}footer{border-top:1px solid #29364a;padding-top:1.5rem;margin-top:3rem;color:#94a3b8}
   </style>
   <script src="/assets/site.js" defer></script>
+
+
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><meta name="theme-color" content="#080d16">
+
+<link rel="stylesheet" href="/assets/site-header.css">
 <link rel="stylesheet" href="/assets/navigation.css">
 </head>
 <body data-page="privacy">
-  <nav><div class="wrap"><a href="/">NICK RAE</a><a href="/blog/">Blog</a></div></nav>
+  <nav class="site-header" aria-label="Primary navigation">
+  <div class="inner">
+    <a class="logo" href="/">NICK RAE</a>
+    <button class="menu-toggle" type="button" aria-label="Navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div class="nav-links" id="nav-links"><a href="/">Home</a><a href="/aviation-workbooks/">Pilot Workbooks</a><a href="/blog/">Pilot Notes</a><a href="/ifr-scenario-pack/">Free IFR Pack</a><a href="/about/">About</a><a href="/#connect">Connect</a></div>
+  </div>
+</nav>
   <main class="wrap">
     <span class="status">Last updated October 13, 2026</span>
     <h1>Privacy policy</h1>
@@ -25,12 +37,12 @@
     <p>The site stores your optional analytics choice in your browser's local storage so the privacy banner does not ask on every page. The embedded Kit signup form may also use browser storage to recognize form visitors and previous subscribers. Static tools, including the flight-hour calculator, run in your browser and do not send calculator inputs to NickRae.net.</p>
 
     <h2>Optional Google analytics and advertising measurement</h2>
-    <p>If you allow measurement, the site loads Google's tag for aggregate traffic and outbound-conversion measurement. Events may include the page path, clicked link, CTA label, placement, destination host, and product category. Ad personalization signals are disabled by this site's loader. Google may still process technical information under its own policies.</p>
+    <p>If you allow measurement, the site loads Google's tag for aggregate traffic and outbound-conversion measurement. Events may include the page path, clicked link, CTA label, placement, destination host, and product category. A calculator-use event records that the calculator was used, without the numbers you entered or the calculated results. Ad personalization signals are disabled by this site's loader. Google may still process technical information under its own policies.</p>
     <p>If you choose “Necessary only,” the Google tag does not load on a fresh page. If you withdraw consent after allowing it, optional event measurement is disabled immediately, the loaded tag element is removed, and known Google measurement cookies are cleared. Reloading keeps the site in necessary-only mode. You can change the choice below.</p>
 
     <div class="card" aria-labelledby="privacy-choice-title">
       <h2 id="privacy-choice-title" style="margin-top:0">Your analytics choice</h2>
-      <p id="privacy-choice-status">Reading this browser's saved choice…</p>
+      <p id="privacy-choice-status" role="status" aria-live="polite" aria-atomic="true">Reading this browser's saved choice…</p>
       <div class="buttons">
         <button type="button" id="allow-analytics">Allow measurement</button>
         <button type="button" class="secondary" id="deny-analytics">Necessary only</button>
