@@ -24,9 +24,11 @@ class Element extends Events {
   getClientRects() { return this.hidden ? [] : [this.rect]; }
   getBoundingClientRect() { return this.rect; }
 }
-function environment({allowed = false, initialConsent = allowed ? 'allow' : null, origin = 'https://nickrae.net', ga4Id = TEST_GA4_ID, autoLoad = true} = {}) {
+function environment({allowed = false, initialConsent = allowed ? 'allow' : null, origin = 'https://nickrae.net', ga4Id = TEST_GA4_ID, autoLoad = true, baseTarget = null} = {}) {
   const storage = new Map(initialConsent ? [['nickrae_analytics_consent_v1', initialConsent]] : []);
   const scripts = [], createdScripts = [], observers = [], intersections = [], cookieWrites = [], reloads = [];
+  const timers = new Map(), navigations = [];
+  let timerId = 0, clock = 0;
   const document = new Events();
   Object.assign(document, {
     readyState: 'loading', referrer: 'https://example.com/article?email=secret@example.com#token',
@@ -40,7 +42,10 @@ function environment({allowed = false, initialConsent = allowed ? 'allow' : null
     },
     head: {appendChild(el) { el.isConnected = true; scripts.push(el); if (autoLoad && !el.loaded) { el.loaded = true; el.onload?.(); } }},
     querySelectorAll(selector) { return selector.includes('googletagmanager') ? scripts : []; },
-    querySelector(selector) { return this.querySelectorAll(selector)[0] || null; }
+    querySelector(selector) {
+      if (selector === 'base[target]' && baseTarget !== null) return {getAttribute: () => baseTarget};
+      return this.querySelectorAll(selector)[0] || null;
+    }
   });
   Object.defineProperty(document, 'cookie', {
     get() { return '_ga=test; _ga_EXAMPLE=test'; }, set(v) { cookieWrites.push(v); }
@@ -50,8 +55,11 @@ function environment({allowed = false, initialConsent = allowed ? 'allow' : null
     location: new URL(origin + '/aviation-workbooks/private-pilot/?email=secret@example.com#private-token'),
     innerWidth: 1000, innerHeight: 800,
     localStorage: {getItem: k => storage.get(k) || null, setItem: (k,v) => storage.set(k,v), removeItem: k => storage.delete(k)},
-    getComputedStyle: e => e.style
+    getComputedStyle: e => e.style,
+    setTimeout(fn, delay) {const id=++timerId;timers.set(id,{fn,at:clock+delay});return id;},
+    clearTimeout(id) {timers.delete(id);}
   });
+  window.location.assign = url => navigations.push(url);
   window.location.reload=()=>reloads.push({
     consent: window.NickRaePrivacy.consent(),
     savedConsent: storage.get('nickrae_analytics_consent_v1') || null,
@@ -83,11 +91,23 @@ function environment({allowed = false, initialConsent = allowed ? 'allow' : null
   const events = () => allEvents().filter(x => x.name !== 'page_view');
   const commands = name => Array.from(window.dataLayer || []).filter(x => x[0] === name);
   const finishLoading = () => { const script = createdScripts.at(-1); script.loaded = true; script.onload?.(); };
-  const click = (href, dataset = {}, text = 'Do not collect this text') => {
-    const link = {href, dataset, textContent: text, closest() {return this;}};
-    document.dispatchEvent({type: 'click', target: link});
+  const click = (href, dataset = {}, text = 'Do not collect this text', options = {}) => {
+    const attributes=options.attributes || {};
+    const link = {
+      href, dataset, textContent: text, onclick:options.onclick || null,
+      closest() {return this;}, matches:selector => selector==='a[href]' && options.tag!=='button',
+      getAttribute:key => attributes[key] ?? null, hasAttribute:key => Object.hasOwn(attributes,key)
+    };
+    const event={type:'click',target:link,button:0,cancelable:true,defaultPrevented:false,preventCalls:0,
+      preventDefault() {this.preventCalls+=1;if(this.cancelable)this.defaultPrevented=true;},...options.event};
+    document.dispatchEvent(event);
+    return event;
   };
-  return {window, document, scripts, createdScripts, observers, intersections, cookieWrites, reloads, events, allEvents, commands, click, finishLoading};
+  const advanceTimers = ms => {
+    clock+=ms;
+    for(const [id,timer] of timers) if(timer.at<=clock) {timers.delete(id);timer.fn();}
+  };
+  return {window, document, scripts, createdScripts, observers, intersections, cookieWrites, reloads, events, allEvents, commands, click, finishLoading, timers, navigations, advanceTimers};
 }
 function signupFixture() {
   const signup = new Element(), form = new Element();
@@ -157,6 +177,80 @@ test('One event per CTA click, including previously untagged previews and produc
   const payload = JSON.stringify(e.events());
   assert(!payload.includes('secret@'));assert(!payload.includes('private-token'));assert(!payload.includes('wanted='));
   e.click('mailto:secret@example.com');assert.equal(e.events().length, rows.length);
+});
+test('Consented same-tab outbound waits for processing and navigates once with the original URL', () => {
+  const e=environment();e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+  const destination='https://www.amazon.com/dp/B0GN81JP9R?tag=retailer&email=secret@example.com#format';
+  const click=e.click(destination,{product:'ppl_workbook',placement:'private-pilot-hero'});
+  assert.equal(click.preventCalls,1);assert.equal(e.navigations.length,0);assert.equal(e.timers.size,1);
+  assert.equal(e.events().length,1);const event=e.events()[0];
+  assert.equal(event.name,'amazon_click');assert.equal(event.params.event_timeout,250);
+  assert.equal(event.params.link_url,'https://www.amazon.com/dp/B0GN81JP9R');
+  assert.equal(event.params.send_to,TEST_GA4_ID);assert(!JSON.stringify(event).includes('secret'));
+  event.params.event_callback();event.params.event_callback();e.advanceTimers(250);
+  assert.deepEqual(e.navigations,[destination]);assert.equal(e.timers.size,0);assert.equal(e.events().length,1);
+});
+test('A suppressed outbound callback releases navigation at 250 ms and ignores late callbacks', () => {
+  const e=environment();e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+  const destination='https://nicholasrae.gumroad.com/l/openclaw-playbook?landing_utm_source=test#checkout';
+  e.click(destination,{track:'checkout'});const callback=e.events()[0].params.event_callback;
+  e.advanceTimers(249);assert.equal(e.navigations.length,0);
+  e.advanceTimers(1);assert.deepEqual(e.navigations,[destination]);
+  callback();callback();e.advanceTimers(1000);
+  assert.equal(e.navigations.length,1);assert.equal(e.events().length,1);assert.equal(e.timers.size,0);
+});
+test('Synchronous processing or a throwing tag cannot double-navigate or strand a link', () => {
+  for(const behavior of ['synchronous','throw']) {
+    const e=environment();e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+    const original=e.window.gtag;
+    e.window.gtag=(...args)=>{
+      assert.equal(e.timers.size,1,'Fallback must be armed before handing the event to the SDK');
+      if(behavior==='throw')throw Error('SDK unavailable');
+      original(...args);args[2].event_callback();args[2].event_callback();
+    };
+    const destination='https://www.amazon.com/dp/B0GN81JP9R';
+    const click=e.click(destination);assert.equal(click.preventCalls,1);
+    assert.deepEqual(e.navigations,[destination]);e.advanceTimers(250);
+    assert.equal(e.navigations.length,1);assert.equal(e.timers.size,0);
+    assert.equal(e.events().length,behavior==='throw'?0:1);
+  }
+});
+test('Modified, canceled, internal, download, new-tab and custom anchor behavior stays native', () => {
+  const external='https://www.amazon.com/dp/B0GN81JP9R';
+  const cases=[
+    {event:{metaKey:true}},{event:{ctrlKey:true}},{event:{shiftKey:true}},{event:{altKey:true}},
+    {event:{button:1}},{event:{button:2}},{event:{cancelable:false}},{event:{defaultPrevented:true}},
+    {attributes:{target:'_blank'}},{attributes:{target:'_parent'}},{attributes:{target:'_top'}},{attributes:{target:'named-window'}},
+    {attributes:{download:''}},{attributes:{onclick:'customHandler()'}},{onclick() {}},
+    {attributes:{rel:'nofollow noreferrer'}},{attributes:{referrerpolicy:'no-referrer'}},
+    {attributes:{ping:'/ping'}},{attributes:{attributionsrc:'/attribution'}},
+    {baseTarget:'_blank'},{tag:'button'},
+    {href:'https://nickrae.net/aviation-workbooks/commercial-pilot/'},
+    {href:'https://nickrae.net/aviation-workbooks/private-pilot/#preview'},
+    {href:'https://nickrae.net/assets/workbook-previews/commercial-pilot-sample.pdf'},
+    {href:'mailto:hello@example.com'}
+  ];
+  for(const options of cases) {
+    const e=environment({baseTarget:options.baseTarget});e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+    const click=e.click(options.href || external,{},'',options);
+    assert.equal(click.preventCalls,0,JSON.stringify(options));assert.equal(e.timers.size,0);
+    assert.equal(e.navigations.length,0);assert(e.events().every(x=>!('event_callback' in x.params)));
+  }
+  // An explicit same-tab target overrides an inherited new-tab target.
+  const e=environment({baseTarget:'_blank'});e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+  assert.equal(e.click(external,{},'',{attributes:{target:'_self'}}).preventCalls,1);
+});
+test('Necessary-only, unavailable, unconfigured and local measurement never delays navigation', () => {
+  for(const mode of ['fresh','denied','loading','withdrawn','unconfigured','local']) {
+    const e=environment({autoLoad:mode!=='loading',ga4Id:mode==='unconfigured'?null:TEST_GA4_ID,
+      origin:mode==='local'?'http://localhost:8080':'https://nickrae.net'});
+    e.window.testAPI.attachGlobalTracking();
+    if(mode!=='fresh' && mode!=='denied')e.window.NickRaePrivacy.allow();
+    if(mode==='denied' || mode==='withdrawn')e.window.NickRaePrivacy.deny();
+    const click=e.click('https://www.amazon.com/dp/B0GN81JP9R');
+    assert.equal(click.preventCalls,0,mode);assert.equal(e.timers.size,0,mode);
+    assert.equal(e.navigations.length,0,mode);assert.equal(e.events().length,0,mode);
+  }
 });
 test('Withdrawal stops clicks, disables Google and clears cookies before requesting one reload', () => {
   const e = environment();e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
@@ -348,12 +442,14 @@ test('Shared helper fixes destination and URLs and excludes unknown input/identi
     event_category:'site_tool',product:'flight_hour_calculator',placement:'cheapest-flight-hours',
     link_url:'https://example.com/path?email=secret@example.com#token',
     page_location:'https://example.com/?private-token',send_to:'AW-WRONG',
-    email:'secret@example.com',user_id:'secret',calculator_input:393.1
-  });
+    email:'secret@example.com',user_id:'secret',calculator_input:393.1,
+    event_callback:()=>{throw Error('Public callback must be ignored');},event_timeout:9000
+  },()=>{throw Error('Public third argument must be ignored');});
   const event=e.events()[0];assert.equal(event.params.send_to,TEST_GA4_ID);
   assert.equal(event.params.link_url,'https://example.com/path');
   assert.equal(event.params.page_location,'https://nickrae.net/aviation-workbooks/private-pilot/');
   assert(!JSON.stringify(event).includes('secret'));assert(!('calculator_input' in event.params));
+  assert(!('event_callback' in event.params));assert(!('event_timeout' in event.params));
 });
 test('Actual calculator callback uses shared consent guard and sends no entered values', () => {
   const html=fs.readFileSync(path.resolve(path.dirname(site),'../blog/blog-cheapest-flight-hours.html'),'utf8');

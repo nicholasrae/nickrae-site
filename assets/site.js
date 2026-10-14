@@ -6,6 +6,7 @@
   const GA4_ID = 'G-VLXK9FKZ0R';
   const ga4Configured = typeof GA4_ID === 'string' && /^G-[A-Z0-9]+$/.test(GA4_ID);
   const CONSENT_KEY = 'nickrae_analytics_consent_v1';
+  const OUTBOUND_WAIT_MS = 250;
   let analyticsReady = false;
   let analyticsInitialized = false;
   let analyticsConfigured = false;
@@ -51,13 +52,21 @@
     } catch (_) { return ''; }
   }
 
-  function trackEvent(name, parameters = {}) {
-    if (!ga4Configured || !analyticsReady || currentConsent() !== 'allow' || typeof window.gtag !== 'function') return false;
+  function canMeasure() {
+    return ga4Configured && analyticsReady && currentConsent() === 'allow' && typeof window.gtag === 'function';
+  }
+
+  function trackEvent(name, parameters = {}, onProcessed) {
+    if (!canMeasure()) return false;
     const details = {};
     ['event_category', 'product', 'placement', 'form_id', 'destination_host'].forEach((key) => {
       if (typeof parameters[key] === 'string') details[key] = parameters[key];
     });
     if (parameters.link_url) details.link_url = measurementUrl(parameters.link_url);
+    if (typeof onProcessed === 'function') {
+      details.event_callback = onProcessed;
+      details.event_timeout = OUTBOUND_WAIT_MS;
+    }
     window.gtag('event', name, {
       ...details,
       page_path: window.location.pathname,
@@ -224,13 +233,38 @@
         const url = link.href ? new URL(link.href, window.location.href) : new URL(window.location.href);
         const eventName = eventNameFor(link, url);
         if (!eventName) return;
-        trackEvent(eventName, {
+        const parameters = {
           event_category: link.dataset.category || 'site_cta',
           product: workbookProduct(url) || link.dataset.product || workbookProduct(new URL(window.location.href)),
           placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
           link_url: link.href ? measurementUrl(link.href) : undefined,
           destination_host: url.hostname
-        });
+        };
+        const target = (link.getAttribute('target') || document.querySelector('base[target]')?.getAttribute('target') || '').toLowerCase();
+        const waitForOutbound = canMeasure() && link.matches('a[href]') && url.origin !== window.location.origin
+          && event.cancelable && !event.defaultPrevented && event.button === 0
+          && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey
+          && (!target || target === '_self') && !link.onclick
+          && !['download', 'onclick', 'referrerpolicy', 'ping', 'attributionsrc'].some((attribute) => link.hasAttribute(attribute))
+          && !/(^|\s)noreferrer(\s|$)/i.test(link.getAttribute('rel') || '');
+        if (!waitForOutbound) {
+          trackEvent(eventName, parameters);
+          return;
+        }
+        // Give the event a brief processing window before this document leaves.
+        // The timer also releases navigation if a blocker suppresses callbacks.
+        event.preventDefault();
+        let navigated = false;
+        const navigate = () => {
+          if (navigated) return;
+          navigated = true;
+          window.clearTimeout(timer);
+          window.location.assign(url.href);
+        };
+        const timer = window.setTimeout(navigate, OUTBOUND_WAIT_MS);
+        try {
+          if (!trackEvent(eventName, parameters, navigate)) navigate();
+        } catch (_) { navigate(); }
       } catch (_) {}
     });
   }
@@ -568,5 +602,5 @@
   };
   // Shared entry point for the calculator; it uses the same consent, host,
   // destination and URL protections as clicks and signup measurement.
-  window.NickRaeMeasurement = Object.freeze({track: trackEvent});
+  window.NickRaeMeasurement = Object.freeze({track: (name, parameters) => trackEvent(name, parameters)});
 })();
