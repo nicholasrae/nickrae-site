@@ -82,20 +82,7 @@
 
   .notes-index .page-header{padding:4rem 0 1.5rem;text-align:left}.notes-index .page-title{font-size:clamp(2.8rem,7vw,4.6rem);line-height:1.05;letter-spacing:-.045em;margin:.6rem 0 1rem}.notes-kicker{font-size:.75rem;text-transform:uppercase;letter-spacing:.09em;color:#93c5fd}.notes-index .page-subtitle{margin:0;max-width:720px}.topic-nav{position:static;display:flex;flex-wrap:wrap;gap:.5rem;border:0;background:none;padding:0 0 2rem}.topic-nav a{display:inline-flex;align-items:center;min-height:44px;padding:.5rem .8rem;border:1px solid #3c526f;border-radius:99px;color:#dbeafe;font-size:.82rem;text-decoration:none}.topic-nav a:hover{border-color:#93c5fd}.notes-group{padding:2.5rem 0;scroll-margin-top:6rem}.notes-group>h2{font-size:1.6rem;letter-spacing:-.02em;margin:0 0 1.25rem}.notes-index .blog-posts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.notes-index .post-card{margin:0;padding:1.5rem;display:flex;flex-direction:column;min-width:0}.notes-index .post-title{font-size:1.35rem;line-height:1.3}.notes-index .post-excerpt{font-size:.95rem;flex:1}.notes-index .post-date,.notes-index .post-meta{color:#b6c3d6}.notes-index .post-category{color:#bfdbfe}.notes-index .read-more{min-height:44px;display:inline-flex;align-items:center;text-decoration:underline;color:#93c5fd}.notes-index .archive-details{margin-top:2rem}.notes-index .archive-details summary{min-height:44px;font-size:1.1rem}.notes-index .featured-cluster{margin:0 0 1rem}.notes-index a:focus-visible,.notes-index summary:focus-visible{outline:3px solid #fbbf24;outline-offset:4px}@media(max-width:700px){.notes-index .blog-posts{grid-template-columns:1fr}.notes-index .page-header{padding-top:2.5rem}.notes-index .post-card{padding:1.1rem}.notes-index .featured-grid{grid-template-columns:1fr 1fr}.notes-index .featured-link{padding:.85rem}.notes-index .featured-link strong{font-size:.9rem}.notes-index .featured-link span{font-size:.8rem}}@media(max-width:360px){.notes-index .featured-grid{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-<script>document.addEventListener('click', function(event){
-    var el = event.target.closest && event.target.closest('a[href],button[data-event]');
-    if(!el || typeof gtag !== 'function') return;
-    try {
-      var url = el.href ? new URL(el.href, window.location.href) : null;
-      gtag('event', el.dataset.event || 'blog_internal_click', {
-        event_category: el.dataset.category || 'site_cta',
-        product: el.dataset.product || undefined,
-        placement: el.dataset.placement || document.body.dataset.page || window.location.pathname,
-        link_url: url ? url.href : undefined
-      });
-    } catch(e) {}
-  });</script>
-<script src="/assets/site.js?v=36aa91e7be63" defer></script>
+<script src="/assets/site.js?v=e1e11ddb009e" defer></script>
 <script>document.documentElement.classList.add('js-nav');</script>
 <link rel="stylesheet" href="/assets/navigation.css?v=53dcc09ff85f">
 <link rel="stylesheet" href="/assets/article.css?v=615d70b926ed">

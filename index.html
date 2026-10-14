@@ -246,26 +246,7 @@
 }
 </script>
 
-<script>
-  document.addEventListener('click', function (event) {
-    var link = event.target.closest && event.target.closest('a[href]');
-    if (!link || typeof gtag !== 'function') return;
-    try {
-      var url = new URL(link.href, window.location.href);
-      var host = url.hostname.replace(/^www\./, '');
-      var product = link.dataset.product || 'other';
-      if (host.includes('amazon.com') || host === 'a.co') product = product === 'other' ? 'amazon_workbook' : product;
-      if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
-      if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
-      if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
-      var eventName = link.dataset.event || ((host.includes('amazon.com') || host === 'a.co') ? 'amazon_click' : 'outbound_cta_click');
-      if (url.hostname !== window.location.hostname || product !== 'other' || link.dataset.event) {
-        gtag('event', eventName, {event_category:link.dataset.category || (eventName === 'outbound_cta_click' ? 'outbound_cta' : 'site_engagement'),product:product,placement:link.dataset.placement || document.body.dataset.page || window.location.pathname,link_url:url.href});
-      }
-    } catch (e) {}
-  });
-</script>
-<script src="/assets/site.js?v=36aa91e7be63" defer></script>
+<script src="/assets/site.js?v=e1e11ddb009e" defer></script>
 
 
 <link rel="stylesheet" href="/assets/ppl-signup.css?v=ec0c262ecfc6">

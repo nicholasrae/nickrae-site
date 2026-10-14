@@ -208,26 +208,7 @@
   .books{align-items:stretch}.book{align-content:stretch;grid-template-rows:auto}.book-content{display:flex;flex-direction:column;min-width:0}.book h2 a{color:var(--text);text-decoration:none}.book h2 a:hover{text-decoration:underline}.book-content>p{margin:.55rem 0}.book-detail a{font-weight:800;text-decoration:underline}.book .product-links{margin-top:auto;padding-top:.8rem;align-items:stretch}.product-links .format-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.65rem .8rem;border:1px solid #6b819e;border-radius:.45rem;color:#e2e8f0;font-size:.78rem;font-weight:800;text-decoration:none}.sample-section{padding:4rem 0;background:#0f1725;border-block:1px solid var(--border)}.full-sample{max-width:820px;margin:1.5rem 0;padding:1.5rem;border:1px solid var(--border);border-radius:.9rem;background:var(--card)}.social-proof{padding:3.5rem 0}.book a:focus-visible,.sample-section a:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}.sample-section [id]{scroll-margin-top:6rem}@media(max-width:520px){.book .product-links{flex-direction:column}.book .product-links a{width:100%}.full-sample{padding:1rem}.sample-section{padding-block:3rem}}
 </style>
 
-<script>
-  document.addEventListener('click', function (event) {
-    var link = event.target.closest && event.target.closest('a[href]');
-    if (!link || typeof gtag !== 'function') return;
-    try {
-      var url = new URL(link.href, window.location.href);
-      var host = url.hostname.replace(/^www\./, '');
-      var product = link.dataset.product || 'other';
-      if (host.includes('amazon.com') || host === 'a.co') product = product === 'other' ? 'amazon_workbook' : product;
-      if (host.includes('apps.apple.com')) product = product === 'other' ? 'app_store' : product;
-      if (host.includes('gumroad.com')) product = product === 'other' ? 'gumroad' : product;
-      if (host.includes('ko-fi.com')) product = product === 'other' ? 'kofi' : product;
-      var eventName = link.dataset.event || ((host.includes('amazon.com') || host === 'a.co') ? 'amazon_click' : 'outbound_cta_click');
-      if (url.hostname !== window.location.hostname || product !== 'other' || link.dataset.event) {
-        gtag('event', eventName, {event_category:link.dataset.category || (eventName === 'outbound_cta_click' ? 'outbound_cta' : 'site_engagement'),product:product,placement:link.dataset.placement || document.body.dataset.page || window.location.pathname,link_url:url.href});
-      }
-    } catch (e) {}
-  });
-</script>
-<script src="/assets/site.js?v=36aa91e7be63" defer></script>
+<script src="/assets/site.js?v=e1e11ddb009e" defer></script>
 
 
 <link rel="stylesheet" href="/assets/ppl-signup.css?v=ec0c262ecfc6">

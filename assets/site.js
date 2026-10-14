@@ -5,6 +5,14 @@
   const CONSENT_KEY = 'nickrae_analytics_consent_v1';
   let analyticsReady = false;
   let consentResizeObserver;
+  let consentRevision = 0;
+  const WORKBOOK_PRODUCTS = {
+    'private-pilot': 'ppl_workbook',
+    'instrument-rating': 'instrument_workbook',
+    'commercial-pilot': 'commercial_workbook',
+    'multi-engine': 'multi_engine_workbook',
+    'vfr-radio': 'vfr_radio_calls_workbook'
+  };
 
   function currentConsent() {
     try { return window.localStorage.getItem(CONSENT_KEY); }
@@ -12,11 +20,33 @@
   }
 
   function setConsent(value) {
+    if (value !== currentConsent()) consentRevision += 1;
     try { window.localStorage.setItem(CONSENT_KEY, value); }
     catch (_) {}
   }
 
+  // Never include query strings, fragments, mail addresses or input values in
+  // our measurement payloads. Retailer links themselves are left unchanged.
+  function measurementUrl(value) {
+    try {
+      const url = new URL(value, window.location.href);
+      return /^https?:$/.test(url.protocol) ? url.origin + url.pathname : '';
+    } catch (_) { return ''; }
+  }
+
+  function trackEvent(name, parameters) {
+    if (!analyticsReady || currentConsent() !== 'allow' || typeof window.gtag !== 'function') return false;
+    window.gtag('event', name, {
+      page_path: window.location.pathname,
+      measurement_version: '2026-10-13',
+      ...parameters
+    });
+    return true;
+  }
+
   function loadAnalytics() {
+    // Local previews and staging hosts must never pollute production reports.
+    if (window.location.protocol !== 'https:' || !['nickrae.net', 'www.nickrae.net'].includes(window.location.hostname)) return;
     if (analyticsReady || currentConsent() !== 'allow') return;
     analyticsReady = true;
     window.dataLayer = window.dataLayer || [];
@@ -28,7 +58,11 @@
       ad_personalization: 'denied'
     });
     window.gtag('js', new Date());
-    window.gtag('config', TAG_ID, {allow_ad_personalization_signals: false});
+    window.gtag('config', TAG_ID, {
+      allow_ad_personalization_signals: false,
+      page_location: measurementUrl(window.location.href),
+      page_referrer: document.referrer ? measurementUrl(document.referrer) : ''
+    });
     const script = document.createElement('script');
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(TAG_ID)}`;
@@ -73,37 +107,49 @@
     }
   }
 
+  function workbookProduct(url) {
+    if (url.origin !== window.location.origin) return undefined;
+    const match = url.pathname.match(/^\/aviation-workbooks\/([^/]+)\/(?:index\.html)?$/);
+    return match ? WORKBOOK_PRODUCTS[match[1]] : undefined;
+  }
+
   function eventNameFor(link, url) {
+    if (!/^https?:$/.test(url.protocol)) return null;
+    if (workbookProduct(url) && !url.hash) return 'product_detail_click';
+    if (link.dataset.event === 'product_view') return 'product_detail_click';
+    if (link.dataset.event === 'workbook_sample_view') return 'workbook_preview_click';
     if (link.dataset.event) return link.dataset.event;
     if (link.dataset.track) return `openclaw_${link.dataset.track}_click`;
     const host = url.hostname.replace(/^www\./, '');
-    if (host.includes('amazon.com') || host === 'a.co') return 'amazon_click';
-    if (host.includes('gumroad.com')) return 'gumroad_click';
-    if (host.includes('apps.apple.com')) return 'app_store_click';
+    if (host === 'amazon.com' || host.endsWith('.amazon.com') || host === 'a.co') return 'amazon_click';
+    if (host === 'gumroad.com' || host.endsWith('.gumroad.com')) return 'gumroad_click';
+    if (host === 'apps.apple.com') return 'app_store_click';
+    if (host === 'nick-rae.kit.com' && url.pathname.replace(/\/$/, '') === '/899d974875') return 'ppl_signup_fallback_click';
     if (url.origin !== window.location.origin) return 'outbound_cta_click';
+    if (url.pathname.startsWith('/assets/workbooks/previews/') || url.pathname.startsWith('/assets/workbook-previews/')) {
+      return url.pathname.endsWith('.pdf') ? 'workbook_sample_download' : 'workbook_preview_open';
+    }
+    if (url.pathname.startsWith('/assets/workbooks/') && url.pathname.endsWith('.pdf')) return 'workbook_sample_download';
+    if (['#preview', '#instrument-sample'].includes(url.hash)) return 'workbook_preview_click';
+    if (url.hash === '#free-ppl-cards') return 'ppl_signup_click';
+    if (link.dataset.product) return 'site_cta_click';
     return null;
   }
 
   function attachGlobalTracking() {
-    const hasLegacyClickTracking = [...document.scripts].some((script) => {
-      const text = script.textContent || '';
-      return text.includes("addEventListener('click'") && text.includes('gtag(');
-    });
-    if (hasLegacyClickTracking) return;
     document.addEventListener('click', (event) => {
       const link = event.target.closest && event.target.closest('a[href],button[data-event]');
-      if (!link || !analyticsReady || typeof window.gtag !== 'function') return;
+      if (!link) return;
       try {
         const url = link.href ? new URL(link.href, window.location.href) : new URL(window.location.href);
         const eventName = eventNameFor(link, url);
         if (!eventName) return;
-        window.gtag('event', eventName, {
-          send_to: eventName.startsWith('openclaw_') ? TAG_ID : undefined,
+        trackEvent(eventName, {
           event_category: link.dataset.category || 'site_cta',
-          product: link.dataset.product || undefined,
+          product: workbookProduct(url) || link.dataset.product || workbookProduct(new URL(window.location.href)),
           placement: link.dataset.placement || document.body.dataset.page || window.location.pathname,
-          link_url: link.href || undefined,
-          link_text: (link.textContent || '').trim().slice(0, 120) || undefined
+          link_url: link.href ? measurementUrl(link.href) : undefined,
+          destination_host: url.hostname
         });
       } catch (_) {}
     });
@@ -283,9 +329,85 @@
     });
   }
 
+  function measurePplSignup(signup, index) {
+    const uid = '899d974875';
+    const formSelector = `form[data-uid="${uid}"]`;
+    const successSelector = `.formkit-alert-success[data-element="success"][id="${uid}"]`;
+    const parameters = {
+      event_category: 'ppl_signup',
+      form_id: uid,
+      product: 'free_ppl_cards',
+      placement: `${window.location.pathname}:ppl-${index + 1}`
+    };
+    let form;
+    let viewed = false;
+    let accepted = false;
+    let pendingRevision = null;
+    let completionSeen = false;
+    let previousSuccess = new Set(signup.querySelectorAll(successSelector));
+
+    const visible = (element) => {
+      if (!element || !element.isConnected || element.hidden || !element.getClientRects().length) return false;
+      const style = window.getComputedStyle(element);
+      return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+    };
+    const recordView = () => {
+      if (viewed || !visible(form)) return;
+      const rect = form.getBoundingClientRect();
+      const width = Math.max(0, Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0));
+      const height = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+      // One measured impression per rendered placement, at least 25% visible.
+      if (width * height >= rect.width * rect.height * 0.25 && rect.width * rect.height > 0) {
+        viewed = trackEvent('ppl_form_view', parameters);
+      }
+    };
+    const visibilityObserver = typeof IntersectionObserver === 'function'
+      ? new IntersectionObserver(recordView, {threshold: [0, 0.25]}) : null;
+
+    signup.addEventListener('submit', (event) => {
+      if (!event.target.matches(formSelector)) return;
+      recordView();
+      completionSeen = false;
+      previousSuccess = new Set(signup.querySelectorAll(successSelector));
+      pendingRevision = trackEvent('ppl_form_submit', parameters) ? consentRevision : null;
+    }, true);
+    // Kit emits this only after its accepted-response flow. Its detail includes
+    // the entered email, so never inspect, copy or forward event.detail.
+    signup.addEventListener('ckjs:submission:complete', (event) => {
+      if (event.target.matches(formSelector) && pendingRevision !== null) completionSeen = true;
+    });
+
+    const inspect = () => {
+      const currentForm = signup.querySelector(formSelector);
+      if (currentForm !== form) {
+        if (form) visibilityObserver?.unobserve(form);
+        form = currentForm;
+        if (form) visibilityObserver?.observe(form);
+      }
+      recordView();
+      if (accepted || !completionSeen || pendingRevision === null || pendingRevision !== consentRevision) return;
+      const success = signup.querySelector(successSelector);
+      if (!previousSuccess.has(success) && visible(success)) {
+        // This means Kit displayed its accepted message. It is not evidence of
+        // email confirmation, a new unique subscriber, PDF delivery or a sale.
+        accepted = trackEvent('ppl_form_accepted', parameters);
+        pendingRevision = null;
+      }
+    };
+    const observer = new MutationObserver(inspect);
+    observer.observe(signup, {childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style', 'hidden']});
+    window.addEventListener('nickrae:analytics-ready', inspect);
+    if (!visibilityObserver) {
+      window.addEventListener('scroll', recordView, {passive: true});
+      window.addEventListener('resize', recordView, {passive: true});
+    }
+    inspect();
+  }
+
   function enhancePplSignup() {
     const uid = '899d974875';
     document.querySelectorAll('.ppl-signup').forEach((signup, index) => {
+      measurePplSignup(signup, index);
       const enhance = () => {
         const form = signup.querySelector(`form[data-uid="${uid}"]`);
         if (form) {

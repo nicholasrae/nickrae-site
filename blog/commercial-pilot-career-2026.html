@@ -125,7 +125,7 @@
   }
 </style>
 
-<script src="/assets/site.js?v=36aa91e7be63" defer></script>
+<script src="/assets/site.js?v=e1e11ddb009e" defer></script>
 <script>document.documentElement.classList.add('js-nav');</script>
 <link rel="stylesheet" href="/assets/navigation.css?v=53dcc09ff85f">
 <link rel="stylesheet" href="/assets/article.css?v=615d70b926ed">
@@ -255,20 +255,5 @@
   });
 </script>
 
-<script>
-  document.addEventListener('click', function(event){
-    var el = event.target.closest && event.target.closest('a[data-event]');
-    if(!el || typeof gtag !== 'function') return;
-    try {
-      var url = new URL(el.href, window.location.href);
-      gtag('event', el.dataset.event, {
-        event_category: 'site_cta',
-        product: el.dataset.product || undefined,
-        placement: el.dataset.placement || document.body.dataset.page || window.location.pathname,
-        link_url: url.href
-      });
-    } catch(e) {}
-  });
-</script>
 </body>
 </html>

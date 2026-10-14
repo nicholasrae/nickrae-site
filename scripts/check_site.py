@@ -283,6 +283,9 @@ class Audit:
                     self.check_css(node.attrs["style"], page.url, source, node.line)
                 if node.tag == "style":
                     self.check_css(node.text, page.url, source, node.line)
+                if node.tag == "script" and not node.attrs.get("src"):
+                    if re.search(r"addEventListener\(\s*['\"]click['\"]", node.text) and re.search(r"\bgtag\s*\(", node.text):
+                        self.error(source, "inline analytics click handler duplicates shared assets/site.js tracking", node.line)
                 if node.tag == "meta" and node.attrs.get("property", node.attrs.get("name", "")) in ("og:image", "twitter:image", "og:url"):
                     self.check_url(node.attrs.get("content"), page.url, source, node.line, fragments=False)
                 if node.tag == "script" and node.attrs.get("type") == "application/ld+json":
