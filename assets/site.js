@@ -306,7 +306,10 @@
         }
         if (signup.dataset.kitUid !== uid) return;
         signup.querySelectorAll('.formkit-alert-error, [data-element="errors"]').forEach((alert) => {
-          alert.setAttribute('role', 'alert');
+          // Kit renders its errors as a list. Keep its native list semantics;
+          // aria-live announces updates without an incompatible alert role.
+          if (alert.matches('ul, ol')) alert.removeAttribute('role');
+          else alert.setAttribute('role', 'alert');
           alert.setAttribute('aria-live', 'assertive');
           alert.setAttribute('aria-atomic', 'true');
         });
