@@ -12,8 +12,31 @@ const TEST_GA4_ID = 'G-TEST000001';
 
 class Events {
   constructor() { this.listeners = {}; }
-  addEventListener(name, fn) { (this.listeners[name] ||= []).push(fn); }
-  dispatchEvent(event) { for (const fn of this.listeners[event.type] || []) fn(event); }
+  addEventListener(name, fn, options = false) {
+    const capture = options === true || !!options?.capture;
+    (this.listeners[name] ||= []).push({fn, capture});
+  }
+  removeEventListener(name, fn, options = false) {
+    const capture = options === true || !!options?.capture;
+    this.listeners[name] = (this.listeners[name] || []).filter(listener => listener.fn !== fn || listener.capture !== capture);
+  }
+  dispatchAtTarget(event) {
+    event.eventPhase = 2;
+    for (const capture of [true, false]) {
+      for (const listener of this.listeners[event.type] || []) if (listener.capture === capture) listener.fn(event);
+    }
+  }
+  dispatchEvent(event) {
+    if (!event.target || event.target === this) return this.dispatchAtTarget(event);
+    // This object is the ancestor used by these DOM doubles. Capture runs
+    // before the target, then non-capture listeners run during bubbling.
+    event.eventPhase = 1;
+    for (const listener of this.listeners[event.type] || []) if (listener.capture) listener.fn(event);
+    event.target.dispatchAtTarget?.(event);
+    event.eventPhase = 3;
+    for (const listener of this.listeners[event.type] || []) if (!listener.capture) listener.fn(event);
+    event.eventPhase = 0;
+  }
 }
 class Element extends Events {
   constructor() {
@@ -85,7 +108,7 @@ function environment({allowed = false, initialConsent = allowed ? 'allow' : null
   const marker = fixtureSource.lastIndexOf('})();');
   assert(marker > 0);
   const instrumented = fixtureSource.slice(0, marker) +
-    'window.testAPI = {attachGlobalTracking, measurePplSignup, preservePplAttribution};\n' + fixtureSource.slice(marker);
+    'window.testAPI = {attachGlobalTracking, measurePplSignup, preservePplAttribution, attachPplNativeAttribution};\n' + fixtureSource.slice(marker);
   vm.runInNewContext(instrumented, context, {filename: site});
   const allEvents = () => Array.from(window.dataLayer || []).filter(x => x[0] === 'event').map(x => ({name: x[1], params: x[2]}));
   const events = () => allEvents().filter(x => x.name !== 'page_view');
@@ -226,6 +249,110 @@ test('Denied measurement still preserves published campaign URLs without adding 
   e.window.testAPI.preservePplAttribution();
   assert.equal(new URL(links[0].href).searchParams.get('utm_source'), 'youtube');
   assert.equal(e.scripts.length, 0);assert.equal(e.allEvents().length, 0);
+});
+function nativeAttributionFixture(e, {uid = '899d974875', formId = '10042240', method = 'post', action = 'https://app.kit.com/forms/10042240/subscriptions'} = {}) {
+  const fields = [];
+  const createElement = e.document.createElement;
+  e.document.createElement = tag => Object.assign(createElement(tag), {
+    dataset: {},
+    remove() {const i = fields.indexOf(this);if (i >= 0) fields.splice(i, 1);}
+  });
+  const form = Object.assign(new Events(), {
+    method, action,
+    matches: selector => selector === `form[data-uid="${uid}"][data-sv-form="${formId}"]`,
+    appendChild(input) {fields.push(input);},
+    querySelectorAll(selector) {
+      if (selector === 'input[data-nickrae-native-attribution]') return fields.filter(input => input.dataset.nickraeNativeAttribution);
+      const name = selector.match(/^input\[name="([a-z]+)"\]$/)?.[1];
+      return fields.filter(input => input.name === name);
+    }
+  });
+  Object.defineProperty(form, 'value', {get() {throw Error('Attribution must not read entered form values');}});
+  const submit = (defaultPrevented = false) => {
+    const event = {type: 'submit', target: form, defaultPrevented, preventCalls: 0,
+      preventDefault() {this.defaultPrevented = true;this.preventCalls += 1;}};
+    e.document.dispatchEvent(event);
+    return event;
+  };
+  return {form, fields, submit};
+}
+test('Native Kit POST includes sanitized campaign attribution without requiring Google consent', () => {
+  const e = environment({initialConsent: 'deny'});e.window.testAPI.attachPplNativeAttribution();
+  e.window.location.search = '?' + pplCampaignQuery + '&email=secret%40example.com&token=private-token';
+  const f = nativeAttributionFixture(e);const event = f.submit();
+  const values = Object.fromEntries(f.fields.map(input => [input.name, input.value]));
+  assert.deepEqual(values, {
+    host: 'https://nickrae.net/aviation-workbooks/private-pilot/?' + pplCampaignQuery,
+    search: '?' + pplCampaignQuery,
+    referrer: 'https://example.com/article'
+  });
+  assert(f.fields.every(input => input.type === 'hidden'));
+  assert.equal(event.preventCalls, 0);
+  assert(!JSON.stringify(values).includes('secret'));assert(!JSON.stringify(values).includes('private-token'));
+  assert.equal(e.scripts.length, 0);assert.equal(e.allEvents().length, 0);
+});
+test('SDK-handled submit receives no fallback duplicates, including after a canceled native attempt', () => {
+  const e = environment();e.window.testAPI.attachPplNativeAttribution();
+  e.window.location.search = '?' + pplCampaignQuery;
+  const f = nativeAttributionFixture(e);f.submit(true);assert.equal(f.fields.length, 0);
+  f.submit();assert.equal(f.fields.length, 3);
+  f.submit();assert.equal(f.fields.length, 3);
+  f.submit(true);assert.equal(f.fields.length, 0);
+});
+test('Capture removes stale fallback fields before synchronous SDK FormData and bubble leaves SDK metadata singular', () => {
+  const e = environment();e.window.testAPI.attachPplNativeAttribution();
+  e.window.location.search = '?' + pplCampaignQuery;
+  const f = nativeAttributionFixture(e);f.submit();assert.equal(f.fields.length, 3);
+  const vendor = {name:'vendor_field',value:'keep',dataset:{}};f.fields.push(vendor);
+  const order = [];let sdkBody;
+  e.document.addEventListener('submit', event => {
+    order.push('capture');assert.equal(event.eventPhase, 1);
+    assert.equal(f.fields.filter(input => input.dataset.nickraeNativeAttribution).length, 0);
+  }, true);
+  const sdkTarget = event => {
+    order.push('target');assert.equal(event.eventPhase, 2);
+    // Snapshot the successful inputs synchronously, as new FormData(form)
+    // would, then append SDK metadata before any document bubble listener.
+    sdkBody = new URLSearchParams(f.fields.map(input => [input.name,input.value]));
+    assert.equal(sdkBody.has('host'), false);assert.equal(sdkBody.has('search'), false);assert.equal(sdkBody.has('referrer'), false);
+    sdkBody.append('host', 'sdk-host');sdkBody.append('search', 'sdk-search');sdkBody.append('referrer', 'sdk-referrer');
+    event.preventDefault();
+  };
+  f.form.addEventListener('submit', sdkTarget);
+  e.document.addEventListener('submit', event => {order.push('bubble');assert.equal(event.eventPhase, 3);});
+  const event = f.submit();
+  assert.deepEqual(order, ['capture','target','bubble']);assert.equal(event.preventCalls, 1);
+  for (const name of ['host','search','referrer']) assert.equal(sdkBody.getAll(name).length, 1);
+  assert.equal(sdkBody.get('vendor_field'), 'keep');assert.deepEqual(f.fields, [vendor]);
+  f.form.removeEventListener('submit', sdkTarget);order.length = 0;
+  const nativeEvent = f.submit();
+  assert.equal(nativeEvent.preventCalls, 0);assert.equal(f.fields.length, 4);
+  assert.equal(f.fields.filter(input => input.dataset.nickraeNativeAttribution).length, 3);
+  assert.equal(vendor.value, 'keep');
+});
+test('Fallback only enhances the exact approved native POST form and preserves future vendor fields', () => {
+  for (const config of [
+    {uid:'other'}, {formId:'42'}, {method:'get'},
+    {action:'https://example.com/forms/10042240/subscriptions'},
+    {action:'https://app.kit.com/forms/42/subscriptions'}
+  ]) {
+    const e = environment();e.window.testAPI.attachPplNativeAttribution();
+    const f = nativeAttributionFixture(e, config);f.submit();assert.equal(f.fields.length, 0);
+  }
+  const e = environment();e.window.testAPI.attachPplNativeAttribution();
+  const f = nativeAttributionFixture(e);const vendor = {name:'host',value:'vendor-value',dataset:{}};
+  f.fields.push(vendor);f.submit();
+  assert.equal(f.fields.filter(input => input.name === 'host').length, 1);
+  assert.equal(vendor.value, 'vendor-value');
+});
+test('Untagged or unrecognized native signups contain no arbitrary campaign or URL query fields', () => {
+  for (const query of ['?email=secret%40example.com', '?' + pplCampaignQuery.replace('laxHqAqtRIg','secret@example.com')]) {
+    const e = environment();e.window.testAPI.attachPplNativeAttribution();e.window.location.search = query;
+    const f = nativeAttributionFixture(e);f.submit();
+    const values = Object.fromEntries(f.fields.map(input => [input.name,input.value]));
+    assert.equal(values.search, '');assert(!JSON.stringify(values).includes('secret'));
+    assert.equal(values.host, 'https://nickrae.net/aviation-workbooks/private-pilot/');
+  }
 });
 test('Localhost, loopback, dev hosts and insecure HTTP never load production measurement', () => {
   for (const origin of ['http://localhost:8080','http://127.0.0.1:8080','https://preview.nickrae.net','http://nickrae.net']) {

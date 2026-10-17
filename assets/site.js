@@ -106,6 +106,55 @@
     });
   }
 
+  function attachPplNativeAttribution() {
+    const approvedForm = (event) => {
+      try {
+        const form = event.target;
+        if (!form?.matches?.('form[data-uid="899d974875"][data-sv-form="10042240"]')) return null;
+        const action = new URL(form.action, window.location.href);
+        if (form.method.toLowerCase() !== 'post' || action.origin !== 'https://app.kit.com'
+          || action.pathname !== '/forms/10042240/subscriptions') return null;
+        return form;
+      } catch (_) { return null; }
+    };
+    document.addEventListener('submit', (event) => {
+      const form = approvedForm(event);
+      if (!form) return;
+      try {
+        // Remove our fields from any previously canceled native attempt before
+        // target handlers can construct FormData. Leave vendor fields intact.
+        form.querySelectorAll('input[data-nickrae-native-attribution]').forEach((input) => input.remove());
+      } catch (_) {}
+    }, true);
+    document.addEventListener('submit', (event) => {
+      const form = approvedForm(event);
+      // Kit's target handler prevents default. Only enhance the ordinary POST.
+      if (!form || event.defaultPrevented) return;
+      try {
+        const campaign = new URLSearchParams(pplCampaign()).toString();
+        const values = {
+          host: measurementUrl(window.location.href) + (campaign ? `?${campaign}` : ''),
+          search: campaign ? `?${campaign}` : '',
+          referrer: document.referrer ? measurementUrl(document.referrer) : ''
+        };
+        Object.entries(values).forEach(([name, value]) => {
+          const existing = [...form.querySelectorAll(`input[name="${name}"]`)];
+          // A future Kit embed may supply its own fields; leave those intact.
+          if (existing.some((input) => !input.dataset.nickraeNativeAttribution)) return;
+          const input = existing[0] || document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = value;
+          input.dataset.nickraeNativeAttribution = name;
+          existing.slice(1).forEach((duplicate) => duplicate.remove());
+          if (!existing.length) form.appendChild(input);
+        });
+      } catch (_) {
+        // Attribution must never stop a visitor from subscribing.
+      }
+    });
+  }
+
   function canMeasure() {
     return ga4Configured && analyticsReady && currentConsent() === 'allow' && typeof window.gtag === 'function';
   }
@@ -622,6 +671,7 @@
     enhancePplSignup();
     addPrivacyLink();
     preservePplAttribution();
+    attachPplNativeAttribution();
     preserveCheckoutAttribution();
     attachGlobalTracking();
     if (currentConsent() === 'allow') loadAnalytics();
