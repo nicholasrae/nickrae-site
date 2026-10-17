@@ -7,6 +7,14 @@
   const ga4Configured = typeof GA4_ID === 'string' && /^G-[A-Z0-9]+$/.test(GA4_ID);
   const CONSENT_KEY = 'nickrae_analytics_consent_v1';
   const OUTBOUND_WAIT_MS = 250;
+  // Only campaign values we publish are eligible for forwarding or Google
+  // measurement. Never turn arbitrary URL text into subscriber/analytics data.
+  const PPL_CAMPAIGN_SOURCES = new Set(['youtube']);
+  const PPL_CAMPAIGN_MEDIA = new Set(['video']);
+  const PPL_CAMPAIGN_CONTENT = new Set([
+    'laxHqAqtRIg', 'mZdwer_KGV0', 'Uuo15pRmiQI',
+    'vaPO0eD5SIo', 'k5icun6orDQ', '1QZxKtL2uz0', 'channel_profile'
+  ]);
   let analyticsReady = false;
   let analyticsInitialized = false;
   let analyticsConfigured = false;
@@ -50,6 +58,52 @@
       const url = new URL(value, window.location.href);
       return /^https?:$/.test(url.protocol) ? url.origin + url.pathname : '';
     } catch (_) { return ''; }
+  }
+
+  function pplCampaign() {
+    const query = new URLSearchParams(window.location.search);
+    const single = (key) => query.getAll(key).length === 1 ? query.get(key) : null;
+    const source = single('utm_source');
+    const medium = single('utm_medium');
+    const campaign = single('utm_campaign');
+    const content = single('utm_content');
+    if (!PPL_CAMPAIGN_SOURCES.has(source) || !PPL_CAMPAIGN_MEDIA.has(medium)
+      || campaign !== 'free_ppl_cards' || !PPL_CAMPAIGN_CONTENT.has(content)) return {};
+    return {utm_source: source, utm_medium: medium, utm_campaign: campaign, utm_content: content};
+  }
+
+  function googlePplCampaign() {
+    const campaign = pplCampaign();
+    if (!campaign.utm_source) return {};
+    return {
+      campaign_source: campaign.utm_source,
+      campaign_medium: campaign.utm_medium,
+      campaign_name: campaign.utm_campaign,
+      campaign_content: campaign.utm_content
+    };
+  }
+
+  function preservePplAttribution() {
+    const campaign = pplCampaign();
+    if (!campaign.utm_source) return;
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.getAttribute('href');
+      // Native fragment navigation already keeps this page's URL intact.
+      if (!href || href.startsWith('#') || link.hasAttribute('download')) return;
+      try {
+        const url = new URL(href, window.location.href);
+        const localPage = url.origin === window.location.origin && /^https?:$/.test(url.protocol)
+          && (url.pathname.endsWith('/') || url.pathname.endsWith('.html'));
+        const hostedForm = url.origin === 'https://nick-rae.kit.com'
+          && url.pathname.replace(/\/$/, '') === '/899d974875';
+        if (!localPage && !hostedForm) return;
+        // A deliberately tagged destination keeps its own campaign. Avoid
+        // mixing fields from two campaigns or rewriting outbound retailers.
+        if ([...url.searchParams.keys()].some((key) => key.startsWith('utm_'))) return;
+        Object.entries(campaign).forEach(([key, value]) => url.searchParams.set(key, value));
+        link.href = url.toString();
+      } catch (_) {}
+    });
   }
 
   function canMeasure() {
@@ -96,7 +150,10 @@
         allow_google_signals: false,
         allow_ad_personalization_signals: false,
         page_location: measurementUrl(window.location.href),
-        page_referrer: document.referrer ? measurementUrl(document.referrer) : ''
+        page_referrer: document.referrer ? measurementUrl(document.referrer) : '',
+        // Google documents these campaign overrides. They preserve our known
+        // campaign attribution while page_location continues to omit queries.
+        ...googlePplCampaign()
       };
       window.gtag('set', config);
       window.gtag('config', TAG_ID, config);
@@ -564,6 +621,7 @@
     enhanceArticleTables();
     enhancePplSignup();
     addPrivacyLink();
+    preservePplAttribution();
     preserveCheckoutAttribution();
     attachGlobalTracking();
     if (currentConsent() === 'allow') loadAnalytics();

@@ -85,7 +85,7 @@ function environment({allowed = false, initialConsent = allowed ? 'allow' : null
   const marker = fixtureSource.lastIndexOf('})();');
   assert(marker > 0);
   const instrumented = fixtureSource.slice(0, marker) +
-    'window.testAPI = {attachGlobalTracking, measurePplSignup};\n' + fixtureSource.slice(marker);
+    'window.testAPI = {attachGlobalTracking, measurePplSignup, preservePplAttribution};\n' + fixtureSource.slice(marker);
   vm.runInNewContext(instrumented, context, {filename: site});
   const allEvents = () => Array.from(window.dataLayer || []).filter(x => x[0] === 'event').map(x => ({name: x[1], params: x[2]}));
   const events = () => allEvents().filter(x => x.name !== 'page_view');
@@ -132,6 +132,100 @@ test('Fresh no-consent state loads no Google script and queues no clicks', () =>
   const e = environment(); e.window.testAPI.attachGlobalTracking();
   e.click('https://www.amazon.com/dp/B0GN81JP9R');
   assert.equal(e.scripts.length, 0); assert.equal(e.events().length, 0);
+});
+const pplCampaignQuery = 'utm_source=youtube&utm_medium=video&utm_campaign=free_ppl_cards&utm_content=laxHqAqtRIg';
+function attributionLinks(e, hrefs) {
+  const links = hrefs.map((href) => ({
+    href: new URL(href, e.window.location.href).toString(),
+    getAttribute: name => name === 'href' ? href : null,
+    hasAttribute: () => false
+  }));
+  const originalQuery = e.document.querySelectorAll;
+  e.document.querySelectorAll = selector => selector === 'a[href]' ? links : originalQuery(selector);
+  return links;
+}
+test('Published YouTube campaign survives navigation and Kit fallback without copying private query values', () => {
+  const e = environment();
+  e.window.location.search = '?' + pplCampaignQuery + '&email=secret%40example.com&token=private-token&utm_term=private-keyword';
+  const links = attributionLinks(e, [
+    '/blog/?sort=recent#articles',
+    '/aviation-workbooks/private-pilot/#free-ppl-cards',
+    'https://nick-rae.kit.com/899d974875?layout=inline#form'
+  ]);
+  e.window.testAPI.preservePplAttribution();
+  const urls = links.map(link => new URL(link.href));
+  urls.forEach(url => {
+    assert.equal(url.searchParams.get('utm_source'), 'youtube');
+    assert.equal(url.searchParams.get('utm_medium'), 'video');
+    assert.equal(url.searchParams.get('utm_campaign'), 'free_ppl_cards');
+    assert.equal(url.searchParams.get('utm_content'), 'laxHqAqtRIg');
+    assert(!url.searchParams.has('email'));assert(!url.searchParams.has('token'));assert(!url.searchParams.has('utm_term'));
+  });
+  assert.equal(urls[0].searchParams.get('sort'), 'recent');assert.equal(urls[0].hash, '#articles');
+  assert.equal(urls[1].hash, '#free-ppl-cards');
+  assert.equal(urls[2].searchParams.get('layout'), 'inline');assert.equal(urls[2].hash, '#form');
+  assert.equal(e.scripts.length, 0);assert.equal(e.allEvents().length, 0);
+});
+test('Campaign forwarding preserves explicit destination campaigns, fragments, downloads and external links', () => {
+  const e = environment();e.window.location.search = '?' + pplCampaignQuery;
+  const hrefs = [
+    '/blog/?utm_source=kit&utm_medium=email&utm_campaign=another#article',
+    '/blog/?utm_content=intentional', '#free-ppl-cards',
+    '/assets/free-ppl-oral-scenario-cards.pdf',
+    'https://example.com/page/', 'https://nicholasrae.gumroad.com/l/ppl',
+    'https://nick-rae.kit.com/other-form', 'mailto:nick@nickrae.net',
+    'https://nick-rae.kit.com.evil.example/899d974875'
+  ];
+  const links = attributionLinks(e, hrefs);
+  const before = links.map(link => link.href);
+  e.window.testAPI.preservePplAttribution();
+  assert.deepEqual(links.map(link => link.href), before);
+  const download = attributionLinks(e, ['/blog/checkride-prep-guide.html']);
+  download[0].hasAttribute = name => name === 'download';
+  const beforeDownload = download[0].href;
+  e.window.testAPI.preservePplAttribution();assert.equal(download[0].href, beforeDownload);
+});
+test('Unknown, missing, duplicate and personal campaign values never propagate or enter Google config', () => {
+  for (const query of [
+    '', 'utm_source=youtube',
+    pplCampaignQuery.replace('youtube', 'secret@example.com'),
+    pplCampaignQuery.replace('video', 'secret-value'),
+    pplCampaignQuery.replace('free_ppl_cards', 'private-campaign'),
+    pplCampaignQuery.replace('laxHqAqtRIg', 'secret@example.com'),
+    pplCampaignQuery + '&utm_source=youtube',
+    pplCampaignQuery + '&utm_content=mZdwer_KGV0'
+  ]) {
+    const e = environment();e.window.location.search = '?' + query;
+    const links = attributionLinks(e, ['/aviation-workbooks/private-pilot/#free-ppl-cards']);
+    const before = links[0].href;
+    e.window.testAPI.preservePplAttribution();assert.equal(links[0].href, before, query);
+    e.window.NickRaePrivacy.allow();
+    e.commands('config').forEach(config => {
+      assert(!Object.keys(config[2]).some(key => key.startsWith('campaign_')), query);
+    });
+    assert(!JSON.stringify(e.allEvents()).includes('secret'));
+  }
+});
+test('Known campaign reaches consent-gated Google through documented fields, with stripped URL fields', () => {
+  for (const content of ['laxHqAqtRIg','mZdwer_KGV0','Uuo15pRmiQI','vaPO0eD5SIo','k5icun6orDQ','1QZxKtL2uz0','channel_profile']) {
+    const e = environment();e.window.location.search = '?' + pplCampaignQuery.replace('laxHqAqtRIg', content) + '&email=secret%40example.com';
+    assert.equal(e.scripts.length, 0);assert.equal(e.commands('config').length, 0);
+    e.window.NickRaePrivacy.allow();
+    e.commands('config').forEach(config => {
+      assert.equal(config[2].campaign_source, 'youtube');assert.equal(config[2].campaign_medium, 'video');
+      assert.equal(config[2].campaign_name, 'free_ppl_cards');assert.equal(config[2].campaign_content, content);
+      assert.equal(config[2].page_location, 'https://nickrae.net/aviation-workbooks/private-pilot/');
+    });
+    assert(!JSON.stringify(e.allEvents()).includes('secret'));
+  }
+});
+test('Denied measurement still preserves published campaign URLs without adding browser storage', () => {
+  const e = environment({initialConsent: 'deny'});e.window.location.search = '?' + pplCampaignQuery;
+  e.window.localStorage = {getItem() {throw Error('Attribution must not read storage');}, setItem() {throw Error('Attribution must not write storage');}};
+  const links = attributionLinks(e, ['/aviation-workbooks/private-pilot/#free-ppl-cards']);
+  e.window.testAPI.preservePplAttribution();
+  assert.equal(new URL(links[0].href).searchParams.get('utm_source'), 'youtube');
+  assert.equal(e.scripts.length, 0);assert.equal(e.allEvents().length, 0);
 });
 test('Localhost, loopback, dev hosts and insecure HTTP never load production measurement', () => {
   for (const origin of ['http://localhost:8080','http://127.0.0.1:8080','https://preview.nickrae.net','http://nickrae.net']) {
