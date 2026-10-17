@@ -157,6 +157,7 @@ test('Fresh no-consent state loads no Google script and queues no clicks', () =>
   assert.equal(e.scripts.length, 0); assert.equal(e.events().length, 0);
 });
 const pplCampaignQuery = 'utm_source=youtube&utm_medium=video&utm_campaign=free_ppl_cards&utm_content=laxHqAqtRIg';
+const xArticleCampaignQuery = 'utm_source=x&utm_medium=social&utm_campaign=free_ppl_cards&utm_content=flight_funded_article';
 function attributionLinks(e, hrefs) {
   const links = hrefs.map((href) => ({
     href: new URL(href, e.window.location.href).toString(),
@@ -187,6 +188,25 @@ test('Published YouTube campaign survives navigation and Kit fallback without co
   assert.equal(urls[0].searchParams.get('sort'), 'recent');assert.equal(urls[0].hash, '#articles');
   assert.equal(urls[1].hash, '#free-ppl-cards');
   assert.equal(urls[2].searchParams.get('layout'), 'inline');assert.equal(urls[2].hash, '#form');
+  assert.equal(e.scripts.length, 0);assert.equal(e.allEvents().length, 0);
+});
+test('X article campaign survives local and hosted-form navigation without storage or Google consent', () => {
+  const e = environment({initialConsent: 'deny'});
+  e.window.location.search = '?' + xArticleCampaignQuery + '&email=secret%40example.com&token=private-token&utm_term=private-keyword';
+  e.window.localStorage = {getItem() {throw Error('Attribution must not read storage');}, setItem() {throw Error('Attribution must not write storage');}};
+  const links = attributionLinks(e, [
+    '/?view=home', '/aviation-workbooks/private-pilot/#free-ppl-cards',
+    'https://nick-rae.kit.com/899d974875#form'
+  ]);
+  e.window.testAPI.preservePplAttribution();
+  links.forEach(link => {
+    const url = new URL(link.href);
+    assert.deepEqual([...url.searchParams].filter(([key]) => key.startsWith('utm_')), [...new URLSearchParams(xArticleCampaignQuery)]);
+    assert(!url.searchParams.has('email'));assert(!url.searchParams.has('token'));
+  });
+  assert.equal(new URL(links[0].href).searchParams.get('view'), 'home');
+  assert.equal(new URL(links[1].href).hash, '#free-ppl-cards');
+  assert.equal(new URL(links[2].href).hash, '#form');
   assert.equal(e.scripts.length, 0);assert.equal(e.allEvents().length, 0);
 });
 test('Campaign forwarding preserves explicit destination campaigns, fragments, downloads and external links', () => {
@@ -229,14 +249,47 @@ test('Unknown, missing, duplicate and personal campaign values never propagate o
     assert(!JSON.stringify(e.allEvents()).includes('secret'));
   }
 });
+test('Campaign source, medium and content cannot be mixed between X and YouTube', () => {
+  const invalid = [
+    xArticleCampaignQuery.replace('social', 'video'),
+    xArticleCampaignQuery.replace('utm_source=x', 'utm_source=youtube'),
+    pplCampaignQuery.replace('video', 'social'),
+    pplCampaignQuery.replace('laxHqAqtRIg', 'flight_funded_article'),
+    xArticleCampaignQuery.replace('free_ppl_cards', 'another_campaign'),
+    xArticleCampaignQuery.replace('flight_funded_article', 'secret@example.com'),
+    ...['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].flatMap(key => {
+      const query = new URLSearchParams(xArticleCampaignQuery);
+      const value = query.get(key);query.delete(key);
+      return [query.toString(), xArticleCampaignQuery + '&' + key + '=' + value];
+    }),
+    ...['laxHqAqtRIg','mZdwer_KGV0','Uuo15pRmiQI','vaPO0eD5SIo','k5icun6orDQ','1QZxKtL2uz0','channel_profile']
+      .map(content => xArticleCampaignQuery.replace('flight_funded_article', content))
+  ];
+  for (const query of invalid) {
+    const e = environment();e.window.location.search = '?' + query;
+    const links = attributionLinks(e, ['/aviation-workbooks/private-pilot/#free-ppl-cards']);
+    const before = links[0].href;
+    e.window.testAPI.preservePplAttribution();assert.equal(links[0].href, before, query);
+    e.window.testAPI.attachPplNativeAttribution();
+    const f = nativeAttributionFixture(e);f.submit();
+    assert.equal(f.fields.find(input => input.name === 'search').value, '', query);
+    e.window.NickRaePrivacy.allow();
+    assert.equal(e.commands('config').length, 2);
+    e.commands('config').forEach(config => assert(!Object.keys(config[2]).some(key => key.startsWith('campaign_')), query));
+  }
+});
 test('Known campaign reaches consent-gated Google through documented fields, with stripped URL fields', () => {
-  for (const content of ['laxHqAqtRIg','mZdwer_KGV0','Uuo15pRmiQI','vaPO0eD5SIo','k5icun6orDQ','1QZxKtL2uz0','channel_profile']) {
-    const e = environment();e.window.location.search = '?' + pplCampaignQuery.replace('laxHqAqtRIg', content) + '&email=secret%40example.com';
+  const campaigns = ['laxHqAqtRIg','mZdwer_KGV0','Uuo15pRmiQI','vaPO0eD5SIo','k5icun6orDQ','1QZxKtL2uz0','channel_profile']
+    .map(content => ({source:'youtube', medium:'video', content, query:pplCampaignQuery.replace('laxHqAqtRIg', content)}));
+  campaigns.push({source:'x', medium:'social', content:'flight_funded_article', query:xArticleCampaignQuery});
+  for (const campaign of campaigns) {
+    const e = environment();e.window.location.search = '?' + campaign.query + '&email=secret%40example.com';
     assert.equal(e.scripts.length, 0);assert.equal(e.commands('config').length, 0);
     e.window.NickRaePrivacy.allow();
+    assert.equal(e.commands('config').length, 2);
     e.commands('config').forEach(config => {
-      assert.equal(config[2].campaign_source, 'youtube');assert.equal(config[2].campaign_medium, 'video');
-      assert.equal(config[2].campaign_name, 'free_ppl_cards');assert.equal(config[2].campaign_content, content);
+      assert.equal(config[2].campaign_source, campaign.source);assert.equal(config[2].campaign_medium, campaign.medium);
+      assert.equal(config[2].campaign_name, 'free_ppl_cards');assert.equal(config[2].campaign_content, campaign.content);
       assert.equal(config[2].page_location, 'https://nickrae.net/aviation-workbooks/private-pilot/');
     });
     assert(!JSON.stringify(e.allEvents()).includes('secret'));
@@ -289,6 +342,20 @@ test('Native Kit POST includes sanitized campaign attribution without requiring 
   assert(f.fields.every(input => input.type === 'hidden'));
   assert.equal(event.preventCalls, 0);
   assert(!JSON.stringify(values).includes('secret'));assert(!JSON.stringify(values).includes('private-token'));
+  assert.equal(e.scripts.length, 0);assert.equal(e.allEvents().length, 0);
+});
+test('Native Kit POST records the X article campaign with no private query values or duplicate fields', () => {
+  const e = environment({initialConsent: 'deny'});e.window.testAPI.attachPplNativeAttribution();
+  e.window.location.search = '?' + xArticleCampaignQuery + '&email=secret%40example.com&token=private-token';
+  const f = nativeAttributionFixture(e);f.submit();const event = f.submit();
+  const values = Object.fromEntries(f.fields.map(input => [input.name, input.value]));
+  assert.deepEqual(values, {
+    host: 'https://nickrae.net/aviation-workbooks/private-pilot/?' + xArticleCampaignQuery,
+    search: '?' + xArticleCampaignQuery,
+    referrer: 'https://example.com/article'
+  });
+  assert.equal(f.fields.length, 3);assert(f.fields.every(input => input.type === 'hidden'));
+  assert.equal(event.preventCalls, 0);assert.equal(event.defaultPrevented, false);
   assert.equal(e.scripts.length, 0);assert.equal(e.allEvents().length, 0);
 });
 test('SDK-handled submit receives no fallback duplicates, including after a canceled native attempt', () => {

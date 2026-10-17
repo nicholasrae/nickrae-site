@@ -9,11 +9,12 @@
   const OUTBOUND_WAIT_MS = 250;
   // Only campaign values we publish are eligible for forwarding or Google
   // measurement. Never turn arbitrary URL text into subscriber/analytics data.
-  const PPL_CAMPAIGN_SOURCES = new Set(['youtube']);
-  const PPL_CAMPAIGN_MEDIA = new Set(['video']);
-  const PPL_CAMPAIGN_CONTENT = new Set([
-    'laxHqAqtRIg', 'mZdwer_KGV0', 'Uuo15pRmiQI',
-    'vaPO0eD5SIo', 'k5icun6orDQ', '1QZxKtL2uz0', 'channel_profile'
+  const PPL_CAMPAIGNS = new Map([
+    ['youtube', {medium: 'video', content: new Set([
+      'laxHqAqtRIg', 'mZdwer_KGV0', 'Uuo15pRmiQI',
+      'vaPO0eD5SIo', 'k5icun6orDQ', '1QZxKtL2uz0', 'channel_profile'
+    ])}],
+    ['x', {medium: 'social', content: new Set(['flight_funded_article'])}]
   ]);
   let analyticsReady = false;
   let analyticsInitialized = false;
@@ -67,8 +68,9 @@
     const medium = single('utm_medium');
     const campaign = single('utm_campaign');
     const content = single('utm_content');
-    if (!PPL_CAMPAIGN_SOURCES.has(source) || !PPL_CAMPAIGN_MEDIA.has(medium)
-      || campaign !== 'free_ppl_cards' || !PPL_CAMPAIGN_CONTENT.has(content)) return {};
+    const approved = PPL_CAMPAIGNS.get(source);
+    if (!approved || medium !== approved.medium || campaign !== 'free_ppl_cards'
+      || !approved.content.has(content)) return {};
     return {utm_source: source, utm_medium: medium, utm_campaign: campaign, utm_content: content};
   }
 
