@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Pilot AI Tools</title>
+  <desc id="desc">Find the tool for the training task. An original illustration connects study, radio, and planning around a central navigation point.</desc>
+  <rect width="1200" height="630" fill="#0a1425"/>
+  <path d="M0 0H1200V22H0Z" fill="#87b9f6"/>
+  <g stroke="#1b2f4c" stroke-width="1" fill="none">
+    <path d="M700 22V630M800 22V630M900 22V630M1000 22V630M1100 22V630M620 115H1200M620 215H1200M620 315H1200M620 415H1200M620 515H1200"/>
+    <circle cx="921" cy="319" r="214"/>
+    <circle cx="921" cy="319" r="143"/>
+  </g>
+  <path d="M685 370L914 188L1081 385" fill="none" stroke="#7db8ff" stroke-width="3" stroke-dasharray="8 10"/>
+  <g fill="#0a1425" stroke="#7db8ff" stroke-width="3">
+    <circle cx="685" cy="370" r="9"/>
+    <circle cx="914" cy="188" r="9"/>
+    <circle cx="1081" cy="385" r="9"/>
+  </g>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <text x="65" y="92" fill="#a9c7ef" font-size="19" font-weight="700" letter-spacing="3">PILOT NOTES / NICK RAE</text>
+    <text x="65" y="218" fill="#f5f0e6" font-family="Georgia,'Times New Roman',serif" font-size="79">Pilot AI</text>
+    <text x="65" y="308" fill="#f5f0e6" font-family="Georgia,'Times New Roman',serif" font-size="79">Tools.</text>
+    <text x="69" y="384" fill="#c7d5e9" font-size="28">Find the tool for</text>
+    <text x="69" y="424" fill="#c7d5e9" font-size="28">the training task.</text>
+    <path d="M69 480H128" stroke="#e9b65a" stroke-width="3"/>
+    <text x="69" y="552" fill="#9db7da" font-size="21">A directory I built for aviation study</text>
+    <g fill="#101f35" stroke="#4c709d" stroke-width="1.5">
+      <rect x="803" y="100" width="228" height="66" rx="5"/>
+      <rect x="621" y="398" width="207" height="66" rx="5"/>
+      <rect x="929" y="413" width="219" height="66" rx="5"/>
+    </g>
+    <g fill="#e4edf9" font-size="21" font-weight="700" text-anchor="middle" letter-spacing="2">
+      <text x="917" y="141">STUDY</text>
+      <text x="724.5" y="439">RADIO</text>
+      <text x="1038.5" y="454">PLANNING</text>
+    </g>
+  </g>
+  <g transform="translate(920 297)" stroke="#dfeaff" stroke-width="2" fill="none">
+    <circle r="30"/>
+    <path d="M0-53V-36M0 36V53M-53 0H-36M36 0H53"/>
+    <path d="M-11 20L0-22L11 20L0 12Z" fill="#87b9f6"/>
+  </g>
+  <text x="1138" y="582" fill="#92abc9" font-family="Arial,Helvetica,sans-serif" font-size="18" text-anchor="end">nickrae.net</text>
+</svg>

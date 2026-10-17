@@ -118,6 +118,13 @@
   .reading-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}
   .reading-links a{padding:1rem;border:1px solid var(--border);border-radius:.75rem;background:var(--card);color:var(--text);font-size:.88rem;font-weight:700;text-decoration:none}
   .reading-links a:hover{border-color:var(--accent-soft)}
+  .pilot-tools{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);gap:2rem;align-items:center;margin-top:1.5rem;padding:1.5rem 1.75rem;border:1px solid #37577f;border-left:4px solid var(--accent-soft);border-radius:.85rem;background:linear-gradient(115deg,#14243b,#0e1827)}
+  .pilot-tools .eyebrow{font-size:.7rem;margin-bottom:.5rem}
+  .pilot-tools h3{margin:0 0 .5rem;font-size:1.5rem;line-height:1.2;letter-spacing:-.02em}
+  .pilot-tools p:not(.eyebrow){margin:0;max-width:640px;color:var(--muted);font-size:.9rem}
+  .tools-actions{display:flex;flex-direction:column;align-items:stretch;gap:.4rem}
+  .tools-actions .story-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.45rem .6rem;font-size:.82rem;font-weight:750;text-align:center}
+  @media(max-width:700px){.pilot-tools{grid-template-columns:1fr;gap:1.2rem;padding:1.25rem}.tools-actions{align-items:flex-start}.tools-actions .button,.tools-actions .story-link{width:100%}}
 
   .labs{padding:4.5rem 0;background:#0b111c;border-top:1px solid var(--border)}
   .labs .section-heading{font-size:1.65rem;color:#d7e0eb}
@@ -391,6 +398,10 @@
         <a href="blog/commercial-pilot-workbook-live.html">Commercial workbook launch notes →</a>
         <a href="blog/multi-engine-add-on-rating-workbook-live.html">Multi-engine workbook launch notes →</a>
       </div>
+      <aside class="pilot-tools" aria-labelledby="pilot-tools-heading">
+        <div><p class="eyebrow">A resource I built</p><h3 id="pilot-tools-heading">Pilot AI Tools</h3><p>Compare aviation apps, AI study tools and radio trainers in a directory I built, with pricing sources, platform details and dated review notes.</p></div>
+        <div class="tools-actions"><a class="button button-secondary" href="https://pilotaitools.com/" data-event="outbound_cta_click" data-product="pilot_ai_tools" data-placement="home-pilot-notes">Explore Pilot AI Tools ↗</a><a class="story-link" href="/blog/pilot-ai-tools-directory.html" data-event="blog_internal_click" data-product="pilot_ai_tools_post" data-placement="home-pilot-notes">Why I built the directory →</a></div>
+      </aside>
     </div>
   </section>
 

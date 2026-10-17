@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-13",
+  "updated": "2026-10-17",
   "policy": "Dates track substantive content revisions. Visual and shared accessibility changes do not reset editorial review dates.",
   "pages": [
     {
       "path": "about/index.html",
       "url": "https://nickrae.net/about/",
-      "last_content_change": "2026-10-02",
+      "last_content_change": "2026-10-17",
       "social_image": "https://nickrae.net/assets/social/about.png"
     },
     {
@@ -71,7 +71,7 @@
     {
       "path": "blog/checkride-prep-guide.html",
       "url": "https://nickrae.net/blog/checkride-prep-guide.html",
-      "last_content_change": "2026-09-10",
+      "last_content_change": "2026-10-17",
       "social_image": "https://nickrae.net/assets/social/checkride-prep-guide.png"
     },
     {
@@ -107,13 +107,13 @@
     {
       "path": "blog/ifr-oral-exam-scenarios.html",
       "url": "https://nickrae.net/blog/ifr-oral-exam-scenarios.html",
-      "last_content_change": "2026-07-09",
+      "last_content_change": "2026-10-17",
       "social_image": "https://nickrae.net/assets/social/ifr-oral-exam-scenarios.png"
     },
     {
       "path": "blog/index.html",
       "url": "https://nickrae.net/blog/",
-      "last_content_change": "2026-10-13",
+      "last_content_change": "2026-10-17",
       "social_image": "https://nickrae.net/assets/social/pilot-notes.png"
     },
     {
@@ -167,7 +167,7 @@
     {
       "path": "blog/student-pilot-apps-2026.html",
       "url": "https://nickrae.net/blog/student-pilot-apps-2026.html",
-      "last_content_change": "2026-10-13",
+      "last_content_change": "2026-10-17",
       "social_image": "https://nickrae.net/assets/social/student-pilot-apps-2026.png"
     },
     {
@@ -197,7 +197,7 @@
     {
       "path": "index.html",
       "url": "https://nickrae.net/",
-      "last_content_change": "2026-10-13",
+      "last_content_change": "2026-10-17",
       "social_image": "https://nickrae.net/assets/social/home.png"
     },
     {
@@ -223,6 +223,12 @@
       "url": "https://nickrae.net/walk-through-the-gospels/",
       "last_content_change": "2026-09-29",
       "social_image": "https://nickrae.net/assets/social/gospels.png"
+    },
+    {
+      "path": "blog/pilot-ai-tools-directory.html",
+      "url": "https://nickrae.net/blog/pilot-ai-tools-directory.html",
+      "last_content_change": "2026-10-17",
+      "social_image": "https://nickrae.net/assets/social/pilot-ai-tools-directory.png"
     }
   ]
 }
