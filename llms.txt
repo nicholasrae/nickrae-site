@@ -2,9 +2,11 @@
 
 > Commercial pilot and aviation workbook author based in Merced, CA. Publishing FAA-aligned pilot study workbooks on Amazon KDP while building side income to fund flight hours toward a flying career.
 
+Summary refreshed October 19, 2026. Historical flight-hour and revenue figures below retain their stated source dates; they are not live totals.
+
 ## About
 
-Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight hours documented in the October 2, 2026 ForeFlight report, working toward a 500-hour planning threshold and eventually the experience required for ATP certification. His main public product lane is FAA-aligned aviation study material on Amazon KDP, including Clearance to Confidence: VFR Radio Calls Workbook. He documents the Flight Funded experiment at nickrae.net. OpenClaw is a retired runtime; the dated playbook remains available as a background digital product, not the primary offer.
+Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight hours documented in the October 2, 2026 ForeFlight report, working toward a 500-hour planning threshold and eventually the experience required for ATP certification. His main public product lane is FAA-aligned aviation study material on Amazon KDP, including Clearance to Confidence: VFR Radio Calls Workbook. He documents the Flight Funded experiment at nickrae.net and built Pilot AI Tools, an independently run aviation software directory. Aviation resources on this site support ground study; they are not FAA approval, flight instruction, or a promised checkride outcome. OpenClaw is a retired runtime; the dated playbook remains available as a background digital product, not the primary offer.
 
 ## Key Pages
 
@@ -15,6 +17,8 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight h
 - [Flight Funded](https://nickrae.net/flight-funded/) — KDP proof through September 29, 2026: 190 full-catalog books since January; 181 aviation units since March / $1,594.23 USD + €71.47 EUR + A$9.49 in estimated aviation royalties. September 1–29 alone: 33 full-catalog paperbacks / $314.83 USD; aviation subset 32 / $311.91 USD; 523 KENP and 0 refunds. August month-end baseline plus September once, not overlapping snapshots. Estimates are not deposits or Amazon Ads attribution; flight hours are dated October 2 and the historical pace June 25, 2026; settled payouts unverified. Not a verified final September close.
 - [Aviation Pilot Workbooks](https://nickrae.net/aviation-workbooks/) — FAA-aligned workbooks for private pilot, instrument, commercial, multi-engine, and VFR radio calls
 - [Instrument workbook sample](https://nickrae.net/aviation-workbooks/#instrument-sample) — Exercise 2.6, item 2 only: dual VOR check question and original answer, accessible HTML plus one-page PDF; First Edition 2026, Version 1.0 (February 2026), paperback interior PDF pages 46 and 153; this excerpt checked September 10, 2026 against 14 CFR 91.171(c) and FAA AIM 1-1-4, not a full-book review
+- [Free PPL Oral Scenario Cards](https://nickrae.net/aviation-workbooks/private-pilot/#free-ppl-cards) — five free private-pilot oral scenario cards delivered as a PDF after email confirmation through Kit; separate from the workbook and the paid 50-card deck
+- [Pilot AI Tools](https://pilotaitools.com/) — aviation software directory built by Nick Rae, covering apps, AI study tools and radio trainers with platform details, pricing sources and dated review notes; listed capabilities and prices require checking the provider
 - [Free IFR Oral Exam Scenario Pack](https://nickrae.net/ifr-scenario-pack/) — free 10-card IFR oral exam scenario PDF, available directly with no email required; source-anchored study aid with chart-specific traps intentionally excluded
 - [IFR Oral Exam Scenarios](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — 10-question blog bridge using the rule-risk-action framework for instrument oral practice
 - [The Non-Developer's OpenClaw Playbook](https://nickrae.net/openclaw-playbook/) — background AI-operations kit built from documented 2026 OpenClaw operation; the runtime is no longer presented as current
@@ -23,6 +27,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight h
 
 ## Blog Posts
 
+- [Pilot AI Tools: A Directory I Built for Aviation Study](https://nickrae.net/blog/pilot-ai-tools-directory.html) — October 17, 2026 introduction to the directory, its comparison approach, source and review-date limits, and the author’s overlapping workbook interests
 - [FeedFare is live: Walk first. Scroll later.](https://nickrae.net/blog/feedfare-launch.html) — October 5, 2026 launch story for Nick Rae's native iPhone/iPad app: choose protected apps, earn minutes from steps, and unlock one app for a timed session. US $4.99 one-time download with full native access; requires iOS/iPadOS 17 or later.
 - [How to Study for Your Instrument Checkride When You Work Full-Time](https://nickrae.net/blog/instrument-checkride-full-time.html) — source-first ground-study workflow and adaptable weekly schedule for full-time workers; study aid, not flight instruction
 - [IFR Oral Exam Scenarios: 10 Questions That Prove Whether You Understand the Rating](https://nickrae.net/blog/ifr-oral-exam-scenarios.html) — bridge article for instrument students; routes to the free IFR scenario pack and aviation workbook shelf
@@ -52,13 +57,18 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight h
 
 ## Background Digital Products
 
-- [The Non-Developer's OpenClaw Playbook](https://nicholasrae.gumroad.com/l/openclaw-playbook) — 163-page guide plus Starter Kit ZIP documenting a retired 2026 OpenClaw operation; examples may differ from current interfaces and are not a validated current installation guide. Background offer while KDP aviation workbooks carry the main buyer path.
+- [The Non-Developer's OpenClaw Playbook](https://nicholasrae.gumroad.com/l/openclaw-playbook) — PDF field guide plus Starter Kit ZIP documenting a retired 2026 OpenClaw operation; examples may differ from current interfaces and are not a validated current installation guide. Background offer while KDP aviation workbooks carry the main buyer path.
 
-## Aviation Books (Amazon KDP)
+## Aviation Workbooks (Amazon KDP)
 
-- [Private Pilot License Workbook: 500+ Practice Questions](https://a.co/d/0hExZLaf) — representative private-pilot practice; check Amazon for current reviews
-- [Instrument Rating Workbook: Complete IFR Study System](https://www.amazon.com/dp/B0GQH7QX62)
-- [Clearance to Confidence: VFR Radio Calls Workbook](https://www.amazon.com/dp/B0H3KT5FHW) — paperback; [Kindle edition](https://www.amazon.com/dp/B0H3HZ2BQG)
+These landing pages explain scope and previews, with separate paperback and Kindle links. Confirm the selected edition, price and availability on Amazon; source-manuscript pagination can differ from retail editions.
+
+- [Private Pilot License Workbook](https://nickrae.net/aviation-workbooks/private-pilot/) — PPL knowledge and oral-exam study, an authentic diversion exercise and free oral scenario cards; paperback and Kindle
+- [Instrument Rating Workbook](https://nickrae.net/aviation-workbooks/instrument-rating/) — IFR ground study, a dual-VOR question with source context and a free scenario-pack route; paperback and Kindle
+- [The Complete Commercial Pilot Workbook](https://nickrae.net/aviation-workbooks/commercial-pilot/) — ASEL commercial preparation, written and oral study, judgment scenarios and a manuscript sample; paperback and Kindle
+- [Multi-Engine Add-On Rating Workbook](https://nickrae.net/aviation-workbooks/multi-engine/) — PA-44-focused add-on study, Vmc, one-engine-inoperative reasoning and manuscript excerpts; paperback and Kindle
+- [Clearance to Confidence: VFR Radio Calls Workbook](https://nickrae.net/aviation-workbooks/vfr-radio/) — call-building, simulated ATC exchanges, readbacks and out-loud ground practice; paperback and Kindle
+
 ## Bible Puzzle Books (Separate From Aviation)
 
 - [Walk Through the Gospels: Large-Print Bible Word Searches](https://nickrae.net/walk-through-the-gospels/) — Nick Rae; paperback published September 29, 2026; 128 pages, 8.5 × 11 inches; ISBN 9798177956763. 60 distinct puzzles from the Nativity to the empty tomb, 10 × 10 grids with nine words each, 18-point grid letters and supporting text at least 16 point. Optional coordinate-based hidden reflections, a worked example, and 60 full-size answer keys. Scripture references invite the reader’s own Bible; introductions and reflections are original writing, not Scripture quotations. Selective journey, not a complete Gospel harmony.
