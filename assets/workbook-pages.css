@@ -24,7 +24,7 @@ section[id],div[id],h2[id],details[id]{scroll-margin-top:1rem}
 .logo{font-size:1rem;font-weight:850;letter-spacing:.085em;color:var(--text);text-decoration:none;flex:none}
 .nav-links{display:flex;gap:1.4rem;align-items:center;font-size:.9rem}
 .nav-links a{color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
-.nav-links a:first-child{color:#fff;font-weight:750}
+.nav-links a[aria-current="page"],.nav-links a[aria-current="location"]{color:#bfdbfe;font-weight:750;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.35em}
 .nav-links a:hover{color:#fff;text-decoration:underline}
 .menu-toggle{display:none;min-height:44px;min-width:64px;padding:.4rem .75rem;border:1px solid #607590;background:var(--bg-2);border-radius:.4rem;color:var(--text);cursor:pointer;font-size:.9rem;font-weight:700}
 .book-hero{position:relative;border-bottom:1px solid var(--border);background:radial-gradient(ellipse at 88% 15%,#142840 0,transparent 48%),linear-gradient(180deg,#0c1522,var(--bg));padding:1.5rem 0 0}

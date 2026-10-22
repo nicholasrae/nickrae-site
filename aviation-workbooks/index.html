@@ -129,7 +129,7 @@
 </script>
 <style>
   *,*::before,*::after{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;color-scheme:dark}
   :root{--bg:#080d16;--bg-2:#0f1725;--bg-3:#141f31;--card:#111c2d;--text:#f1f5f9;--muted:#aab7c9;--dim:#94a3b8;--accent:#2563eb;--accent-hover:#1d4ed8;--accent-soft:#93c5fd;--border:#2a3a50;--green:#4ade80;--amazon:#ff9900}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
   a{color:var(--accent-soft);text-underline-offset:.18em}a:hover{text-decoration-thickness:2px}
@@ -149,7 +149,7 @@
   nav{position:fixed;inset:0 0 auto;z-index:100;background:rgba(8,13,22,.94);border-bottom:1px solid var(--border);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
   nav .inner{width:min(1120px,calc(100% - 3rem));height:4rem;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
   .logo{color:var(--text);font-size:1rem;font-weight:850;letter-spacing:.08em;text-decoration:none}
-  .nav-links{display:flex;align-items:center;gap:1.25rem;font-size:.88rem}.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:first-child{color:var(--text);font-weight:750}.nav-links a:hover{color:var(--text)}
+  .nav-links{display:flex;align-items:center;gap:1.25rem;font-size:.88rem}.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--text)}
   .menu-toggle{display:none;min-width:44px;min-height:44px;border:1px solid var(--border);border-radius:.5rem;background:var(--bg-2);color:var(--text);font:inherit;font-size:1.25rem;cursor:pointer}
 
   .hero{padding:4rem 0 4.5rem;background:radial-gradient(circle at 76% 23%,rgba(37,99,235,.22),transparent 28%),linear-gradient(180deg,#070b12 0%,var(--bg-2) 100%);border-bottom:1px solid var(--border);overflow:hidden}
@@ -217,7 +217,7 @@
 <meta property="og:image" content="https://nickrae.net/assets/social/aviation-workbooks.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Choose the workbook for your rating. — Nick Rae"><meta name="twitter:image" content="https://nickrae.net/assets/social/aviation-workbooks.png"><meta name="twitter:image:alt" content="Choose the workbook for your rating. — Nick Rae">
 
 <link rel="stylesheet" href="/assets/site-header.css?v=2c4c712094e7">
-<link rel="stylesheet" href="/assets/navigation.css?v=53dcc09ff85f">
+<link rel="stylesheet" href="/assets/navigation.css?v=773d0cfb8555">
 </head>
 <body data-page="aviation-workbooks">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -225,7 +225,7 @@
   <div class="inner">
     <a class="logo" href="/">NICK RAE</a>
     <button class="menu-toggle" type="button" aria-label="Navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
-    <div class="nav-links" id="nav-links"><a href="/">Home</a><a href="/aviation-workbooks/">Pilot Workbooks</a><a href="/blog/">Pilot Notes</a><a href="/ifr-scenario-pack/">Free IFR Pack</a><a href="/about/">About</a><a href="/#connect">Connect</a></div>
+    <div class="nav-links" id="nav-links"><a href="/">Home</a><a href="/aviation-workbooks/" aria-current="page">Pilot Workbooks</a><a href="/blog/">Pilot Notes</a><a href="/ifr-scenario-pack/">Free IFR Pack</a><a href="/about/">About</a><a href="/#connect">Connect</a></div>
   </div>
 </nav>
 

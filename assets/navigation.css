@@ -2,6 +2,15 @@
    first-paint expanded header; site.js supplies the disclosure semantics. */
 :is(body > nav, body > header > nav):not(.sticky-cta) .menu-toggle { min-width:44px; min-height:44px; }
 :is(body > nav, body > header > nav):not(.sticky-cta) :is(a, button):focus-visible { outline:3px solid #fbbf24; outline-offset:3px; }
+/* The current destination is marked in HTML, so it is announced and visible
+   before scripts run. Underlining also distinguishes it without relying on color. */
+body > nav.site-header .nav-links a[aria-current="page"],
+body > nav.site-header .nav-links a[aria-current="location"] {
+  color:#bfdbfe; font-weight:750; text-decoration:underline;
+  text-decoration-thickness:2px; text-underline-offset:.35em;
+}
+body > nav.site-header .nav-links a:focus-visible,
+body > nav.site-header .menu-toggle:focus-visible { border-radius:.15rem; }
 @media (max-width:860px) {
   /* Keep expanded/no-JS headers in flow instead of covering the article. */
   :is(body > nav, body > header > nav):not(.sticky-cta) { position:sticky !important; top:0; }
@@ -27,4 +36,11 @@
   .js-nav :is(body > nav, body > header > nav):not(.sticky-cta):has(.menu-toggle) :is(.links, .nav-links).open {
     display:flex !important; max-height:60vh; overflow-y:auto;
   }
+}
+@media (prefers-reduced-motion:reduce) {
+  body > nav.site-header *, body > nav.site-header *::before,
+  body > nav.site-header *::after { scroll-behavior:auto; transition:none; animation:none; }
+}
+@media (forced-colors:active) {
+  body > nav.site-header .nav-links a[aria-current] { color:LinkText; }
 }
