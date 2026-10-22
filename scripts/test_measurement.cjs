@@ -158,6 +158,8 @@ test('Fresh no-consent state loads no Google script and queues no clicks', () =>
 });
 const pplCampaignQuery = 'utm_source=youtube&utm_medium=video&utm_campaign=free_ppl_cards&utm_content=laxHqAqtRIg';
 const xArticleCampaignQuery = 'utm_source=x&utm_medium=social&utm_campaign=free_ppl_cards&utm_content=flight_funded_article';
+const medguideNewsletterPath = '/blog/faa-medguide-pilot-medication-guide.html';
+const medguideNewsletterQuery = 'utm_source=pilot_ai_tools&utm_medium=email&utm_campaign=faa_medguide_20261022&utm_content=companion_article';
 function attributionLinks(e, hrefs) {
   const links = hrefs.map((href) => ({
     href: new URL(href, e.window.location.href).toString(),
@@ -294,6 +296,60 @@ test('Known campaign reaches consent-gated Google through documented fields, wit
     });
     assert(!JSON.stringify(e.allEvents()).includes('secret'));
   }
+});
+test('Published MedGuide newsletter attribution is consent-gated, exact and free of private URL values', () => {
+  const e = environment();
+  e.window.location = new URL('https://nickrae.net' + medguideNewsletterPath + '?' + medguideNewsletterQuery + '&email=secret%40example.com&token=private-token&utm_term=private-keyword#private-fragment');
+  assert.equal(e.createdScripts.length, 0);assert.equal(e.commands('config').length, 0);assert.equal(e.allEvents().length, 0);
+  e.window.NickRaePrivacy.allow();
+  assert.equal(e.commands('config').length, 2);
+  for (const command of [...e.commands('config'), ...e.commands('set')]) {
+    const config = command[command.length - 1];
+    assert.equal(config.campaign_source, 'pilot_ai_tools');assert.equal(config.campaign_medium, 'email');
+    assert.equal(config.campaign_name, 'faa_medguide_20261022');assert.equal(config.campaign_content, 'companion_article');
+    assert.equal(config.page_location, 'https://nickrae.net' + medguideNewsletterPath);
+    assert.equal(config.page_referrer, 'https://example.com/article');
+  }
+  assert.deepEqual(e.allEvents().map(event => event.name), ['page_view']);
+  const payload = JSON.stringify([...e.commands('config'), ...e.commands('set'), ...e.allEvents()]);
+  for (const privateValue of ['secret', 'private-token', 'private-keyword', 'private-fragment', 'utm_']) assert(!payload.includes(privateValue), privateValue);
+});
+test('MedGuide attribution rejects missing, duplicate, malformed, unknown and wrong-page newsletter fields', () => {
+  const fields = [...new URLSearchParams(medguideNewsletterQuery)];
+  const invalidQueries = fields.flatMap(([key, value]) => {
+    const missing = new URLSearchParams(medguideNewsletterQuery);missing.delete(key);
+    const unknown = new URLSearchParams(medguideNewsletterQuery);unknown.set(key, 'secret@example.com');
+    const empty = new URLSearchParams(medguideNewsletterQuery);empty.set(key, '');
+    return [missing.toString(), medguideNewsletterQuery + '&' + key + '=' + value,
+      medguideNewsletterQuery + '&' + key + '=secret%40example.com', unknown.toString(), empty.toString()];
+  });
+  invalidQueries.push(medguideNewsletterQuery.replace('pilot_ai_tools', 'Pilot_AI_Tools'), medguideNewsletterQuery.replace('companion_article', 'companion_article%ZZ'));
+  const cases = invalidQueries.map(query => ({path: medguideNewsletterPath, query}));
+  for (const path of ['/blog/', medguideNewsletterPath + '/', '/blog/pilot-ai-tools-directory.html', '/aviation-workbooks/private-pilot/']) cases.push({path, query: medguideNewsletterQuery});
+  for (const {path, query} of cases) {
+    const e = environment();e.window.location = new URL('https://nickrae.net' + path + '?' + query);
+    e.window.NickRaePrivacy.allow();
+    assert.equal(e.commands('config').length, 2);
+    for (const command of [...e.commands('config'), ...e.commands('set')]) {
+      const config = command[command.length - 1];
+      assert(!Object.keys(config).some(key => key.startsWith('campaign_')), path + '?' + query);
+      assert.equal(config.page_location, 'https://nickrae.net' + path);
+    }
+    assert(!JSON.stringify(e.allEvents()).includes('secret'));
+  }
+});
+test('MedGuide newsletter campaign does not propagate into PPL links or Kit attribution, and denial keeps measurement off', () => {
+  const e = environment({initialConsent: 'deny'});
+  e.window.location = new URL('https://nickrae.net' + medguideNewsletterPath + '?' + medguideNewsletterQuery + '&email=secret%40example.com');
+  const links = attributionLinks(e, ['/aviation-workbooks/private-pilot/#free-ppl-cards', 'https://nick-rae.kit.com/899d974875']);
+  const before = links.map(link => link.href);
+  e.window.testAPI.preservePplAttribution();assert.deepEqual(links.map(link => link.href), before);
+  e.window.testAPI.attachPplNativeAttribution();const f = nativeAttributionFixture(e);f.submit();
+  const values = Object.fromEntries(f.fields.map(input => [input.name, input.value]));
+  assert.equal(values.search, '');assert.equal(values.host, 'https://nickrae.net' + medguideNewsletterPath);
+  e.document.dispatchEvent({type:'DOMContentLoaded'});
+  assert.equal(e.createdScripts.length, 0);assert.equal(e.commands('config').length, 0);assert.equal(e.allEvents().length, 0);
+  assert(!JSON.stringify(values).includes('secret'));
 });
 test('Denied measurement still preserves published campaign URLs without adding browser storage', () => {
   const e = environment({initialConsent: 'deny'});e.window.location.search = '?' + pplCampaignQuery;

@@ -452,7 +452,11 @@ class Audit:
             if lastmods.get(page.url) != changed:
                 self.error(source, f"{relative}: content revision date differs from sitemap lastmod")
             for node in self.structured.get(relative, []):
-                if node.get("@type") == "BlogPosting" and node.get("dateModified") != changed:
+                # A Blog index can embed posts with their own editorial dates.
+                # Compare only the posting for this page, preserving older posts.
+                if (node.get("@type") == "BlogPosting"
+                        and node.get("url", page.url) == page.url
+                        and node.get("dateModified") != changed):
                     self.error(relative, "BlogPosting dateModified differs from the content registry")
             social = record.get("social_image")
             if social:

@@ -74,8 +74,20 @@
     return {utm_source: source, utm_medium: medium, utm_campaign: campaign, utm_content: content};
   }
 
-  function googlePplCampaign() {
-    const campaign = pplCampaign();
+  function googleCampaign() {
+    let campaign = pplCampaign();
+    // This one published newsletter link has a fixed, non-personal campaign.
+    // Keep it separate from PPL forwarding and native form attribution.
+    if (!campaign.utm_source && window.location.pathname === '/blog/faa-medguide-pilot-medication-guide.html') {
+      const approved = {
+        utm_source: 'pilot_ai_tools', utm_medium: 'email',
+        utm_campaign: 'faa_medguide_20261022', utm_content: 'companion_article'
+      };
+      const query = new URLSearchParams(window.location.search);
+      if (Object.entries(approved).every(([key, value]) => query.getAll(key).length === 1 && query.get(key) === value)) {
+        campaign = approved;
+      }
+    }
     if (!campaign.utm_source) return {};
     return {
       campaign_source: campaign.utm_source,
@@ -204,7 +216,7 @@
         page_referrer: document.referrer ? measurementUrl(document.referrer) : '',
         // Google documents these campaign overrides. They preserve our known
         // campaign attribution while page_location continues to omit queries.
-        ...googlePplCampaign()
+        ...googleCampaign()
       };
       window.gtag('set', config);
       window.gtag('config', TAG_ID, config);

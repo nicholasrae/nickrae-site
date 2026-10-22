@@ -27,6 +27,7 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight h
 
 ## Blog Posts
 
+- [FAA MedGuide: What Pilots Should Know](https://nickrae.net/blog/faa-medguide-pilot-medication-guide.html) — October 22, 2026 source-linked explanation of the official medication reference, its limits and individualized AME/clinician questions; educational, not medical advice or individual clearance
 - [Pilot AI Tools: A Directory I Built for Aviation Study](https://nickrae.net/blog/pilot-ai-tools-directory.html) — October 17, 2026 introduction to the directory, its comparison approach, source and review-date limits, and the author’s overlapping workbook interests
 - [FeedFare is live: Walk first. Scroll later.](https://nickrae.net/blog/feedfare-launch.html) — October 5, 2026 launch story for Nick Rae's native iPhone/iPad app: choose protected apps, earn minutes from steps, and unlock one app for a timed session. US $4.99 one-time download with full native access; requires iOS/iPadOS 17 or later.
 - [How to Study for Your Instrument Checkride When You Work Full-Time](https://nickrae.net/blog/instrument-checkride-full-time.html) — source-first ground-study workflow and adaptable weekly schedule for full-time workers; study aid, not flight instruction
