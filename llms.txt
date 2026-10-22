@@ -37,10 +37,10 @@ Nick Rae is a Commercial Instrument Multi-Engine rated pilot with 393.1 flight h
 - [I Read Meta's Self-Improving AI Paper. Then I Implemented It.](https://nickrae.net/blog/self-improving-ai-agents.html)
 - [OpenClaw Setup in 2026: Five Lessons From a Retired Runtime](https://nickrae.net/blog/blog-openclaw-setup.html)
 - [How I Earned My Commercial Pilot License at 45](https://nickrae.net/blog/blog-commercial-pilot.html) — first-hand career-change story with verified 393.1-hour totals and current 400/500-hour paid-flying context
-- [Cheapest Way to Build Flight Hours: 2026 Cost Guide](https://nickrae.net/blog/blog-cheapest-flight-hours.html) — eligibility-aware, all-in cost comparison and prepay checklist plus an interactive calculator for rental, club, safety-pilot, and paid-flying paths
+- [Cheapest Way to Build Flight Hours: Compare Your Costs](https://nickrae.net/blog/blog-cheapest-flight-hours.html) — Compare like-for-like quotes, logging limits and realistic flying paths, then use the calculator and all-in cost worksheet.
 - [How to Become a Commercial Pilot in 2026](https://nickrae.net/blog/commercial-pilot-career-2026.html)
-- [The Ultimate Private Pilot Checkride Prep Guide](https://nickrae.net/blog/checkride-prep-guide.html) — FAA-S-ACS-6C source links, an illustrative study timeline, a visible checkride-week checklist, oral/flight guidance, and PPL-specific workbook path
-- [Best Student Pilot Apps for 2026: What to Buy First](https://nickrae.net/blog/student-pilot-apps-2026.html) — buy-or-wait comparisons by training stage; avoid duplicate written-prep, E6B, planning, debriefing, and logbook purchases
+- [Private Pilot Checkride Prep: ACS, Oral Study, and Checklist](https://nickrae.net/blog/checkride-prep-guide.html) — Build an ACS study map, practice oral answers with sources, work a fuel example, and review the final-week checklist with your CFI.
+- [Best Student Pilot Apps for 2026: Compare by Task](https://nickrae.net/blog/student-pilot-apps-2026.html) — Compare written prep, oral practice, EFBs, flight calculators, debriefing and free logbooks by task, device and budget.
 - [I Ran OpenClaw for 30 Days — Lessons From a Retired Runtime](https://nickrae.net/blog/openclaw-30-days.html)
 - [How I'm Using AI to Build Side Income as a Pilot](https://nickrae.net/blog/ai-aviation-business.html) — current Hermes/Talos workflow, verified aviation-product revenue proof, parked app status, and closed legacy weather hypotheses; separate newer research is unproven and not live or funding proof
 
