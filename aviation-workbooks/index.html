@@ -200,7 +200,7 @@
   @media(max-width:760px){
     .container,nav .inner{width:min(100% - 2rem,1100px)}.menu-toggle{display:inline-flex;align-items:center;justify-content:center}.nav-links{display:none;position:absolute;inset:4rem 0 auto;padding:1rem;background:#080d16;border-bottom:1px solid var(--border);flex-direction:column;align-items:stretch;gap:.2rem}.nav-links.open{display:flex}.nav-links a{min-height:44px;display:flex;align-items:center;padding:.35rem 1rem}
     .hero{padding:2.5rem 0 3.5rem}.metric-grid{grid-template-columns:repeat(2,1fr)}.books{grid-template-columns:1fr}.free-card{grid-template-columns:1fr}.free-card .button{width:100%}.faq-grid{grid-template-columns:1fr}
-    .sticky-cta{position:fixed;inset:auto 0 0;z-index:200;display:flex;gap:.5rem;padding:.6rem .75rem calc(.6rem + env(safe-area-inset-bottom));border-top:1px solid var(--border);background:rgba(2,6,23,.97);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}.sticky-cta[hidden]{display:none}.sticky-cta a{min-height:44px;display:flex;align-items:center;justify-content:center;flex:1;padding:.6rem;border-radius:.5rem;font-size:.78rem;font-weight:850;text-align:center;text-decoration:none}.sticky-cta .compare{background:var(--accent);color:#fff}.sticky-cta .buy{background:var(--amazon);color:#111}body.sticky-active{padding-bottom:calc(4.2rem + env(safe-area-inset-bottom))}
+    .sticky-cta{position:fixed;inset:auto 0 0;z-index:200;display:flex;gap:.5rem;padding:.6rem calc(.75rem + env(safe-area-inset-right,0px)) calc(.6rem + env(safe-area-inset-bottom,0px)) calc(.75rem + env(safe-area-inset-left,0px));max-height:calc(100dvh - env(safe-area-inset-top,0px) - 1rem);overflow-y:auto;overscroll-behavior:contain;border-top:1px solid var(--border);background:rgba(2,6,23,.97);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}.sticky-cta[hidden]{display:none}.sticky-cta a{min-height:44px;display:flex;align-items:center;justify-content:center;flex:1;padding:.6rem;border-radius:.5rem;font-size:.78rem;font-weight:850;text-align:center;text-decoration:none}.sticky-cta .compare{background:var(--accent);color:#fff}.sticky-cta .buy{background:var(--amazon);color:#111}body.sticky-active{padding-bottom:calc(4.2rem + env(safe-area-inset-bottom))}
   }
   @media(max-width:520px){.hero-copy{text-align:left}.hero-actions{align-items:stretch}.hero-actions .button{width:100%}.catalog-link{width:100%}.hero-stage{min-height:315px}.hero-cover{width:124px}.hero-cover.main{width:154px;right:36px;top:38px}.hero-cover.left{left:24px;top:105px}.hero-cover.bottom{right:18px;bottom:60px}.hero-proof{left:16px;bottom:18px;max-width:188px}.metric-grid,.chooser-grid{grid-template-columns:1fr}.metric{display:grid;grid-template-columns:92px 1fr;align-items:center;gap:.5rem}.metric span{margin:0}.chooser-card{min-height:0}.book{grid-template-columns:88px 1fr;gap:.9rem;padding:1rem}.book-cover{width:88px}.book h2{font-size:1.02rem}.product-links{grid-column:1/-1}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.001ms!important}}
@@ -209,15 +209,15 @@
   .books{align-items:stretch}.book{align-content:stretch;grid-template-rows:auto}.book-content{display:flex;flex-direction:column;min-width:0}.book h2 a{color:var(--text);text-decoration:none}.book h2 a:hover{text-decoration:underline}.book-content>p{margin:.55rem 0}.book-detail a{font-weight:800;text-decoration:underline}.book .product-links{margin-top:auto;padding-top:.8rem;align-items:stretch}.product-links .format-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.65rem .8rem;border:1px solid #6b819e;border-radius:.45rem;color:#e2e8f0;font-size:.78rem;font-weight:800;text-decoration:none}.sample-section{padding:4rem 0;background:#0f1725;border-block:1px solid var(--border)}.full-sample{max-width:820px;margin:1.5rem 0;padding:1.5rem;border:1px solid var(--border);border-radius:.9rem;background:var(--card)}.social-proof{padding:3.5rem 0}.book a:focus-visible,.sample-section a:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}.sample-section [id]{scroll-margin-top:6rem}@media(max-width:520px){.book .product-links{flex-direction:column}.book .product-links a{width:100%}.full-sample{padding:1rem}.sample-section{padding-block:3rem}}
 </style>
 
-<script src="/assets/site.js?v=bf0eb5b98dcd" defer></script>
+<script src="/assets/site.js?v=02823696040c" defer></script>
 
 
-<link rel="stylesheet" href="/assets/ppl-signup.css?v=ec0c262ecfc6">
+<link rel="stylesheet" href="/assets/ppl-signup.css?v=09f0b333b46c">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><meta name="theme-color" content="#080d16">
 <meta property="og:image" content="https://nickrae.net/assets/social/aviation-workbooks.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Choose the workbook for your rating. — Nick Rae"><meta name="twitter:image" content="https://nickrae.net/assets/social/aviation-workbooks.png"><meta name="twitter:image:alt" content="Choose the workbook for your rating. — Nick Rae">
 
-<link rel="stylesheet" href="/assets/site-header.css?v=2c4c712094e7">
-<link rel="stylesheet" href="/assets/navigation.css?v=773d0cfb8555">
+<link rel="stylesheet" href="/assets/site-header.css?v=cfa7dd33f4fe">
+<link rel="stylesheet" href="/assets/navigation.css?v=f1cfabdf97b4">
 </head>
 <body data-page="aviation-workbooks">
 <a class="skip-link" href="#main-content">Skip to main content</a>

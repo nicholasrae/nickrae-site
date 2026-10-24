@@ -34,8 +34,12 @@ body > nav.site-header .menu-toggle:focus-visible { border-radius:.15rem; }
   .js-nav :is(body > nav, body > header > nav):not(.sticky-cta):has(.menu-toggle) :is(.links, .nav-links) { display:none !important; }
   :is(body > nav, body > header > nav):not(.sticky-cta).navigation-enhanced :is(.links, .nav-links).open,
   .js-nav :is(body > nav, body > header > nav):not(.sticky-cta):has(.menu-toggle) :is(.links, .nav-links).open {
-    display:flex !important; max-height:60vh; overflow-y:auto;
+    display:flex !important; max-height:60vh; max-height:min(60dvh,calc(100dvh - var(--site-header-inner-height,64px) - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 1rem)); overflow-y:auto; overscroll-behavior:contain;
   }
+}
+/* Wider touch windows still need readable form text. */
+@media (any-pointer:coarse) {
+  :is(input:not([type="hidden"]), select, textarea) { font-size:max(16px,1rem); }
 }
 @media (prefers-reduced-motion:reduce) {
   body > nav.site-header *, body > nav.site-header *::before,

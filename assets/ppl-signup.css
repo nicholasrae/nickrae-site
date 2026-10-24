@@ -4,6 +4,9 @@
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-header h2{margin:0;font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.2;letter-spacing:-.025em}
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-submit{min-height:46px;background-color:#2563eb!important;font-weight:700!important}
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-field{min-width:0}
+/* Kit supplies a 15px input size after loading; retain readable touch inputs
+   at every width, including a wider phone window, without changing the form. */
+.ppl-signup .formkit-form[data-uid="899d974875"] .formkit-input{font-size:max(16px,1rem)!important;min-height:46px}
 .ppl-signup .formkit-form[data-uid="899d974875"] .ppl-email-label{display:block;margin:0 0 .4rem;color:#334155;font-size:15px;font-weight:700;text-align:left}
 .ppl-signup .formkit-form[data-uid="899d974875"] .formkit-fields{align-items:flex-end}
 .ppl-signup[data-kit-uid="899d974875"] .formkit-alert.formkit-alert-error{background:#fff1f2;border-color:#be123c;color:#9f1239}
