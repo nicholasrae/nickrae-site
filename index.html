@@ -262,6 +262,8 @@
 
 <link rel="stylesheet" href="/assets/site-header.css?v=cfa7dd33f4fe">
 <link rel="stylesheet" href="/assets/navigation.css?v=f1cfabdf97b4">
+<link rel="stylesheet" href="/assets/home-motion.css?v=9927a6299ec5">
+<script src="/assets/home-motion.js?v=518daf4ae40f" defer></script>
 </head>
 <body data-page="home">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -293,20 +295,33 @@
           <span>Nick Rae · Commercial Pilot ASEL/AMEL · Instrument · Central California</span>
         </div>
       </div>
-      <div class="cover-stage" aria-label="Three Nick Rae aviation workbook covers">
-        <picture>
-          <source type="image/webp" srcset="assets/workbooks/private-pilot-cover-240.webp 240w, assets/workbooks/private-pilot-cover-480.webp 480w" sizes="(max-width:520px) 124px, 180px">
-          <img class="cover cover-left" src="assets/workbooks/private-pilot-cover.jpg" width="1000" height="1293" alt="Private Pilot License Workbook cover" loading="lazy" decoding="async">
-        </picture>
-        <picture>
-          <source type="image/webp" srcset="assets/workbooks/vfr-radio-calls-cover-240.webp 240w, assets/workbooks/vfr-radio-calls-cover-480.webp 480w" sizes="(max-width:520px) 154px, 218px">
-          <img class="cover cover-main" src="assets/workbooks/vfr-radio-calls-cover.jpg" width="1000" height="1293" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager" fetchpriority="high" decoding="async">
-        </picture>
-        <picture>
-          <source type="image/webp" srcset="assets/workbooks/instrument-rating-cover-240.webp 240w, assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:520px) 124px, 180px">
-          <img class="cover cover-right" src="assets/workbooks/instrument-rating-cover.jpg" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="lazy" decoding="async">
-        </picture>
-        <div class="stage-note"><strong>Practice. Explain. Repeat.</strong>Choose the workbook for your rating, then preview the teaching before you buy.</div>
+      <div class="home-artwork">
+        <div class="cover-stage" data-home-artwork aria-label="Three Nick Rae aviation workbook covers">
+          <svg class="home-route" viewBox="0 0 560 440" aria-hidden="true" focusable="false">
+            <g class="route-contour"><ellipse cx="315" cy="205" rx="180" ry="110" transform="rotate(-25 315 205)"/><ellipse cx="315" cy="205" rx="205" ry="135" transform="rotate(-25 315 205)"/><ellipse cx="315" cy="205" rx="230" ry="160" transform="rotate(-25 315 205)"/></g>
+            <path class="route-path" d="M50 347C125 355 112 244 192 255S291 296 330 171 447 91 510 120"/>
+            <circle class="route-point" cx="50" cy="347" r="3"/><circle class="route-point" cx="510" cy="120" r="3"/>
+          </svg>
+          <picture>
+            <source type="image/webp" srcset="assets/workbooks/instrument-rating-cover-240.webp 240w, assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:520px) 100px, 160px">
+            <img class="cover cover-left" src="assets/workbooks/instrument-rating-cover.jpg" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="eager" decoding="async">
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="assets/workbooks/private-pilot-cover-240.webp 240w, assets/workbooks/private-pilot-cover-480.webp 480w" sizes="(max-width:520px) 145px, 210px">
+            <img class="cover cover-main" src="assets/workbooks/private-pilot-cover.jpg" width="1000" height="1293" alt="Private Pilot License Workbook cover" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="assets/workbooks/vfr-radio-calls-cover-240.webp 240w, assets/workbooks/vfr-radio-calls-cover-480.webp 480w" sizes="(max-width:520px) 100px, 160px">
+            <img class="cover cover-right" src="assets/workbooks/vfr-radio-calls-cover.jpg" width="1000" height="1293" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager" decoding="async">
+          </picture>
+          <div class="stage-note"><strong>Practice. Explain. Repeat.</strong>Preview the teaching before you buy.</div>
+        </div>
+        <p class="home-artwork-caption">PPL, instrument and VFR radio practice</p>
+        <div class="home-motion-controls" data-home-motion-controls hidden>
+          <button type="button" data-motion-replay aria-label="Replay workbook artwork animation">Replay artwork ↻</button>
+          <button type="button" data-motion-toggle aria-pressed="true">Motion on</button>
+          <p class="home-motion-status" data-motion-status role="status"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -329,9 +344,35 @@
       <p class="direct-products">Direct Amazon links: <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-finder-direct">PPL</a> · <a href="https://www.amazon.com/dp/B0GQLQYLDN" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="home-finder-direct">Instrument</a> · <a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="home-finder-direct">Commercial</a> · <a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="home-finder-direct">Multi-Engine paperback</a> / <a href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="home-finder-direct">Kindle</a> · <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-finder-direct">VFR Radio paperback</a> / <a href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="home-finder-direct">Kindle</a></p>
       </details>
       <div class="teaching-teaser"><div><p class="eyebrow">Look inside the teaching</p><h3>Read a question. Explain the decision.</h3><p>A useful study session goes beyond choosing an answer. Try a real Instrument workbook question, reveal its explanation, and follow the source reference.</p><a href="/aviation-workbooks/#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="home-teaching">Try the worked question →</a></div><div class="teaser-question"><span>From the Instrument workbook</span><p>VOR #1 reads 271°. VOR #2 reads 268°. Is the difference acceptable?</p><p class="teaser-source">Exercise 2.6, item 2 · 2026 source edition<br>Prompt page 46 · answer page 153</p></div></div>
-      <div class="ppl-signup" id="free-ppl-cards" role="region" aria-label="Free private pilot oral scenario cards">
-        <script async data-uid="899d974875" src="https://nick-rae.kit.com/899d974875/index.js"></script>
-        <p class="ppl-signup-note">Confirm your email to receive the cards. <a href="privacy/">Privacy details</a> · <a href="https://nick-rae.kit.com/899d974875">Open the signup form →</a></p>
+      <div class="ppl-signup" id="free-ppl-cards" role="region" aria-labelledby="ppl-offer-heading">
+        <div class="ppl-offer-grid">
+          <div class="ppl-preview">
+            <p class="eyebrow">Look inside a real card</p>
+            <p class="preview-intro">A question is the start.<br>The explanation is the practice.</p>
+            <details class="ppl-card-preview">
+              <summary><span class="preview-card-number">Free PPL oral cards · Card 01</span><span class="preview-card-title">Fuel: a minimum is not a margin.</span><span class="preview-card-action">Open the full card</span></summary>
+              <div class="ppl-card-sheet"><img src="/assets/workbooks/previews/ppl-oral-card-01.png" width="1020" height="1320" alt="Full first study card from the free PPL oral scenario pack, including its explanation, references and study-aid limitations" loading="lazy" decoding="async"></div>
+              <details class="ppl-card-text"><summary>Read the card as text</summary><div>
+                <p><strong>Study aid only · October 2026</strong></p>
+                <h3>The scenario</h3><p>You are planning a daytime VFR flight in a piston airplane. After accounting for forecast winds, your calculations show fuel to the first intended landing plus 35 minutes at normal cruising speed. Your passenger wants to leave now. Is meeting the minimum enough to make this a good plan?</p>
+                <h3>Rule</h3><p>Under 14 CFR 91.151(a), you may not begin a VFR airplane flight unless, considering wind and forecast weather, you have fuel to the first point of intended landing and then at least 30 minutes by day or 45 minutes at night, assuming normal cruising speed. In the stated daytime case, 35 minutes exceeds that particular minimum; it is not a complete go/no-go decision.</p>
+                <h3>Risk</h3><p>A small planning margin can disappear with stronger headwinds, delays, a diversion, or inaccurate usable-fuel and fuel-burn assumptions. Legal minimums are not recommended targets.</p>
+                <h3>Action</h3><p>Verify usable fuel and aircraft-specific performance with the applicable POH/AFM, choose a larger personal reserve, and identify an early fuel-stop or diversion trigger. Add fuel or shorten the leg when the margin is inadequate.</p>
+                <h3>Follow-up reps</h3><p><strong>What changes for a night VFR airplane flight?</strong><br>The planning reserve becomes at least 45 minutes at normal cruising speed after reaching the first intended landing.</p><p><strong>Does a 35-minute daytime reserve guarantee a safe flight?</strong><br>No. It answers only this fuel-minimum question. Conditions, performance assumptions, diversion options, and personal minimums still matter.</p>
+                <h3>Common trap</h3><p>Reciting 30/45 without accounting for winds and forecast weather, or treating the reserve as fuel you intend to use.</p>
+                <p class="ppl-card-text-source">Source: 14 CFR 91.151(a). Source text checked October 13, 2026. Recheck current rules with your CFI.</p>
+              </div></details>
+            </details>
+            <p class="preview-edition">Actual card from the October 13, 2026 edition, page 2. The preview retains its sources and study-aid limitations.</p>
+          </div>
+          <div class="ppl-offer-copy">
+            <p class="eyebrow">Five free PPL oral-practice cards</p>
+            <h2 id="ppl-offer-heading">Practice the answer.<br>Explain the decision.</h2>
+            <p>Get five printable scenarios with explained answers and references to check, plus occasional aviation study tips. Use the cards for out-loud study alongside your instructor.</p>
+            <script async data-uid="899d974875" src="https://nick-rae.kit.com/899d974875/index.js"></script>
+            <p class="ppl-signup-note">Confirm your email to receive the cards. <a href="privacy/">Privacy details</a> · <a href="https://nick-rae.kit.com/899d974875">Open the signup form →</a></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

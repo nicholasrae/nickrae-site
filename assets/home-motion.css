@@ -1,0 +1,75 @@
+/* Homepage-only product artwork and progressive, optional motion. */
+body[data-page="home"] .hero-grid{gap:2.5rem}
+body[data-page="home"] .cover-stage{min-height:400px;perspective:1000px;background:radial-gradient(ellipse at 60% 50%,#25426180,transparent 75%),#101b2c;overflow:hidden;isolation:isolate}
+body[data-page="home"] .cover-stage::before{opacity:.65}
+.home-route{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.home-route .route-contour{fill:none;stroke:#90afcf29;stroke-width:1}
+.home-route .route-path{fill:none;stroke:#d0b16d;stroke-width:1.7;stroke-dasharray:720;stroke-dashoffset:0}
+.home-route .route-point{fill:#d0b16d}
+body[data-page="home"] .cover{top:auto;bottom:66px;height:auto;object-fit:contain;transform-origin:50% 80%;border-radius:.25rem;box-shadow:0 20px 35px #0008}
+body[data-page="home"] .cover-main{left:31%;right:auto;width:39%;z-index:3;transform:rotateY(-12deg) rotateZ(-2deg)}
+body[data-page="home"] .cover-left{left:5%;width:30%;bottom:94px;z-index:2;transform:rotateY(-15deg) rotateZ(-10deg)}
+body[data-page="home"] .cover-right{right:4%;left:auto;width:30%;bottom:90px;z-index:1;transform:rotateY(-18deg) rotateZ(10deg)}
+body[data-page="home"] .stage-note{left:22px;right:22px;bottom:15px;max-width:none;padding:0;border:0;border-radius:0;background:none;color:#aebed2;font-size:.72rem;text-align:center}
+body[data-page="home"] .stage-note strong{display:inline;color:#d7c18e;font-size:inherit;line-height:inherit;margin:0 .4rem 0 0}
+.home-artwork-caption{font-size:.7rem;color:var(--dim);margin:.65rem 0 0;text-align:center}
+.home-motion-controls{display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;margin-top:.65rem}
+.home-motion-controls[hidden]{display:none}
+.home-motion-controls button{min-width:44px;min-height:44px;padding:.4rem .7rem;border:1px solid #3c526e;border-radius:.5rem;background:#101d30;color:#cfdaea;font:inherit;font-size:.75rem;font-weight:650;cursor:pointer}
+.home-motion-controls button:hover:not(:disabled){background:#192d47;border-color:#8dabd0}
+.home-motion-controls button:disabled{cursor:default;color:#9aaac0;border-color:#314257}
+.home-motion-status{flex-basis:100%;margin:0;color:var(--dim);font-size:.7rem;line-height:1.4;text-align:center;min-height:1.4em}
+body[data-page="home"] .ppl-signup{max-width:none;margin:2.5rem 0 0;padding:1.75rem;border:1px solid #395275;border-radius:1rem;background:#111f33;scroll-margin-top:5.5rem}
+.ppl-offer-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:2rem;align-items:start}
+.ppl-offer-copy{min-width:0}
+.ppl-offer-copy h2{font-size:clamp(1.65rem,3.3vw,2.2rem);line-height:1.12;letter-spacing:-.035em;margin:0 0 .8rem;text-wrap:balance}
+.ppl-offer-copy>p:not(.eyebrow):not(.ppl-signup-note){color:#bdcbdc;margin:0 0 1rem;font-size:1rem}
+.ppl-preview{min-width:0;background:#f4f0e7;color:#253244;border:1px solid #d6c8ac;border-radius:.75rem;padding:1.25rem;box-shadow:0 13px 30px #0002}
+.ppl-preview .eyebrow{color:#7b5b25;font-size:.7rem;margin:0 0 .75rem}
+.ppl-preview .preview-intro{font:500 1.55rem/1.12 Georgia,serif;letter-spacing:-.025em;margin:0 0 1rem}
+.ppl-preview .preview-edition{font-size:.75rem;color:#526174;line-height:1.5;margin:1rem 0 0}
+.ppl-card-preview{margin:0}
+.ppl-card-preview summary{min-height:68px;padding:1rem;border:1px solid #cfc2aa;border-radius:.5rem;background:#fffdf7;color:#26364c;list-style:none;box-shadow:0 7px 18px #4c3a1912;transition:transform 160ms ease,box-shadow 160ms ease}
+.ppl-card-preview summary::-webkit-details-marker{display:none}
+.ppl-card-preview summary:hover{transform:translateY(-3px);box-shadow:0 11px 22px #4c3a1920}
+.ppl-card-preview summary:focus-visible{outline-color:#9d5e00}
+.ppl-card-preview .preview-card-number{display:block;color:#7b5b25;font-size:.65rem;text-transform:uppercase;letter-spacing:.09em}
+.ppl-card-preview .preview-card-title{display:block;margin:.45rem 0 .8rem;font:500 1.4rem/1.15 Georgia,serif}
+.ppl-card-preview .preview-card-action{display:flex;gap:.7rem;justify-content:space-between;color:#2259ab;font-size:.75rem;font-weight:750}
+.ppl-card-preview .preview-card-action::after{content:"+";font-size:1rem;line-height:1}
+.ppl-card-preview[open] .preview-card-action::after{content:"−"}
+.ppl-card-sheet{margin:1rem 0 0;background:#fff;border:1px solid #d2c6b0;border-radius:.4rem;overflow:hidden}
+.ppl-card-sheet img{display:block;width:100%;height:auto}
+body[data-page="home"] .ppl-signup .ppl-signup-note{text-align:left;line-height:1.6}
+body[data-page="home"] .ppl-signup .formkit-form[data-uid="899d974875"]{margin-top:1rem}
+@media(prefers-reduced-motion:no-preference){
+  body.home-motion-on .cover-stage.is-playing .cover-main{animation:nick-cover-main 1050ms cubic-bezier(.2,.7,.2,1) both}
+  body.home-motion-on .cover-stage.is-playing .cover-left{animation:nick-cover-left 950ms 100ms cubic-bezier(.2,.7,.2,1) both}
+  body.home-motion-on .cover-stage.is-playing .cover-right{animation:nick-cover-right 1100ms 150ms cubic-bezier(.2,.7,.2,1) both}
+  body.home-motion-on .cover-stage.is-playing .route-path{animation:nick-route-draw 1900ms 100ms ease both}
+  body.home-motion-on .ppl-card-preview[open] .ppl-card-sheet{animation:nick-card-open 300ms ease both}
+}
+@keyframes nick-cover-main{from{opacity:0;transform:translateY(35px) rotateY(-30deg) rotateZ(-7deg)}to{opacity:1;transform:translateY(0) rotateY(-12deg) rotateZ(-2deg)}}
+@keyframes nick-cover-left{from{opacity:0;transform:translateY(28px) rotateY(-25deg) rotateZ(-16deg)}to{opacity:1;transform:translateY(0) rotateY(-15deg) rotateZ(-10deg)}}
+@keyframes nick-cover-right{from{opacity:0;transform:translateY(40px) rotateY(0deg) rotateZ(17deg)}to{opacity:1;transform:translateY(0) rotateY(-18deg) rotateZ(10deg)}}
+@keyframes nick-route-draw{from{stroke-dashoffset:720;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+@keyframes nick-card-open{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+body.home-motion-off .cover-stage *,body.home-motion-off .ppl-card-preview *,body.home-motion-off .ppl-card-preview summary{animation:none!important;transition:none!important}
+body.home-motion-off .ppl-card-preview summary:hover{transform:none}
+@media(max-width:900px){body[data-page="home"] .cover-stage{min-height:390px}.home-artwork{width:min(100%,560px);margin:auto}.ppl-offer-grid{gap:1.4rem}}
+@media(max-width:700px){body[data-page="home"] .hero-grid{gap:1.4rem}body[data-page="home"] .cover-stage{min-height:300px}body[data-page="home"] .cover{bottom:53px}body[data-page="home"] .cover-left{bottom:70px}body[data-page="home"] .cover-right{bottom:68px}body[data-page="home"] .stage-note{left:14px;right:14px;bottom:12px;font-size:.65rem}.ppl-offer-grid{grid-template-columns:1fr}.ppl-offer-copy{order:-1}body[data-page="home"] .ppl-signup{padding:1.25rem}.ppl-preview{padding:1rem}.home-motion-controls{gap:.4rem}.home-motion-controls button{font-size:.73rem}.home-motion-status{font-size:.65rem}}
+@media(max-width:380px){body[data-page="home"] .cover-stage{min-height:268px}.home-motion-controls{justify-content:flex-start}.home-motion-status{text-align:left}}
+@media(prefers-reduced-motion:reduce){.cover-stage *,.ppl-card-preview *{animation:none!important;transition:none!important}.ppl-card-preview summary:hover{transform:none}}
+
+/* The rendered card also has a readable native text version. */
+.ppl-card-text{margin-top:1rem}
+.ppl-card-text>summary{min-height:44px;padding:.6rem .7rem;font:700 .8rem/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2259ab;background:transparent;border-color:#bdae90;box-shadow:none}
+.ppl-card-text>div{padding:.2rem .3rem}
+.ppl-card-text h3{margin:1rem 0 .35rem;font-size:1rem;line-height:1.3}
+.ppl-card-text p{margin:.55rem 0;color:#354558;font-size:1rem;line-height:1.65}
+.ppl-card-text .ppl-card-text-source{font-size:.8rem}
+
+/* The static offer above remains visible if Kit is blocked. Hide only the
+   duplicate provider copy; keep its fields, consent text, branding and events. */
+.ppl-offer-copy .formkit-form[data-uid="899d974875"] .formkit-header[data-element="header"],
+.ppl-offer-copy .formkit-form[data-uid="899d974875"] .formkit-subheader[data-element="subheader"]{display:none!important}
