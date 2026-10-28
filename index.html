@@ -262,8 +262,8 @@
 
 <link rel="stylesheet" href="/assets/site-header.css?v=cfa7dd33f4fe">
 <link rel="stylesheet" href="/assets/navigation.css?v=f1cfabdf97b4">
-<link rel="stylesheet" href="/assets/home-motion.css?v=6b98375649a7">
-<script src="/assets/home-motion.js?v=9fe06261ad8f" defer></script>
+<link rel="stylesheet" href="/assets/home-motion.css?v=9d1536414a64">
+<script src="/assets/home-motion.js?v=d23fed54e895" defer></script>
 </head>
 <body data-page="home">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -280,11 +280,11 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">FAA-aligned pilot workbooks</p>
-        <h1 id="home-heading">Pilot workbooks. Practice the why.</h1>
+        <h1 id="home-heading"><span>Pilot workbooks.</span> <span>Practice the <em>why.</em></span></h1>
         <p class="lede">Private, instrument, commercial, multi-engine and VFR radio-call study. Practice with explained answers, then check the references with your instructor.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#workbooks" data-product="aviation_workbooks" data-placement="home-hero">Find your workbook</a>
-          <a class="button button-secondary" href="#free-ppl-cards" data-product="free_ppl_cards" data-placement="home-hero-free">Try 5 free PPL cards</a>
+          <a class="button button-primary" href="#free-ppl-cards" data-product="free_ppl_cards" data-placement="home-hero-free">Try 5 free PPL cards</a>
+          <a class="button button-secondary" href="#workbooks" data-product="aviation_workbooks" data-placement="home-hero">Find your workbook</a>
         </div>
 
         <div class="author-line">
@@ -296,27 +296,59 @@
         </div>
       </div>
       <div class="home-artwork">
+        <p class="artwork-kicker" aria-hidden="true">From the first lesson. To the next rating.</p>
         <div class="cover-stage" data-home-artwork aria-label="Three Nick Rae aviation workbook covers">
           <svg class="home-route" viewBox="0 0 560 440" aria-hidden="true" focusable="false">
             <g class="route-contour"><ellipse cx="315" cy="205" rx="180" ry="110" transform="rotate(-25 315 205)"/><ellipse cx="315" cy="205" rx="205" ry="135" transform="rotate(-25 315 205)"/><ellipse cx="315" cy="205" rx="230" ry="160" transform="rotate(-25 315 205)"/></g>
             <path class="route-path" d="M50 347C125 355 112 244 192 255S291 296 330 171 447 91 510 120"/>
             <circle class="route-point" cx="50" cy="347" r="3"/><circle class="route-point" cx="510" cy="120" r="3"/>
           </svg>
-          <picture>
-            <source type="image/webp" srcset="assets/workbooks/instrument-rating-cover-240.webp 240w, assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:520px) 100px, 160px">
+          <picture class="hero-book hero-book-instrument">
+            <source type="image/webp" srcset="assets/workbooks/instrument-rating-cover-240.webp 240w, assets/workbooks/instrument-rating-cover-480.webp 480w" sizes="(max-width:600px) 24vw, 250px">
             <img class="cover cover-left" src="assets/workbooks/instrument-rating-cover.jpg" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="eager" decoding="async">
           </picture>
-          <picture>
-            <source type="image/webp" srcset="assets/workbooks/private-pilot-cover-240.webp 240w, assets/workbooks/private-pilot-cover-480.webp 480w" sizes="(max-width:520px) 145px, 210px">
+          <picture class="hero-book hero-book-ppl">
             <img class="cover cover-main" src="assets/workbooks/private-pilot-cover.jpg" width="1000" height="1293" alt="Private Pilot License Workbook cover" loading="eager" fetchpriority="high" decoding="async">
           </picture>
-          <picture>
-            <source type="image/webp" srcset="assets/workbooks/vfr-radio-calls-cover-240.webp 240w, assets/workbooks/vfr-radio-calls-cover-480.webp 480w" sizes="(max-width:520px) 100px, 160px">
+          <picture class="hero-book hero-book-radio">
+            <source type="image/webp" srcset="assets/workbooks/vfr-radio-calls-cover-240.webp 240w, assets/workbooks/vfr-radio-calls-cover-480.webp 480w" sizes="(max-width:600px) 24vw, 250px">
             <img class="cover cover-right" src="assets/workbooks/vfr-radio-calls-cover.jpg" width="1000" height="1293" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="eager" decoding="async">
           </picture>
           <div class="stage-note"><strong>Practice. Explain. Repeat.</strong>Preview the teaching before you buy.</div>
         </div>
         <p class="home-artwork-caption">PPL, instrument and VFR radio practice</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-study" aria-labelledby="home-study-heading">
+    <div class="container">
+      <div class="study-intro">
+        <p class="eyebrow">Look inside the teaching</p>
+        <h2 id="home-study-heading">Read a question.<br><span>Explain the decision.</span></h2>
+        <p>A useful study session goes beyond choosing an answer. Try a real Instrument workbook question, reveal its explanation, and follow the source reference.</p>
+      </div>
+      <div class="study-spread" data-study-story>
+        <figure class="study-sheet">
+          <img src="/assets/workbooks/previews/instrument-vor-sample.webp" width="928" height="1200" alt="Actual Instrument workbook promotional sample, with its question, consolidated answer, source check and original disclaimer" loading="lazy" decoding="async">
+          <figcaption>Selected workbook text, reformatted for readability. <a href="/assets/workbooks/previews/instrument-vor-sample.webp">Open the full-size sample ↗</a></figcaption>
+        </figure>
+        <div class="study-story">
+          <p class="sample-step">01 <span>The question</span></p>
+          <h3>From the Instrument workbook</h3>
+          <p class="sample-question">VOR #1 reads 271°. VOR #2 reads 268°. Is the difference acceptable?</p>
+          <p class="sample-provenance">Exercise 2.6, item 2 · 2026 source edition<br>Prompt page 46 · answer page 153</p>
+          <details class="study-answer">
+            <summary><span>Reveal the workbook answer</span><span class="answer-plus" aria-hidden="true">+</span></summary>
+            <div class="study-answer-copy">
+              <p class="sample-step">02 <span>The explanation</span></p>
+              <p class="answer-line">Difference is 3°. Maximum 4°.<br>Yes, acceptable.</p>
+              <p>The source check assumes two VOR units independent except for the antenna, tuned to the same VOR ground facility. Passing this comparison alone does not establish aircraft airworthiness or authorize a flight. <a href="/aviation-workbooks/#instrument-sample">Read the full source check and original disclaimer →</a></p>
+            </div>
+          </details>
+          <p class="sample-limitation">Training and educational use only. Consult current official FAA publications and your instructor. Not FAA endorsed.</p>
+          <a class="sample-cta" href="/aviation-workbooks/#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="home-teaching">Try the worked question →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -327,18 +359,18 @@
       <h2 class="section-heading" id="finder-heading">Find your workbook</h2>
       <p class="section-intro">Start with your rating. Preview the question style and explanations, then choose the format you will use.</p>
       <div class="finder-grid">
-        <a class="finder-card" href="/aviation-workbooks/private-pilot/" data-product="ppl_workbook" data-placement="home-finder"><strong>Student pilot / PPL</strong><span>Written-test fluency, explained answers, and oral-exam thinking.</span><em>See PPL workbook →</em></a>
-        <a class="finder-card" href="/aviation-workbooks/instrument-rating/" data-product="instrument_workbook" data-placement="home-finder"><strong>IFR training</strong><span>Weather, procedures, charts, systems, and scenario decisions.</span><em>See Instrument workbook →</em></a>
-        <a class="finder-card" href="/aviation-workbooks/commercial-pilot/" data-product="commercial_workbook" data-placement="home-finder"><strong>Commercial candidate</strong><span>Commercial ACS review, maneuvers, judgment, and explanations.</span><em>See Commercial workbook →</em></a>
-        <a class="finder-card" href="/aviation-workbooks/multi-engine/" data-product="multi_engine_workbook" data-placement="home-finder"><strong>Multi-engine add-on</strong><span>Vmc, OEI, PA-44 flows, engine-out calls, and oral traps.</span><em>See Multi-Engine workbook →</em></a>
-        <a class="finder-card" href="/aviation-workbooks/vfr-radio/" data-product="vfr_radio_calls_workbook" data-placement="home-finder"><strong>VFR radio calls</strong><span>Call-building, ATC replies, readbacks, CTAF flows, and out-loud reps.</span><em>See Radio Calls workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/private-pilot/" data-product="ppl_workbook" data-placement="home-finder"><div class="finder-cover"><img src="/assets/workbooks/private-pilot-cover-480.webp" width="1000" height="1293" alt="Private Pilot License Workbook cover" loading="lazy" decoding="async"></div><strong>Student pilot / PPL</strong><span>Written-test fluency, explained answers, and oral-exam thinking.</span><em>See PPL workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/instrument-rating/" data-product="instrument_workbook" data-placement="home-finder"><div class="finder-cover"><img src="/assets/workbooks/instrument-rating-cover-480.webp" width="1218" height="1500" alt="Instrument Rating Workbook cover" loading="lazy" decoding="async"></div><strong>IFR training</strong><span>Weather, procedures, charts, systems, and scenario decisions.</span><em>See Instrument workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/commercial-pilot/" data-product="commercial_workbook" data-placement="home-finder"><div class="finder-cover"><img src="/assets/workbooks/commercial-pilot-cover-480.webp" width="1000" height="1293" alt="The Complete Commercial Pilot Workbook cover" loading="lazy" decoding="async"></div><strong>Commercial candidate</strong><span>Commercial ACS review, maneuvers, judgment, and explanations.</span><em>See Commercial workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/multi-engine/" data-product="multi_engine_workbook" data-placement="home-finder"><div class="finder-cover"><img src="/assets/workbooks/multi-engine-cover-480.webp" width="1000" height="1293" alt="Multi-Engine Add-On Rating Workbook cover" loading="lazy" decoding="async"></div><strong>Multi-engine add-on</strong><span>Vmc, OEI, PA-44 flows, engine-out calls, and oral traps.</span><em>See Multi-Engine workbook →</em></a>
+        <a class="finder-card" href="/aviation-workbooks/vfr-radio/" data-product="vfr_radio_calls_workbook" data-placement="home-finder"><div class="finder-cover"><img src="/assets/workbooks/vfr-radio-calls-cover-480.webp" width="1000" height="1293" alt="Clearance to Confidence VFR Radio Calls Workbook cover" loading="lazy" decoding="async"></div><strong>VFR radio calls</strong><span>Call-building, ATC replies, readbacks, CTAF flows, and out-loud reps.</span><em>See Radio Calls workbook →</em></a>
       </div>
       <p class="catalog-links"><a href="aviation-workbooks/#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="home-finder-sample">Try an Instrument workbook question + answer</a></p>
       <details class="secondary-details"><summary>More buying options and resources</summary>
       <p class="catalog-links"><a href="aviation-workbooks/">Compare workbook scope and formats</a> · <a href="https://www.amazon.com/stores/Nick-Rae/author/B0GDGY1DWX" target="_blank" rel="noopener" data-product="amazon_author_store" data-placement="home-finder">Full Amazon catalog</a> · <a href="https://nicholasrae.gumroad.com/l/ppl-oral-flashcards" target="_blank" rel="noopener" data-product="ppl_oral_flashcards" data-placement="home-finder">Paid 50-card PPL deck</a></p>
       <p class="direct-products">Direct Amazon links: <a href="https://a.co/d/0hExZLaf" target="_blank" rel="noopener" data-product="ppl_workbook" data-placement="home-finder-direct">PPL</a> · <a href="https://www.amazon.com/dp/B0GQLQYLDN" target="_blank" rel="noopener" data-product="instrument_workbook" data-placement="home-finder-direct">Instrument</a> · <a href="https://www.amazon.com/dp/B0GW8BGNDP" target="_blank" rel="noopener" data-product="commercial_workbook" data-placement="home-finder-direct">Commercial</a> · <a href="https://www.amazon.com/dp/B0GXK6J9F5" target="_blank" rel="noopener" data-product="multi_engine_workbook" data-placement="home-finder-direct">Multi-Engine paperback</a> / <a href="https://www.amazon.com/dp/B0GX32PRCJ" target="_blank" rel="noopener" data-product="multi_engine_workbook_kindle" data-placement="home-finder-direct">Kindle</a> · <a href="https://www.amazon.com/dp/B0H3KT5FHW" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook" data-placement="home-finder-direct">VFR Radio paperback</a> / <a href="https://www.amazon.com/dp/B0H3HZ2BQG" target="_blank" rel="noopener" data-product="vfr_radio_calls_workbook_kindle" data-placement="home-finder-direct">Kindle</a></p>
       </details>
-      <div class="teaching-teaser"><div><p class="eyebrow">Look inside the teaching</p><h3>Read a question. Explain the decision.</h3><p>A useful study session goes beyond choosing an answer. Try a real Instrument workbook question, reveal its explanation, and follow the source reference.</p><a href="/aviation-workbooks/#instrument-sample" data-event="workbook_sample_view" data-product="instrument_workbook" data-placement="home-teaching">Try the worked question →</a></div><div class="teaser-question"><span>From the Instrument workbook</span><p>VOR #1 reads 271°. VOR #2 reads 268°. Is the difference acceptable?</p><p class="teaser-source">Exercise 2.6, item 2 · 2026 source edition<br>Prompt page 46 · answer page 153</p></div></div>
+
       <div class="ppl-signup" id="free-ppl-cards" role="region" aria-labelledby="ppl-offer-heading">
         <div class="ppl-offer-grid">
           <div class="ppl-preview">
