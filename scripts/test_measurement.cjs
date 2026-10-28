@@ -47,7 +47,7 @@ class Element extends Events {
   getClientRects() { return this.hidden ? [] : [this.rect]; }
   getBoundingClientRect() { return this.rect; }
 }
-function environment({allowed = false, initialConsent = allowed ? 'allow' : null, origin = 'https://nickrae.net', ga4Id = TEST_GA4_ID, autoLoad = true, baseTarget = null} = {}) {
+function environment({allowed = false, initialConsent = allowed ? 'allow' : null, origin = 'https://nickrae.net', ga4Id = TEST_GA4_ID, autoLoad = true, baseTarget = null, search = '?email=secret@example.com', gpc = false} = {}) {
   const storage = new Map(initialConsent ? [['nickrae_analytics_consent_v1', initialConsent]] : []);
   const scripts = [], createdScripts = [], observers = [], intersections = [], cookieWrites = [], reloads = [];
   const timers = new Map(), navigations = [];
@@ -75,7 +75,8 @@ function environment({allowed = false, initialConsent = allowed ? 'allow' : null
   });
   const window = new Events();
   Object.assign(window, {
-    location: new URL(origin + '/aviation-workbooks/private-pilot/?email=secret@example.com#private-token'),
+    location: new URL(origin + '/aviation-workbooks/private-pilot/' + search + '#private-token'),
+    navigator: {globalPrivacyControl: gpc},
     innerWidth: 1000, innerHeight: 800,
     localStorage: {getItem: k => storage.get(k) || null, setItem: (k,v) => storage.set(k,v), removeItem: k => storage.delete(k)},
     getComputedStyle: e => e.style,
@@ -130,7 +131,7 @@ function environment({allowed = false, initialConsent = allowed ? 'allow' : null
     clock+=ms;
     for(const [id,timer] of timers) if(timer.at<=clock) {timers.delete(id);timer.fn();}
   };
-  return {window, document, scripts, createdScripts, observers, intersections, cookieWrites, reloads, events, allEvents, commands, click, finishLoading, timers, navigations, advanceTimers};
+  return {window, document, storage, scripts, createdScripts, observers, intersections, cookieWrites, reloads, events, allEvents, commands, click, finishLoading, timers, navigations, advanceTimers};
 }
 function signupFixture() {
   const signup = new Element(), form = new Element();
@@ -478,11 +479,90 @@ test('Untagged or unrecognized native signups contain no arbitrary campaign or U
   }
 });
 test('Localhost, loopback, dev hosts and insecure HTTP never load production measurement', () => {
-  for (const origin of ['http://localhost:8080','http://127.0.0.1:8080','https://preview.nickrae.net','http://nickrae.net']) {
-    const e=environment({origin});e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+  for (const origin of ['http://localhost:8080','http://127.0.0.1:8080','https://preview.nickrae.net','http://nickrae.net']) for (const search of ['', '?analytics_test=1']) {
+    const e=environment({origin,search});e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
     e.click('https://www.amazon.com/dp/B0GN81JP9R');
     assert.equal(e.scripts.length,0,origin);assert.equal(e.events().length,0,origin);
   }
+});
+test('Exact production QA marker labels config before pageview and every event, with Ads disabled', () => {
+  for (const origin of ['https://nickrae.net','https://www.nickrae.net']) {
+    const e=environment({origin,search:'?analytics_test=1&email=secret%40example.com'});
+    e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+    assert.equal(e.scripts.length,1);
+    assert.equal(new URL(e.scripts[0].src).searchParams.get('id'),TEST_GA4_ID);
+    assert.deepEqual(e.commands('config').map(x=>x[1]),[TEST_GA4_ID]);
+    const queue=Array.from(e.window.dataLayer),setIndex=queue.findIndex(x=>x[0]==='set'),configIndex=queue.findIndex(x=>x[0]==='config'),viewIndex=queue.findIndex(x=>x[0]==='event');
+    assert(setIndex<configIndex&&configIndex<viewIndex);
+    e.click('https://www.amazon.com/dp/B0GN81JP9R');
+    e.window.NickRaeMeasurement.track('flight_hour_calculator_use',{test_traffic:'no',traffic_type:'external',debug_mode:false});
+    const payloads=[e.commands('set')[0][1],e.commands('config')[0][2],...e.allEvents().map(x=>x.params)];
+    for(const payload of payloads) {
+      assert.equal(payload.test_traffic,'yes');assert.equal(payload.traffic_type,'internal');assert.equal(payload.debug_mode,true);
+      assert(!JSON.stringify(payload).includes('analytics_test'));assert(!JSON.stringify(payload).includes('secret'));
+    }
+    assert(e.commands('consent').every(x=>x[2].ad_storage==='denied'&&x[2].ad_user_data==='denied'&&x[2].ad_personalization==='denied'));
+    assert.deepEqual([...e.storage.keys()],['nickrae_analytics_consent_v1']);
+  }
+});
+test('Absent, malformed or duplicate QA markers keep ordinary traffic non-test without debug/internal labels', () => {
+  for(const search of ['', '?analytics_test=0','?analytics_test=true','?analytics_test=01','?analytics_test=','?ANALYTICS_TEST=1','?analytics_test[]=1','?analytics_test=1&analytics_test=1','?analytics_test=1&analytics_test=0','?analytics_test=1%20']) {
+    const e=environment({search});e.window.NickRaePrivacy.allow();
+    assert.equal(new URL(e.scripts[0].src).searchParams.get('id'),'AW-18126210838',search);
+    assert.deepEqual(e.commands('config').map(x=>x[1]),['AW-18126210838',TEST_GA4_ID]);
+    for(const payload of [e.commands('set')[0][1],...e.commands('config').map(x=>x[2]),...e.allEvents().map(x=>x.params)]) {
+      assert.equal(payload.test_traffic,'no',search);assert(!Object.hasOwn(payload,'traffic_type'));assert(!Object.hasOwn(payload,'debug_mode'));
+    }
+    assert.equal(e.commands('consent').at(-1)[2].ad_storage,'granted');
+  }
+});
+test('QA marker never overrides missing/denied consent, GPC, or an invalid GA4 destination', () => {
+  for(const search of ['', '?analytics_test=1']) {
+    for(const initialConsent of [null,'deny']) {
+      const e=environment({search,initialConsent});e.window.testAPI.attachGlobalTracking();
+      if(initialConsent!==null)e.document.dispatchEvent({type:'DOMContentLoaded'});
+      e.click('https://www.amazon.com/dp/B0GN81JP9R');
+      assert.equal(e.scripts.length,0);assert.equal(e.allEvents().length,0);
+    }
+    const e=environment({search,gpc:true,initialConsent:'allow'});
+    e.document.dispatchEvent({type:'DOMContentLoaded'});e.window.NickRaePrivacy.allow();
+    assert.equal(e.scripts.length,0);assert.equal(e.allEvents().length,0);assert.equal(e.window.NickRaeMeasurement.track('flight_hour_calculator_use'),false);
+  }
+  for(const ga4Id of [null,'','AW-18126210838','G-bad-id']) {
+    const e=environment({search:'?analytics_test=1',ga4Id});e.window.NickRaePrivacy.allow();
+    assert.equal(e.createdScripts.length,0);assert.equal(e.commands('config').length,0);assert.equal(e.allEvents().length,0);
+  }
+});
+test('GPC blocks a pending loader and subsequent custom measurement if enabled before activation', () => {
+  const e=environment({search:'?analytics_test=1',autoLoad:false});e.window.NickRaePrivacy.allow();
+  e.window.navigator.globalPrivacyControl=true;e.finishLoading();
+  assert.equal(e.commands('config').length,0);assert.equal(e.allEvents().length,0);
+  assert.equal(e.window.NickRaeMeasurement.track('flight_hour_calculator_use'),false);
+  const active=environment();active.window.NickRaePrivacy.allow();
+  active.window.navigator.globalPrivacyControl=true;
+  assert.equal(active.window.NickRaeMeasurement.track('flight_hour_calculator_use'),false);
+  assert.equal(active.allEvents().length,1);
+});
+test('QA loading withdrawal and regrant retain labels without an Ads config or duplicate pageview', () => {
+  const e=environment({search:'?analytics_test=1',autoLoad:false});e.window.NickRaePrivacy.allow();
+  e.window.NickRaePrivacy.deny();e.finishLoading();
+  assert.equal(e.commands('config').length,0);assert.equal(e.allEvents().length,0);
+  e.window.NickRaePrivacy.allow();e.window.NickRaePrivacy.allow();
+  assert.equal(e.createdScripts.length,1);assert.deepEqual(e.commands('config').map(x=>x[1]),[TEST_GA4_ID]);
+  assert.equal(e.allEvents().filter(x=>x.name==='page_view').length,1);
+  assert.equal(e.allEvents()[0].params.test_traffic,'yes');
+  assert(e.commands('consent').every(x=>x[2].ad_storage==='denied'&&x[2].ad_user_data==='denied'));
+});
+test('QA marker stays out of forwarded links, Kit attribution and storage while approved campaigns survive', () => {
+  const e=environment({search:'?analytics_test=1&'+pplCampaignQuery+'&email=secret%40example.com'});
+  const links=attributionLinks(e,['/blog/','/aviation-workbooks/private-pilot/#free-ppl-cards','https://nick-rae.kit.com/899d974875']);
+  e.window.testAPI.preservePplAttribution();
+  for(const link of links) {const url=new URL(link.href);assert(!url.searchParams.has('analytics_test'));assert.equal(url.searchParams.get('utm_source'),'youtube');}
+  e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();
+  const values=Object.fromEntries(f.fields.map(input=>[input.name,input.value]));
+  assert(!JSON.stringify(values).includes('analytics_test'));assert(!JSON.stringify(values).includes('secret'));
+  assert.equal(new URLSearchParams(values.search).get('utm_source'),'youtube');
+  assert.equal(e.storage.size,0);
 });
 test('Allow loads once and strips URL/referrer query and fragment', () => {
   const e = environment();e.window.NickRaePrivacy.allow();e.window.NickRaePrivacy.allow();

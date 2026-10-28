@@ -7,6 +7,13 @@
   const ga4Configured = typeof GA4_ID === 'string' && /^G-[A-Z0-9]+$/.test(GA4_ID);
   const CONSENT_KEY = 'nickrae_analytics_consent_v1';
   const OUTBOUND_WAIT_MS = 250;
+  // Deliberate, per-page QA only. This flag is never stored or forwarded, and
+  // it cannot enable measurement on a preview, localhost or insecure page.
+  const qaQuery = new URLSearchParams(window.location.search);
+  const testTraffic = window.location.protocol === 'https:'
+    && ['nickrae.net', 'www.nickrae.net'].includes(window.location.hostname)
+    && qaQuery.getAll('analytics_test').length === 1
+    && qaQuery.get('analytics_test') === '1';
   // Only campaign values we publish are eligible for forwarding or Google
   // measurement. Never turn arbitrary URL text into subscriber/analytics data.
   const PPL_CAMPAIGNS = new Map([
@@ -41,6 +48,16 @@
     if (consentOverride !== undefined) return consentOverride;
     try { return window.localStorage.getItem(CONSENT_KEY); }
     catch (_) { return null; }
+  }
+
+  function globalPrivacyControl() {
+    return window.navigator?.globalPrivacyControl === true;
+  }
+
+  function trafficLabels() {
+    return testTraffic
+      ? {test_traffic: 'yes', traffic_type: 'internal', debug_mode: true}
+      : {test_traffic: 'no'};
   }
 
   function setConsent(value) {
@@ -171,7 +188,8 @@
   }
 
   function canMeasure() {
-    return ga4Configured && analyticsReady && currentConsent() === 'allow' && typeof window.gtag === 'function';
+    return ga4Configured && analyticsReady && !globalPrivacyControl()
+      && currentConsent() === 'allow' && typeof window.gtag === 'function';
   }
 
   function trackEvent(name, parameters = {}, onProcessed) {
@@ -191,17 +209,18 @@
       page_location: measurementUrl(window.location.href),
       page_referrer: document.referrer ? measurementUrl(document.referrer) : '',
       measurement_version: '2026-10-14',
+      ...trafficLabels(),
       send_to: GA4_ID
     });
     return true;
   }
 
   function activateMeasurement() {
-    if (!analyticsLoaded || analyticsReady || currentConsent() !== 'allow') return;
+    if (!analyticsLoaded || analyticsReady || globalPrivacyControl() || currentConsent() !== 'allow') return;
     window.gtag('consent', 'update', {
-      ad_storage: 'granted',
+      ad_storage: testTraffic ? 'denied' : 'granted',
       analytics_storage: 'granted',
-      ad_user_data: 'granted',
+      ad_user_data: testTraffic ? 'denied' : 'granted',
       ad_personalization: 'denied'
     });
     if (ga4Configured) window[`ga-disable-${GA4_ID}`] = false;
@@ -215,12 +234,16 @@
         allow_ad_personalization_signals: false,
         page_location: measurementUrl(window.location.href),
         page_referrer: document.referrer ? measurementUrl(document.referrer) : '',
+        ...trafficLabels(),
         // Google documents these campaign overrides. They preserve our known
         // campaign attribution while page_location continues to omit queries.
         ...googleCampaign()
       };
+      // Set before either config so automatic GA4 session/first-visit events
+      // inherit the same classification as our explicit pageview and events.
       window.gtag('set', config);
-      window.gtag('config', TAG_ID, config);
+      // QA uses only the dedicated GA4 destination, never the Ads config.
+      if (!testTraffic) window.gtag('config', TAG_ID, config);
       if (ga4Configured) window.gtag('config', GA4_ID, config);
     }
     analyticsReady = true;
@@ -231,6 +254,7 @@
   function loadAnalytics() {
     // Local previews and staging hosts must never pollute production reports.
     if (window.location.protocol !== 'https:' || !['nickrae.net', 'www.nickrae.net'].includes(window.location.hostname)) return;
+    if (globalPrivacyControl() || (testTraffic && !ga4Configured)) return;
     if (analyticsReady || currentConsent() !== 'allow') return;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function gtag(){ window.dataLayer.push(arguments); };
@@ -250,7 +274,7 @@
     if (!analyticsScript) {
       analyticsScript = document.createElement('script');
       analyticsScript.async = true;
-      analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(TAG_ID)}`;
+      analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(testTraffic ? GA4_ID : TAG_ID)}`;
       analyticsScript.onload = () => {
         analyticsLoaded = true;
         activateMeasurement();
