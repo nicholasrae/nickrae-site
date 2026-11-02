@@ -247,7 +247,12 @@ class Audit:
             if source in REDIRECTS:
                 destination = REDIRECTS[source]
                 refresh = page.refreshes
-                if len(refresh) != 1 or destination not in refresh[0].attrs.get("content", ""):
+                refresh_destination = None
+                if len(refresh) == 1:
+                    match = re.fullmatch(r"\s*0\s*;\s*url\s*=\s*(.+?)\s*", refresh[0].attrs.get("content", ""), re.I)
+                    if match:
+                        refresh_destination = urljoin(page.url, match.group(1).strip("\"'"))
+                if refresh_destination != destination:
                     self.error(source, f"expected redirect to {destination}")
                 if not page.noindex or page.canonical != [destination]:
                     self.error(source, "redirect must be noindex with its destination canonical")

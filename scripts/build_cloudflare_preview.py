@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export only tracked public files into an isolated Cloudflare preview payload.
 
-Production source bytes, GitHub Pages configuration and DNS are not changed.
+The exporter does not rewrite source bytes, GitHub Pages configuration or DNS.
 Uses the current simple Jekyll exclusion list; unsupported exclusion syntax fails
 closed so a future configuration change requires an explicit publication review.
 """
@@ -217,6 +217,7 @@ if __name__ == "__main__":
         for command in [
             [sys.executable, "scripts/check_site.py"],
             ["node", "scripts/test_measurement.cjs"],
+            ["node", "scripts/test_preview_navigation.cjs"],
             ["node", "scripts/test_cloudflare_preview.cjs"],
             *([["node", "scripts/test_cloudflare_pages_preview.cjs"]] if options.pages else []),
         ]:

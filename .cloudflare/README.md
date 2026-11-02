@@ -10,6 +10,7 @@ changes DNS, adds a custom domain, merges to `main`, sends email or schedules X.
 python3 scripts/check_site.py
 node scripts/test_measurement.cjs
 python3 scripts/build_cloudflare_preview.py
+node scripts/test_preview_navigation.cjs
 node scripts/test_cloudflare_preview.cjs
 node scripts/serve_cloudflare_preview.cjs --port 8899
 ```
@@ -20,8 +21,14 @@ metadata exclusions, and excludes `CNAME` from the preview asset payload. It
 rejects symlinks, unsupported config/file types and assets larger than 25 MiB.
 Internal memos, `scripts`, `data`, Git metadata, Worker source and generated
 manifests cannot be served by the Worker. Generated output is ignored by Git.
-Every exported HTML, PDF, JavaScript, image, video and other public asset remains
-byte-identical. The production canonicals, sitemap and all Kit placements stay
+Every export remains byte-identical to this branch's checked-out source. The
+preview branch fixes 24 same-site clickable anchors and registered index/legacy
+redirects to use root-relative navigation, so those actions stay on the origin
+being reviewed. Two legacy blog stubs also forward queries and fragments through
+JavaScript; their no-JavaScript static meta fallback retains its existing query
+limitation. These changes affect 26 HTML files. All other public source bytes,
+including PDFs, design assets and measurement JavaScript, remain unchanged.
+The production canonicals, social/schema metadata, sitemap and all Kit placements stay
 unchanged. Existing measurement code only loads Google's SDK on HTTPS
 `nickrae.net`/`www.nickrae.net`, so even allowing analytics on this preview cannot
 send Google events. Source/runtime tests do not prove Google receipt or signup
@@ -84,8 +91,10 @@ The Worker runs before assets to add `X-Robots-Tag: noindex, nofollow`,
 assets, PDFs, 404s and redirects. The original `robots.txt` bytes stay unchanged so
 crawlers can read the noindex response headers. The Worker explicitly rejects
 requests for the production Nick Rae hostnames. The three legacy HTML redirect
-stubs retain their original bodies and production targets; their preview behavior
-should be inspected without following them into an unlabelled production visit.
+stubs use root-relative navigation to the same canonical destinations. Actual
+index-alias scripts and legacy redirects are executed in regression tests with
+preview and production origins, including queries and fragments. Metadata keeps
+its original absolute production URLs.
 
 The local server executes this same Worker module against a read-only local asset
 binding for routing/layout checks. It is not evidence of a Cloudflare deployment,
