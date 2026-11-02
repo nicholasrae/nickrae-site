@@ -12,6 +12,7 @@ node_modules/
 .DS_Store
 .cloudflare/dist/
 .cloudflare/pages-dist/
+.cloudflare/production-dist/
 .cloudflare/generated/
 .wrangler/
 __pycache__/
