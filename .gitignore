@@ -10,3 +10,8 @@ node_modules/
 *secret*
 *private_key*
 .DS_Store
+.cloudflare/dist/
+.cloudflare/pages-dist/
+.cloudflare/generated/
+.wrangler/
+__pycache__/
