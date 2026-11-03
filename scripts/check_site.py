@@ -37,6 +37,8 @@ EXTERNAL_CANONICALS = {
 KIT_UID = "899d974875"
 KIT_FORM = f"https://nick-rae.kit.com/{KIT_UID}"
 KIT_SCRIPT = KIT_FORM + "/index.js"
+KIT_HTML_SCRIPT = "https://f.convertkit.com/ckjs/ck.5.js"
+KIT_ACTION = "https://app.kit.com/forms/10042240/subscriptions"
 KIT_PAGES = {
     "index.html", "aviation-workbooks/index.html",
     "aviation-workbooks/private-pilot/index.html",
@@ -247,7 +249,12 @@ class Audit:
             if source in REDIRECTS:
                 destination = REDIRECTS[source]
                 refresh = page.refreshes
-                if len(refresh) != 1 or destination not in refresh[0].attrs.get("content", ""):
+                refresh_destination = None
+                if len(refresh) == 1:
+                    match = re.fullmatch(r"\s*0\s*;\s*url\s*=\s*(.+?)\s*", refresh[0].attrs.get("content", ""), re.I)
+                    if match:
+                        refresh_destination = urljoin(page.url, match.group(1).strip("\"'"))
+                if refresh_destination != destination:
                     self.error(source, f"expected redirect to {destination}")
                 if not page.noindex or page.canonical != [destination]:
                     self.error(source, "redirect must be noindex with its destination canonical")
@@ -474,21 +481,34 @@ class Audit:
     def check_kit(self):
         actual_pages = set()
         for page in self.pages.values():
-            scripts = [x for x in page.tags("script") if "data-uid" in x.attrs or "nick-rae.kit.com/" in x.attrs.get("src", "")]
-            if not scripts:
+            scripts = [x for x in page.tags("script") if x.attrs.get("src") == KIT_HTML_SCRIPT or "data-uid" in x.attrs or "nick-rae.kit.com/" in x.attrs.get("src", "")]
+            forms = [x for x in page.tags("form") if x.attrs.get("data-uid") == KIT_UID or x.attrs.get("data-sv-form") == "10042240"]
+            if not scripts and not forms:
                 continue
             actual_pages.add(page.relative)
-            if len(scripts) != 1:
-                self.error(page.relative, "expected one Kit embed")
+            if len(scripts) != 1 or len(forms) != 1:
+                self.error(page.relative, "expected one official Kit HTML form and one loader")
             for script in scripts:
-                if script.attrs.get("data-uid") != KIT_UID or script.attrs.get("src") != KIT_SCRIPT or "async" not in script.attrs:
-                    self.error(page.relative, "Kit script UID, source or async attribute differs from the approved form", script.line)
+                if script.attrs.get("src") != KIT_HTML_SCRIPT:
+                    self.error(page.relative, "Kit loader differs from the current official HTML embed", script.line)
                 if not script.inside_signup:
                     self.error(page.relative, "Kit script must be inside .ppl-signup", script.line)
+            for form in forms:
+                if (form.attrs.get("data-uid") != KIT_UID or form.attrs.get("data-sv-form") != "10042240"
+                        or form.attrs.get("method", "").lower() != "post" or form.attrs.get("action") != KIT_ACTION):
+                    self.error(page.relative, "Kit form identity or native POST destination changed", form.line)
+                if not form.inside_signup:
+                    self.error(page.relative, "Kit form must be inside .ppl-signup", form.line)
+                try:
+                    options = json.loads(form.attrs.get("data-options", ""))
+                    if options.get("settings", {}).get("return_visitor", {}).get("action") != "show":
+                        self.error(page.relative, "Kit returning visitors must continue to see the form", form.line)
+                except (ValueError, TypeError):
+                    self.error(page.relative, "Kit HTML embed options must be valid JSON", form.line)
             if "free-ppl-cards" not in page.ids:
                 self.error(page.relative, "missing free-ppl-cards anchor")
-            if not any(a.attrs.get("href") == KIT_FORM and a.inside_signup for a in page.anchors):
-                self.error(page.relative, "missing hosted-form fallback within .ppl-signup")
+            if not any(a.attrs.get("href", "").startswith("mailto:nick@nickrae.net") and a.inside_signup for a in page.anchors):
+                self.error(page.relative, "missing signup-help contact within .ppl-signup")
             if not any(urljoin(page.url, a.attrs.get("href", "")) == ORIGIN + "/privacy/" and a.inside_signup for a in page.anchors):
                 self.error(page.relative, "missing privacy link within .ppl-signup")
         if actual_pages != KIT_PAGES:
