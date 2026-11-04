@@ -38,6 +38,8 @@
     })
   });
   const pplAmazonOriginals = new WeakMap();
+  const pplGoogleLinkOriginals = new WeakMap();
+  const pplGoogleCustomLinks = new WeakSet();
   let analyticsReady = false;
   let analyticsInitialized = false;
   let analyticsConfigured = false;
@@ -135,8 +137,22 @@
 
   function preservePplAttribution() {
     const campaign = pplCampaign();
+    const links = document.querySelectorAll('a[href]');
+    links.forEach((link) => {
+      const original = pplGoogleLinkOriginals.get(link);
+      if (!original) return;
+      if (link.href !== original.forwarded) {
+        // Preserve a downstream feature's deliberate change to our link.
+        pplGoogleCustomLinks.add(link);
+        pplGoogleLinkOriginals.delete(link);
+      } else if (campaign.utm_source !== 'google') {
+        link.href = original.href;
+        pplGoogleLinkOriginals.delete(link);
+      }
+    });
     if (!campaign.utm_source) return;
-    document.querySelectorAll('a[href]').forEach((link) => {
+    links.forEach((link) => {
+      if (pplGoogleCustomLinks.has(link) || pplGoogleLinkOriginals.has(link)) return;
       const href = link.getAttribute('href');
       // Native fragment navigation already keeps this page's URL intact.
       if (!href || href.startsWith('#') || link.hasAttribute('download')) return;
@@ -151,6 +167,9 @@
         // mixing fields from two campaigns or rewriting outbound retailers.
         if ([...url.searchParams.keys()].some((key) => key.startsWith('utm_'))) return;
         Object.entries(campaign).forEach(([key, value]) => url.searchParams.set(key, value));
+        if (campaign.utm_source === 'google') {
+          pplGoogleLinkOriginals.set(link, {href: link.href, forwarded: url.toString()});
+        }
         link.href = url.toString();
       } catch (_) {}
     });
@@ -200,20 +219,26 @@
     document.querySelectorAll('a[href]').forEach(refreshPplAmazonLink);
   }
 
+  function refreshOptionalAttribution() {
+    preservePplAttribution();
+    refreshPplAmazonLinks();
+  }
+
   function attachPplAmazonAttribution() {
     // Recheck the live choice before native/new-tab/menu navigation as well as
     // ordinary clicks. No gesture is prevented or replaced by this listener.
     const refreshGesture = (event) => {
+      preservePplAttribution();
       const link = event.target.closest?.('a[href]');
       if (link) refreshPplAmazonLink(link);
     };
     ['pointerdown', 'keydown', 'click', 'auxclick', 'contextmenu', 'focusin'].forEach((name) => {
       document.addEventListener(name, refreshGesture, true);
     });
-    window.addEventListener('focus', refreshPplAmazonLinks);
-    window.addEventListener('pageshow', refreshPplAmazonLinks);
-    document.addEventListener('visibilitychange', refreshPplAmazonLinks);
-    refreshPplAmazonLinks();
+    window.addEventListener('focus', refreshOptionalAttribution);
+    window.addEventListener('pageshow', refreshOptionalAttribution);
+    document.addEventListener('visibilitychange', refreshOptionalAttribution);
+    refreshOptionalAttribution();
   }
 
   function attachPplNativeAttribution() {
@@ -453,6 +478,8 @@
       const link = event.target.closest && event.target.closest('a[href],button[data-event]');
       if (!link) return;
       try {
+        preservePplAttribution();
+        const ownedGoogleLink = pplGoogleLinkOriginals.has(link);
         refreshPplAmazonLink(link);
         const ownedAmazonLink = pplAmazonOriginals.has(link);
         const url = link.href ? new URL(link.href, window.location.href) : new URL(window.location.href);
@@ -486,7 +513,9 @@
           window.clearTimeout(timer);
           // Permission or GPC may change during the short processing window.
           // Resolve from the immutable raw book URL again at actual navigation.
-          const destination = ownedAmazonLink ? refreshPplAmazonLink(link) : url.href;
+          preservePplAttribution();
+          const destination = ownedAmazonLink ? refreshPplAmazonLink(link)
+            : ownedGoogleLink ? link.href : url.href;
           window.location.assign(destination || url.href);
         };
         const timer = window.setTimeout(navigate, OUTBOUND_WAIT_MS);
@@ -547,7 +576,7 @@
     heading.textContent = 'Privacy choice';
     const message = document.createElement('span');
     message.id = 'privacy-consent-description';
-    message.textContent = 'Optional Google analytics and ad measurement. Off unless allowed; read and download either way.';
+    message.textContent = 'Optional analytics and ad measurement with Google and Amazon. Off unless allowed; read and download either way.';
     banner.setAttribute('aria-describedby', message.id);
     const details = document.createElement('a');
     details.href = '/privacy/';
@@ -817,9 +846,8 @@
     if (event.key !== CONSENT_KEY && event.key !== null) return;
     // Another tab can revoke consent while this tab still has Google's SDK.
     consentRevision += 1;
-    refreshPplAmazonLinks();
+    refreshOptionalAttribution();
     if (currentConsent() === 'allow') {
-      preservePplAttribution();
       loadAnalytics();
     }
     else {
@@ -830,17 +858,17 @@
 
   window.NickRaePrivacy = {
     consent: currentConsent,
-    allow(){ setConsent('allow'); removeBanner(); preservePplAttribution(); refreshPplAmazonLinks(); loadAnalytics(); },
+    allow(){ setConsent('allow'); removeBanner(); refreshOptionalAttribution(); loadAnalytics(); },
     deny(){
       setConsent('deny');
-      refreshPplAmazonLinks();
+      refreshOptionalAttribution();
       removeBanner();
       disableAnalytics();
       reloadWithoutMeasurement();
     },
     reset(){
       setConsent(null);
-      refreshPplAmazonLinks();
+      refreshOptionalAttribution();
       // Revoke active measurement before navigation can trigger unload events.
       disableAnalytics();
       reloadWithoutMeasurement(true);

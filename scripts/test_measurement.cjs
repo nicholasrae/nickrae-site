@@ -163,11 +163,15 @@ const googleSearchCampaignQuery = 'utm_source=google&utm_medium=cpc&utm_campaign
 const medguideNewsletterPath = '/blog/faa-medguide-pilot-medication-guide.html';
 const medguideNewsletterQuery = 'utm_source=pilot_ai_tools&utm_medium=email&utm_campaign=faa_medguide_20261022&utm_content=companion_article';
 function attributionLinks(e, hrefs) {
-  const links = hrefs.map((href) => ({
-    href: new URL(href, e.window.location.href).toString(),
-    getAttribute: name => name === 'href' ? href : null,
-    hasAttribute: () => false
-  }));
+  const links = hrefs.map((href) => {
+    let attribute = href;
+    return {
+      get href() {return new URL(attribute, e.window.location.href).toString();},
+      set href(value) {attribute = value;},
+      getAttribute: name => name === 'href' ? attribute : null,
+      hasAttribute: () => false
+    };
+  });
   const originalQuery = e.document.querySelectorAll;
   e.document.querySelectorAll = selector => selector === 'a[href]' ? links : originalQuery(selector);
   return links;
@@ -549,6 +553,59 @@ test('Explicit and cross-tab grants forward only owned Google labels, leaving pr
     assert.deepEqual(e.allEvents().map(event=>event.name),['page_view']);
     e.window.NickRaePrivacy.deny();f.submit();
     assert.equal(f.fields.find(input=>input.name==='search').value,'');
+  }
+});
+test('Google link labels withdraw immediately without SDK initialization or a successful storage write', () => {
+  for(const origin of ['http://localhost:8899','https://nickrae.net']) for(const action of ['deny','reset']) {
+    const e=environment({origin,search:'?'+googleSearchCampaignQuery});
+    const links=attributionLinks(e,['/?view=home#top','/privacy/','https://nick-rae.kit.com/899d974875?layout=inline#form']);
+    const raw=links.map(link=>link.href);e.window.NickRaePrivacy.allow();
+    assert(links.every(link=>new URL(link.href).searchParams.get('utm_source')==='google'));
+    if(origin.startsWith('http:'))assert.equal(e.scripts.length,0);
+    e.window.localStorage.setItem=()=>{throw Error('Storage blocked');};e.window.localStorage.removeItem=()=>{throw Error('Storage blocked');};
+    e.window.NickRaePrivacy[action]();
+    assert.deepEqual(links.map(link=>link.href),raw,origin+'/'+action);
+    assert.equal(e.reloads.length,0,'Restoration must not depend on reload');
+  }
+});
+test('Google link originals restore on cross-tab withdrawal, GPC focus and native gestures', () => {
+  for(const change of ['storage','focus','pageshow','contextmenu','keydown','visibilitychange']) {
+    const e=environment({search:'?'+googleSearchCampaignQuery});const links=attributionLinks(e,['/','/privacy/']);const raw=links.map(link=>link.href);
+    e.window.testAPI.attachPplAmazonAttribution();e.window.NickRaePrivacy.allow();
+    if(change==='storage') {e.window.localStorage.setItem('nickrae_analytics_consent_v1','deny');e.window.dispatchEvent({type:'storage',key:'nickrae_analytics_consent_v1'});}
+    else {
+      e.window.navigator.globalPrivacyControl=true;
+      if(['focus','pageshow'].includes(change))e.window.dispatchEvent({type:change});
+      else e.document.dispatchEvent({type:change,target:links[0]});
+    }
+    assert.deepEqual(links.map(link=>link.href),raw,change);
+  }
+});
+test('Google withdrawal preserves pretagged campaigns and downstream custom edits', () => {
+  const e=environment({search:'?'+googleSearchCampaignQuery});
+  const links=attributionLinks(e,['/blog/?sort=recent#articles','/privacy/','/blog/?'+xArticleCampaignQuery,'https://nick-rae.kit.com/899d974875?utm_source=another']);
+  const raw=links.map(link=>link.href);e.window.NickRaePrivacy.allow();
+  const custom='https://nickrae.net/privacy/?owner=deliberate#notice';links[1].href=custom;
+  e.window.NickRaePrivacy.deny();assert.deepEqual(links.map(link=>link.href),[raw[0],custom,raw[2],raw[3]]);
+  e.window.NickRaePrivacy.allow();assert.equal(links[1].href,custom);assert.equal(links[2].href,raw[2]);assert.equal(links[3].href,raw[3]);
+});
+test('Delayed owned Google hosted-form navigation uses the restored URL after withdrawal or GPC', () => {
+  for(const change of ['deny','gpc']) {
+    const e=environment({search:'?'+googleSearchCampaignQuery});
+    const links=attributionLinks(e,['https://nick-rae.kit.com/899d974875?layout=inline#form']);const raw=links[0].href;
+    Object.assign(links[0],{dataset:{},closest() {return this;},matches:selector=>selector==='a[href]'});
+    e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+    const click={type:'click',target:links[0],button:0,cancelable:true,defaultPrevented:false,preventDefault() {this.defaultPrevented=true;}};
+    e.document.dispatchEvent(click);assert.equal(click.defaultPrevented,true);assert.equal(e.events()[0].name,'ppl_signup_fallback_click');
+    if(change==='gpc')e.window.navigator.globalPrivacyControl=true;else e.window.NickRaePrivacy.deny();
+    e.advanceTimers(250);e.events()[0].params.event_callback();assert.deepEqual(e.navigations,[raw]);
+  }
+});
+test('Withdrawing Google measurement leaves the existing YouTube and X source-link contract unchanged', () => {
+  for(const campaign of [pplCampaignQuery,xArticleCampaignQuery]) {
+    const e=environment({search:'?'+campaign});const links=attributionLinks(e,['/privacy/']);
+    e.window.NickRaePrivacy.allow();const forwarded=links[0].href;e.window.NickRaePrivacy.deny();
+    assert.equal(links[0].href,forwarded);assert.equal(new URL(links[0].href).searchParams.get('utm_campaign'),'free_ppl_cards');
   }
 });
 test('Google Search tuple rejects missing, duplicate, mixed, unknown and personal values after permission', () => {
