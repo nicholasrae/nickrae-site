@@ -21,7 +21,8 @@
       'laxHqAqtRIg', 'mZdwer_KGV0', 'Uuo15pRmiQI',
       'vaPO0eD5SIo', 'k5icun6orDQ', '1QZxKtL2uz0', 'channel_profile'
     ])}],
-    ['x', {medium: 'social', content: new Set(['flight_funded_article'])}]
+    ['x', {medium: 'social', content: new Set(['flight_funded_article'])}],
+    ['google', {medium: 'cpc', content: new Set(['ppl_search_v1']), requiresConsent: true}]
   ]);
   let analyticsReady = false;
   let analyticsInitialized = false;
@@ -89,6 +90,9 @@
     const approved = PPL_CAMPAIGNS.get(source);
     if (!approved || medium !== approved.medium || campaign !== 'free_ppl_cards'
       || !approved.content.has(content)) return {};
+    // The owned Search campaign is optional measurement. Do not retain its
+    // labels on links or add them to native submissions before permission.
+    if (approved.requiresConsent && (currentConsent() !== 'allow' || globalPrivacyControl())) return {};
     return {utm_source: source, utm_medium: medium, utm_campaign: campaign, utm_content: content};
   }
 
@@ -733,7 +737,10 @@
     if (event.key !== CONSENT_KEY && event.key !== null) return;
     // Another tab can revoke consent while this tab still has Google's SDK.
     consentRevision += 1;
-    if (currentConsent() === 'allow') loadAnalytics();
+    if (currentConsent() === 'allow') {
+      preservePplAttribution();
+      loadAnalytics();
+    }
     else {
       disableAnalytics();
       reloadWithoutMeasurement();
@@ -742,7 +749,7 @@
 
   window.NickRaePrivacy = {
     consent: currentConsent,
-    allow(){ setConsent('allow'); removeBanner(); loadAnalytics(); },
+    allow(){ setConsent('allow'); removeBanner(); preservePplAttribution(); loadAnalytics(); },
     deny(){
       setConsent('deny');
       removeBanner();

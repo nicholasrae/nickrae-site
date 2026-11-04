@@ -159,6 +159,7 @@ test('Fresh no-consent state loads no Google script and queues no clicks', () =>
 });
 const pplCampaignQuery = 'utm_source=youtube&utm_medium=video&utm_campaign=free_ppl_cards&utm_content=laxHqAqtRIg';
 const xArticleCampaignQuery = 'utm_source=x&utm_medium=social&utm_campaign=free_ppl_cards&utm_content=flight_funded_article';
+const googleSearchCampaignQuery = 'utm_source=google&utm_medium=cpc&utm_campaign=free_ppl_cards&utm_content=ppl_search_v1';
 const medguideNewsletterPath = '/blog/faa-medguide-pilot-medication-guide.html';
 const medguideNewsletterQuery = 'utm_source=pilot_ai_tools&utm_medium=email&utm_campaign=faa_medguide_20261022&utm_content=companion_article';
 function attributionLinks(e, hrefs) {
@@ -285,6 +286,7 @@ test('Known campaign reaches consent-gated Google through documented fields, wit
   const campaigns = ['laxHqAqtRIg','mZdwer_KGV0','Uuo15pRmiQI','vaPO0eD5SIo','k5icun6orDQ','1QZxKtL2uz0','channel_profile']
     .map(content => ({source:'youtube', medium:'video', content, query:pplCampaignQuery.replace('laxHqAqtRIg', content)}));
   campaigns.push({source:'x', medium:'social', content:'flight_funded_article', query:xArticleCampaignQuery});
+  campaigns.push({source:'google', medium:'cpc', content:'ppl_search_v1', query:googleSearchCampaignQuery});
   for (const campaign of campaigns) {
     const e = environment();e.window.location.search = '?' + campaign.query + '&email=secret%40example.com';
     assert.equal(e.scripts.length, 0);assert.equal(e.commands('config').length, 0);
@@ -386,6 +388,89 @@ function nativeAttributionFixture(e, {uid = '899d974875', formId = '10042240', m
   };
   return {form, fields, submit};
 }
+test('Owned Google Search labels require permission and never override GPC', () => {
+  for (const options of [{}, {initialConsent:'deny'}, {initialConsent:'allow',gpc:true}]) {
+    const e=environment({...options,search:'?'+googleSearchCampaignQuery});
+    const links=attributionLinks(e,['/blog/','https://nick-rae.kit.com/899d974875']);
+    const before=links.map(link=>link.href);
+    e.window.testAPI.preservePplAttribution();
+    e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();
+    assert.deepEqual(links.map(link=>link.href),before);
+    const values=Object.fromEntries(f.fields.map(input=>[input.name,input.value]));
+    assert.equal(values.search,'');assert.equal(values.host,'https://nickrae.net/aviation-workbooks/private-pilot/');
+    if(options.gpc)e.window.NickRaePrivacy.allow();
+    assert.equal(e.scripts.length,0);assert.equal(e.allEvents().length,0);
+    assert(!JSON.stringify([...e.storage]).includes('ppl_search_v1'));
+  }
+});
+test('Explicit and cross-tab grants forward only owned Google labels, leaving private data and store URLs untouched', () => {
+  for(const grant of ['allow','storage']) {
+    const e=environment({search:'?'+googleSearchCampaignQuery+'&gclid=synthetic-not-a-click&gbraid=private-braid&wbraid=private-braid&utm_term=private-keyword&email=secret%40example.com&token=private-token'});
+    const links=attributionLinks(e,['/blog/?sort=recent#articles','https://nick-rae.kit.com/899d974875#form','https://www.amazon.com/dp/B0GN81JP9R','/blog/?utm_source=kit&utm_campaign=another']);
+    const untouched=links.slice(2).map(link=>link.href);
+    e.window.testAPI.preservePplAttribution();
+    assert.equal(new URL(links[0].href).searchParams.has('utm_source'),false);
+    if(grant==='allow')e.window.NickRaePrivacy.allow();
+    else {
+      e.window.localStorage.setItem('nickrae_analytics_consent_v1','allow');
+      e.window.dispatchEvent({type:'storage',key:'nickrae_analytics_consent_v1'});
+    }
+    for(const link of links.slice(0,2)) {
+      const url=new URL(link.href);
+      assert.deepEqual([...url.searchParams].filter(([key])=>key.startsWith('utm_')),[...new URLSearchParams(googleSearchCampaignQuery)]);
+      for(const key of ['email','token','utm_term','gclid','gbraid','wbraid'])assert(!url.searchParams.has(key));
+    }
+    assert.equal(new URL(links[0].href).searchParams.get('sort'),'recent');
+    assert.equal(new URL(links[0].href).hash,'#articles');assert.equal(new URL(links[1].href).hash,'#form');
+    assert.deepEqual(links.slice(2).map(link=>link.href),untouched);
+    e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();f.submit();
+    const values=Object.fromEntries(f.fields.map(input=>[input.name,input.value]));
+    assert.equal(values.search,'?'+googleSearchCampaignQuery);assert.equal(f.fields.length,3);
+    for(const payload of [values,...e.commands('config').map(config=>config[2]),...e.allEvents().map(event=>event.params)]) {
+      for(const forbidden of ['synthetic-not-a-click','private-braid','private-keyword','secret','private-token'])assert(!JSON.stringify(payload).includes(forbidden));
+    }
+    assert.deepEqual([...e.storage],[['nickrae_analytics_consent_v1','allow']]);
+    assert.deepEqual(e.allEvents().map(event=>event.name),['page_view']);
+    e.window.NickRaePrivacy.deny();f.submit();
+    assert.equal(f.fields.find(input=>input.name==='search').value,'');
+  }
+});
+test('Google Search tuple rejects missing, duplicate, mixed, unknown and personal values after permission', () => {
+  const query=new URLSearchParams(googleSearchCampaignQuery);
+  const invalid=[
+    googleSearchCampaignQuery.replace('google','Google'),
+    googleSearchCampaignQuery.replace('cpc','social'),
+    googleSearchCampaignQuery.replace('free_ppl_cards','another_campaign'),
+    googleSearchCampaignQuery.replace('ppl_search_v1','flight_funded_article'),
+    googleSearchCampaignQuery.replace('ppl_search_v1','secret%40example.com'),
+    ...[...query].flatMap(([key,value])=>{
+      const missing=new URLSearchParams(query);missing.delete(key);
+      return [missing.toString(),googleSearchCampaignQuery+'&'+key+'='+value];
+    })
+  ];
+  for(const value of invalid) {
+    const e=environment({search:'?'+value});const links=attributionLinks(e,['/blog/']);const before=links[0].href;
+    e.window.NickRaePrivacy.allow();assert.equal(links[0].href,before,value);
+    e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();
+    assert.equal(f.fields.find(input=>input.name==='search').value,'',value);
+    e.commands('config').forEach(config=>assert(!Object.keys(config[2]).some(key=>key.startsWith('campaign_')),value));
+  }
+});
+test('Owned Google campaign QA remains GA4-only with labels and no simulated conversion', () => {
+  const e=environment({search:'?analytics_test=1&'+googleSearchCampaignQuery+'&gclid=synthetic-not-a-click'});
+  e.window.NickRaePrivacy.allow();
+  assert.deepEqual(e.commands('config').map(config=>config[1]),[TEST_GA4_ID]);
+  const config=e.commands('config')[0][2];
+  assert.equal(config.campaign_source,'google');assert.equal(config.campaign_medium,'cpc');
+  assert.equal(config.campaign_content,'ppl_search_v1');assert.equal(config.test_traffic,'yes');
+  assert.equal(config.traffic_type,'internal');assert.equal(config.debug_mode,true);
+  assert.equal(config.page_location,'https://nickrae.net/aviation-workbooks/private-pilot/');
+  assert(!JSON.stringify(e.commands('config')).includes('synthetic-not-a-click'));
+  assert.deepEqual(e.allEvents().map(event=>event.name),['page_view']);
+  e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();
+  assert.equal(f.fields.find(input=>input.name==='search').value,'?'+googleSearchCampaignQuery);
+  assert(!JSON.stringify(f.fields.map(input=>input.value)).includes('analytics_test'));
+});
 test('Native Kit POST includes sanitized campaign attribution without requiring Google consent', () => {
   const e = environment({initialConsent: 'deny'});e.window.testAPI.attachPplNativeAttribution();
   e.window.location.search = '?' + pplCampaignQuery + '&email=secret%40example.com&token=private-token';
