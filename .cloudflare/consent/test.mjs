@@ -305,4 +305,6 @@ test('deployment defaults expose no workers.dev/preview/route and contain no act
   assert.equal(config.observability.enabled, false); assert.equal(config.vars.SERVICE_ENABLED, 'false');
   assert.equal(config.IMPORTER_TOKEN_SHA256, undefined);
   assert.deepEqual(config.migrations[0].new_sqlite_classes, ['PplConsentLedger']);
+  const source = await readFile(path.join(control, 'worker.mjs'), 'utf8');
+  assert.deepEqual(Array.from(source.matchAll(/^export (?:class|(?:async )?function) ([A-Za-z0-9_]+)/gm), match => match[1]), ['PplConsentLedger']);
 });

@@ -27,7 +27,7 @@ function bearer(request) {
   return match ? match[1] : null;
 }
 
-export async function parseOperation(request, env) {
+async function parseOperation(request, env) {
   const url = new URL(request.url);
   const path = url.pathname.startsWith(BASE) ? url.pathname.slice(BASE.length) : '';
   if (url.origin !== ORIGIN || url.search || !ROUTES.has(path)) throw new LedgerError('not_found', 404);
@@ -114,7 +114,7 @@ export async function parseOperation(request, env) {
   return {path, args};
 }
 
-export function applyOperation(ledger, operation, now) {
+function applyOperation(ledger, operation, now) {
   let data, status = 200;
   const {path, args} = operation;
   if (path === 'grant') {
