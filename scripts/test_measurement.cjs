@@ -109,7 +109,7 @@ function environment({allowed = false, initialConsent = allowed ? 'allow' : null
   const marker = fixtureSource.lastIndexOf('})();');
   assert(marker > 0);
   const instrumented = fixtureSource.slice(0, marker) +
-    'window.testAPI = {attachGlobalTracking, measurePplSignup, preservePplAttribution, attachPplNativeAttribution};\n' + fixtureSource.slice(marker);
+    'window.testAPI = {attachGlobalTracking, measurePplSignup, preservePplAttribution, attachPplNativeAttribution, attachPplAmazonAttribution, refreshPplAmazonLinks};\n' + fixtureSource.slice(marker);
   vm.runInNewContext(instrumented, context, {filename: site});
   const allEvents = () => Array.from(window.dataLayer || []).filter(x => x[0] === 'event').map(x => ({name: x[1], params: x[2]}));
   const events = () => allEvents().filter(x => x.name !== 'page_view');
@@ -159,18 +159,139 @@ test('Fresh no-consent state loads no Google script and queues no clicks', () =>
 });
 const pplCampaignQuery = 'utm_source=youtube&utm_medium=video&utm_campaign=free_ppl_cards&utm_content=laxHqAqtRIg';
 const xArticleCampaignQuery = 'utm_source=x&utm_medium=social&utm_campaign=free_ppl_cards&utm_content=flight_funded_article';
+const googleSearchCampaignQuery = 'utm_source=google&utm_medium=cpc&utm_campaign=free_ppl_cards&utm_content=ppl_search_v1';
 const medguideNewsletterPath = '/blog/faa-medguide-pilot-medication-guide.html';
 const medguideNewsletterQuery = 'utm_source=pilot_ai_tools&utm_medium=email&utm_campaign=faa_medguide_20261022&utm_content=companion_article';
 function attributionLinks(e, hrefs) {
-  const links = hrefs.map((href) => ({
-    href: new URL(href, e.window.location.href).toString(),
-    getAttribute: name => name === 'href' ? href : null,
-    hasAttribute: () => false
-  }));
+  const links = hrefs.map((href) => {
+    let attribute = href;
+    return {
+      get href() {return new URL(attribute, e.window.location.href).toString();},
+      set href(value) {attribute = value;},
+      getAttribute: name => name === 'href' ? attribute : null,
+      hasAttribute: () => false
+    };
+  });
   const originalQuery = e.document.querySelectorAll;
   e.document.querySelectorAll = selector => selector === 'a[href]' ? links : originalQuery(selector);
   return links;
 }
+const amazonAttributionDestinations = {
+  ppl_workbook: 'https://www.amazon.com/dp/B0GN81JP9R?maas=maas_adg_DBA815843312363D5D3F45083F4C4E79_afap_abs&ref_=aa_maas&tag=maas',
+  ppl_workbook_kindle: 'https://www.amazon.com/dp/B0GN3LCV4F?maas=maas_adg_19FC51D8CF41E7D8A86DAE468A4AF5C2_afap_abs&ref_=aa_maas&tag=maas'
+};
+function amazonLinkFixture(e, specs = [
+  {product:'ppl_workbook',placement:'private-pilot-hero'},
+  {product:'ppl_workbook_kindle',placement:'private-pilot-hero'},
+  {product:'ppl_workbook',placement:'private-pilot-formats'},
+  {product:'ppl_workbook_kindle',placement:'private-pilot-formats'}
+]) {
+  const links=specs.map(spec=>Object.assign(new Element(),{
+    href:spec.href || amazonAttributionDestinations[spec.product]?.split('?')[0] || 'https://www.amazon.com/dp/B0OTHERBOOK',
+    dataset:{product:spec.product,placement:spec.placement},attributes:{...spec.attributes},
+    matches:selector=>selector==='a[href]',closest() {return this;},
+    getAttribute(name) {return name==='href'?this.href:this.attributes[name]??null;},
+    hasAttribute(name) {return Object.hasOwn(this.attributes,name);}
+  }));
+  const query=e.document.querySelectorAll;
+  e.document.querySelectorAll=selector=>selector==='a[href]'?links:query(selector);
+  const gesture=(index,type,overrides={})=>{
+    const event={type,target:links[index],button:0,cancelable:true,defaultPrevented:false,preventCalls:0,
+      preventDefault() {this.preventCalls++;if(this.cancelable)this.defaultPrevented=true;},...overrides};
+    e.document.dispatchEvent(event);return event;
+  };
+  return {links,gesture,raw:links.map(link=>link.href)};
+}
+test('Verified Amazon destinations cover exactly four owned PPL buttons without requiring SDK receipt', () => {
+  for(const suffix of ['', 'index.html']) {
+    const e=environment({initialConsent:'allow',search:'?'+googleSearchCampaignQuery});
+    e.window.location.pathname+=suffix;const f=amazonLinkFixture(e);e.window.testAPI.attachPplAmazonAttribution();
+    assert.deepEqual(f.links.map(link=>link.href),f.links.map(link=>amazonAttributionDestinations[link.dataset.product]));
+    assert.equal(e.scripts.length,0);assert.equal(e.allEvents().length,0);assert.equal(e.navigations.length,0);
+  }
+});
+test('Amazon attribution stays raw outside exact consented production PPL campaign and for every QA parameter', () => {
+  const contexts=[
+    {},{initialConsent:'deny'},{initialConsent:'allow',gpc:true},
+    ...['1','0','','1&analytics_test=1'].map(value=>({initialConsent:'allow',search:'?'+googleSearchCampaignQuery+'&analytics_test='+value})),
+    ...['http://nickrae.net','http://localhost:8080','https://nickrae-preview.pages.dev','https://pilotaitools.com'].map(origin=>({initialConsent:'allow',origin})),
+    ...['','utm_source=google',googleSearchCampaignQuery.replace('cpc','social'),googleSearchCampaignQuery+'&utm_content=ppl_search_v1'].map(search=>({initialConsent:'allow',search:'?'+search}))
+  ];
+  for(const context of contexts) {
+    const e=environment({search:'?'+googleSearchCampaignQuery,...context});const f=amazonLinkFixture(e);
+    e.window.testAPI.attachPplAmazonAttribution();assert.deepEqual(f.links.map(link=>link.href),f.raw,JSON.stringify(context));
+  }
+  const e=environment({initialConsent:'allow',search:'?'+googleSearchCampaignQuery});e.window.location.pathname='/blog/checkride-prep-guide.html';
+  const f=amazonLinkFixture(e);e.window.testAPI.attachPplAmazonAttribution();assert.deepEqual(f.links.map(link=>link.href),f.raw);
+});
+test('Owned Amazon links refresh on grant, denial, reset and failed withdrawal storage without touching other destinations', () => {
+  for(const action of ['deny','reset']) {
+    const e=environment({search:'?'+googleSearchCampaignQuery});const f=amazonLinkFixture(e);e.window.testAPI.attachPplAmazonAttribution();
+    assert.deepEqual(f.links.map(link=>link.href),f.raw);e.window.NickRaePrivacy.allow();
+    assert(f.links.every(link=>link.href.includes('maas_adg_')));
+    e.window.localStorage.setItem=()=>{throw Error('Storage blocked');};
+    e.window.localStorage.removeItem=()=>{throw Error('Storage blocked');};
+    e.window.NickRaePrivacy[action]();assert.deepEqual(f.links.map(link=>link.href),f.raw);
+  }
+  const e=environment({initialConsent:'allow',search:'?'+googleSearchCampaignQuery});
+  const f=amazonLinkFixture(e,[
+    {product:'ppl_workbook',placement:'private-pilot-hero',href:'https://www.amazon.com/dp/B0GN81JP9R?tag=deliberate'},
+    {product:'ppl_workbook',placement:'another-placement'},
+    {product:'instrument_workbook',placement:'private-pilot-hero',href:'https://www.amazon.com/dp/B0OTHERBOOK'},
+    {product:'ppl_workbook',placement:'private-pilot-hero',href:'https://www.amazon.com.evil.example/dp/B0GN81JP9R'}
+  ]);
+  e.window.testAPI.attachPplAmazonAttribution();e.window.NickRaePrivacy.allow();assert.deepEqual(f.links.map(link=>link.href),f.raw);
+});
+test('Amazon links follow cross-tab choice and current GPC on focus or resumed pages', () => {
+  const e=environment({search:'?'+googleSearchCampaignQuery});const f=amazonLinkFixture(e);e.window.testAPI.attachPplAmazonAttribution();
+  e.window.localStorage.setItem('nickrae_analytics_consent_v1','allow');e.window.dispatchEvent({type:'storage',key:'nickrae_analytics_consent_v1'});
+  assert(f.links.every(link=>link.href.includes('maas_adg_')));
+  e.window.navigator.globalPrivacyControl=true;e.window.dispatchEvent({type:'focus'});assert.deepEqual(f.links.map(link=>link.href),f.raw);
+  e.window.navigator.globalPrivacyControl=false;e.window.dispatchEvent({type:'pageshow'});assert(f.links.every(link=>link.href.includes('maas_adg_')));
+  e.window.localStorage.setItem('nickrae_analytics_consent_v1','deny');e.window.dispatchEvent({type:'storage',key:'nickrae_analytics_consent_v1'});
+  assert.deepEqual(f.links.map(link=>link.href),f.raw);
+});
+test('Native and menu gestures recheck GPC without preventing or synthesizing navigation', () => {
+  for(const type of ['pointerdown','keydown','click','auxclick','contextmenu','focusin']) {
+    const e=environment({initialConsent:'allow',search:'?'+googleSearchCampaignQuery});const f=amazonLinkFixture(e);e.window.testAPI.attachPplAmazonAttribution();
+    assert(f.links[0].href.includes('maas_adg_'));e.window.navigator.globalPrivacyControl=true;
+    const event=f.gesture(0,type);assert.equal(f.links[0].href,f.raw[0],type);assert.equal(event.preventCalls,0);
+    assert.equal(e.navigations.length,0);assert.equal(e.allEvents().length,0);
+  }
+});
+test('Delayed Amazon navigation rechecks withdrawal, storage, GPC and QA at actual assignment', () => {
+  for(const change of ['deny','reset','storage','gpc','qa']) {
+    const e=environment({search:'?'+googleSearchCampaignQuery});const f=amazonLinkFixture(e);
+    e.window.testAPI.attachPplAmazonAttribution();e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+    const click=f.gesture(0,'click');assert.equal(click.preventCalls,1);assert.equal(e.navigations.length,0);
+    const callback=e.events()[0].params.event_callback;
+    if(change==='gpc')e.window.navigator.globalPrivacyControl=true;
+    else if(change==='qa')e.window.location.search+='&analytics_test=1';
+    else if(change==='storage') {e.window.localStorage.setItem('nickrae_analytics_consent_v1','deny');e.window.dispatchEvent({type:'storage',key:'nickrae_analytics_consent_v1'});}
+    else e.window.NickRaePrivacy[change]();
+    e.advanceTimers(250);callback();assert.deepEqual(e.navigations,[f.raw[0]],change);assert.equal(f.links[0].href,f.raw[0]);
+  }
+});
+test('Eligible Amazon navigation uses exact export once while GA4 remains an outbound diagnostic', () => {
+  const e=environment({search:'?'+googleSearchCampaignQuery+'&email=secret%40example.com&gclid=synthetic-not-a-click'});const f=amazonLinkFixture(e);
+  e.window.testAPI.attachPplAmazonAttribution();e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+  f.gesture(1,'click');const event=e.events()[0];assert.equal(event.name,'amazon_click');
+  assert.equal(event.params.link_url,f.raw[1]);assert.equal(event.params.send_to,TEST_GA4_ID);
+  event.params.event_callback();e.advanceTimers(250);assert.deepEqual(e.navigations,[amazonAttributionDestinations.ppl_workbook_kindle]);
+  const payload=JSON.stringify(e.allEvents());for(const value of ['maas_adg_','secret','synthetic-not-a-click'])assert(!payload.includes(value));
+  assert.deepEqual(e.allEvents().map(event=>event.name),['page_view','amazon_click']);
+});
+test('Amazon routing preserves modified and new-tab gestures, future explicit URLs and changed metadata', () => {
+  for(const overrides of [{metaKey:true},{ctrlKey:true},{shiftKey:true},{altKey:true},{button:1}]) {
+    const e=environment({search:'?'+googleSearchCampaignQuery});const f=amazonLinkFixture(e);e.window.testAPI.attachPplAmazonAttribution();e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+    const event=f.gesture(0,'click',overrides);assert.equal(event.preventCalls,0);assert.equal(e.navigations.length,0);assert.equal(f.links[0].href,amazonAttributionDestinations.ppl_workbook);
+  }
+  const e=environment({search:'?'+googleSearchCampaignQuery});const f=amazonLinkFixture(e);e.window.testAPI.attachPplAmazonAttribution();e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+  f.links[0].attributes.target='_blank';assert.equal(f.gesture(0,'click').preventCalls,0);assert.equal(e.navigations.length,0);
+  const deliberate='https://www.amazon.com/dp/B0GN81JP9R?tag=another-feature';f.links[1].href=deliberate;
+  delete f.links[2].dataset.product;e.window.NickRaePrivacy.deny();
+  assert.equal(f.links[1].href,deliberate);assert.equal(f.links[2].href,f.raw[2]);
+});
 test('Published YouTube campaign survives navigation and Kit fallback without copying private query values', () => {
   const e = environment();
   e.window.location.search = '?' + pplCampaignQuery + '&email=secret%40example.com&token=private-token&utm_term=private-keyword';
@@ -285,6 +406,7 @@ test('Known campaign reaches consent-gated Google through documented fields, wit
   const campaigns = ['laxHqAqtRIg','mZdwer_KGV0','Uuo15pRmiQI','vaPO0eD5SIo','k5icun6orDQ','1QZxKtL2uz0','channel_profile']
     .map(content => ({source:'youtube', medium:'video', content, query:pplCampaignQuery.replace('laxHqAqtRIg', content)}));
   campaigns.push({source:'x', medium:'social', content:'flight_funded_article', query:xArticleCampaignQuery});
+  campaigns.push({source:'google', medium:'cpc', content:'ppl_search_v1', query:googleSearchCampaignQuery});
   for (const campaign of campaigns) {
     const e = environment();e.window.location.search = '?' + campaign.query + '&email=secret%40example.com';
     assert.equal(e.scripts.length, 0);assert.equal(e.commands('config').length, 0);
@@ -386,6 +508,142 @@ function nativeAttributionFixture(e, {uid = '899d974875', formId = '10042240', m
   };
   return {form, fields, submit};
 }
+test('Owned Google Search labels require permission and never override GPC', () => {
+  for (const options of [{}, {initialConsent:'deny'}, {initialConsent:'allow',gpc:true}]) {
+    const e=environment({...options,search:'?'+googleSearchCampaignQuery});
+    const links=attributionLinks(e,['/blog/','https://nick-rae.kit.com/899d974875']);
+    const before=links.map(link=>link.href);
+    e.window.testAPI.preservePplAttribution();
+    e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();
+    assert.deepEqual(links.map(link=>link.href),before);
+    const values=Object.fromEntries(f.fields.map(input=>[input.name,input.value]));
+    assert.equal(values.search,'');assert.equal(values.host,'https://nickrae.net/aviation-workbooks/private-pilot/');
+    if(options.gpc)e.window.NickRaePrivacy.allow();
+    assert.equal(e.scripts.length,0);assert.equal(e.allEvents().length,0);
+    assert(!JSON.stringify([...e.storage]).includes('ppl_search_v1'));
+  }
+});
+test('Explicit and cross-tab grants forward only owned Google labels, leaving private data and store URLs untouched', () => {
+  for(const grant of ['allow','storage']) {
+    const e=environment({search:'?'+googleSearchCampaignQuery+'&gclid=synthetic-not-a-click&gbraid=private-braid&wbraid=private-braid&utm_term=private-keyword&email=secret%40example.com&token=private-token'});
+    const links=attributionLinks(e,['/blog/?sort=recent#articles','https://nick-rae.kit.com/899d974875#form','https://www.amazon.com/dp/B0GN81JP9R','/blog/?utm_source=kit&utm_campaign=another']);
+    const untouched=links.slice(2).map(link=>link.href);
+    e.window.testAPI.preservePplAttribution();
+    assert.equal(new URL(links[0].href).searchParams.has('utm_source'),false);
+    if(grant==='allow')e.window.NickRaePrivacy.allow();
+    else {
+      e.window.localStorage.setItem('nickrae_analytics_consent_v1','allow');
+      e.window.dispatchEvent({type:'storage',key:'nickrae_analytics_consent_v1'});
+    }
+    for(const link of links.slice(0,2)) {
+      const url=new URL(link.href);
+      assert.deepEqual([...url.searchParams].filter(([key])=>key.startsWith('utm_')),[...new URLSearchParams(googleSearchCampaignQuery)]);
+      for(const key of ['email','token','utm_term','gclid','gbraid','wbraid'])assert(!url.searchParams.has(key));
+    }
+    assert.equal(new URL(links[0].href).searchParams.get('sort'),'recent');
+    assert.equal(new URL(links[0].href).hash,'#articles');assert.equal(new URL(links[1].href).hash,'#form');
+    assert.deepEqual(links.slice(2).map(link=>link.href),untouched);
+    e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();f.submit();
+    const values=Object.fromEntries(f.fields.map(input=>[input.name,input.value]));
+    assert.equal(values.search,'?'+googleSearchCampaignQuery);assert.equal(f.fields.length,3);
+    for(const payload of [values,...e.commands('config').map(config=>config[2]),...e.allEvents().map(event=>event.params)]) {
+      for(const forbidden of ['synthetic-not-a-click','private-braid','private-keyword','secret','private-token'])assert(!JSON.stringify(payload).includes(forbidden));
+    }
+    assert.deepEqual([...e.storage],[['nickrae_analytics_consent_v1','allow']]);
+    assert.deepEqual(e.allEvents().map(event=>event.name),['page_view']);
+    e.window.NickRaePrivacy.deny();f.submit();
+    assert.equal(f.fields.find(input=>input.name==='search').value,'');
+  }
+});
+test('Google link labels withdraw immediately without SDK initialization or a successful storage write', () => {
+  for(const origin of ['http://localhost:8899','https://nickrae.net']) for(const action of ['deny','reset']) {
+    const e=environment({origin,search:'?'+googleSearchCampaignQuery});
+    const links=attributionLinks(e,['/?view=home#top','/privacy/','https://nick-rae.kit.com/899d974875?layout=inline#form']);
+    const raw=links.map(link=>link.href);e.window.NickRaePrivacy.allow();
+    assert(links.every(link=>new URL(link.href).searchParams.get('utm_source')==='google'));
+    if(origin.startsWith('http:'))assert.equal(e.scripts.length,0);
+    e.window.localStorage.setItem=()=>{throw Error('Storage blocked');};e.window.localStorage.removeItem=()=>{throw Error('Storage blocked');};
+    e.window.NickRaePrivacy[action]();
+    assert.deepEqual(links.map(link=>link.href),raw,origin+'/'+action);
+    assert.equal(e.reloads.length,0,'Restoration must not depend on reload');
+  }
+});
+test('Google link originals restore on cross-tab withdrawal, GPC focus and native gestures', () => {
+  for(const change of ['storage','focus','pageshow','contextmenu','keydown','visibilitychange']) {
+    const e=environment({search:'?'+googleSearchCampaignQuery});const links=attributionLinks(e,['/','/privacy/']);const raw=links.map(link=>link.href);
+    e.window.testAPI.attachPplAmazonAttribution();e.window.NickRaePrivacy.allow();
+    if(change==='storage') {e.window.localStorage.setItem('nickrae_analytics_consent_v1','deny');e.window.dispatchEvent({type:'storage',key:'nickrae_analytics_consent_v1'});}
+    else {
+      e.window.navigator.globalPrivacyControl=true;
+      if(['focus','pageshow'].includes(change))e.window.dispatchEvent({type:change});
+      else e.document.dispatchEvent({type:change,target:links[0]});
+    }
+    assert.deepEqual(links.map(link=>link.href),raw,change);
+  }
+});
+test('Google withdrawal preserves pretagged campaigns and downstream custom edits', () => {
+  const e=environment({search:'?'+googleSearchCampaignQuery});
+  const links=attributionLinks(e,['/blog/?sort=recent#articles','/privacy/','/blog/?'+xArticleCampaignQuery,'https://nick-rae.kit.com/899d974875?utm_source=another']);
+  const raw=links.map(link=>link.href);e.window.NickRaePrivacy.allow();
+  const custom='https://nickrae.net/privacy/?owner=deliberate#notice';links[1].href=custom;
+  e.window.NickRaePrivacy.deny();assert.deepEqual(links.map(link=>link.href),[raw[0],custom,raw[2],raw[3]]);
+  e.window.NickRaePrivacy.allow();assert.equal(links[1].href,custom);assert.equal(links[2].href,raw[2]);assert.equal(links[3].href,raw[3]);
+});
+test('Delayed owned Google hosted-form navigation uses the restored URL after withdrawal or GPC', () => {
+  for(const change of ['deny','gpc']) {
+    const e=environment({search:'?'+googleSearchCampaignQuery});
+    const links=attributionLinks(e,['https://nick-rae.kit.com/899d974875?layout=inline#form']);const raw=links[0].href;
+    Object.assign(links[0],{dataset:{},closest() {return this;},matches:selector=>selector==='a[href]'});
+    e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
+    const click={type:'click',target:links[0],button:0,cancelable:true,defaultPrevented:false,preventDefault() {this.defaultPrevented=true;}};
+    e.document.dispatchEvent(click);assert.equal(click.defaultPrevented,true);assert.equal(e.events()[0].name,'ppl_signup_fallback_click');
+    if(change==='gpc')e.window.navigator.globalPrivacyControl=true;else e.window.NickRaePrivacy.deny();
+    e.advanceTimers(250);e.events()[0].params.event_callback();assert.deepEqual(e.navigations,[raw]);
+  }
+});
+test('Withdrawing Google measurement leaves the existing YouTube and X source-link contract unchanged', () => {
+  for(const campaign of [pplCampaignQuery,xArticleCampaignQuery]) {
+    const e=environment({search:'?'+campaign});const links=attributionLinks(e,['/privacy/']);
+    e.window.NickRaePrivacy.allow();const forwarded=links[0].href;e.window.NickRaePrivacy.deny();
+    assert.equal(links[0].href,forwarded);assert.equal(new URL(links[0].href).searchParams.get('utm_campaign'),'free_ppl_cards');
+  }
+});
+test('Google Search tuple rejects missing, duplicate, mixed, unknown and personal values after permission', () => {
+  const query=new URLSearchParams(googleSearchCampaignQuery);
+  const invalid=[
+    googleSearchCampaignQuery.replace('google','Google'),
+    googleSearchCampaignQuery.replace('cpc','social'),
+    googleSearchCampaignQuery.replace('free_ppl_cards','another_campaign'),
+    googleSearchCampaignQuery.replace('ppl_search_v1','flight_funded_article'),
+    googleSearchCampaignQuery.replace('ppl_search_v1','secret%40example.com'),
+    ...[...query].flatMap(([key,value])=>{
+      const missing=new URLSearchParams(query);missing.delete(key);
+      return [missing.toString(),googleSearchCampaignQuery+'&'+key+'='+value];
+    })
+  ];
+  for(const value of invalid) {
+    const e=environment({search:'?'+value});const links=attributionLinks(e,['/blog/']);const before=links[0].href;
+    e.window.NickRaePrivacy.allow();assert.equal(links[0].href,before,value);
+    e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();
+    assert.equal(f.fields.find(input=>input.name==='search').value,'',value);
+    e.commands('config').forEach(config=>assert(!Object.keys(config[2]).some(key=>key.startsWith('campaign_')),value));
+  }
+});
+test('Owned Google campaign QA remains GA4-only with labels and no simulated conversion', () => {
+  const e=environment({search:'?analytics_test=1&'+googleSearchCampaignQuery+'&gclid=synthetic-not-a-click'});
+  e.window.NickRaePrivacy.allow();
+  assert.deepEqual(e.commands('config').map(config=>config[1]),[TEST_GA4_ID]);
+  const config=e.commands('config')[0][2];
+  assert.equal(config.campaign_source,'google');assert.equal(config.campaign_medium,'cpc');
+  assert.equal(config.campaign_content,'ppl_search_v1');assert.equal(config.test_traffic,'yes');
+  assert.equal(config.traffic_type,'internal');assert.equal(config.debug_mode,true);
+  assert.equal(config.page_location,'https://nickrae.net/aviation-workbooks/private-pilot/');
+  assert(!JSON.stringify(e.commands('config')).includes('synthetic-not-a-click'));
+  assert.deepEqual(e.allEvents().map(event=>event.name),['page_view']);
+  e.window.testAPI.attachPplNativeAttribution();const f=nativeAttributionFixture(e);f.submit();
+  assert.equal(f.fields.find(input=>input.name==='search').value,'?'+googleSearchCampaignQuery);
+  assert(!JSON.stringify(f.fields.map(input=>input.value)).includes('analytics_test'));
+});
 test('Native Kit POST includes sanitized campaign attribution without requiring Google consent', () => {
   const e = environment({initialConsent: 'deny'});e.window.testAPI.attachPplNativeAttribution();
   e.window.location.search = '?' + pplCampaignQuery + '&email=secret%40example.com&token=private-token';
