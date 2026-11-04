@@ -289,16 +289,10 @@ async function test(name,fn) { await fn(); results.push(name); }
     const bad=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});bad.window.location.pathname='/ppl-measurement-qa/';
     bad.api.grantOverride={qa:false};bad.start();await bad.client.choice('allow',true);assert.deepEqual(bad.submit(),{});
   });
-  await test('Temporary QA page, when present, has no Google/site tags, is noindex and keeps the exact ordinary Kit form',async()=>{
+  await test('Completed owner QA has no public harness and the production configuration cannot activate QA mode',async()=>{
     const qaPath=path.join(__dirname,'../ppl-measurement-qa/index.html');
-    if(!fs.existsSync(qaPath)) return; // Removal after the owner test is required.
-    const html=fs.readFileSync(qaPath,'utf8');
-    const scriptSources=[...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map(match=>match[1]);
-    assert(html.includes('noindex,nofollow'));assert(!scriptSources.some(src=>/googletagmanager|google-analytics/.test(src)));
-    assert(!html.includes('src="/assets/site.js'));assert(html.includes('"qa_harness":true'));
-    assert.equal((html.match(/<form\b/g)||[]).length,1);assert(html.includes('data-sv-form="10042240"'));
-    assert(html.includes('data-uid="899d974875"'));assert(html.includes('https://app.kit.com/forms/10042240/subscriptions'));
-    assert(!html.includes('IMPORTER_TOKEN'));assert(!html.includes('revoke_capability'));
+    assert.equal(fs.existsSync(qaPath),false);
+    assert.notEqual(config.qa_harness,true);
   });
   console.log(JSON.stringify({passed:results.length,tests:results,source:modulePath,
     scope:'Synthetic DOM/storage/WebLocks/HTTPS doubles only; no Google or Kit request, signup or conversion.'},null,2));
