@@ -1,4 +1,4 @@
-Nick Rae PPL consent service — prepared, disabled by default
+Nick Rae PPL consent service — configuration and independent tests
 
 Run tests from this directory with npm ci --no-audit --no-fund, then npm test.
 The dev dependency is the official pinned Miniflare4.20260730.0 package; tests
@@ -11,17 +11,36 @@ build separately validates the browser modules and Pages proxy.
 python3 bundle.py writes dist/consent-worker.bundle.mjs and its SHA256 manifest.
 This single file imports only the Workers builtin cloudflare:workers and can be
 reviewed in the Dashboard editor. It contains no account, Kit or importer secret.
-The modular Wrangler config is also supplied for a later approved deployment.
 
-No resources, migrations, credentials, public API or binding have been created by
-these files. Root must obtain approval for the concrete new endpoint/storage and
-importer access before deploying. Defaults: SERVICE_ENABLED=false, no routes,
-workers.dev=false, preview_urls=false and observability=false. Actual SQLite DO
-class PplConsentLedger needs the v1 new_sqlite_classes migration. The existing
-nickrae-production Pages project then needs service binding PPL_CONSENT and
-PPL_CONSENT_ENABLED=true. The private Worker needs SERVICE_ENABLED=true and a
-server-only IMPORTER_TOKEN_SHA256, while the raw token stays private on the Mac.
-The existing Kit key never leaves the Mac.
+Existing runtime and public route
+The approved nickrae-ppl-consent Worker uses the existing PPL_LEDGER binding and
+PplConsentLedger SQLite namespace, with migration tag v1. It needs the server-only
+IMPORTER_TOKEN_SHA256 and SERVICE_ENABLED=true for new grants/importer actions;
+the source default is false. The raw importer token and Kit key stay on the Mac.
+workers.dev, preview URLs and Workers observability remain disabled.
+
+The Dashboard manages this one route in the existing nickrae.net zone:
+https://nickrae.net/api/ppl-measurement/v1/*
+It sends the same existing first-party API URLs directly to this Worker instead
+of the Pages proxy. It adds no route for HTTP, www, other hosts or site pages.
+The handler still validates the exact HTTPS apex origin, six operation names,
+POST method, fixed JSON schema and separate browser/importer authorization.
+The ordinary Mac importer sends neither Origin nor Cookie. Browser grant/revoke
+requests require the exact Origin; ordinary browser cookies are ignored and are
+not stored in the consent ledger. No email, click ID or Kit key goes to it.
+
+Cloudflare documents a separate managed Browser Integrity Check on Pages custom
+domains that ignores a zone's skip rule. A Worker route in the owner's zone lets
+the already approved path-specific zone rule apply; do not change the client's
+User-Agent, relax authentication or disable security globally to work around it.
+https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/
+
+This source records the Dashboard-managed route for review. The existing Wrangler
+OAuth grant has no route-write permission: do not run wrangler deploy, request a
+broader token or log in again to reconcile it. Use approved version-only script
+updates or the Dashboard while preserving this route and the existing namespace.
+The Pages PPL_CONSENT binding/proxy remains a fallback, not the active direct
+route's feature switch. Its flag cannot disable the direct Worker handler.
 
 Withdrawal after expiry cleanup
 POST /revoke still requires the exact first-party Origin, scalar receipt ID and
@@ -40,7 +59,9 @@ ads-confirmed-matching-2026-11-04/service/api-contract.json
 ads-confirmed-matching-2026-11-04/service/owner-review.txt
 
 Rollback
-Disable Pages PPL_CONSENT_ENABLED or the private Worker SERVICE_ENABLED first.
+Disable the Worker SERVICE_ENABLED flag first for the direct API route. The
+Pages PPL_CONSENT_ENABLED flag only controls the fallback proxy; it cannot stop
+new authorizations on the direct route. Preserve the same Worker and namespace.
 Existing authenticated /revoke requests remain available through both flags,
 provided the binding/namespace remain; new grants/import access are disabled.
 The native Kit form must keep working without optional measurement. Preserve the

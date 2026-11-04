@@ -281,6 +281,21 @@ test('importer routes reject browser origin/cookies and never accept a revoke ca
   const wrongScope = await call('status', {receipt_id: grant.receipt_id}, {importer: true, token: grant.revoke_capability});
   assert.equal(wrongScope.response.status, 401);
 });
+test('direct first-party handler accepts normal browser cookies but keeps Mac importer authorization separate', async () => {
+  const grant = await call('grant', {policy: POLICY, qa: true}, {headers: {Cookie: 'synthetic=browser-only'}});
+  assert.equal(grant.response.status, 201);
+  const receipt_id = grant.parsed.receipt_id;
+  // This reaches the real Worker directly, without the Pages header filter.
+  const status = await call('status', {receipt_id}, {importer: true});
+  assert.equal(status.response.status, 200); assert.equal(status.parsed.qa, true);
+  assert.equal(status.parsed.state, 'granted');
+  assert.equal(JSON.stringify(status.parsed).includes('browser-only'), false);
+  const unauthorized = await call('status', {receipt_id}, {importer: true, headers: {Cookie: 'synthetic=browser-only'}});
+  assert.equal(unauthorized.response.status, 401);
+  const revoked = await call('revoke', {receipt_id}, {capability: grant.parsed.revoke_capability,
+    headers: {Cookie: 'synthetic=browser-only'}});
+  assert.equal(revoked.response.status, 200); assert.equal(revoked.parsed.state, 'revoked');
+});
 test('wrong hosts/query/path/method and content types are rejected', async () => {
   for (const url of ['https://evil.example/api/ppl-measurement/v1/grant', apiUrl('grant') + '?gclid=private', apiUrl('grant/extra')]) {
     const result = await call('grant', {policy: POLICY, qa: false}, {url}); assert.equal(result.response.status, 404);
@@ -333,9 +348,10 @@ test('actual SQLite state survives a worker restart with no external request', a
   const revoked = await call('status', {receipt_id: withdrawing.receipt_id}, {importer: true});
   assert.equal(revoked.parsed.state, 'revoked');
 });
-test('deployment defaults expose no workers.dev/preview/route and contain no actual secrets', async () => {
+test('production route is limited to the exact first-party API with no workers.dev/preview or actual secrets', async () => {
   const config = JSON.parse(await readFile(path.join(control, 'wrangler.jsonc'), 'utf8'));
-  assert.equal(config.workers_dev, false); assert.equal(config.preview_urls, false); assert.deepEqual(config.routes, []);
+  assert.equal(config.workers_dev, false); assert.equal(config.preview_urls, false);
+  assert.deepEqual(config.routes, [{pattern: 'https://nickrae.net/api/ppl-measurement/v1/*', zone_name: 'nickrae.net'}]);
   assert.equal(config.observability.enabled, false); assert.equal(config.vars.SERVICE_ENABLED, 'false');
   assert.equal(config.IMPORTER_TOKEN_SHA256, undefined);
   assert.deepEqual(config.migrations[0].new_sqlite_classes, ['PplConsentLedger']);
