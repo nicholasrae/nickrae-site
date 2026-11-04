@@ -1,0 +1,7 @@
+{
+  "name": "nickrae-ppl-consent-service",
+  "private": true,
+  "type": "module",
+  "scripts": {"test": "node --test test.mjs"},
+  "devDependencies": {"miniflare": "4.20260730.0"}
+}

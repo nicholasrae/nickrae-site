@@ -4,6 +4,17 @@ import policies from './generated/production-policies.mjs';
 const assets = new Set(routing.assets);
 const productionHosts = new Set(['nickrae.net', 'www.nickrae.net']);
 const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
+const consentPrefix = '/api/ppl-measurement/v1/';
+const consentRoutes = new Set(['grant', 'revoke', 'status', 'permit', 'dispatch', 'result']);
+
+function consentResponse(data, status) {
+  return new Response(JSON.stringify(data), {status, headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+    'Cache-Control': 'no-store, private', 'X-Robots-Tag': 'noindex, nofollow',
+    'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer',
+    'Cross-Origin-Resource-Policy': 'same-origin', 'Allow': 'POST'
+  }});
+}
 
 function responsePolicy(response, {candidate = false, target = null, status = response.status} = {}) {
   const headers = new Headers(response.headers);
@@ -41,6 +52,33 @@ export default {
     const candidate = url.hostname.endsWith('.pages.dev') && url.hostname !== 'pages.dev' && !url.port;
     if ((!production && !candidate) || !['http:', 'https:'].includes(url.protocol)) {
       return responsePolicy(new Response('This deployment is not configured for this host.', {status: 421}), {candidate: true});
+    }
+    if (url.pathname.startsWith(consentPrefix)) {
+      const operation = url.pathname.slice(consentPrefix.length);
+      if (url.origin !== 'https://nickrae.net' || url.search || !consentRoutes.has(operation)) {
+        return consentResponse({error: 'not_found'}, 404);
+      }
+      if (request.method !== 'POST') return consentResponse({error: 'method_not_allowed'}, 405);
+      // Turning off new measurement must leave authenticated withdrawals for
+      // existing receipts usable. Missing/broken bindings still fail closed.
+      if ((operation !== 'revoke' && env.PPL_CONSENT_ENABLED !== 'true')
+        || typeof env.PPL_CONSENT?.fetch !== 'function') {
+        return consentResponse({error: 'service_unconfigured'}, 503);
+      }
+      // Do not forward ordinary site cookies, referrers, IP or browser metadata
+      // to the private service. Its explicit JSON schemas contain no click ID.
+      const headers = new Headers();
+      for (const name of ['Content-Type', 'Content-Length', 'Origin', 'Sec-Fetch-Site', 'Sec-GPC', 'Authorization']) {
+        if (request.headers.has(name)) headers.set(name, request.headers.get(name));
+      }
+      try {
+        const result = await env.PPL_CONSENT.fetch(new Request(request, {headers}));
+        const resultHeaders = new Headers(result.headers);
+        resultHeaders.set('Cache-Control', 'no-store, private');
+        resultHeaders.set('X-Robots-Tag', 'noindex, nofollow');
+        resultHeaders.set('X-Content-Type-Options', 'nosniff');
+        return new Response(result.body, {status: result.status, headers: resultHeaders});
+      } catch (_) { return consentResponse({error: 'service_unavailable'}, 503); }
     }
     if (!['GET', 'HEAD'].includes(request.method)) {
       return responsePolicy(new Response(null, {status: 405, headers: {'Allow': 'GET, HEAD'}}), {candidate});

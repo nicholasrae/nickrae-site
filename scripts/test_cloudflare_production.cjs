@@ -123,6 +123,54 @@ async function test(name, fn) {await fn(); passed++; console.log('PASS ' + name)
       assert.equal(response.headers.get('cache-control'), 'no-store'); assert.equal(calls.length, before);
     }
   });
+  await test('consent API is closed unless its exact production binding and approval flag are present', async () => {
+    const route = '/api/ppl-measurement/v1/grant';
+    const before = calls.length;
+    const absent = await fetch(route, {method: 'POST', body: '{}'});
+    assert.equal(absent.status, 503); assert.deepEqual(await absent.json(), {error: 'service_unconfigured'});
+    assert.equal(absent.headers.get('cache-control'), 'no-store, private');
+    assert.equal(absent.headers.get('x-robots-tag'), 'noindex, nofollow');
+    for (const method of ['GET','HEAD','OPTIONS','PUT','DELETE']) {
+      const response = await fetch(route, {method}); assert.equal(response.status, 405);
+      assert.equal(response.headers.get('allow'), 'POST');
+    }
+    for (const origin of ['https://www.nickrae.net','http://nickrae.net','https://candidate.pages.dev']) {
+      const response = await fetch(route, {method: 'POST', body: '{}'}, origin);
+      assert.equal(response.status, 404); assert.equal(response.headers.get('location'), null);
+    }
+    const unknown = await fetch('/api/ppl-measurement/v1/unknown', {method: 'POST'});
+    assert.equal(unknown.status, 404);
+    const query = await fetch(route + '?not-permitted=1', {method: 'POST'}); assert.equal(query.status, 404);
+    assert.equal(calls.length, before);
+  });
+  await test('actual Pages adapter retains consent binding and strips nonessential request headers', async () => {
+    const proxyCalls = [];
+    const bound = {...env, PPL_CONSENT_ENABLED: 'true', PPL_CONSENT: {async fetch(request) {
+      proxyCalls.push({url: request.url, method: request.method, headers: Object.fromEntries(request.headers), body: await request.text()});
+      return new Response('{"receipt_id":"synthetic-local-test"}', {status: 201, headers: {'Content-Type': 'application/json'}});
+    }}};
+    const request = new Request('https://nickrae.net/api/ppl-measurement/v1/grant', {method: 'POST', headers: {
+      'Content-Type': 'application/json', Origin: 'https://nickrae.net', 'Sec-Fetch-Site': 'same-origin',
+      'Sec-GPC': '0', Authorization: 'Bearer synthetic-local-test', Cookie: 'not-forwarded=1',
+      Referer: 'https://nickrae.net/private?not-forwarded=1', 'User-Agent': 'not-forwarded', 'CF-Connecting-IP': '192.0.2.1'
+    }, body: '{"policy":"ppl-ads-v1","qa":false}'});
+    const response = await worker.fetch(request, bound);
+    assert.equal(response.status, 201); assert.equal(proxyCalls.length, 1);
+    assert.deepEqual(proxyCalls[0].headers, {'authorization':'Bearer synthetic-local-test','content-type':'application/json',
+      'origin':'https://nickrae.net','sec-fetch-site':'same-origin','sec-gpc':'0'});
+    assert.equal(proxyCalls[0].body, '{"policy":"ppl-ads-v1","qa":false}');
+    assert.equal(response.headers.get('cache-control'), 'no-store, private');
+    assert.equal(response.headers.get('x-robots-tag'), 'noindex, nofollow');
+    const disabled = await worker.fetch(new Request('https://nickrae.net/api/ppl-measurement/v1/grant', {method: 'POST'}), {...bound, PPL_CONSENT_ENABLED: 'false'});
+    assert.equal(disabled.status, 503); assert.equal(proxyCalls.length, 1);
+    const withdrawal = await worker.fetch(new Request('https://nickrae.net/api/ppl-measurement/v1/revoke', {
+      method: 'POST', headers: {'Content-Type': 'application/json', Authorization: 'Bearer synthetic-local-test'}, body: '{"receipt_id":"synthetic-local-test"}'
+    }), {...bound, PPL_CONSENT_ENABLED: 'false'});
+    assert.equal(withdrawal.status, 201); assert.equal(proxyCalls.length, 2);
+    const failing = await worker.fetch(new Request('https://nickrae.net/api/ppl-measurement/v1/status', {method: 'POST'}),
+      {...bound, PPL_CONSENT: {async fetch(){ throw new Error('Synthetic unavailable binding'); }}});
+    assert.equal(failing.status, 503); assert.deepEqual(await failing.json(), {error: 'service_unavailable'});
+  });
   await test('unknown/private/control routes retain complete custom404 and ignore unrelated validators/ranges', async () => {
     const etag = (await fetch('/')).headers.get('etag');
     for (const route of ['/not-found', '/scripts/check_site.py', '/data/pages.json', '/.git/config', '/.cloudflare/production-worker.mjs', '/_worker.js', '/_routes.json', '/CNAME']) {
