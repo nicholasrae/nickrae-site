@@ -37,7 +37,7 @@ function server() {
   const requests = [], records = new Map();
   const token = (prefix) => prefix + String(++serial).padStart(42, '0');
   const api = {
-    requests, records, fail:false, grantGate:null, grantOverride:null,
+    requests, records, fail:false, grantGate:null, grantOverride:null, revokeOverride:null, revokeStatus:200,
     async fetch(url, options) {
       const body = JSON.parse(options.body);
       requests.push({url, options:{...options, body}});
@@ -53,9 +53,11 @@ function server() {
       if (url === BASE+'/revoke') {
         const record=records.get(body.receipt_id);
         if (!record || options.headers.Authorization !== 'Bearer '+record.revoke_capability) return response(403,{});
+        if(api.revokeStatus!==200) return response(api.revokeStatus,{error:'unknown_receipt'});
         record.state='revoked';
         return response(200,{receipt_id:record.receipt_id,state:'revoked',revision:2,
-          acknowledged_at:'2026-11-04T20:00:01.000Z',in_flight_may_have_sent:false});
+          acknowledged_at:'2026-11-04T20:00:01.000Z',server_time:'2026-11-04T20:00:01.000Z',
+          in_flight_may_have_sent:false,...api.revokeOverride});
       }
       throw Error('Unexpected endpoint');
     }
@@ -85,9 +87,12 @@ function environment({choice='allow',gpc=false,origin='https://nickrae.net',sear
     },appendChild(input) {inputs.push(input);}
   };
   Object.defineProperty(form,'email',{get() {throw Error('Email must not be read');}});
+  const choiceKey=cfg.qa_harness?'nickrae_ppl_measurement_qa_choice_v1':'nickrae_analytics_consent_v1';
+  if(!store.has(choiceKey)&&choice!==null) store.set(choiceKey,choice);
   Object.assign(window,{document,location:new URL(origin+'/aviation-workbooks/private-pilot/'+search),
     navigator:{globalPrivacyControl:gpc, ...(locks?{locks}:{})},
-    localStorage:{getItem:key=>store.get(key)??null,setItem:(key,value)=>store.set(key,value),removeItem:key=>store.delete(key)},
+    localStorage:{get length(){return store.size;},key:index=>[...store.keys()][index]??null,
+      getItem:key=>store.get(key)??null,setItem:(key,value)=>store.set(key,value),removeItem:key=>store.delete(key)},
     fetch:api.fetch,setTimeout,clearTimeout});
   class FakeDate extends Date { static now() {return clock;} }
   vm.runInNewContext(source,{window,URL,URLSearchParams,Date:FakeDate,Set,JSON,Object,Promise},{filename:modulePath});
@@ -124,6 +129,7 @@ async function test(name,fn) { await fn(); results.push(name); }
     assert(!e.store.get(STORE).includes(CLICK));assert(!e.store.get(STORE).includes('gclid'));
     const req=e.api.requests[0];assert.deepEqual(plain(req.options.body),{policy:'ppl-ads-v1',qa:false});
     assert.equal(req.options.credentials,'omit');assert.equal(req.options.referrerPolicy,'no-referrer');assert.equal(req.options.redirect,'error');
+    assert.equal(req.options.mode,'cors'); // Keeps a real Origin with no-referrer under WHATWG Fetch.
   });
   await test('Native canceled attempts refresh their own fields once and leave unrelated vendor values intact',async()=>{
     const e=environment();e.inputs.push({name:'vendor',value:'unchanged',dataset:{}});e.start();await e.client.choice('allow',true);
@@ -207,35 +213,83 @@ async function test(name,fn) { await fn(); results.push(name); }
   });
   await test('Mapping disabled after use still honors stored revocations without creating a grant',async()=>{
     const e=environment();e.start();await e.client.choice('allow',true);
+    e.store.set('nickrae_analytics_consent_v1','deny');
     const next=environment({choice:'deny',store:e.store,locks:lockManager(),api:e.api,config:{...config,enabled:false}});next.start();await tick();
     assert([...e.api.records.values()].every(r=>r.state==='revoked'));assert.deepEqual(next.submit(),{});
   });
+  await test('An ahead or behind client clock disables capture without erasing the server withdrawal capability',async()=>{
+    for(const clock of ['2026-12-05T20:00:00Z','2026-10-01T20:00:00Z']) {
+      const e=environment();e.start();await e.client.choice('allow',true);
+      const id=e.submit()['fields[nr_ads_receipt]'];e.api.fail=true;e.setClock(clock);e.window.dispatch('focus');await tick();
+      assert.deepEqual(e.submit(),{});assert.equal(e.api.records.get(id).state,'granted');
+      const pending=JSON.parse(e.store.get(STORE+':pending:'+id));assert.equal(pending.receipt_id,id);
+      assert.equal(pending.local_state,'pending');assert.equal(typeof pending.revoke_capability,'string');
+      assert.equal(e.client.status(),'withdrawal-pending');
+    }
+  });
+  await test('Server expiry acknowledgement clears an outbox only after matching expiry and valid server time',async()=>{
+    for(const valid of [false,true]) {
+      const e=environment();e.start();await e.client.choice('allow',true);const id=e.submit()['fields[nr_ads_receipt]'];
+      e.api.revokeOverride={state:'expired',expires_at:valid?'2026-12-04T20:00:00.000Z':'2026-11-04T20:00:00.000Z',
+        acknowledged_at:'2026-12-05T20:00:00.000Z',server_time:'2026-12-05T20:00:00.000Z'};
+      await e.client.choice('deny',true);
+      assert.equal(e.store.has(STORE+':pending:'+id),!valid);
+      assert.equal(JSON.parse(e.store.get(STORE)).receipts.length,valid?0:1);
+    }
+  });
+  await test('Only an exact authoritative absent acknowledgement clears cleanup state; a 404 never permits regrant',async()=>{
+    for(const mode of ['404','malformed-absent','absent']) {
+      const e=environment();e.start();await e.client.choice('allow',true);const id=e.submit()['fields[nr_ads_receipt]'];
+      if(mode==='404') e.api.revokeStatus=404;
+      else e.api.revokeOverride={state:'absent',...(mode==='malformed-absent'?{server_time:null}:{})};
+      await e.client.choice('deny',true);
+      assert.equal(e.store.has(STORE+':pending:'+id),mode!=='absent');
+      if(mode!=='absent') {await e.client.choice('allow',true);assert.equal(e.api.requests.filter(r=>r.url.endsWith('/grant')).length,1);assert.deepEqual(e.submit(),{});}
+    }
+  });
+  await test('Clearing collection, marker or all storage preserves known capabilities synchronously for a reload',async()=>{
+    for(const key of [STORE,REVOKE,null]) {
+      const e=environment();e.start();await e.client.choice('allow',true);const id=e.submit()['fields[nr_ads_receipt]'];e.api.fail=true;
+      if(key===null) e.store.clear();else e.store.delete(key);
+      e.window.dispatch('storage',e.window,{key,newValue:null});
+      assert.equal(JSON.parse(e.store.get(STORE+':pending:'+id)).receipt_id,id);
+      const next=environment({store:e.store,api:e.api});next.start();await tick();assert.deepEqual(next.submit(),{});
+      e.api.fail=false;next.window.dispatch('online');await tick();assert.equal(e.api.records.get(id).state,'revoked');
+    }
+  });
+  await test('A stale local denied choice cannot revoke a newer cross-tab explicit Allow receipt',async()=>{
+    const store=new Map(),api=server(),locks=lockManager();const stale=environment({store,api,locks});stale.start();
+    await stale.client.choice('allow',true);await stale.client.choice('deny',true);stale.choiceState.value='deny';
+    store.set('nickrae_analytics_consent_v1','allow');const newer=environment({store,api,locks});newer.start();await newer.client.choice('allow',true);
+    const id=newer.submit()['fields[nr_ads_receipt]'];stale.window.dispatch('storage',stale.window,{key:STORE,newValue:store.get(STORE)});await tick();
+    assert.equal(api.records.get(id).state,'granted');assert.deepEqual(stale.submit(),{});assert.equal(newer.submit()['fields[nr_ads_receipt]'],id);
+  });
   await test('Temporary exact QA harness always requests QA=true and uses only its fixed synthetic click',async()=>{
     const e=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});
-    e.window.location.pathname='/_ppl-measurement-qa/';e.start();await e.client.choice('allow',true);
+    e.window.location.pathname='/ppl-measurement-qa/';e.start();await e.client.choice('allow',true);
     const data=e.submit();assert.equal(data['fields[nr_ads_gclid]'],'QA_SYNTHETIC_NO_GOOGLE_MATCH_20261104');
     assert.equal(e.api.requests.find(r=>r.url.endsWith('/grant')).options.body.qa,true);
     assert.equal(e.store.has(STORE),false);assert(JSON.parse(e.store.get('nickrae_ppl_measurement_qa_receipts_v1')).receipts.every(r=>r.qa===true));
     assert([...e.api.records.values()].every(r=>r.qa===true));
   });
   await test('QA mode cannot weaken production path, consent, GPC, identifier or query guards',async()=>{
-    for(const change of [e=>{},e=>{e.window.location.pathname='/_ppl-measurement-qa/';e.window.location.search='';},
-      e=>{e.window.location.pathname='/_ppl-measurement-qa/';e.window.location.search='?analytics_test=0';},
-      e=>{e.window.location.pathname='/_ppl-measurement-qa/';e.window.location.search='?analytics_test=1&gclid=other';},
-      e=>{e.window.location.pathname='/_ppl-measurement-qa/';e.window.navigator.globalPrivacyControl=true;}]) {
+    for(const change of [e=>{},e=>{e.window.location.pathname='/ppl-measurement-qa/';e.window.location.search='';},
+      e=>{e.window.location.pathname='/ppl-measurement-qa/';e.window.location.search='?analytics_test=0';},
+      e=>{e.window.location.pathname='/ppl-measurement-qa/';e.window.location.search='?analytics_test=1&gclid=other';},
+      e=>{e.window.location.pathname='/ppl-measurement-qa/';e.window.navigator.globalPrivacyControl=true;}]) {
       const e=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});change(e);e.start();await e.client.choice('allow',true);
       assert.deepEqual(e.submit(),{});assert.equal(e.api.requests.filter(r=>r.url.endsWith('/grant')).length,0);
     }
   });
   await test('QA receipt storage is isolated from production and an unexpected non-QA acknowledgement is unusable',async()=>{
-    const e=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});e.window.location.pathname='/_ppl-measurement-qa/';
+    const e=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});e.window.location.pathname='/ppl-measurement-qa/';
     e.start();await e.client.choice('allow',true);
     const production=environment({store:e.store,api:e.api});production.start();await tick();assert.deepEqual(production.submit(),{});
-    const bad=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});bad.window.location.pathname='/_ppl-measurement-qa/';
+    const bad=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});bad.window.location.pathname='/ppl-measurement-qa/';
     bad.api.grantOverride={qa:false};bad.start();await bad.client.choice('allow',true);assert.deepEqual(bad.submit(),{});
   });
   await test('Temporary QA page, when present, has no Google/site tags, is noindex and keeps the exact ordinary Kit form',async()=>{
-    const qaPath=path.join(__dirname,'../_ppl-measurement-qa/index.html');
+    const qaPath=path.join(__dirname,'../ppl-measurement-qa/index.html');
     if(!fs.existsSync(qaPath)) return; // Removal after the owner test is required.
     const html=fs.readFileSync(qaPath,'utf8');
     const scriptSources=[...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map(match=>match[1]);

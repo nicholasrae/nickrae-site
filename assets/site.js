@@ -110,7 +110,7 @@
   function matchingStatus(state) {
     const messages = {
       'withdrawal-pending': 'Measurement is off on this page. Your withdrawal is still being saved and will retry when the connection returns.',
-      'withdrawal-saved': 'Your measurement withdrawal has been saved.'
+      'withdrawal-saved': 'These measurement receipts can no longer authorize new imports.'
     };
     let status = document.getElementById('ppl-matching-choice-status');
     if (!messages[state]) { status?.remove(); return; }
@@ -131,7 +131,11 @@
       matchingExplicitAllowPending = false;
       // Persist this non-identifying marker synchronously, even if the optional
       // first-party receipt library has not loaded before a privacy reload.
-      try { window.localStorage.setItem(MATCHING_REVOKE_KEY, '1'); } catch (_) {}
+      try {
+        if (explicit || globalPrivacyControl() || window.localStorage.getItem(CONSENT_KEY) !== 'allow') {
+          window.localStorage.setItem(MATCHING_REVOKE_KEY, '1');
+        }
+      } catch (_) {}
       if (!confirmedSignupClient) {
         try {
           if (JSON.parse(window.localStorage.getItem('nickrae_ppl_measurement_receipts_v1') || '{}').receipts?.length) {

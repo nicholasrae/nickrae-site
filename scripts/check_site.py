@@ -44,7 +44,7 @@ KIT_PAGES = {
     "aviation-workbooks/private-pilot/index.html",
     "blog/checkride-prep-guide.html", "blog/student-pilot-apps-2026.html",
 }
-KIT_QA_PAGE = "_ppl-measurement-qa/index.html"
+KIT_QA_PAGE = "ppl-measurement-qa/index.html"
 WORKBOOK_IDS = {"ppl", "instrument", "commercial", "multi-engine", "vfr-radio"}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 CSS_URL = re.compile(r"url\(\s*(['\"]?)(.*?)\1\s*\)", re.I | re.S)
