@@ -18,7 +18,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Validate links, metadata, products and signup placements
-        run: python3 scripts/check_site.py
-      - name: Validate measurement privacy and consent lifecycle
-        run: node scripts/test_measurement.cjs
+      - name: Set up Node for browser and Durable Object tests
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+      - name: Validate the complete production build and measurement lifecycle
+        run: python3 scripts/build_cloudflare_production.py --validate

@@ -7,6 +7,21 @@
   const ga4Configured = typeof GA4_ID === 'string' && /^G-[A-Z0-9]+$/.test(GA4_ID);
   const CONSENT_KEY = 'nickrae_analytics_consent_v1';
   const OUTBOUND_WAIT_MS = 250;
+  // Verified against Kit's generated HTML, not inferred from field labels.
+  const PPL_MATCHING_CONFIG = Object.freeze({
+    enabled: true,
+    mapping_sha256: 'bd9605de8c62fcd406ec0e7f8c703e086553d50545f1bba35da11c06a5fb1189',
+    fields: Object.freeze({
+      gclid: {api_key:'nr_ads_gclid', input_name:'fields[nr_ads_gclid]'},
+      receipt: {api_key:'nr_ads_receipt', input_name:'fields[nr_ads_receipt]'},
+      submitted_at: {api_key:'nr_ads_submitted_at', input_name:'fields[nr_ads_submitted_at]'},
+      campaign: {api_key:'nr_ads_campaign', input_name:'fields[nr_ads_campaign]'}
+    })
+  });
+  const MATCHING_REVOKE_KEY = 'nickrae_ppl_measurement_withdrawal_v1';
+  const matchingAssetVersion = 'a6234c7a4fc4';
+  let confirmedSignupClient;
+  let matchingExplicitAllowPending = false;
   // Deliberate, per-page QA only. This flag is never stored or forwarded, and
   // it cannot enable measurement on a preview, localhost or insecure page.
   const qaQuery = new URLSearchParams(window.location.search);
@@ -85,6 +100,81 @@
       else window.localStorage.setItem(CONSENT_KEY, value);
     }
     catch (_) {}
+  }
+
+  function matchingStatus(state) {
+    const messages = {
+      'withdrawal-pending': 'Measurement is off on this page. Your withdrawal is still being saved and will retry when the connection returns.',
+      'withdrawal-saved': 'These measurement receipts can no longer authorize new imports.'
+    };
+    let status = document.getElementById('ppl-matching-choice-status');
+    if (!messages[state]) { status?.remove(); return; }
+    if (!status) {
+      status = document.createElement('p');
+      status.id = 'ppl-matching-choice-status';
+      status.setAttribute('role', 'status');
+      status.setAttribute('aria-live', 'polite');
+      status.setAttribute('aria-atomic', 'true');
+      const choice = document.querySelector('[aria-labelledby="privacy-choice-title"]');
+      (choice || document.querySelector('footer') || document.body).appendChild(status);
+    }
+    status.textContent = messages[state];
+  }
+
+  function matchingChoice(value, explicit = false) {
+    if (value !== 'allow' || globalPrivacyControl()) {
+      matchingExplicitAllowPending = false;
+      // Persist this non-identifying marker synchronously, even if the optional
+      // first-party receipt library has not loaded before a privacy reload.
+      try {
+        if (explicit || globalPrivacyControl() || window.localStorage.getItem(CONSENT_KEY) !== 'allow') {
+          window.localStorage.setItem(MATCHING_REVOKE_KEY, '1');
+        }
+      } catch (_) {}
+      if (!confirmedSignupClient) {
+        try {
+          if (JSON.parse(window.localStorage.getItem('nickrae_ppl_measurement_receipts_v1') || '{}').receipts?.length) {
+            matchingStatus('withdrawal-pending');
+          }
+        } catch (_) {}
+      }
+    } else if (explicit && !confirmedSignupClient) matchingExplicitAllowPending = true;
+    confirmedSignupClient?.choice(value, explicit);
+  }
+
+  function matchingLinkPresent() {
+    if (!PPL_MATCHING_CONFIG.enabled || window.location.protocol !== 'https:'
+      || window.location.hostname !== 'nickrae.net' || window.location.port
+      || !/^\/aviation-workbooks\/private-pilot\/(?:index\.html)?$/.test(window.location.pathname)) return false;
+    const query = new URLSearchParams(window.location.search);
+    const exact = {utm_source:'google', utm_medium:'cpc', utm_campaign:'free_ppl_cards', utm_content:'ppl_search_v1'};
+    return !query.has('analytics_test') && query.getAll('gclid').length === 1
+      && /^[A-Za-z0-9._~-]{10,512}$/.test(query.get('gclid') || '')
+      && Object.entries(exact).every(([key, value]) => query.getAll(key).length === 1 && query.get(key) === value);
+  }
+
+  function loadConfirmedSignupMatching() {
+    if (window.location.protocol !== 'https:' || window.location.hostname !== 'nickrae.net'
+      || window.location.port || typeof window.fetch !== 'function') return;
+    const script = document.createElement('script');
+    script.async = true;
+    script.referrerPolicy = 'no-referrer';
+    script.src = `/assets/confirmed-signup.js?v=${matchingAssetVersion}`;
+    script.onload = () => {
+      if (confirmedSignupClient || !window.NickRaeConfirmedSignup?.create) return;
+      confirmedSignupClient = window.NickRaeConfirmedSignup.create({
+        config: PPL_MATCHING_CONFIG, currentConsent, globalPrivacyControl,
+        onStatus: matchingStatus,
+        onChoiceNeeded: () => { if (!matchingExplicitAllowPending) showBanner(true); }
+      });
+      confirmedSignupClient.start();
+      if (matchingExplicitAllowPending && currentConsent() === 'allow' && !globalPrivacyControl()) {
+        matchingExplicitAllowPending = false;
+        confirmedSignupClient.choice('allow', true);
+      }
+    };
+    // A blocked library leaves signup usable and adds no optional form fields.
+    document.head.appendChild(script);
   }
 
   // Never include query strings, fragments, mail addresses or input values in
@@ -222,6 +312,7 @@
   function refreshOptionalAttribution() {
     preservePplAttribution();
     refreshPplAmazonLinks();
+    if (globalPrivacyControl()) matchingChoice('deny');
   }
 
   function attachPplAmazonAttribution() {
@@ -564,8 +655,8 @@
     document.documentElement.style.removeProperty('--privacy-banner-space');
   }
 
-  function showBanner() {
-    if (currentConsent() || document.getElementById('privacy-consent')) return;
+  function showBanner(matchingChoiceNeeded = false) {
+    if ((currentConsent() && !matchingChoiceNeeded) || document.getElementById('privacy-consent')) return;
     const banner = document.createElement('section');
     banner.id = 'privacy-consent';
     banner.setAttribute('role', 'dialog');
@@ -576,7 +667,9 @@
     heading.textContent = 'Privacy choice';
     const message = document.createElement('span');
     message.id = 'privacy-consent-description';
-    message.textContent = 'Optional analytics and ad measurement with Google and Amazon. Off unless allowed; read and download either way.';
+    message.textContent = matchingChoiceNeeded || matchingLinkPresent()
+      ? 'Optional measurement with Google, Kit and Amazon can link this visit to an email-confirmed signup. Your email is not shared with Google. Read and download either way.'
+      : 'Optional analytics and ad measurement with Google and Amazon. Off unless allowed; read and download either way.';
     banner.setAttribute('aria-describedby', message.id);
     const details = document.createElement('a');
     details.href = '/privacy/';
@@ -835,6 +928,7 @@
     preserveCheckoutAttribution();
     attachPplAmazonAttribution();
     attachGlobalTracking();
+    loadConfirmedSignupMatching();
     if (currentConsent() === 'allow') loadAnalytics();
     else if (!currentConsent()) showBanner();
   }
@@ -847,6 +941,7 @@
     // Another tab can revoke consent while this tab still has Google's SDK.
     consentRevision += 1;
     refreshOptionalAttribution();
+    matchingChoice(currentConsent());
     if (currentConsent() === 'allow') {
       loadAnalytics();
     }
@@ -858,9 +953,10 @@
 
   window.NickRaePrivacy = {
     consent: currentConsent,
-    allow(){ setConsent('allow'); removeBanner(); refreshOptionalAttribution(); loadAnalytics(); },
+    allow(){ setConsent('allow'); removeBanner(); refreshOptionalAttribution(); matchingChoice('allow', true); loadAnalytics(); },
     deny(){
       setConsent('deny');
+      matchingChoice('deny', true);
       refreshOptionalAttribution();
       removeBanner();
       disableAnalytics();
@@ -868,6 +964,7 @@
     },
     reset(){
       setConsent(null);
+      matchingChoice(null, true);
       refreshOptionalAttribution();
       // Revoke active measurement before navigation can trigger unload events.
       disableAnalytics();

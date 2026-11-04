@@ -1,0 +1,14 @@
+{
+  "name": "nickrae-ppl-consent",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-07-30",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [],
+  "vars": {"SERVICE_ENABLED": "false"},
+  "observability": {"enabled": false},
+  "durable_objects": {
+    "bindings": [{"name": "PPL_LEDGER", "class_name": "PplConsentLedger"}]
+  },
+  "migrations": [{"tag": "v1", "new_sqlite_classes": ["PplConsentLedger"]}]
+}

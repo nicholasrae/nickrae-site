@@ -48,7 +48,10 @@ function htmlResponse(request, page) {
 export default {
   async fetch(request, env) {
     const originalPath = new URL(request.url).pathname;
-    return previewWorker.fetch(request, {ASSETS: {async fetch(assetRequest) {
+    return previewWorker.fetch(request, {
+      PPL_CONSENT: env.PPL_CONSENT,
+      PPL_CONSENT_ENABLED: env.PPL_CONSENT_ENABLED,
+      ASSETS: {async fetch(assetRequest) {
       const pathname = new URL(assetRequest.url).pathname;
       if (Object.prototype.hasOwnProperty.call(htmlPages, pathname)) {
         // A missing/private URL must retain its complete custom404, even if the
