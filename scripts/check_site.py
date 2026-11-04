@@ -44,6 +44,7 @@ KIT_PAGES = {
     "aviation-workbooks/private-pilot/index.html",
     "blog/checkride-prep-guide.html", "blog/student-pilot-apps-2026.html",
 }
+KIT_QA_PAGE = "_ppl-measurement-qa/index.html"
 WORKBOOK_IDS = {"ppl", "instrument", "commercial", "multi-engine", "vfr-radio"}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 CSS_URL = re.compile(r"url\(\s*(['\"]?)(.*?)\1\s*\)", re.I | re.S)
@@ -480,7 +481,21 @@ class Audit:
 
     def check_kit(self):
         actual_pages = set()
+        expected_pages = set(KIT_PAGES)
         for page in self.pages.values():
+            if page.relative == KIT_QA_PAGE:
+                # Temporary explicit owner QA route, not a sixth marketing form.
+                # Deleting the route restores the original five-place contract.
+                expected_pages.add(KIT_QA_PAGE)
+                if not page.noindex:
+                    self.error(page.relative, "temporary Kit QA page must be noindex")
+                if not any('"qa_harness":true' in script.text for script in page.tags("script")):
+                    self.error(page.relative, "temporary Kit QA page must force QA-only client mode")
+                if any("googletagmanager" in script.attrs.get("src", "")
+                       or "google-analytics" in script.attrs.get("src", "")
+                       or re.search(r"(?:^|/)site\.js(?:[?]|$)", script.attrs.get("src", ""))
+                       for script in page.tags("script")):
+                    self.error(page.relative, "temporary Kit QA page cannot load Google/site measurement tags")
             scripts = [x for x in page.tags("script") if x.attrs.get("src") == KIT_HTML_SCRIPT or "data-uid" in x.attrs or "nick-rae.kit.com/" in x.attrs.get("src", "")]
             forms = [x for x in page.tags("form") if x.attrs.get("data-uid") == KIT_UID or x.attrs.get("data-sv-form") == "10042240"]
             if not scripts and not forms:
@@ -511,9 +526,10 @@ class Audit:
                 self.error(page.relative, "missing signup-help contact within .ppl-signup")
             if not any(urljoin(page.url, a.attrs.get("href", "")) == ORIGIN + "/privacy/" and a.inside_signup for a in page.anchors):
                 self.error(page.relative, "missing privacy link within .ppl-signup")
-        if actual_pages != KIT_PAGES:
-            self.error("Kit placements", f"missing={sorted(KIT_PAGES - actual_pages)}, unexpected={sorted(actual_pages - KIT_PAGES)}")
+        if actual_pages != expected_pages:
+            self.error("Kit placements", f"missing={sorted(expected_pages - actual_pages)}, unexpected={sorted(actual_pages - expected_pages)}")
         self.stats["kit_placements"] = len(actual_pages)
+        self.stats["kit_qa_placements"] = int(KIT_QA_PAGE in actual_pages)
 
     def run(self):
         self.load_pages()

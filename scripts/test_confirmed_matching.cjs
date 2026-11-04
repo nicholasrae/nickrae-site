@@ -45,7 +45,7 @@ function server() {
       if (url === BASE+'/grant') {
         if (api.grantGate) await api.grantGate;
         const receipt_id=token('R'), revoke_capability=token('C');
-        const result={receipt_id,revoke_capability,policy:'ppl-ads-v1',qa:false,state:'granted',revision:1,
+        const result={receipt_id,revoke_capability,policy:'ppl-ads-v1',qa:body.qa,state:'granted',revision:1,
           granted_at:'2026-11-04T20:00:00.000Z',expires_at:'2026-12-04T20:00:00.000Z',...api.grantOverride};
         records.set(receipt_id,{...result});
         return response(201,result);
@@ -197,10 +197,53 @@ async function test(name,fn) { await fn(); results.push(name); }
     const e=environment();e.start();await e.client.choice('allow',true);e.setClock('2026-12-05T20:00:00Z');
     assert.deepEqual(e.submit(),{});e.window.dispatch('focus');await tick();assert.equal(JSON.parse(e.store.get(STORE)).receipts.length,0);
   });
+  await test('Array-coerced tokens and timestamps in stored or returned records never become measurement fields',async()=>{
+    for(const property of ['receipt_id','revoke_capability','granted_at','expires_at']) {
+      const e=environment();e.start();await e.client.choice('allow',true);
+      const saved=JSON.parse(e.store.get(STORE));saved.receipts[0][property]=[saved.receipts[0][property]];e.store.set(STORE,JSON.stringify(saved));
+      const next=environment({store:e.store,api:e.api});next.start();await next.client.choice('allow',true);assert.deepEqual(next.submit(),{});
+    }
+    const e=environment();e.api.grantOverride={receipt_id:['R'+'0'.repeat(42)]};e.start();await e.client.choice('allow',true);assert.deepEqual(e.submit(),{});
+  });
   await test('Mapping disabled after use still honors stored revocations without creating a grant',async()=>{
     const e=environment();e.start();await e.client.choice('allow',true);
     const next=environment({choice:'deny',store:e.store,locks:lockManager(),api:e.api,config:{...config,enabled:false}});next.start();await tick();
     assert([...e.api.records.values()].every(r=>r.state==='revoked'));assert.deepEqual(next.submit(),{});
+  });
+  await test('Temporary exact QA harness always requests QA=true and uses only its fixed synthetic click',async()=>{
+    const e=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});
+    e.window.location.pathname='/_ppl-measurement-qa/';e.start();await e.client.choice('allow',true);
+    const data=e.submit();assert.equal(data['fields[nr_ads_gclid]'],'QA_SYNTHETIC_NO_GOOGLE_MATCH_20261104');
+    assert.equal(e.api.requests.find(r=>r.url.endsWith('/grant')).options.body.qa,true);
+    assert.equal(e.store.has(STORE),false);assert(JSON.parse(e.store.get('nickrae_ppl_measurement_qa_receipts_v1')).receipts.every(r=>r.qa===true));
+    assert([...e.api.records.values()].every(r=>r.qa===true));
+  });
+  await test('QA mode cannot weaken production path, consent, GPC, identifier or query guards',async()=>{
+    for(const change of [e=>{},e=>{e.window.location.pathname='/_ppl-measurement-qa/';e.window.location.search='';},
+      e=>{e.window.location.pathname='/_ppl-measurement-qa/';e.window.location.search='?analytics_test=0';},
+      e=>{e.window.location.pathname='/_ppl-measurement-qa/';e.window.location.search='?analytics_test=1&gclid=other';},
+      e=>{e.window.location.pathname='/_ppl-measurement-qa/';e.window.navigator.globalPrivacyControl=true;}]) {
+      const e=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});change(e);e.start();await e.client.choice('allow',true);
+      assert.deepEqual(e.submit(),{});assert.equal(e.api.requests.filter(r=>r.url.endsWith('/grant')).length,0);
+    }
+  });
+  await test('QA receipt storage is isolated from production and an unexpected non-QA acknowledgement is unusable',async()=>{
+    const e=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});e.window.location.pathname='/_ppl-measurement-qa/';
+    e.start();await e.client.choice('allow',true);
+    const production=environment({store:e.store,api:e.api});production.start();await tick();assert.deepEqual(production.submit(),{});
+    const bad=environment({config:{...config,qa_harness:true},search:'?analytics_test=1'});bad.window.location.pathname='/_ppl-measurement-qa/';
+    bad.api.grantOverride={qa:false};bad.start();await bad.client.choice('allow',true);assert.deepEqual(bad.submit(),{});
+  });
+  await test('Temporary QA page, when present, has no Google/site tags, is noindex and keeps the exact ordinary Kit form',async()=>{
+    const qaPath=path.join(__dirname,'../_ppl-measurement-qa/index.html');
+    if(!fs.existsSync(qaPath)) return; // Removal after the owner test is required.
+    const html=fs.readFileSync(qaPath,'utf8');
+    const scriptSources=[...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/g)].map(match=>match[1]);
+    assert(html.includes('noindex,nofollow'));assert(!scriptSources.some(src=>/googletagmanager|google-analytics/.test(src)));
+    assert(!html.includes('src="/assets/site.js'));assert(html.includes('"qa_harness":true'));
+    assert.equal((html.match(/<form\b/g)||[]).length,1);assert(html.includes('data-sv-form="10042240"'));
+    assert(html.includes('data-uid="899d974875"'));assert(html.includes('https://app.kit.com/forms/10042240/subscriptions'));
+    assert(!html.includes('IMPORTER_TOKEN'));assert(!html.includes('revoke_capability'));
   });
   console.log(JSON.stringify({passed:results.length,tests:results,source:modulePath,
     scope:'Synthetic DOM/storage/WebLocks/HTTPS doubles only; no Google or Kit request, signup or conversion.'},null,2));

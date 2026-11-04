@@ -17,6 +17,11 @@
     const win = options.window || root;
     const doc = options.document || win.document;
     const config = options.config || {};
+    // Only the temporary noindex harness opts in. Its request remains QA=true
+    // regardless of URL values and can never create an importable receipt.
+    const qaMode = config.qa_harness === true;
+    const storeKey = qaMode ? 'nickrae_ppl_measurement_qa_receipts_v1' : STORE_KEY;
+    const revokeKey = qaMode ? 'nickrae_ppl_measurement_qa_withdrawal_v1' : REVOKE_KEY;
     const consent = options.currentConsent;
     const gpc = options.globalPrivacyControl;
     const now = () => Date.now();
@@ -44,13 +49,13 @@
 
     function privacyAllows() { return consent() === 'allow' && !gpc(); }
     function withdrawalPending() {
-      try { return win.localStorage.getItem(REVOKE_KEY) === '1'; }
+      try { return win.localStorage.getItem(revokeKey) === '1'; }
       catch (_) { storageSafe = false; return true; }
     }
     function markWithdrawal() {
       try {
-        win.localStorage.setItem(REVOKE_KEY, '1');
-        if (win.localStorage.getItem(REVOKE_KEY) !== '1') throw new Error();
+        win.localStorage.setItem(revokeKey, '1');
+        if (win.localStorage.getItem(revokeKey) !== '1') throw new Error();
       } catch (_) { storageSafe = false; }
     }
     function withLock(operation) {
@@ -59,7 +64,7 @@
       if (typeof win.navigator?.locks?.request !== 'function') {
         setStatus('unavailable'); return Promise.resolve(false);
       }
-      return win.navigator.locks.request(STORE_KEY, {mode:'exclusive'}, async () => {
+      return win.navigator.locks.request(storeKey, {mode:'exclusive'}, async () => {
         load();
         if (cleanupExpired) persist();
         if (withdrawalPending()) records.forEach((record) => { record.local_state = 'pending'; });
@@ -67,9 +72,14 @@
       });
     }
     function eligibleClick() {
-      if (!production || !mappingValid || !privacyAllows() || typeof win.navigator?.locks?.request !== 'function'
-        || !/^\/aviation-workbooks\/private-pilot\/(?:index\.html)?$/.test(win.location.pathname)) return null;
+      if (!production || !mappingValid || !privacyAllows() || typeof win.navigator?.locks?.request !== 'function') return null;
       const query = new URLSearchParams(win.location.search);
+      if (qaMode) {
+        if (win.location.pathname !== '/_ppl-measurement-qa/' || query.getAll('analytics_test').length !== 1
+          || query.get('analytics_test') !== '1' || [...query.keys()].some((key) => key !== 'analytics_test')) return null;
+        return 'QA_SYNTHETIC_NO_GOOGLE_MATCH_20261104';
+      }
+      if (!/^\/aviation-workbooks\/private-pilot\/(?:index\.html)?$/.test(win.location.pathname)) return null;
       if (query.has('analytics_test')) return null;
       const exact = {utm_source:'google', utm_medium:'cpc', utm_campaign:'free_ppl_cards', utm_content:'ppl_search_v1'};
       if (!Object.entries(exact).every(([key, value]) => query.getAll(key).length === 1 && query.get(key) === value)
@@ -77,17 +87,19 @@
       return query.get('gclid'); // Case-sensitive, opaque identifier; memory only.
     }
     function safeRecord(value) {
-      if (!value || !TOKEN.test(value.receipt_id || '') || !TOKEN.test(value.revoke_capability || '')
-        || value.policy !== POLICY || !['active', 'pending'].includes(value.local_state)) return null;
+      if (!value || typeof value.receipt_id !== 'string' || typeof value.revoke_capability !== 'string'
+        || !TOKEN.test(value.receipt_id) || !TOKEN.test(value.revoke_capability)
+        || typeof value.granted_at !== 'string' || typeof value.expires_at !== 'string'
+        || value.policy !== POLICY || typeof value.qa !== 'boolean' || !['active', 'pending'].includes(value.local_state)) return null;
       const granted = Date.parse(value.granted_at), expiry = Date.parse(value.expires_at);
       if (!Number.isFinite(granted) || !Number.isFinite(expiry) || expiry <= granted
         || expiry - granted > MAX_LIFETIME || granted > now() + 5 * 60 * 1000) return null;
       return {receipt_id:value.receipt_id, revoke_capability:value.revoke_capability, policy:POLICY,
-        granted_at:new Date(granted).toISOString(), expires_at:new Date(expiry).toISOString(), local_state:value.local_state};
+        qa:value.qa, granted_at:new Date(granted).toISOString(), expires_at:new Date(expiry).toISOString(), local_state:value.local_state};
     }
     function load() {
       try {
-        const text = win.localStorage.getItem(STORE_KEY);
+        const text = win.localStorage.getItem(storeKey);
         if (!text) { records = []; return; }
         if (text.length > 16000) throw new Error();
         const data = JSON.parse(text);
@@ -101,9 +113,9 @@
     function persist() {
       try {
         const value = JSON.stringify({version:1, receipts:records});
-        win.localStorage.setItem(STORE_KEY, value);
+        win.localStorage.setItem(storeKey, value);
         // A silent storage failure must not make an unrevocable association.
-        if (win.localStorage.getItem(STORE_KEY) !== value) throw new Error();
+        if (win.localStorage.getItem(storeKey) !== value) throw new Error();
         return true;
       } catch (_) { storageSafe = false; return false; }
     }
@@ -129,7 +141,7 @@
     }
     function selectCurrent() {
       current = records.filter((record) => record.local_state === 'active'
-        && Date.parse(record.expires_at) > now()).at(-1) || null;
+        && record.qa === qaMode && Date.parse(record.expires_at) > now()).at(-1) || null;
     }
     async function flushPendingLocked() {
         const pending = records.filter((record) => record.local_state === 'pending');
@@ -174,14 +186,14 @@
       granting = withLock(async () => {
         if (!await flushPendingLocked() || revision !== generation || !eligibleClick() || !storageSafe) return false;
         try {
-          win.localStorage.removeItem(REVOKE_KEY);
-          if (win.localStorage.getItem(REVOKE_KEY) !== null) throw new Error();
+          win.localStorage.removeItem(revokeKey);
+          if (win.localStorage.getItem(revokeKey) !== null) throw new Error();
         } catch (_) { storageSafe = false; setStatus('unavailable'); return false; }
         if (records.length >= 20) { setStatus('unavailable'); return false; }
         try {
           setStatus('saving');
-          const response = await request('/grant', {policy:POLICY, qa:false});
-          if (response.state !== 'granted' || response.qa !== false || response.policy !== POLICY) throw new Error();
+          const response = await request('/grant', {policy:POLICY, qa:qaMode});
+          if (response.state !== 'granted' || response.qa !== qaMode || response.policy !== POLICY) throw new Error();
           const record = safeRecord({...response, local_state:'active'});
           if (!record) throw new Error();
           // Even a grant response received after withdrawal must be revoked.
@@ -248,7 +260,7 @@
       // GPC can change while a document stays open; recheck before each gesture.
       ['pointerdown', 'keydown'].forEach((name) => doc.addEventListener(name, () => { if (gpc()) void withdraw(); }, true));
       win.addEventListener('storage', (event) => {
-        if (![STORE_KEY, REVOKE_KEY, 'nickrae_analytics_consent_v1', null].includes(event.key)) return;
+        if (![storeKey, revokeKey, 'nickrae_analytics_consent_v1', null].includes(event.key)) return;
         current = null; click = null; clearFields(); load(); refresh();
       });
       refresh();
