@@ -107,6 +107,14 @@ export class ConsentLedger {
     // holder's valid withdrawal. Platform outages/quotas can still fail and the
     // browser must retain its pending outbox until acknowledgement.
     this.spendPublicBudget(now, false, !!authorized);
+    // Cleanup deliberately removes old capability hashes. An absent row cannot
+    // authorize an import, so acknowledge current absence rather than leaving
+    // an expired browser outbox pending forever. This does not establish that a
+    // prior revocation succeeded or recall any earlier external dispatch. IDs
+    // are generated afresh, never accepted from grant callers; rollback must
+    // preserve current history and must never restore an older ledger snapshot.
+    if (!row) return {receipt_id: receiptId, state: 'absent',
+      acknowledged_at: iso(now), server_time: iso(now)};
     if (!authorized) fail('unknown_receipt', 404);
     if (row.state !== 'revoked') {
       this.sql.exec(`UPDATE receipts SET state='revoked',revoked_ms=?,revision=revision+1,

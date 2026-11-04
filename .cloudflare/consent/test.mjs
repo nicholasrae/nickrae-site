@@ -44,9 +44,12 @@ test('SQLite records minimal grant with server time,30-day expiry and no raw cap
   assert.equal(JSON.stringify(receipt).includes(CAP), false);
   f.db.close();
 });
-test('unknown/wrong capability cannot revoke another receipt and exposes no identity', () => {
+test('absent receipt acknowledges no current authorization; wrong capability cannot revoke an existing receipt', () => {
   const f = fixture(); f.grant();
-  throwsCode(() => f.ledger.revoke({receiptId: ID2, capabilityHash: CAP}, NOW + 1), 'unknown_receipt');
+  assert.deepEqual(f.ledger.revoke({receiptId: ID2, capabilityHash: CAP}, NOW + 1), {
+    receipt_id: ID2, state: 'absent', acknowledged_at: new Date(NOW + 1).toISOString(),
+    server_time: new Date(NOW + 1).toISOString()
+  });
   throwsCode(() => f.ledger.revoke({receiptId: ID, capabilityHash: 'f'.repeat(64)}, NOW + 1), 'unknown_receipt');
   assert.equal(f.ledger.snapshot(ID, NOW + 1).state, 'granted'); f.db.close();
 });
@@ -149,7 +152,15 @@ test('cleanup deletes expired receipt/capability/event metadata and old aggregat
   const f = fixture(); f.grant(); f.ledger.prepare({receiptId: ID, eventKey: EVENT, permitHash: PERMIT}, NOW + 1);
   f.ledger.cleanup(NOW + RETENTION_MS);
   assert.equal(f.sql.exec('SELECT * FROM receipts').length, 0);
-  assert.equal(f.sql.exec('SELECT * FROM daily_limits').length, 0); f.db.close();
+  assert.equal(f.sql.exec('SELECT * FROM daily_limits').length, 0);
+  const absent = f.ledger.revoke({receiptId: ID, capabilityHash: CAP}, NOW + RETENTION_MS + 1);
+  assert.equal(absent.state, 'absent');
+  assert.equal(absent.server_time, new Date(NOW + RETENTION_MS + 1).toISOString());
+  assert.deepEqual(Object.keys(absent).sort(), ['acknowledged_at','receipt_id','server_time','state']);
+  throwsCode(() => f.ledger.snapshot(ID, NOW + RETENTION_MS + 2), 'unknown_receipt');
+  throwsCode(() => f.ledger.prepare({receiptId: ID, eventKey: EVENT, permitHash: PERMIT},
+    NOW + RETENTION_MS + 2), 'unknown_receipt');
+  assert.equal(f.sql.exec('SELECT * FROM receipts').length, 0); f.db.close();
 });
 test('constant-time comparison rejects wrong lengths and types', () => {
   assert.equal(constantTimeEqual(CAP, CAP), true); assert.equal(constantTimeEqual(CAP, CAP + 'a'), false);
@@ -207,6 +218,29 @@ test('actual workerd SQLite grant/status/revoke roundtrip and private-token auth
   assert.equal(revoke.parsed.state, 'revoked'); assert.ok(revoke.parsed.acknowledged_at);
   const repeated = await call('revoke', {receipt_id: grant.receipt_id}, {capability: grant.revoke_capability});
   assert.equal(repeated.parsed.revision, revoke.parsed.revision);
+});
+test('actual workerd absent withdrawal requires valid browser schema and has no import authorization', async () => {
+  const receipt_id = 'Z'.repeat(43), capability = 'Y'.repeat(43);
+  const absent = await call('revoke', {receipt_id}, {capability});
+  assert.equal(absent.response.status, 200);
+  assert.deepEqual(Object.keys(absent.parsed).sort(), ['acknowledged_at','receipt_id','server_time','state']);
+  assert.equal(absent.parsed.receipt_id, receipt_id); assert.equal(absent.parsed.state, 'absent');
+  assert.ok(Number.isFinite(Date.parse(absent.parsed.acknowledged_at)));
+  assert.equal(absent.parsed.acknowledged_at, absent.parsed.server_time);
+  const status = await call('status', {receipt_id}, {importer: true});
+  assert.equal(status.response.status, 404); assert.equal(status.parsed.error, 'unknown_receipt');
+  const permit = await call('permit', {receipt_id, event_key: sha('absent')}, {importer: true});
+  assert.equal(permit.response.status, 404);
+  const missing = await call('revoke', {receipt_id}); assert.equal(missing.response.status, 401);
+  const malformed = await call('revoke', {receipt_id}, {capability: 'bad'});
+  assert.equal(malformed.response.status, 401);
+  const wrongOrigin = await call('revoke', {receipt_id}, {capability, headers: {Origin: 'https://evil.example'}});
+  assert.equal(wrongOrigin.response.status, 403);
+  const grant = await runtimeGrant();
+  const wrongExisting = await call('revoke', {receipt_id: grant.receipt_id}, {capability});
+  assert.equal(wrongExisting.response.status, 404);
+  const unchanged = await call('status', {receipt_id: grant.receipt_id}, {importer: true});
+  assert.equal(unchanged.parsed.state, 'granted');
 });
 test('actual workerd permits are consumed once and revoke-before-dispatch cancels eligibility', async () => {
   const grant = await runtimeGrant(); const event_key = sha('runtime-revoke-before-dispatch');
