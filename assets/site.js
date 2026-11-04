@@ -19,12 +19,7 @@
     })
   });
   const MATCHING_REVOKE_KEY = 'nickrae_ppl_measurement_withdrawal_v1';
-  const siteAssetVersion = (() => {
-    try {
-      const value = new URL(document.currentScript?.src || '', window.location.href).searchParams.get('v');
-      return /^[a-f0-9]{12}$/.test(value || '') ? value : '20261104';
-    } catch (_) { return '20261104'; }
-  })();
+  const matchingAssetVersion = 'a6234c7a4fc4';
   let confirmedSignupClient;
   let matchingExplicitAllowPending = false;
   // Deliberate, per-page QA only. This flag is never stored or forwarded, and
@@ -164,7 +159,7 @@
     const script = document.createElement('script');
     script.async = true;
     script.referrerPolicy = 'no-referrer';
-    script.src = `/assets/confirmed-signup.js?v=${siteAssetVersion}`;
+    script.src = `/assets/confirmed-signup.js?v=${matchingAssetVersion}`;
     script.onload = () => {
       if (confirmedSignupClient || !window.NickRaeConfirmedSignup?.create) return;
       confirmedSignupClient = window.NickRaeConfirmedSignup.create({

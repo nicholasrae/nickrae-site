@@ -121,6 +121,7 @@ async function test(name,fn) { await fn(); results.push(name); }
   });
   await test('A fresh acknowledged allow inserts exactly four fields before SDK FormData, never email or capability',async()=>{
     const e=environment();e.start();assert.equal(await e.client.choice('allow',true),true);
+    assert.equal(e.inputs.length,0); // Consent alone does not populate an idle form.
     const data=e.submit(), saved=JSON.parse(e.store.get(STORE));
     assert.equal(Object.keys(data).length,4);assert.equal(data['fields[nr_ads_gclid]'],CLICK);
     assert.equal(data['fields[nr_ads_campaign]'],CAMPAIGN);assert.equal(data['fields[nr_ads_submitted_at]'],'2026-11-04T20:00:00.000Z');

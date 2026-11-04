@@ -108,6 +108,8 @@ if __name__ == "__main__":
         for command in [
             [sys.executable, "scripts/check_site.py"],
             ["node", "scripts/test_measurement.cjs"],
+            ["node", "scripts/test_confirmed_matching.cjs"],
+            ["node", "scripts/test_confirmed_matching_bridge.cjs"],
             ["node", "scripts/test_preview_navigation.cjs"],
             ["node", "scripts/test_cloudflare_preview.cjs"],
             ["node", "scripts/test_cloudflare_pages_preview.cjs"],

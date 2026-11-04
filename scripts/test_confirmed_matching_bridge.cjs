@@ -1,5 +1,5 @@
 // Actual site.js bridge; no browser/provider/network session is used.
-const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const site=path.join(__dirname,'../assets/site.js'),source=fs.readFileSync(site,'utf8');
 const results=[];
 function fixture({origin='https://nickrae.net',choice='allow',search='?utm_source=google&utm_medium=cpc&utm_campaign=free_ppl_cards&utm_content=ppl_search_v1&gclid=Case_Sensitive-Gclid_QA0001'}={}) {
@@ -29,7 +29,8 @@ function fixture({origin='https://nickrae.net',choice='allow',search='?utm_sourc
 function test(name,fn) {fn();results.push(name);}
 test('Production loads only the versioned first-party matching library without forwarding private URL values',()=>{
   const e=fixture();e.win.bridgeTest.loadConfirmedSignupMatching();assert.equal(e.scripts.length,1);
-  assert.equal(e.scripts[0].src,'/assets/confirmed-signup.js?v=123456abcdef');assert.equal(e.scripts[0].referrerPolicy,'no-referrer');
+  const version=crypto.createHash('sha256').update(fs.readFileSync(path.join(__dirname,'../assets/confirmed-signup.js'))).digest('hex').slice(0,12);
+  assert.equal(e.scripts[0].src,'/assets/confirmed-signup.js?v='+version);assert.equal(e.scripts[0].referrerPolicy,'no-referrer');
   assert(!e.scripts[0].src.includes('gclid'));assert.equal(e.created.length,0);
 });
 test('Local, preview, www, insecure and port-bearing hosts do not bootstrap production matching',()=>{

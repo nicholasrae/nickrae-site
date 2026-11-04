@@ -3,7 +3,10 @@ Nick Rae PPL consent service — prepared, disabled by default
 Run tests from this directory with npm ci --no-audit --no-fund, then npm test.
 The dev dependency is the official pinned Miniflare4.20260730.0 package; tests
 execute the actual workerd Durable Object with SQLite and no external requests.
-Node25 is used for the separate node:sqlite core time/expiry cases.
+Node24 or later runs the separate node:sqlite core time/expiry cases. The site's
+.node-version pins the CI and Pages build runtime. These independent service
+tests run without credentials or external conversion requests; the production
+build separately validates the browser modules and Pages proxy.
 
 python3 bundle.py writes dist/consent-worker.bundle.mjs and its SHA256 manifest.
 This single file imports only the Workers builtin cloudflare:workers and can be
