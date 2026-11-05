@@ -55,7 +55,7 @@ const run = (file, incoming) => {
 let passed = 0;
 const test = (name, fn) => {fn(); passed++; console.log('PASS ' + name);};
 test('all public HTML is parsed and every existing navigation script is covered', () => {
-  assert.equal(Object.keys(pages).length, 53);
+  assert.equal(Object.keys(pages).length, 54);
   const actual = Object.entries(pages).filter(([, page]) => page.scripts.some(s => s.includes('window.location.replace'))).map(([file]) => file).sort();
   assert.deepEqual(actual, Object.keys({...indexRedirects, ...legacyRedirects}).sort());
 });
