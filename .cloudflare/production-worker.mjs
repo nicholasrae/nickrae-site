@@ -31,6 +31,11 @@ function responsePolicy(response, {candidate = false, target = null, status = re
     headers.set('Cache-Control', 'no-store');
   } else {
     if (own(policies.noindex, target)) headers.set('X-Robots-Tag', policies.noindex[target]);
+    // PDFs cannot declare an HTML canonical. Keep historic query links usable
+    // while consolidating this document's successful responses on one URL.
+    if (target === '/Nicholas_Rae_Flight_Resume.pdf' && (status < 300 || status === 304)) {
+      headers.append('Link', '<https://nickrae.net/Nicholas_Rae_Flight_Resume.pdf>; rel="canonical"');
+    }
     // HTML remains revalidatable rather than pinned across deployments. Leave
     // non-HTML assets on Pages' own deployment-aware caching policy; a stable
     // PDF or script filename must never acquire an immutable long lifetime.

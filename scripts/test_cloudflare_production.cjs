@@ -198,12 +198,33 @@ async function test(name, fn) {await fn(); passed++; console.log('PASS ' + name)
     for (const file of Object.keys(manifest.files).filter(name => name.endsWith('.pdf'))) {
       const url = '/' + file, body = bodies.get(url), response = await fetch(url), etag = response.headers.get('etag');
       assert.equal(response.headers.get('content-type'), 'application/pdf'); assert.equal(response.headers.get('cache-control'), assetCache); assert.equal(response.headers.get('x-robots-tag'), null);
+      assert.equal(response.headers.get('link'), url === '/Nicholas_Rae_Flight_Resume.pdf' ? '<https://nickrae.net/Nicholas_Rae_Flight_Resume.pdf>; rel="canonical"' : null);
       assert.deepEqual(Buffer.from(await response.arrayBuffer()), body);
       const head = await fetch(url, {method: 'HEAD'}); assert.equal(head.headers.get('content-length'), String(body.length)); assert.equal((await head.arrayBuffer()).byteLength, 0);
       const part = await fetch(url, {headers: {Range: 'bytes=0-31', 'If-Range': etag}}); assert.equal(part.status, 206); assert.equal(part.headers.get('cache-control'), assetCache); assert.deepEqual(Buffer.from(await part.arrayBuffer()), body.subarray(0, 32));
       const unchanged = await fetch(url, {headers: {'If-None-Match': etag}}); assert.equal(unchanged.status, 304); assert.equal(unchanged.headers.get('cache-control'), assetCache);
       const invalid = await fetch(url, {headers: {Range: 'bytes=999999999-'}}); assert.equal(invalid.status, 416); assert.equal(invalid.headers.get('cache-control'), 'no-store');
     }
+  });
+  await test('resume canonical covers old query links and successful PDF validators without changing access or bytes', async () => {
+    const file = '/Nicholas_Rae_Flight_Resume.pdf', body = bodies.get(file);
+    const canonical = '<https://nickrae.net/Nicholas_Rae_Flight_Resume.pdf>; rel="canonical"';
+    const etag = (await fetch(file)).headers.get('etag');
+    for (const suffix of ['', '?v=20261002-generic', '?analytics_test=1&v=20261002-generic']) {
+      for (const [init, status] of [[undefined, 200], [{method: 'HEAD'}, 200], [{headers: {Range: 'bytes=0-31', 'If-Range': etag}}, 206], [{headers: {'If-None-Match': etag}}, 304]]) {
+        const response = await fetch(file + suffix, init);
+        assert.equal(response.status, status); assert.equal(response.headers.get('link'), canonical);
+        assert.equal(response.headers.get('location'), null); assert.equal(response.headers.get('x-robots-tag'), null);
+        assert.equal(response.headers.get('cache-control'), assetCache); assert.equal(response.headers.get('etag'), etag);
+        const result = Buffer.from(await response.arrayBuffer());
+        assert.deepEqual(result, status === 304 || init?.method === 'HEAD' ? Buffer.alloc(0) : status === 206 ? body.subarray(0, 32) : body);
+      }
+    }
+    for (const [route, init] of [[file, {headers: {Range: 'bytes=999999999-'}}], [file, {method: 'POST'}], [file + '/missing', undefined], ['/', undefined]]) {
+      assert.equal((await fetch(route, init)).headers.get('link'), null);
+    }
+    const candidate = await fetch(file + '?v=20261002-generic', undefined, 'https://candidate.pages.dev');
+    candidateHeaders(candidate); assert.equal(candidate.headers.get('link'), null);
   });
   await test('source intentional noindex pages retain policy on aliases,HEAD and304 without changing content', async () => {
     assert.ok(Object.keys(production.intentionalNoindexPages).length >= 11);
