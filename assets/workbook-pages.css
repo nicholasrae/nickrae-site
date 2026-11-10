@@ -70,15 +70,18 @@ h1{font-size:clamp(2.25rem,4.9vw,4.15rem);line-height:1.04;letter-spacing:-.055e
 .source-note{margin-top:1.4rem!important;color:var(--dim);font-size:.8rem;line-height:1.7;max-width:900px}
 .preview-section{background:#0e1826;border-block:1px solid var(--border);padding:4rem 0}
 .preview-section h2{max-width:900px}
-.preview-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:2rem;align-items:start;margin-top:2rem}
+.preview-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:2rem;align-items:start;margin-top:2rem}
 .excerpt{margin:0;min-width:0}
 .excerpt>a{display:block;background:#fff;border-radius:.35rem;overflow:hidden;border:1px solid #dce6f4}
 .excerpt img{width:100%;height:auto}
 .excerpt figcaption{color:var(--muted);font-size:.78rem;margin-top:.7rem;line-height:1.6}
 .excerpt-wide{margin:1.7rem 0;max-width:960px}
+.sample-copy{min-width:0}
 .sample-copy h3{font-size:1.5rem;margin-bottom:.9rem;line-height:1.25}
 .sample-copy p{color:#cfdaea}
 .sample-copy .eyebrow{color:var(--accent)}
+.sample-copy ol{padding-inline-start:1.5rem}
+.sample-copy li+li{margin-top:.65rem}
 blockquote{margin:1rem 0;padding:.7rem 0 .7rem 1.2rem;border-left:3px solid var(--accent);font-size:1.04rem;color:#e6eef9}
 blockquote p+p{margin-top:.7rem}
 .sample-details{border-block-start:1px solid #4d627e;padding:.6rem 0;margin:1.3rem 0}
@@ -89,6 +92,7 @@ blockquote p+p{margin-top:.7rem}
 .sample-details li+li{margin-top:.6rem}
 .sample-details .excerpt{margin-top:1rem}
 .sample-details .small{font-size:.83rem}
+.preview-grid>.sample-original{min-width:0;width:100%;margin:0}
 .preview-guide{max-width:820px}
 .preview-guide>ol{padding-left:1.5rem;margin:1.5rem 0}
 .preview-guide li+li{margin-top:.65rem}
@@ -138,7 +142,7 @@ blockquote p+p{margin-top:.7rem}
  .section-lede{font-size:1.04rem}
  .preview-section,.formats-section{padding:3rem 0}
  .preview-grid{grid-template-columns:minmax(0,1fr);gap:1.5rem}
- .preview-grid>.excerpt{max-width:520px;margin-inline:auto;width:100%}
+ .preview-grid>.excerpt,.preview-grid>.sample-original{max-width:520px;margin-inline:auto;width:100%}
  .resource-inline{grid-template-columns:minmax(0,1fr);gap:1.3rem}
  .resource-inline>.button{justify-self:start}
  .related-links{grid-template-columns:minmax(0,1fr);gap:0}
