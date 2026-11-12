@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Illuminating the Word | Large-Print Bible Word Searches</title>
+  <meta name="description" content="Explore the life and teachings of Jesus with 100 large-print Bible word searches by Nick Rae. Try a sample puzzle from the paperback.">
+  <link rel="canonical" href="https://nickrae.net/illuminating-the-word/">
+  <meta property="og:type" content="book">
+  <meta property="og:title" content="Illuminating the Word">
+  <meta property="og:description" content="Try a sample from Nick Rae’s collection of 100 large-print word searches inspired by the life and teachings of Jesus.">
+  <meta property="og:url" content="https://nickrae.net/illuminating-the-word/">
+  <meta property="og:image" content="https://nickrae.net/assets/apps-books/illuminating-the-word-cover.avif">
+  <meta property="og:image:width" content="807">
+  <meta property="og:image:height" content="1044">
+  <meta property="og:image:alt" content="Illuminating the Word paperback cover">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@nickrae">
+  <meta name="twitter:image" content="https://nickrae.net/assets/apps-books/illuminating-the-word-cover.avif">
+  <meta name="twitter:image:alt" content="Illuminating the Word paperback cover">
+  <meta name="theme-color" content="#080d16">
+  <link rel="icon" href="/favicon.ico?v=20261028" sizes="any">
+  <link rel="icon" href="/assets/favicon-20261028.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon-20261028.png" sizes="180x180">
+  <link rel="stylesheet" href="/assets/site-header.css?v=cfa7dd33f4fe">
+  <link rel="stylesheet" href="/assets/navigation.css?v=f1cfabdf97b4">
+  <script>document.documentElement.classList.add('js-nav');</script>
+  <script src="/assets/site.js?v=4f68a1d88366" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "@id": "https://nickrae.net/illuminating-the-word/#book",
+    "name": "Illuminating the Word",
+    "author": {
+      "@type": "Person",
+      "@id": "https://nickrae.net/#person",
+      "name": "Nick Rae",
+      "url": "https://nickrae.net/"
+    },
+    "bookFormat": "https://schema.org/Paperback",
+    "isbn": "9798313415161",
+    "numberOfPages": 122,
+    "datePublished": "2025-03-08",
+    "inLanguage": "en",
+    "url": "https://nickrae.net/illuminating-the-word/",
+    "image": "https://nickrae.net/assets/apps-books/illuminating-the-word-cover.avif",
+    "sameAs": "https://www.amazon.com/dp/B0DZY4C98F",
+    "description": "100 large-print word searches inspired by the life and teachings of Jesus."
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080d16;
+      --text: #d1d9e6;
+      --muted: #afbdd0;
+      --paper: #faf4e8;
+      --gold: #e8cb8f;
+      --rule: #334055;
+      --ink: #25231e;
+      --serif: Georgia, "Times New Roman", serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 1rem/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: #c0dbff; text-underline-offset: .2em; }
+    :is(a, button, summary):focus-visible { outline: 3px solid #fbbf24; outline-offset: 4px; }
+    .skip {
+      position: fixed;
+      z-index: 200;
+      top: 1rem;
+      left: 1rem;
+      padding: .6rem 1rem;
+      transform: translateY(-200%);
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .skip:focus { transform: none; }
+    .book-page {
+      width: min(1080px, calc(100% - 2rem));
+      margin-inline: auto;
+      padding-block: clamp(2rem, 5vw, 4.5rem) 3rem;
+    }
+    .book-page section + section { margin-top: clamp(2.75rem, 6vw, 5rem); }
+    .book-page h1, .book-page h2, .puzzle-sheet h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .book-page h1, .book-page h2 { color: var(--paper); letter-spacing: -.035em; }
+    .book-page h1 { font-size: clamp(2.6rem, 6vw, 5rem); }
+    .book-page h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+    .book-page p { margin: .8rem 0; }
+    .book-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .book-page .eyebrow {
+      margin: 0 0 .75rem;
+      color: var(--gold);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .book-subtitle { color: var(--gold); font: 1.35rem/1.35 var(--serif); }
+    .book-intro { max-width: 50ch; color: var(--muted); font-size: 1.1rem; }
+    .book-cover {
+      display: block;
+      width: min(100%, 320px);
+      height: auto;
+      margin-inline: auto;
+      border-radius: .2rem;
+      box-shadow: 0 1rem 3rem #0007;
+    }
+    .book-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem 1.2rem;
+      margin: 1.2rem 0;
+      padding: 0;
+      color: var(--muted);
+      font-size: .95rem;
+      list-style: none;
+    }
+    .book-actions { display: flex; flex-wrap: wrap; gap: .65rem; }
+    .book-action {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      gap: .3em;
+      padding: .55rem .95rem;
+      border: 1px solid var(--rule);
+      border-radius: .35rem;
+      color: var(--paper);
+      font-size: .94rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .book-action:hover { text-decoration: underline; }
+    .book-action.amazon { border-color: var(--gold); background: var(--gold); color: var(--ink); }
+    .puzzle-section { scroll-margin-top: 5.5rem; }
+    .puzzle-sheet {
+      margin-top: 1.2rem;
+      padding: clamp(.85rem, 3vw, 1.8rem);
+      border-radius: .7rem;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .puzzle-sheet h3 { font-size: 1.65rem; }
+    .puzzle-note { font-size: .9rem; color: #564b3a; }
+    .puzzle-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      gap: clamp(1rem, 3vw, 2rem);
+      align-items: start;
+    }
+    .word-bank {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .25rem .75rem;
+      margin: .5rem 0 1rem;
+      padding: 0;
+      list-style: none;
+      font-size: .9rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+    .letter-grid {
+      width: 100%;
+      max-width: 34rem;
+      margin-inline: auto;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font: 700 clamp(.72rem, 3.2vw, 1.12rem)/1 ui-monospace, Menlo, monospace;
+      text-align: center;
+    }
+    .letter-grid caption { margin-bottom: .5rem; font: 650 .86rem/1.4 system-ui, sans-serif; }
+    .letter-grid th { color: #564b3a; font-size: .72em; font-weight: 600; }
+    .letter-grid td {
+      height: clamp(1rem, 4.1vw, 1.75rem);
+      padding: 0;
+      border: 1px solid #dfd3be;
+      background: #fffcf4;
+    }
+    .letter-grid .found { background: #efd397; }
+    .letter-grid mark { background: transparent; color: inherit; }
+    .solution { margin-top: 1.2rem; border-top: 1px solid #bdb19e; }
+    .solution summary { min-height: 44px; padding: .7rem 0; cursor: pointer; font-weight: 700; }
+    .solution summary:focus-visible { outline-color: #87531a; }
+    .solution-list { margin: .75rem 0; padding-left: 1.2rem; font-size: .9rem; }
+    .purchase {
+      padding: 1.25rem;
+      border: 1px solid var(--rule);
+      border-radius: .6rem;
+      background: #111a29;
+    }
+    .purchase p { max-width: 64ch; color: var(--muted); }
+    .book-footer { padding: 1.4rem 1rem; border-top: 1px solid var(--rule); text-align: center; color: var(--muted); }
+    @media (max-width: 740px) {
+      .book-hero, .puzzle-layout { grid-template-columns: minmax(0, 1fr); }
+      .book-cover { width: min(74%, 270px); }
+    }
+    @media (max-width: 390px) { .book-action { width: 100%; } }
+  </style>
+</head>
+<body data-page="illuminating-the-word">
+  <a class="skip" href="#main-content">Skip to main content</a>
+  <nav class="site-header" aria-label="Primary navigation">
+    <div class="inner">
+      <a class="logo" href="/">NICK RAE</a>
+      <button class="menu-toggle" type="button" aria-label="Navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="/">Home</a>
+        <a href="/aviation-workbooks/">Pilot Workbooks</a>
+        <a href="/blog/">Pilot Notes</a>
+        <a href="/ifr-scenario-pack/">Free IFR Pack</a>
+        <a href="/apps-books/">Apps &amp; Books</a>
+        <a href="/about/">About</a>
+        <a href="/#connect">Connect</a>
+      </div>
+    </div>
+  </nav>
+  <main class="book-page" id="main-content" tabindex="-1">
+    <section class="book-hero" aria-labelledby="book-title">
+      <div>
+        <p class="eyebrow">Paperback by Nick Rae</p>
+        <h1 id="book-title">Illuminating the Word</h1>
+        <p class="book-subtitle">100 Large-Print Bible Word Searches</p>
+        <p class="book-intro">Explore the life and teachings of Jesus through word searches inspired by his miracles, parables, and messages. Try one of the paperback’s puzzles below.</p>
+        <ul class="book-facts" aria-label="Book details">
+          <li>100 puzzles</li>
+          <li>122 pages</li>
+          <li>8.5 × 11 inches</li>
+        </ul>
+        <div class="book-actions">
+          <a class="book-action amazon" href="https://www.amazon.com/dp/B0DZY4C98F" data-product="illuminating_the_word" data-placement="illuminating-hero">Paperback on Amazon <span aria-hidden="true">↗</span></a>
+          <a class="book-action" href="#sample-puzzle">Try a sample puzzle</a>
+        </div>
+      </div>
+      <img class="book-cover" src="/assets/apps-books/illuminating-the-word-cover.avif" width="807" height="1044" alt="Illuminating the Word paperback cover with an illustration of Jesus carrying the cross." fetchpriority="high" decoding="async">
+    </section>
+
+    <section class="puzzle-section" id="sample-puzzle" aria-labelledby="sample-heading">
+      <h2 id="sample-heading">Try a sample puzzle</h2>
+      <div class="puzzle-sheet">
+        <h3>Stable Setting</h3>
+        <p class="puzzle-note">Puzzle 1 from the paperback</p>
+        <div class="puzzle-layout">
+          <div>
+            <p>Find all 18 words in the grid. They can run horizontally, vertically, or diagonally in either direction and can share letters.</p>
+            <strong>Word bank</strong>
+            <ul class="word-bank" role="list">
+              <li>NATIVITY</li>
+              <li>BETHLEHEM</li>
+              <li>MESSIAH</li>
+              <li>MARY</li>
+              <li>WISEMEN</li>
+              <li>SAVIOR</li>
+              <li>GOLD</li>
+              <li>FRANKINCENSE</li>
+              <li>PEACE</li>
+              <li>MYRRH</li>
+              <li>SHEPHERDS</li>
+              <li>SWADDLING</li>
+              <li>INNKEEPER</li>
+              <li>JOURNEY</li>
+              <li>HUMBLE</li>
+              <li>HOLY</li>
+              <li>MANGER</li>
+              <li>DONKEY</li>
+            </ul>
+          </div>
+          <table class="letter-grid">
+            <caption>Stable Setting word-search grid</caption>
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th><th scope="col">F</th>
+                <th scope="col">G</th><th scope="col">H</th><th scope="col">I</th><th scope="col">J</th><th scope="col">K</th><th scope="col">L</th>
+                <th scope="col">M</th><th scope="col">N</th><th scope="col">O</th><th scope="col">P</th><th scope="col">Q</th><th scope="col">R</th>
+                <th scope="col">S</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>V</td><td>D</td><td>Y</td><td>L</td><td>O</td><td>H</td>
+                <td>V</td><td>O</td><td>C</td><td>N</td><td>M</td><td>F</td>
+                <td>W</td><td>S</td><td>Y</td><td>Q</td><td>Q</td><td>J</td>
+                <td>O</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>D</td><td>B</td><td>E</td><td>T</td><td>H</td><td>L</td>
+                <td>E</td><td>H</td><td>E</td><td>M</td><td>R</td><td>Z</td>
+                <td>Z</td><td>D</td><td>H</td><td>Y</td><td>J</td><td>F</td>
+                <td>X</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>J</td><td>L</td><td>W</td><td>H</td><td>R</td><td>R</td>
+                <td>Y</td><td>M</td><td>O</td><td>A</td><td>U</td><td>Q</td>
+                <td>W</td><td>R</td><td>Z</td><td>Y</td><td>A</td><td>O</td>
+                <td>I</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>G</td><td>M</td><td>O</td><td>V</td><td>R</td><td>P</td>
+                <td>Y</td><td>C</td><td>N</td><td>M</td><td>X</td><td>F</td>
+                <td>U</td><td>E</td><td>O</td><td>T</td><td>T</td><td>D</td>
+                <td>Q</td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>E</td><td>L</td><td>Y</td><td>G</td><td>G</td><td>W</td>
+                <td>F</td><td>K</td><td>Z</td><td>M</td><td>A</td><td>N</td>
+                <td>A</td><td>H</td><td>Z</td><td>I</td><td>Y</td><td>P</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <th scope="row">6</th>
+                <td>L</td><td>Y</td><td>G</td><td>N</td><td>L</td><td>H</td>
+                <td>I</td><td>G</td><td>Q</td><td>J</td><td>D</td><td>O</td>
+                <td>W</td><td>P</td><td>R</td><td>V</td><td>J</td><td>B</td>
+                <td>E</td>
+              </tr>
+              <tr>
+                <th scope="row">7</th>
+                <td>B</td><td>L</td><td>M</td><td>Z</td><td>C</td><td>N</td>
+                <td>V</td><td>S</td><td>N</td><td>D</td><td>K</td><td>E</td>
+                <td>E</td><td>E</td><td>E</td><td>I</td><td>X</td><td>T</td>
+                <td>V</td>
+              </tr>
+              <tr>
+                <th scope="row">8</th>
+                <td>M</td><td>P</td><td>W</td><td>F</td><td>C</td><td>Y</td>
+                <td>V</td><td>S</td><td>E</td><td>I</td><td>Q</td><td>J</td>
+                <td>C</td><td>H</td><td>G</td><td>T</td><td>N</td><td>R</td>
+                <td>S</td>
+              </tr>
+              <tr>
+                <th scope="row">9</th>
+                <td>U</td><td>J</td><td>H</td><td>E</td><td>D</td><td>U</td>
+                <td>M</td><td>X</td><td>B</td><td>M</td><td>L</td><td>W</td>
+                <td>E</td><td>S</td><td>N</td><td>A</td><td>U</td><td>A</td>
+                <td>O</td>
+              </tr>
+              <tr>
+                <th scope="row">10</th>
+                <td>H</td><td>O</td><td>N</td><td>X</td><td>E</td><td>S</td>
+                <td>V</td><td>E</td><td>V</td><td>U</td><td>E</td><td>D</td>
+                <td>I</td><td>U</td><td>A</td><td>N</td><td>Q</td><td>S</td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <th scope="row">11</th>
+                <td>U</td><td>S</td><td>E</td><td>F</td><td>T</td><td>A</td>
+                <td>E</td><td>S</td><td>R</td><td>J</td><td>C</td><td>N</td>
+                <td>D</td><td>Y</td><td>M</td><td>V</td><td>H</td><td>T</td>
+                <td>E</td>
+              </tr>
+              <tr>
+                <th scope="row">12</th>
+                <td>E</td><td>O</td><td>Z</td><td>P</td><td>Q</td><td>V</td>
+                <td>S</td><td>H</td><td>W</td><td>X</td><td>O</td><td>Q</td>
+                <td>M</td><td>A</td><td>U</td><td>V</td><td>Q</td><td>K</td>
+                <td>S</td>
+              </tr>
+              <tr>
+                <th scope="row">13</th>
+                <td>Y</td><td>X</td><td>O</td><td>E</td><td>V</td><td>I</td>
+                <td>E</td><td>G</td><td>T</td><td>I</td><td>Y</td><td>U</td>
+                <td>A</td><td>S</td><td>W</td><td>O</td><td>J</td><td>P</td>
+                <td>S</td>
+              </tr>
+              <tr>
+                <th scope="row">14</th>
+                <td>E</td><td>G</td><td>D</td><td>A</td><td>X</td><td>O</td>
+                <td>D</td><td>M</td><td>S</td><td>C</td><td>T</td><td>G</td>
+                <td>R</td><td>D</td><td>P</td><td>S</td><td>V</td><td>O</td>
+                <td>I</td>
+              </tr>
+              <tr>
+                <th scope="row">15</th>
+                <td>K</td><td>D</td><td>M</td><td>C</td><td>M</td><td>R</td>
+                <td>X</td><td>A</td><td>Y</td><td>Y</td><td>N</td><td>V</td>
+                <td>Y</td><td>N</td><td>V</td><td>P</td><td>X</td><td>N</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <th scope="row">16</th>
+                <td>N</td><td>W</td><td>E</td><td>E</td><td>M</td><td>J</td>
+                <td>B</td><td>Z</td><td>Q</td><td>A</td><td>L</td><td>D</td>
+                <td>Y</td><td>T</td><td>E</td><td>D</td><td>C</td><td>T</td>
+                <td>H</td>
+              </tr>
+              <tr>
+                <th scope="row">17</th>
+                <td>O</td><td>X</td><td>D</td><td>U</td><td>Y</td><td>Z</td>
+                <td>P</td><td>C</td><td>G</td><td>W</td><td>A</td><td>S</td>
+                <td>Q</td><td>L</td><td>C</td><td>Y</td><td>L</td><td>I</td>
+                <td>I</td>
+              </tr>
+              <tr>
+                <th scope="row">18</th>
+                <td>D</td><td>F</td><td>Z</td><td>V</td><td>X</td><td>I</td>
+                <td>N</td><td>N</td><td>K</td><td>E</td><td>E</td><td>P</td>
+                <td>E</td><td>R</td><td>H</td><td>X</td><td>B</td><td>Q</td>
+                <td>F</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <details class="solution">
+          <summary>Reveal the solution</summary>
+          <div class="puzzle-layout">
+            <div>
+              <p>Each pair gives the first and last letter of the word. For example, P10 is column P, row 10.</p>
+              <ul class="solution-list">
+                <li><strong>NATIVITY</strong> · P10 to P3</li>
+                <li><strong>BETHLEHEM</strong> · B2 to J2</li>
+                <li><strong>MESSIAH</strong> · S10 to S16</li>
+                <li><strong>MARY</strong> · M12 to M15</li>
+                <li><strong>WISEMEN</strong> · F5 to L11</li>
+                <li><strong>SAVIOR</strong> · F10 to F15</li>
+                <li><strong>GOLD</strong> · D5 to A2</li>
+                <li><strong>FRANKINCENSE</strong> · L1 to A12</li>
+                <li><strong>PEACE</strong> · D12 to D16</li>
+                <li><strong>MYRRH</strong> · H3 to D3</li>
+                <li><strong>SHEPHERDS</strong> · N9 to N1</li>
+                <li><strong>SWADDLING</strong> · P14 to H6</li>
+                <li><strong>INNKEEPER</strong> · F18 to N18</li>
+                <li><strong>JOURNEY</strong> · J11 to P17</li>
+                <li><strong>HUMBLE</strong> · A10 to A5</li>
+                <li><strong>HOLY</strong> · F1 to C1</li>
+                <li><strong>MANGER</strong> · O11 to O6</li>
+                <li><strong>DONKEY</strong> · A18 to A13</li>
+              </ul>
+            </div>
+            <table class="letter-grid">
+              <caption>Marked solution grid</caption>
+              <thead>
+                <tr>
+                  <td></td>
+                  <th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th><th scope="col">E</th><th scope="col">F</th>
+                  <th scope="col">G</th><th scope="col">H</th><th scope="col">I</th><th scope="col">J</th><th scope="col">K</th><th scope="col">L</th>
+                  <th scope="col">M</th><th scope="col">N</th><th scope="col">O</th><th scope="col">P</th><th scope="col">Q</th><th scope="col">R</th>
+                  <th scope="col">S</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>V</td><td>D</td><td class="found"><mark>Y</mark></td><td class="found"><mark>L</mark></td><td class="found"><mark>O</mark></td><td class="found"><mark>H</mark></td>
+                  <td>V</td><td>O</td><td>C</td><td>N</td><td>M</td><td class="found"><mark>F</mark></td>
+                  <td>W</td><td class="found"><mark>S</mark></td><td>Y</td><td>Q</td><td>Q</td><td>J</td>
+                  <td>O</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td class="found"><mark>D</mark></td><td class="found"><mark>B</mark></td><td class="found"><mark>E</mark></td><td class="found"><mark>T</mark></td><td class="found"><mark>H</mark></td><td class="found"><mark>L</mark></td>
+                  <td class="found"><mark>E</mark></td><td class="found"><mark>H</mark></td><td class="found"><mark>E</mark></td><td class="found"><mark>M</mark></td><td class="found"><mark>R</mark></td><td>Z</td>
+                  <td>Z</td><td class="found"><mark>D</mark></td><td>H</td><td>Y</td><td>J</td><td>F</td>
+                  <td>X</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>J</td><td class="found"><mark>L</mark></td><td>W</td><td class="found"><mark>H</mark></td><td class="found"><mark>R</mark></td><td class="found"><mark>R</mark></td>
+                  <td class="found"><mark>Y</mark></td><td class="found"><mark>M</mark></td><td>O</td><td class="found"><mark>A</mark></td><td>U</td><td>Q</td>
+                  <td>W</td><td class="found"><mark>R</mark></td><td>Z</td><td class="found"><mark>Y</mark></td><td>A</td><td>O</td>
+                  <td>I</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>G</td><td>M</td><td class="found"><mark>O</mark></td><td>V</td><td>R</td><td>P</td>
+                  <td>Y</td><td>C</td><td class="found"><mark>N</mark></td><td>M</td><td>X</td><td>F</td>
+                  <td>U</td><td class="found"><mark>E</mark></td><td>O</td><td class="found"><mark>T</mark></td><td>T</td><td>D</td>
+                  <td>Q</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td class="found"><mark>E</mark></td><td>L</td><td>Y</td><td class="found"><mark>G</mark></td><td>G</td><td class="found"><mark>W</mark></td>
+                  <td>F</td><td class="found"><mark>K</mark></td><td>Z</td><td>M</td><td>A</td><td>N</td>
+                  <td>A</td><td class="found"><mark>H</mark></td><td>Z</td><td class="found"><mark>I</mark></td><td>Y</td><td>P</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td class="found"><mark>L</mark></td><td>Y</td><td>G</td><td>N</td><td>L</td><td>H</td>
+                  <td class="found"><mark>I</mark></td><td class="found"><mark>G</mark></td><td>Q</td><td>J</td><td>D</td><td>O</td>
+                  <td>W</td><td class="found"><mark>P</mark></td><td class="found"><mark>R</mark></td><td class="found"><mark>V</mark></td><td>J</td><td>B</td>
+                  <td>E</td>
+                </tr>
+                <tr>
+                  <th scope="row">7</th>
+                  <td class="found"><mark>B</mark></td><td>L</td><td>M</td><td>Z</td><td>C</td><td class="found"><mark>N</mark></td>
+                  <td>V</td><td class="found"><mark>S</mark></td><td class="found"><mark>N</mark></td><td>D</td><td>K</td><td>E</td>
+                  <td>E</td><td class="found"><mark>E</mark></td><td class="found"><mark>E</mark></td><td class="found"><mark>I</mark></td><td>X</td><td>T</td>
+                  <td>V</td>
+                </tr>
+                <tr>
+                  <th scope="row">8</th>
+                  <td class="found"><mark>M</mark></td><td>P</td><td>W</td><td>F</td><td class="found"><mark>C</mark></td><td>Y</td>
+                  <td>V</td><td>S</td><td class="found"><mark>E</mark></td><td class="found"><mark>I</mark></td><td>Q</td><td>J</td>
+                  <td>C</td><td class="found"><mark>H</mark></td><td class="found"><mark>G</mark></td><td class="found"><mark>T</mark></td><td>N</td><td>R</td>
+                  <td>S</td>
+                </tr>
+                <tr>
+                  <th scope="row">9</th>
+                  <td class="found"><mark>U</mark></td><td>J</td><td>H</td><td class="found"><mark>E</mark></td><td>D</td><td>U</td>
+                  <td>M</td><td>X</td><td>B</td><td class="found"><mark>M</mark></td><td class="found"><mark>L</mark></td><td>W</td>
+                  <td>E</td><td class="found"><mark>S</mark></td><td class="found"><mark>N</mark></td><td class="found"><mark>A</mark></td><td>U</td><td>A</td>
+                  <td>O</td>
+                </tr>
+                <tr>
+                  <th scope="row">10</th>
+                  <td class="found"><mark>H</mark></td><td>O</td><td class="found"><mark>N</mark></td><td>X</td><td>E</td><td class="found"><mark>S</mark></td>
+                  <td>V</td><td>E</td><td>V</td><td>U</td><td class="found"><mark>E</mark></td><td class="found"><mark>D</mark></td>
+                  <td>I</td><td>U</td><td class="found"><mark>A</mark></td><td class="found"><mark>N</mark></td><td>Q</td><td>S</td>
+                  <td class="found"><mark>M</mark></td>
+                </tr>
+                <tr>
+                  <th scope="row">11</th>
+                  <td>U</td><td class="found"><mark>S</mark></td><td>E</td><td>F</td><td>T</td><td class="found"><mark>A</mark></td>
+                  <td>E</td><td>S</td><td>R</td><td class="found"><mark>J</mark></td><td>C</td><td class="found"><mark>N</mark></td>
+                  <td class="found"><mark>D</mark></td><td>Y</td><td class="found"><mark>M</mark></td><td>V</td><td>H</td><td>T</td>
+                  <td class="found"><mark>E</mark></td>
+                </tr>
+                <tr>
+                  <th scope="row">12</th>
+                  <td class="found"><mark>E</mark></td><td>O</td><td>Z</td><td class="found"><mark>P</mark></td><td>Q</td><td class="found"><mark>V</mark></td>
+                  <td>S</td><td>H</td><td>W</td><td>X</td><td class="found"><mark>O</mark></td><td>Q</td>
+                  <td class="found"><mark>M</mark></td><td class="found"><mark>A</mark></td><td>U</td><td>V</td><td>Q</td><td>K</td>
+                  <td class="found"><mark>S</mark></td>
+                </tr>
+                <tr>
+                  <th scope="row">13</th>
+                  <td class="found"><mark>Y</mark></td><td>X</td><td>O</td><td class="found"><mark>E</mark></td><td>V</td><td class="found"><mark>I</mark></td>
+                  <td>E</td><td>G</td><td>T</td><td>I</td><td>Y</td><td class="found"><mark>U</mark></td>
+                  <td class="found"><mark>A</mark></td><td>S</td><td class="found"><mark>W</mark></td><td>O</td><td>J</td><td>P</td>
+                  <td class="found"><mark>S</mark></td>
+                </tr>
+                <tr>
+                  <th scope="row">14</th>
+                  <td class="found"><mark>E</mark></td><td>G</td><td>D</td><td class="found"><mark>A</mark></td><td>X</td><td class="found"><mark>O</mark></td>
+                  <td>D</td><td>M</td><td>S</td><td>C</td><td>T</td><td>G</td>
+                  <td class="found"><mark>R</mark></td><td>D</td><td>P</td><td class="found"><mark>S</mark></td><td>V</td><td>O</td>
+                  <td class="found"><mark>I</mark></td>
+                </tr>
+                <tr>
+                  <th scope="row">15</th>
+                  <td class="found"><mark>K</mark></td><td>D</td><td>M</td><td class="found"><mark>C</mark></td><td>M</td><td class="found"><mark>R</mark></td>
+                  <td>X</td><td>A</td><td>Y</td><td>Y</td><td>N</td><td>V</td>
+                  <td class="found"><mark>Y</mark></td><td class="found"><mark>N</mark></td><td>V</td><td>P</td><td>X</td><td>N</td>
+                  <td class="found"><mark>A</mark></td>
+                </tr>
+                <tr>
+                  <th scope="row">16</th>
+                  <td class="found"><mark>N</mark></td><td>W</td><td>E</td><td class="found"><mark>E</mark></td><td>M</td><td>J</td>
+                  <td>B</td><td>Z</td><td>Q</td><td>A</td><td>L</td><td>D</td>
+                  <td>Y</td><td>T</td><td class="found"><mark>E</mark></td><td>D</td><td>C</td><td>T</td>
+                  <td class="found"><mark>H</mark></td>
+                </tr>
+                <tr>
+                  <th scope="row">17</th>
+                  <td class="found"><mark>O</mark></td><td>X</td><td>D</td><td>U</td><td>Y</td><td>Z</td>
+                  <td>P</td><td>C</td><td>G</td><td>W</td><td>A</td><td>S</td>
+                  <td>Q</td><td>L</td><td>C</td><td class="found"><mark>Y</mark></td><td>L</td><td>I</td>
+                  <td>I</td>
+                </tr>
+                <tr>
+                  <th scope="row">18</th>
+                  <td class="found"><mark>D</mark></td><td>F</td><td>Z</td><td>V</td><td>X</td><td class="found"><mark>I</mark></td>
+                  <td class="found"><mark>N</mark></td><td class="found"><mark>N</mark></td><td class="found"><mark>K</mark></td><td class="found"><mark>E</mark></td><td class="found"><mark>E</mark></td><td class="found"><mark>P</mark></td>
+                  <td class="found"><mark>E</mark></td><td class="found"><mark>R</mark></td><td>H</td><td>X</td><td>B</td><td>Q</td>
+                  <td>F</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="purchase" aria-labelledby="purchase-heading">
+      <h2 id="purchase-heading">Get the paperback</h2>
+      <p>The paperback collects all 100 large-print puzzles and their answer keys. ISBN 9798313415161.</p>
+      <div class="book-actions">
+        <a class="book-action amazon" href="https://www.amazon.com/dp/B0DZY4C98F" data-product="illuminating_the_word" data-placement="illuminating-footer">Paperback on Amazon <span aria-hidden="true">↗</span></a>
+        <a class="book-action" href="/apps-books/#word-searches">Browse word-search books</a>
+      </div>
+    </section>
+  </main>
+  <footer class="book-footer">© 2026 Nick Rae · <a href="/apps-books/">Apps &amp; Books</a> · <a href="/about/">About Nick</a></footer>
+</body>
+</html>
