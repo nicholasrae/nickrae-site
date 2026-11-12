@@ -23,9 +23,9 @@ for name in manifest['files']:
         'refreshes':[m.attrs.get('content','') for m in page.refreshes],
         'canonical':page.canonical,
     }
-print(json.dumps(pages))
+print(json.dumps({'htmlFiles': manifest['htmlFiles'], 'pages': pages}))
 `;
-const pages = JSON.parse(execFileSync('python3', ['-c', extract], {cwd: root, encoding: 'utf8'}));
+const {htmlFiles, pages} = JSON.parse(execFileSync('python3', ['-c', extract], {cwd: root, encoding: 'utf8'}));
 const indexRedirects = {
   'index.html': '/',
   'aviation-workbooks/index.html': '/aviation-workbooks/',
@@ -55,7 +55,7 @@ const run = (file, incoming) => {
 let passed = 0;
 const test = (name, fn) => {fn(); passed++; console.log('PASS ' + name);};
 test('all public HTML is parsed and every existing navigation script is covered', () => {
-  assert.equal(Object.keys(pages).length, 54);
+  assert.equal(Object.keys(pages).length, htmlFiles);
   const actual = Object.entries(pages).filter(([, page]) => page.scripts.some(s => s.includes('window.location.replace'))).map(([file]) => file).sort();
   assert.deepEqual(actual, Object.keys({...indexRedirects, ...legacyRedirects}).sort());
 });
