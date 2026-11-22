@@ -748,7 +748,7 @@ test('Exact production QA marker labels config before pageview and every event, 
     const e=environment({origin,search:'?analytics_test=1&email=secret%40example.com'});
     e.window.testAPI.attachGlobalTracking();e.window.NickRaePrivacy.allow();
     assert.equal(e.scripts.length,1);
-    assert.equal(new URL(e.scripts[0].src).searchParams.get('id'),TEST_GA4_ID);
+    assert.equal(new URL(e.scripts[0].src).searchParams.get('id'),'GT-KVHN76SW');
     assert.deepEqual(e.commands('config').map(x=>x[1]),[TEST_GA4_ID]);
     const queue=Array.from(e.window.dataLayer),setIndex=queue.findIndex(x=>x[0]==='set'),configIndex=queue.findIndex(x=>x[0]==='config'),viewIndex=queue.findIndex(x=>x[0]==='event');
     assert(setIndex<configIndex&&configIndex<viewIndex);

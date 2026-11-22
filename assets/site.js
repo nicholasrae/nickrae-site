@@ -2,6 +2,8 @@
   'use strict';
 
   const TAG_ID = 'AW-18126210838';
+  // Google serves the shared tag by this ID. QA configures only the GA4 destination.
+  const GOOGLE_TAG_ID = 'GT-KVHN76SW';
   // Set only after the production web stream and its Measurement ID are verified.
   const GA4_ID = 'G-VLXK9FKZ0R';
   const ga4Configured = typeof GA4_ID === 'string' && /^G-[A-Z0-9]+$/.test(GA4_ID);
@@ -468,7 +470,7 @@
     if (!analyticsScript) {
       analyticsScript = document.createElement('script');
       analyticsScript.async = true;
-      analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(testTraffic ? GA4_ID : TAG_ID)}`;
+      analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(testTraffic ? GOOGLE_TAG_ID : TAG_ID)}`;
       analyticsScript.onload = () => {
         analyticsLoaded = true;
         activateMeasurement();
