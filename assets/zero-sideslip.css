@@ -1,0 +1,40 @@
+.sideslip {
+  margin-block: 2.5rem;
+  border-block: 1px solid #41566e;
+  padding-block: clamp(1.4rem, 3vw, 2.4rem);
+}
+#zero-sideslip {scroll-margin-top: 5rem;}
+.sideslip h3 {font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2;}
+.sideslip-intro {max-width: 72ch; margin: .6rem 0 1rem; color: #d8e3ea;}
+.sideslip-tools {display: flex; align-items: center; flex-wrap: wrap; gap: .45rem 1rem; margin-bottom: .8rem;}
+.sideslip button {
+  min-height: 44px; padding: .45rem .9rem; border-radius: .35rem; cursor: pointer;
+  font: inherit; font-weight: 650; color: #edf5fa; background: #14263a; border: 1px solid #55718c;
+}
+.sideslip button:hover, .sideslip button[aria-pressed="true"] {background: #24425c; border-color: #a7cae4;}
+.sideslip button:disabled {cursor: progress;}
+.sideslip #sideslip-toggle {color: #0c1924; background: #c6e1eb; border-color: #c6e1eb;}
+.sideslip [hidden] {display: none !important;}
+.sideslip-presets {display: flex; flex-wrap: wrap; gap: .35rem;}
+.sideslip-diagrams {display: grid; grid-template-columns: 1fr 1fr; gap: .65rem;}
+.sideslip figure {margin: 0; overflow: hidden; background: #101d2b; border: 1px solid #35495c; border-radius: .5rem;}
+.sideslip figure img {display: block; width: 100%; height: auto;}
+.sideslip figure figcaption {padding: .6rem .9rem; color: #e1eaf0; border-top: 1px solid #2c4050; font-weight: 650;}
+#sideslip-scene {height: clamp(330px, 46vw, 470px); position: relative; overflow: hidden; border-radius: .5rem; background: #101d2b;}
+.sideslip-key {padding: 0; margin: 1rem 0; list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; color: #e0e8ee;}
+.sideslip-key li {display: flex; align-items: baseline; gap: .4rem;}
+.sideslip-key span {font-size: .8rem; font-weight: 750; text-align: center; width: 1.4rem; line-height: 1.4rem; border-radius: 50%; color: #101d2b; background: #a8b7c4;}
+.sideslip-key li:nth-child(2) span {background: #f4b95b;}
+.sideslip-key li:nth-child(3) span {background: #54d8df;}
+.sideslip p.sideslip-answer {max-width: 76ch; color: #dbe7f0; margin: .9rem 0 .5rem;}
+.sideslip .sideslip-source {font-size: .87rem; color: #bdceda; margin-bottom: 1rem; max-width: 76ch;}
+.sideslip .sideslip-message:empty {display: none;}
+.sideslip .sideslip-message {margin: .5rem 0; color: #dfebf5;}
+@media (max-width: 600px) {
+  .sideslip-diagrams {grid-template-columns: 1fr;}
+  .sideslip-key {display: grid;}
+}
+@media print {
+  .sideslip-tools, #sideslip-interactive, .sideslip-message, .sideslip a[download] {display: none !important;}
+  #sideslip-diagrams[hidden] {display: grid !important;}
+}

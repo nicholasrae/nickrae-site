@@ -1133,6 +1133,43 @@ test('Shared helper fixes destination and URLs and excludes unknown input/identi
   assert(!JSON.stringify(event).includes('secret'));assert(!('calculator_input' in event.params));
   assert(!('event_callback' in event.params));assert(!('event_timeout' in event.params));
 });
+test('Multi-engine demo opens and sample downloads share the site consent and QA rules', () => {
+  const root = path.resolve(__dirname, '..');
+  const demo = fs.readFileSync(path.join(root, 'assets/zero-sideslip.js'), 'utf8');
+  const html = fs.readFileSync(path.join(root, 'aviation-workbooks/multi-engine/index.html'), 'utf8');
+  const openCall = demo.match(/window\.NickRaeMeasurement\?\.track\('zero_sideslip_model_open',\s*\{[^}]+\}\)/);
+  const sample = (html.match(/<a\b[^>]+>/g) || []).find(tag => tag.includes('data-placement="zero-sideslip-demo"'));
+  assert.ok(openCall, 'Model uses the consent-aware helper');
+  assert.ok(sample?.includes('href="/assets/workbook-previews/multi-engine-sample.pdf"'));
+  assert.ok(sample.includes('data-product="multi_engine_workbook"'));
+  assert.ok(!sample.includes('data-event='), 'The sample uses the existing download classifier');
+
+  const e = environment({search:'?analytics_test=1'});
+  e.window.location.pathname = '/aviation-workbooks/multi-engine/';
+  e.window.testAPI.attachGlobalTracking();
+  const open = () => vm.runInNewContext(openCall[0], {window:e.window});
+  const click = () => e.click('https://nickrae.net/assets/workbook-previews/multi-engine-sample.pdf',
+    {product:'multi_engine_workbook',placement:'zero-sideslip-demo'}, 'Download the sample', {attributes:{download:''}});
+  open();
+  click();
+  assert.equal(e.events().length, 0);
+  e.window.NickRaePrivacy.allow();
+  assert.equal(e.events().length, 0, 'Consent does not replay earlier interactions');
+  open();
+  assert.equal(click().preventCalls, 0);
+  assert.deepEqual(e.events().map(event => event.name), ['zero_sideslip_model_open', 'workbook_sample_download']);
+  for (const event of e.events()) {
+    assert.equal(event.params.send_to, TEST_GA4_ID);
+    assert.equal(event.params.test_traffic, 'yes');
+    assert.equal(event.params.product, 'multi_engine_workbook');
+    assert.equal(event.params.placement, 'zero-sideslip-demo');
+  }
+  e.window.NickRaePrivacy.deny();
+  open();
+  click();
+  assert.equal(e.events().length, 2);
+});
+
 test('Actual calculator callback uses shared consent guard and sends no entered values', () => {
   const html=fs.readFileSync(path.resolve(path.dirname(site),'../blog/blog-cheapest-flight-hours.html'),'utf8');
   assert(!html.includes("gtag('event', 'flight_hour_calculator_use'"));

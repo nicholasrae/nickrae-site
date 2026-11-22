@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 236" role="img" aria-labelledby="top-title top-desc">
+  <title id="top-title">Zero sideslip seen from above</title>
+  <desc id="top-desc">The nose points up. Marker one identifies the feathered left engine. Marker two shows the right engine's thrust pointing forward. Marker three shows relative airflow pointing aft along the aircraft centerline.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#577186" stroke-opacity=".14"/></pattern>
+    <linearGradient id="skin" x2=".85" y2="1"><stop stop-color="#f3f3df"/><stop offset="1" stop-color="#8ca9bb"/></linearGradient>
+  </defs>
+  <rect width="400" height="236" fill="#101d2b"/><rect width="400" height="236" fill="url(#grid)"/>
+  <g fill="none" stroke-linecap="round">
+    <path stroke="#809ba9" stroke-dasharray="4 6" d="M200 10v214"/>
+    <g fill="url(#skin)" stroke="#1a3144" stroke-width="1.8">
+      <path d="M197 101 146 110 65 129Q60 131 61 138L63 142 147 137 196 134ZM203 101 254 110 335 129Q340 131 339 138L337 142 253 137 204 134Z"/>
+      <path d="M198 176 161 192 160 198 199 193 240 198 239 192 202 176Z"/>
+      <path d="M200 57Q191 64 191 97L193 135 196 168 198 191 200 203 202 191 204 168 207 135 209 97Q209 64 200 57Z"/>
+      <path d="M143 91Q135 92 135 103L136 133Q139 144 143 146Q148 141 151 132L151 103Q151 92 143 91ZM257 91Q249 92 249 103L249 132Q252 142 257 146Q262 141 265 132L265 103Q265 92 257 91Z"/>
+    </g>
+    <path d="M194 86Q200 81 206 86L207 96Q200 92 193 96Z" fill="#274758" stroke="#61869a"/>
+    <path d="m66 138 45-6m178 0 45 6m-134 23v32" stroke="#607e8b"/>
+    <path d="M141 91l4-7m93 9 37-5" stroke="#b0c4cd" stroke-width="2.5"/>
+    <path d="M257 81V40" stroke="#f4b95b" stroke-width="4"/><path d="m250 47 7-11 7 11" stroke="#f4b95b" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M200 19v26" stroke="#54d8df" stroke-width="4"/><path d="m193 39 7 10 7-10" stroke="#54d8df" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M103 82h19l12 15" stroke="#a8b7c4"/><path d="M287 44h-18" stroke="#f4b95b"/><path d="M172 30h16" stroke="#54d8df"/>
+  </g>
+  <g text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#101d2b">
+    <circle cx="92" cy="82" r="11" fill="#a8b7c4"/><text x="92" y="87">1</text>
+    <circle cx="298" cy="44" r="11" fill="#f4b95b"/><text x="298" y="49">2</text>
+    <circle cx="161" cy="30" r="11" fill="#54d8df"/><text x="161" y="35">3</text>
+  </g>
+</svg>
