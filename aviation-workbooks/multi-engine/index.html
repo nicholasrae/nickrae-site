@@ -20,6 +20,8 @@
 
 
 <link rel="stylesheet" href="/assets/workbook-pages.css?v=9ed5922d344d">
+<link rel="stylesheet" href="/assets/critical-engine.css">
+<script type="module" src="/assets/critical-engine.js"></script>
 <link rel="stylesheet" href="/assets/zero-sideslip.css">
 <script type="module" src="/assets/zero-sideslip.js"></script>
 
@@ -119,7 +121,7 @@
 <figure class="hero-visual"><picture><source type="image/webp" srcset="/assets/workbooks/multi-engine-cover-240.webp 240w, /assets/workbooks/multi-engine-cover-480.webp 480w" sizes="(max-width:720px) 144px, 260px"><img class="book-cover" src="/assets/workbooks/multi-engine-cover-480.webp" width="480" height="621" alt="Multi-Engine Add-On Rating Workbook cover" fetchpriority="high" decoding="async"></picture><figcaption><span>FOCUSED GROUND STUDY</span><strong>Multi-Engine</strong><span>Paperback + Kindle</span></figcaption></figure></div>
 <div class="page-meta"><p>By <a href="/about/">Nick Rae</a> · Commercial pilot &amp; aviation workbook author</p><p>Page updated <time datetime="2026-11-22">November 22, 2026</time></p></div>
 </div></header>
-<div class="container"><div class="jump-links" role="navigation" aria-label="On this page"><a href="#inside">Inside the workbook</a><a href="#preview">Preview</a><a href="#zero-sideslip">Zero-sideslip demo</a><a href="#study">Study approach</a><a href="#formats">Choose a format</a></div></div>
+<div class="container"><div class="jump-links" role="navigation" aria-label="On this page"><a href="#inside">Inside the workbook</a><a href="#preview">Preview</a><a href="#critical-engine">Critical-engine comparison</a><a href="#zero-sideslip">Zero-sideslip demo</a><a href="#study">Study approach</a><a href="#formats">Choose a format</a></div></div>
 <section class="content-section" id="inside" aria-labelledby="inside-title"><div class="container section-grid"><div class="section-heading"><p class="eyebrow">The right fit</p><h2 id="inside-title">What you’ll work on.</h2></div><div class="section-body"><p class="section-lede">For pilots adding multi-engine privileges, especially those training in a PA-44 Seminole environment. It is intended for ground study and oral preparation alongside the flight training required for the add-on.</p><p>PA-44-focused multi-engine study. Aircraft-specific speeds, limitations, procedures and performance must come from your actual POH/AFM, approved checklists and instructor; a study workbook cannot set them for your aircraft.</p><ol class="topic-list"><li><span class="topic-index" aria-hidden="true">01</span><div><h3>V-speeds and systems</h3><p>Organize the speeds and systems you need to explain, and connect them to your actual airplane’s documents.</p></div></li>
 <li><span class="topic-index" aria-hidden="true">02</span><div><h3>Vmc and asymmetric thrust</h3><p>Review the concepts and factors discussed during multi-engine training without treating a demonstration as an unsupervised exercise.</p></div></li>
 <li><span class="topic-index" aria-hidden="true">03</span><div><h3>One-engine-inoperative operations</h3><p>Ground-study prompts for engine-out procedures, single-engine decisions and OEI approaches.</p></div></li>
@@ -129,6 +131,103 @@
 <p class="training-note"><strong>Preparation checklist context:</strong> the source checklist is not exhaustive; current FAA prerequisites control. The <a href="https://www.faa.gov/training_testing/testing/acs/acs_companion_guide_pilots.pdf">FAA ACS Companion Guide, Section 7</a>, includes a medical certificate or BasicMed qualification when applicable. Confirm the documents and eligibility that apply to your test with your instructor and evaluator.</p>
 <div class="format-actions"><a class="button primary" href="/assets/workbook-previews/multi-engine-sample.pdf" data-product="multi_engine_workbook" data-placement="multi-engine-preview" download>Download the manuscript sample <span aria-hidden="true">↓</span></a></div><p class="small">PDF · two selected source pages plus a source-and-study-context page. No email required.</p>
 <div class="preview-grid"><div class="sample-copy"><p class="eyebrow">From the review page</p><h3>Explain your answer out loud.</h3><p>Source page 111 contains questions 3–7 from a longer exercise. The selected page preserves those five prompts; the sample does not add model answers or reproduce the intervening pages.</p><ol start="3"><li>During the practical, you identify and feather the wrong engine. What do you say to the DPE?</li><li>Vmc increases with altitude. True or false? Explain.</li><li>You pass your checkride. Can you now legally fly a multi-engine airplane IFR? Under what conditions?</li><li>The DPE asks whether the Seminole has a critical engine. What is the correct answer and why?</li><li>In OEI flight, is the ball centered the correct condition for best climb performance? Explain zero sideslip.</li></ol><p class="training-note">These are discussion questions, not statements to memorize or in-flight instructions. Resolve your answers with the current applicable ACS, FAA references, actual aircraft POH/AFM and instructor.</p></div><figure class="excerpt"><a href="/assets/workbook-previews/multi-engine-page-107.webp" data-product="multi_engine_workbook" data-placement="multi-engine-preview" aria-label="Open manuscript source page 107 at full size"><picture><source type="image/webp" srcset="/assets/workbook-previews/multi-engine-page-107-480.webp 480w, /assets/workbook-previews/multi-engine-page-107.webp 935w" sizes="(max-width:720px) 92vw, 480px"><img src="/assets/workbook-previews/multi-engine-page-107.webp" width="935" height="1210" loading="lazy" decoding="async" alt="Complete source page 107 with the author’s preparation checklist and oral-study guidance; checklist qualifications and a readable text transcript are also provided."></picture></a><figcaption>Checkride Day: preparation and oral-study guidance · manuscript page 107 of the author’s Multi-Engine manuscript.</figcaption></figure></div>
+<section id="critical-engine" aria-labelledby="critical-title">
+  <h3 id="critical-title">Why doesn’t the Seminole have a critical engine?</h3>
+  <p class="critical-intro">At a positive angle of attack, the descending blade of a powered propeller produces more thrust than the ascending blade. This is P-factor. Which engine loss gives the remaining engine more leverage to yaw the nose?</p>
+  <div class="critical-layout">
+    <div class="critical-panel">
+      <div id="critical-settings" hidden>
+        <fieldset>
+          <legend>Aircraft</legend>
+          <div class="critical-options">
+            <label><input type="radio" name="critical-aircraft" value="conventional" checked><span>Conventional twin</span></label>
+            <label><input type="radio" name="critical-aircraft" value="seminole"><span>Seminole</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Failed engine</legend>
+          <div class="critical-options">
+            <label><input type="radio" name="critical-failed" value="left" checked><span>Left</span></label>
+            <label><input type="radio" name="critical-failed" value="right"><span>Right</span></label>
+          </div>
+        </fieldset>
+      </div>
+      <button id="critical-toggle" type="button" aria-controls="critical-model-panel" aria-expanded="false" hidden>View in 3D</button>
+      <div id="critical-result" aria-live="polite" aria-atomic="true">
+        <h4 id="critical-result-title">Left engine out · nose tends left</h4>
+        <p id="critical-result-text">The right propeller’s descending blade is outboard. Its thrust acts farther from the center of gravity, producing the larger yawing moment. The left engine is critical on this twin.</p>
+      </div>
+    </div>
+    <div class="critical-visual">
+      <svg id="critical-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 286" role="img" aria-label="Engine-out thrust and yaw seen from above" aria-describedby="critical-drawing-desc">
+        <desc id="critical-drawing-desc">The nose points up. On a conventional twin with the left engine out, the right engine’s effective thrust line is outboard of its propeller hub. Its longer moment arm tends to yaw the nose left.</desc>
+        <defs>
+          <linearGradient id="critical-skin" x2=".8" y2="1"><stop stop-color="#eaf3f1"/><stop offset="1" stop-color="#8ca6b4"/></linearGradient>
+          <g id="critical-wing">
+            <path d="M5 146 66 149 163 160Q171 161 176 169L173 177 77 181 6 185Z"/>
+            <path d="M4 235 52 245 62 254 60 258 4 252Z"/>
+          </g>
+          <g id="critical-nacelle">
+            <path d="M0 120Q10 121 11 137L10 170Q7 185 0 191Q-7 185-10 170L-11 137Q-10 121 0 120Z"/>
+            <path d="M-28 121H28" fill="none" stroke="#b6c9d0" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cy="121" r="3.5" fill="#9cb6c1"/>
+          </g>
+        </defs>
+        <rect width="480" height="286" fill="#101d2b"/>
+        <g transform="translate(240 0)" font-family="system-ui,sans-serif" font-size="17" font-weight="650" text-anchor="middle">
+          <path d="M0 16v254" stroke="#8198a8" stroke-dasharray="3 6" opacity=".55"/>
+          <g fill="url(#critical-skin)" stroke="#30495b" stroke-width="1.8" stroke-linejoin="round">
+            <use href="#critical-wing"/><use href="#critical-wing" transform="scale(-1 1)"/>
+            <path d="M0 80Q-9 83-12 108Q-16 139-10 191L-5 228-2 252 0 266 2 252 5 228 10 191Q16 139 12 108Q9 83 0 80Z"/>
+            <path d="M-9 111Q0 105 9 111L10 123Q0 118-10 123Z" fill="#284452" stroke="#698292"/>
+            <path d="M-165 173l56-4m218 0 56 4M0 212v40" fill="none" stroke="#658294" stroke-width="1.25"/>
+            <use href="#critical-nacelle" transform="translate(-72 0)"/><use href="#critical-nacelle" transform="translate(72 0)"/>
+          </g>
+          <g data-cue="failed" transform="translate(-72 0)">
+            <circle cy="137" r="9" fill="#192b3b" stroke="#bccbd4" stroke-width="1.5"/>
+            <path d="m-4 133 8 8m0-8-8 8" fill="none" stroke="#e3ebef" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+          <g data-cue="out-leader" transform="scale(-1 1)" fill="none" stroke="#a9bac6" stroke-width="1.2">
+            <path d="M82 136 97 124h11"/>
+          </g>
+          <text data-cue="out-label" x="-115" y="128" text-anchor="end" fill="#d8e2e8">Left out</text>
+          <g data-cue="thrust" transform="translate(90 0)" fill="none" stroke="#f4b95b" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M0 177V117" stroke="#243343" stroke-width="5"/>
+            <path d="M0 177V117" stroke-width="1.9" stroke-dasharray="4 4"/>
+            <path d="M0 119V46m-6 9 6-10 6 10" stroke-width="4"/>
+          </g>
+          <text data-cue="thrust-label" x="90" y="34" fill="#f5cf87">Thrust</text>
+          <g data-cue="yaw" transform="scale(-1 1)" fill="none" stroke="#dfb8ff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 62Q24 63 45 81m-11-2 11 2-3-11"/>
+          </g>
+          <text data-cue="yaw-label" x="-87" y="65" fill="#e4c4ff">Yaw left</text>
+          <g stroke-linecap="round" fill="none">
+            <path data-cue="arm-outline" d="M0 177H90" stroke="#1b3040" stroke-width="6"/>
+            <path data-cue="arm" d="M0 177H90" stroke="#54d8df" stroke-width="3"/>
+            <path data-cue="corner" d="M83 177v-7h7" stroke="#266874" stroke-width="2"/>
+            <path data-cue="arm-leader" d="M45 183v8l21 16h9" stroke="#70dce0" stroke-width="1.4"/>
+            <path data-cue="cg-leader" transform="scale(-1 1)" d="M7 184l16 15h10" stroke="#b3c8d4" stroke-width="1.4"/>
+          </g>
+          <circle cy="177" r="6" fill="#172938" stroke="#f0f6f6" stroke-width="2"/>
+          <circle cy="177" r="2" fill="#f0f6f6"/>
+          <text data-cue="cg-label" x="-38" y="205" text-anchor="end" fill="#e4edf0">CG</text>
+          <text data-cue="arm-label" x="79" y="214" text-anchor="start" fill="#83e3e6">Longer arm</text>
+        </g>
+      </svg>
+      <div id="critical-model-panel" hidden>
+        <div class="critical-views" role="group" aria-label="Critical-engine model viewpoint">
+          <button type="button" data-critical-view="propellers" aria-pressed="true">Propellers</button>
+          <button type="button" data-critical-view="overhead" aria-pressed="false">Overhead</button>
+        </div>
+        <div id="critical-scene"></div>
+        <p class="small">The propeller view looks forward from behind the airplane. Drag to rotate or choose a view above.</p>
+      </div>
+    </div>
+  </div>
+  <p id="critical-message" role="status"></p>
+  <p class="critical-reading">Viewed from the pilot’s seat, both propellers turn clockwise on the conventional twin shown here. On the Seminole they turn in opposite directions, with both descending blades inboard. In the overhead view, the teal line marks the perpendicular distance from the center of gravity (CG) to the operating engine’s thrust line. Both models use the same engine spacing and thrust, so the longer arm produces the stronger yawing moment.</p>
+  <p class="critical-sources"><a href="https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/airplane_handbook/14_afh_ch13.pdf#page=24">FAA figure 13-12</a> · <a href="https://www.lanierflightcenter.com/wp-content/uploads/2023/03/PA-44-180-Pilot-Information-Manual.pdf#page=170">Piper Seminole handbook, section 7</a></p>
+</section>
 <section class="sideslip" id="zero-sideslip" aria-labelledby="sideslip-title">
   <h3 id="sideslip-title">What does zero sideslip look like?</h3>
   <p class="sideslip-intro">In the FAA’s example, a twin is flying straight at its best single-engine rate-of-climb speed (V<sub>YSE</sub>). The left engine is inoperative, its propeller is feathered, and the right engine is producing thrust. Where would you expect the slip/skid ball to sit?</p>
