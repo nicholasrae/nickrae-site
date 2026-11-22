@@ -11,6 +11,7 @@ const message = section.querySelector('#critical-message');
 const resultTitle = section.querySelector('#critical-result-title');
 const resultText = section.querySelector('#critical-result-text');
 let model = null;
+let opened = false;
 
 function selectedState() {
   const aircraft = controls.querySelector('[name="critical-aircraft"]:checked').value;
@@ -71,8 +72,15 @@ toggle.addEventListener('click', async () => {
     toggle.setAttribute('aria-expanded', 'true');
   } catch {
     showDiagram('The 3D view is unavailable. You can still compare both aircraft and engine failures in the diagram.');
+    return;
   } finally {
     toggle.disabled = false;
+  }
+  if (!opened) {
+    opened = true;
+    window.NickRaeMeasurement?.track('critical_engine_model_open', {
+      event_category: 'workbook', product: 'multi_engine_workbook', placement: 'critical-engine-demo'
+    });
   }
 });
 

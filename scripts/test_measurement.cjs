@@ -1135,11 +1135,13 @@ test('Shared helper fixes destination and URLs and excludes unknown input/identi
 });
 test('Multi-engine demo opens and sample downloads share the site consent and QA rules', () => {
   const root = path.resolve(__dirname, '..');
-  const demo = fs.readFileSync(path.join(root, 'assets/zero-sideslip.js'), 'utf8');
+  const sideslip = fs.readFileSync(path.join(root, 'assets/zero-sideslip.js'), 'utf8');
+  const critical = fs.readFileSync(path.join(root, 'assets/critical-engine.js'), 'utf8');
   const html = fs.readFileSync(path.join(root, 'aviation-workbooks/multi-engine/index.html'), 'utf8');
-  const openCall = demo.match(/window\.NickRaeMeasurement\?\.track\('zero_sideslip_model_open',\s*\{[^}]+\}\)/);
+  const sideslipCall = sideslip.match(/window\.NickRaeMeasurement\?\.track\('zero_sideslip_model_open',\s*\{[^}]+\}\)/);
+  const criticalCall = critical.match(/window\.NickRaeMeasurement\?\.track\('critical_engine_model_open',\s*\{[^}]+\}\)/);
   const sample = (html.match(/<a\b[^>]+>/g) || []).find(tag => tag.includes('data-placement="zero-sideslip-demo"'));
-  assert.ok(openCall, 'Model uses the consent-aware helper');
+  assert.ok(sideslipCall && criticalCall, 'Both models use the consent-aware helper');
   assert.ok(sample?.includes('href="/assets/workbook-previews/multi-engine-sample.pdf"'));
   assert.ok(sample.includes('data-product="multi_engine_workbook"'));
   assert.ok(!sample.includes('data-event='), 'The sample uses the existing download classifier');
@@ -1147,27 +1149,30 @@ test('Multi-engine demo opens and sample downloads share the site consent and QA
   const e = environment({search:'?analytics_test=1'});
   e.window.location.pathname = '/aviation-workbooks/multi-engine/';
   e.window.testAPI.attachGlobalTracking();
-  const open = () => vm.runInNewContext(openCall[0], {window:e.window});
+  const openBoth = () => {
+    vm.runInNewContext(sideslipCall[0], {window:e.window});
+    vm.runInNewContext(criticalCall[0], {window:e.window});
+  };
   const click = () => e.click('https://nickrae.net/assets/workbook-previews/multi-engine-sample.pdf',
     {product:'multi_engine_workbook',placement:'zero-sideslip-demo'}, 'Download the sample', {attributes:{download:''}});
-  open();
+  openBoth();
   click();
   assert.equal(e.events().length, 0);
   e.window.NickRaePrivacy.allow();
   assert.equal(e.events().length, 0, 'Consent does not replay earlier interactions');
-  open();
+  openBoth();
   assert.equal(click().preventCalls, 0);
-  assert.deepEqual(e.events().map(event => event.name), ['zero_sideslip_model_open', 'workbook_sample_download']);
+  assert.deepEqual(e.events().map(event => event.name), ['zero_sideslip_model_open', 'critical_engine_model_open', 'workbook_sample_download']);
   for (const event of e.events()) {
     assert.equal(event.params.send_to, TEST_GA4_ID);
     assert.equal(event.params.test_traffic, 'yes');
     assert.equal(event.params.product, 'multi_engine_workbook');
-    assert.equal(event.params.placement, 'zero-sideslip-demo');
+    assert.equal(event.params.placement, event.name === 'critical_engine_model_open' ? 'critical-engine-demo' : 'zero-sideslip-demo');
   }
   e.window.NickRaePrivacy.deny();
-  open();
+  openBoth();
   click();
-  assert.equal(e.events().length, 2);
+  assert.equal(e.events().length, 3);
 });
 
 test('Actual calculator callback uses shared consent guard and sends no entered values', () => {
