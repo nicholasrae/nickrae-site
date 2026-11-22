@@ -5,7 +5,7 @@ const LEFT = 0xa8b7c4;
 const THRUST = 0xf4b95b;
 const AIRFLOW = 0x54d8df;
 const BACKGROUND = 0x101e2d;
-const BANK = THREE.MathUtils.degToRad(2.5);
+const BANK = THREE.MathUtils.degToRad(2);
 const views = {
   overhead: [0, Math.PI / 2],
   rear: [0, 0],
@@ -143,8 +143,14 @@ function addTwin(plane) {
     spinner.position.set(0, .03, -1.83);
     spinner.scale.set(.15, .15, .27);
   }
-  fin(plane, [[1.54, .23], [2.06, .51], [2.47, 1.13], [2.97, 1.16], [3.06, .25]], .085, ivory);
+  fin(plane, [[1.54, .23], [2.06, .51], [2.47, 1.13], [2.97, 1.16], [2.98, 1.02], [2.68, 1.02], [2.68, .25]], .085, ivory);
   fin(plane, [[2.39, 1.015], [2.47, 1.13], [2.97, 1.16], [2.98, 1.05]], .092, blue);
+  // Right rudder: the trailing edge moves to aircraft right around the fixed hinge.
+  const rudder = new THREE.Group();
+  rudder.position.z = 2.68;
+  rudder.rotation.y = THREE.MathUtils.degToRad(12); // Illustrative deflection.
+  plane.add(rudder);
+  fin(rudder, [[.009, .29], [.009, 1.01], [.30, 1.01], [.48, .30]], .064, skin(0xb3c6cb));
 }
 
 function arrow(parent, start, end, color) {
@@ -227,7 +233,7 @@ export function createModel(container) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setClearColor(BACKGROUND);
     canvas.setAttribute('role', 'img');
-    canvas.setAttribute('aria-label', 'Twin-engine airplane banked slightly right. The feathered left engine is marked 1, forward thrust on the right is marked 2, and incoming airflow is marked 3.');
+    canvas.setAttribute('aria-label', 'Twin-engine airplane banked slightly right, with the left propeller feathered and the rudder deflected right. The overhead and oblique views also show right-engine thrust and the plan-view direction of relative airflow.');
     canvas.style.cssText = 'display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab;';
     container.appendChild(canvas);
     scene.add(new THREE.HemisphereLight(0xf5fbff, 0x6d8c9c, 2.1));
@@ -239,12 +245,14 @@ export function createModel(container) {
     scene.add(plane);
     addTwin(plane);
     // Both arrows depict their plan-view components. Keep thrust anchored at the operating propeller.
-    arrow(plane, new THREE.Vector3(1.58, .03, -2.05), new THREE.Vector3(1.58, .03, -3.91), THRUST);
-    arrow(plane, new THREE.Vector3(0, .08, -4.63), new THREE.Vector3(0, .08, -2.82), AIRFLOW);
+    const planVectors = new THREE.Group();
+    plane.add(planVectors);
+    arrow(planVectors, new THREE.Vector3(1.58, .03, -2.05), new THREE.Vector3(1.58, .03, -3.91), THRUST);
+    arrow(planVectors, new THREE.Vector3(0, .08, -4.63), new THREE.Vector3(0, .08, -2.82), AIRFLOW);
     const pins = [
       numberPin(plane, 1, LEFT, -1.97, .38, -1.58),
-      numberPin(plane, 2, THRUST, 2.23, .20, -3.12),
-      numberPin(plane, 3, AIRFLOW, -.38, .58, -4.36)
+      numberPin(planVectors, 2, THRUST, 2.23, .20, -3.12),
+      numberPin(planVectors, 3, AIRFLOW, -.38, .58, -4.36)
     ];
     const referenceGeo = new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(-4.66, .09, -5), new THREE.Vector3(4.66, .09, -5)
@@ -293,6 +301,7 @@ export function createModel(container) {
       camera.updateProjectionMatrix();
       pins.forEach(pin => pin.scale.setScalar(23 * 2 * half / height));
       reference.visible = preset === 'rear';
+      planVectors.visible = preset !== 'rear';
       grid.visible = preset !== 'rear';
       renderer.render(scene, camera);
     }

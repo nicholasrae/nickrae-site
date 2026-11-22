@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 236" role="img" aria-labelledby="top-title top-desc">
   <title id="top-title">Zero sideslip seen from above</title>
-  <desc id="top-desc">The nose points up. Marker one identifies the feathered left engine. Marker two shows the right engine's thrust pointing forward. Marker three shows relative airflow pointing aft along the aircraft centerline.</desc>
+  <desc id="top-desc">The nose points up. Marker 1 identifies the feathered left propeller. Marker 2 shows right-engine thrust forward. Marker 3 shows the plan-view relative airflow aft along the centerline. Two purple arrows show the balancing lateral forces. The horizontal lift component points right near the center of gravity. The rudder trailing edge is deflected right, producing a leftward side force at the tail.</desc>
   <defs>
     <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#577186" stroke-opacity=".14"/></pattern>
     <linearGradient id="skin" x2=".85" y2="1"><stop stop-color="#f3f3df"/><stop offset="1" stop-color="#8ca9bb"/></linearGradient>
+    <path id="lateral-arrows" d="M200 119h67m-8-5 8 5-8 5M200 187h-67m8-5-8 5 8 5"/>
   </defs>
   <rect width="400" height="236" fill="#101d2b"/><rect width="400" height="236" fill="url(#grid)"/>
   <g fill="none" stroke-linecap="round">
@@ -15,11 +16,21 @@
       <path d="M143 91Q135 92 135 103L136 133Q139 144 143 146Q148 141 151 132L151 103Q151 92 143 91ZM257 91Q249 92 249 103L249 132Q252 142 257 146Q262 141 265 132L265 103Q265 92 257 91Z"/>
     </g>
     <path d="M194 86Q200 81 206 86L207 96Q200 92 193 96Z" fill="#274758" stroke="#61869a"/>
-    <path d="m66 138 45-6m178 0 45 6m-134 23v32" stroke="#607e8b"/>
+    <path d="m66 138 45-6m178 0 45 6M200 154v25" stroke="#607e8b"/>
+    <path d="M199 178h3l5 23-3 1Z" fill="#708fa0" stroke="#274758"/>
     <path d="M141 91l4-7m93 9 37-5" stroke="#b0c4cd" stroke-width="2.5"/>
     <path d="M257 81V40" stroke="#f4b95b" stroke-width="4"/><path d="m250 47 7-11 7 11" stroke="#f4b95b" stroke-width="4" stroke-linejoin="round"/>
     <path d="M200 19v26" stroke="#54d8df" stroke-width="4"/><path d="m193 39 7 10 7-10" stroke="#54d8df" stroke-width="4" stroke-linejoin="round"/>
     <path d="M103 82h19l12 15" stroke="#a8b7c4"/><path d="M287 44h-18" stroke="#f4b95b"/><path d="M172 30h16" stroke="#54d8df"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#lateral-arrows" stroke="#152333" stroke-width="7"/>
+    <use href="#lateral-arrows" stroke="#dfb8ff" stroke-width="3.5"/>
+    <path d="M270 123l15 27h11m-165 40-13 12H99" stroke="#dfb8ff" stroke-width="1.2"/>
+  </g>
+  <g fill="#ead5ff" font-family="system-ui,sans-serif" font-size="14" font-weight="600">
+    <text x="296" y="164" text-anchor="middle">Horizontal lift component</text>
+    <text x="16" y="218">Tail side force</text>
   </g>
   <g text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#101d2b">
     <circle cx="92" cy="82" r="11" fill="#a8b7c4"/><text x="92" y="87">1</text>

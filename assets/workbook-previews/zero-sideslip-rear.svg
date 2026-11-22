@@ -1,22 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 236" role="img" aria-labelledby="rear-title rear-desc">
   <title id="rear-title">Zero sideslip seen from behind</title>
-  <desc id="rear-desc">A dashed horizontal line marks wings level. The aircraft's right wing, on the operating-engine side, is lower than its left.</desc>
+  <desc id="rear-desc">Looking forward from behind the airplane, a dashed horizon shows the slight bank toward the operating right engine. The inset shows the pilot's view of the slip/skid ball slightly right of the instrument center.</desc>
   <defs>
     <pattern id="rear-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#577186" stroke-opacity=".14"/></pattern>
     <linearGradient id="rear-skin" x2=".85" y2="1"><stop stop-color="#f3f3df"/><stop offset="1" stop-color="#8ca9bb"/></linearGradient>
   </defs>
   <rect width="400" height="236" fill="#101d2b"/><rect width="400" height="236" fill="url(#rear-grid)"/>
-  <path d="M19 131h362" stroke="#a1b4bf" stroke-dasharray="5 6"/>
-  <g transform="rotate(4 200 131)" stroke="#203b4c" stroke-width="1.8" stroke-linejoin="round">
+  <path d="M19 120h362" stroke="#a1b4bf" stroke-dasharray="5 6"/>
+  <g transform="rotate(2 200 131)" stroke="#203b4c" stroke-width="1.8" stroke-linejoin="round">
     <path d="M199 124 52 118 46 120Q53 125 89 128L184 138H216L311 128Q347 125 354 120L348 118 201 124Z" fill="url(#rear-skin)"/>
     <g fill="url(#rear-skin)"><ellipse cx="138" cy="124" rx="11" ry="13"/><ellipse cx="262" cy="124" rx="11" ry="13"/></g>
     <circle cx="262" cy="124" r="19" fill="none" stroke="#a6c4cd" opacity=".38"/>
     <path d="M200 111C179 107 181 148 200 150C219 148 221 107 200 111Z" fill="url(#rear-skin)"/>
-    <path d="M194 129 197 79Q198 72 201 78L205 128ZM199 130 159 129 152 132 195 137H206L248 132 241 129Z" fill="url(#rear-skin)"/>
+    <path d="M194 129 197 78Q199 74 201 78L205 128Z" fill="url(#rear-skin)"/>
+    <path d="M200 77 158 76 152 78 195 82H205L248 78 242 76Z" fill="url(#rear-skin)"/>
   </g>
   <g font-family="system-ui,sans-serif" font-size="15">
-    <text x="24" y="155" fill="#c2d0db">Level horizon</text>
-    <path d="m353 136 10 25h-26" fill="none" stroke="#f4b95b" stroke-width="1.5"/>
-    <text x="336" y="183" text-anchor="end" fill="#f4cb79">Right wing low</text>
+    <path d="M23 124v19h11" fill="none" stroke="#a1b4bf" stroke-width="1.2"/>
+    <text x="39" y="148" fill="#c2d0db">Level horizon</text>
+    <path d="M355 126l15 24h-13" fill="none" stroke="#f4b95b" stroke-width="1.5"/>
+    <text x="352" y="156" text-anchor="end" fill="#f4cb79">Right wing low</text>
+  </g>
+  <g font-family="system-ui,sans-serif">
+    <rect x="18" y="168" width="364" height="55" rx="7" fill="#172a3b" stroke="#577186"/>
+    <text x="32" y="190" font-size="14" font-weight="600" fill="#e8f0f3">Cockpit slip/skid ball</text>
+    <text x="32" y="210" font-size="13" fill="#c2d0db">Toward the operating engine</text>
+    <path d="M240 189Q301 201 362 189" fill="none" stroke="#8ea8b7" stroke-width="17" stroke-linecap="round"/>
+    <path d="M240 189Q301 201 362 189" fill="none" stroke="#d2dfe3" stroke-width="14" stroke-linecap="round"/>
+    <path d="M294 183v23m14-23v23" fill="none" stroke="#607680" stroke-width="1.4"/>
+    <circle cx="307.5" cy="194.9" r="6.5" fill="#15212b" stroke="#eff8fb" stroke-width="1"/>
   </g>
 </svg>
