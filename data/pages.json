@@ -119,7 +119,7 @@
     {
       "path": "blog/index.html",
       "url": "https://nickrae.net/blog/",
-      "last_content_change": "2026-10-22",
+      "last_content_change": "2026-11-24",
       "social_image": "https://nickrae.net/assets/social/pilot-notes.png"
     },
     {
@@ -175,6 +175,12 @@
       "url": "https://nickrae.net/blog/student-pilot-apps-2026.html",
       "last_content_change": "2026-10-22",
       "social_image": "https://nickrae.net/assets/social/student-pilot-apps-2026.png"
+    },
+    {
+      "path": "blog/vfr-fuel-reserves.html",
+      "url": "https://nickrae.net/blog/vfr-fuel-reserves.html",
+      "last_content_change": "2026-11-24",
+      "social_image": "https://nickrae.net/assets/social/pilot-notes.png"
     },
     {
       "path": "blog/walk-through-the-gospels-launch.html",
