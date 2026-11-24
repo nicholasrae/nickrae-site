@@ -137,9 +137,13 @@ button:focus-visible {
 .app-grid,
 .resource-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
+
+.app-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.resource-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+#referee-play-clock { scroll-margin-top: 5rem; }
 
 .app-card {
   display: flex;
@@ -296,10 +300,13 @@ button:focus-visible {
 .catalog-footer a { margin-right: .85rem; }
 .catalog-footer p { margin: 0; }
 
+@media (max-width: 1000px) {
+  .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 860px) {
   .catalog-hero { grid-template-columns: minmax(0, 1fr); gap: 1.65rem; }
   .catalog-index { max-width: 30rem; }
-  .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   body > nav.site-header:not(.navigation-enhanced) { position: static !important; }
 }
 
